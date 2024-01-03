@@ -1,0 +1,2 @@
+class Shikimori:
+    pass
