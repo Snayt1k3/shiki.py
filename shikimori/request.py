@@ -5,6 +5,7 @@ from .exceptions import RequestError
 
 
 class Request:
+    """class for send requests"""
     async def _get(self, url: str, query_params: dict = None, headers: dict = None):
         try:
             async with aiohttp.ClientSession(headers=headers) as session:
@@ -57,8 +58,10 @@ class Request:
         try:
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.delete(url, json=body) as response:
+
                     response.raise_for_status()
                     return await response.json()
+
         except aiohttp.ClientResponseError as exc:
             logging.debug(f"Error occurred with delete request - {exc}")
             return RequestError(exc.message, exc.status)
