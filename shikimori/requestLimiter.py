@@ -29,7 +29,7 @@ class RequestLimiter:
         """
         :param method: one of [GET, POST, PUT, PATCH, DELETE]
         :param kwargs: parameters for request
-        :return: response or Raise 'TooManyRequests'
+        :return: response or 'RequestError' or Raise 'TooManyRequests'
         """
         if self._is_limit_exceeded():
             raise TooManyRequests("Rate limit exceeded")
