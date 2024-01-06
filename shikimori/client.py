@@ -1,8 +1,8 @@
 from .requestLimiter import RequestLimiter
-from .constants import MAX_REQUESTS_PER_SECOND
+from .constants import MAX_REQUESTS_PER_SECOND, SHIKIMORI_URL
 from .request import Request
 from .auth import Auth, AuthOptions
-
+from .endpoints.topic_ignore import TopicIgnoreEndpoint
 
 class Shikimori:
     """
@@ -21,10 +21,11 @@ class Shikimori:
             raise ValueError(
                 "You need to specify user-agent otherwise you may be banned"
             )
-        limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, 1, Request())
+        self._limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, 1, Request())
 
         # Auth dependencies
-        options = AuthOptions(
+        self._options = AuthOptions(
             client_id=client_id, redirect_uri=redirect_uri, client_secret=client_secret
         )
-        self.auth = Auth(limiter, user_agent, options)
+        self.Auth = Auth(limiter, user_agent, options)
+        self.Topic = TopicIgnoreEndpoint(SHIKIMORI_URL, self._limiter, user_agent)
