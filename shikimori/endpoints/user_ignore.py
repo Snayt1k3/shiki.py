@@ -8,7 +8,9 @@ class UserIgnoreEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def ignore_user(self, user_id: str | int, access_token: str) -> Topic:
+    async def ignore_user(
+        self, user_id: str | int, access_token: str
+    ) -> UserIgnore | RequestError:
         """
         ignore user.
 
@@ -27,9 +29,11 @@ class UserIgnoreEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserIgnore(**response)
 
-        return UserIgnore()
+        return response
 
-    async def unignore_topic(self, user_id: str | int, access_token: str) -> UserIgnore:
+    async def unignore_topic(
+        self, user_id: str | int, access_token: str
+    ) -> UserIgnore | RequestError:
         """
         unignore user
 
@@ -38,7 +42,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
 
         response = await self._request.make_request(
             "DELETE",
-            url=f"{self.base_url}/api/v2/users/{user_id}/ignore",
+            url=f"{self._base_url}/api/v2/users/{user_id}/ignore",
             headers={
                 "User-Agent": self._user_agent,
                 "Authorization": f"Bearer {access_token}",
@@ -48,4 +52,4 @@ class UserIgnoreEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserIgnore(**response)
 
-        return UserIgnore()
+        return response

@@ -21,11 +21,10 @@ class Shikimori:
             raise ValueError(
                 "You need to specify user-agent otherwise you may be banned"
             )
-        self._limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, 1, Request())
-
-        # Auth dependencies
+        self._limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, 1, Request())        # Auth dependencies
         self._options = AuthOptions(
             client_id=client_id, redirect_uri=redirect_uri, client_secret=client_secret
         )
-        self.Auth = Auth(limiter, user_agent, options)
-        self.Topic = TopicIgnoreEndpoint(SHIKIMORI_URL, self._limiter, user_agent)
+        self._user_agent = user_agent
+        self.Auth = Auth(self._limiter, self._user_agent, self._options)
+        self.Topic = TopicIgnoreEndpoint(SHIKIMORI_URL, self._limiter, self._user_agent)
