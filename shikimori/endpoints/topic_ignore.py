@@ -8,7 +8,7 @@ class TopicIgnoreEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def ignore_topic(self, topic_id: str | int, access_token: str) -> Topic | RequestError:
+    async def ignore(self, topic_id: str | int, access_token: str) -> Topic | RequestError:
         """
         ignore topic.
 
@@ -29,7 +29,7 @@ class TopicIgnoreEndpoint(BaseEndpoint):
 
         return response
 
-    async def unignore_topic(self, topic_id: str | int, access_token: str) -> Topic | RequestError:
+    async def unignore(self, topic_id: str | int, access_token: str) -> Topic | RequestError:
         """
         unignore topic.
 

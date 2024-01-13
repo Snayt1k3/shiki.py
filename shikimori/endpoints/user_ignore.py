@@ -8,7 +8,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def ignore_user(
+    async def ignore(
         self, user_id: str | int, access_token: str
     ) -> UserIgnore | RequestError:
         """
@@ -31,7 +31,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
 
         return response
 
-    async def unignore_topic(
+    async def unignore(
         self, user_id: str | int, access_token: str
     ) -> UserIgnore | RequestError:
         """

@@ -11,7 +11,7 @@ class UserRatesEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def get_user_rate(self, id: int) -> UserRateResponse | RequestError:
+    async def get(self, id: int) -> UserRateResponse | RequestError:
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/v2/user_rates/{id}",
@@ -27,7 +27,7 @@ class UserRatesEndpoint(BaseEndpoint):
 
         return response
 
-    async def get_user_rates(
+    async def list(
         self,
         user_id: int = None,
         target_id: int = None,
@@ -69,7 +69,7 @@ class UserRatesEndpoint(BaseEndpoint):
 
         return response
 
-    async def create_user_rate(
+    async def create(
         self, user_rate: UserRateCreate, access_token: str
     ) -> UserRateResponse | RequestError:
         """
@@ -94,7 +94,7 @@ class UserRatesEndpoint(BaseEndpoint):
 
         return response
 
-    async def update_user_rate(
+    async def update(
         self, user_rate_id: int, user_rate: UserRateUpdate, access_token: str
     ) -> UserRateResponse | RequestError:
         response = await self._request.make_request(
@@ -132,7 +132,7 @@ class UserRatesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserRateResponse(**response)
 
-    async def delete_user_rate(
+    async def delete(
         self, user_rate_id: int, access_token: str
     ) -> None | RequestError:
         """

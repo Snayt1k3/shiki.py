@@ -11,7 +11,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def mark_comment_as_offtopic(
+    async def AsOfftopic(
         self, comment_id: str | int
     ) -> AbuseRequest | RequestError:
         """
@@ -37,7 +37,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
 
         return response
 
-    async def convert_comment_to_review(
+    async def AsReview(
         self, topic_id: str | int = None, comment_id: str | int = None
     ) -> None | RequestError:
         """
@@ -64,7 +64,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         )
         return response
 
-    async def create_abuse_about_violation_of_site_rules(
+    async def CreateViolation(
         self,
         topic_id: str | int = None,
         comment_id: str | int = None,
@@ -93,14 +93,14 @@ class AbuseRequestEndpoint(BaseEndpoint):
 
         return response
 
-    async def create_abuse_about_spoiler_in_content(
+    async def SpoilerInContent(
         self,
         topic_id: str | int = None,
         comment_id: str | int = None,
         reason: str = None,
     ) -> None | RequestError:
         """
-        Create abuse about violation of site rules
+        create abuse about spoiler in content
         """
         response = await self._request.make_request(
             "POST",

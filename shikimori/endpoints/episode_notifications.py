@@ -11,7 +11,7 @@ class EpisodeNotificationEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def notify_shikimori_about_anime_episode(
+    async def notify(
         self, episode: EpisodeNotification, token: str
     ) -> EpisodeNotificationResponse | RequestError:
         """

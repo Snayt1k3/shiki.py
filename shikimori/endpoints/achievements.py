@@ -10,7 +10,7 @@ class AchievementsEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def get_achievements(self, user_id: int) -> list[Achievement] | RequestError:
+    async def list(self, user_id: int) -> list[Achievement] | RequestError:
         response = await self._request.make_request(
             "GET", query_params={"user_id": user_id},
             headers={"User-Agent": self._user_agent}
