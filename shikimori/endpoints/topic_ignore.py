@@ -1,3 +1,5 @@
+import logging
+
 from .base import BaseEndpoint
 from ..types.topic_ignore import Topic
 from ..exceptions import RequestError
@@ -27,6 +29,10 @@ class TopicIgnoreEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return Topic(**response)
 
+        logging.debug(
+            f"Bad Request(ignore): status - {response.status_code}: info - {str(response)}"
+        )
+
         return response
 
     async def unignore(self, topic_id: str | int, access_token: str) -> Topic | RequestError:
@@ -47,5 +53,9 @@ class TopicIgnoreEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return Topic(**response)
+
+        logging.debug(
+            f"Bad Request(unignore): status - {response.status_code}: info - {str(response)}"
+        )
 
         return response

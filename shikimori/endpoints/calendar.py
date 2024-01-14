@@ -1,3 +1,5 @@
+import logging
+
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
@@ -25,4 +27,9 @@ class CalendarEndpoint(BaseEndpoint):
             return [
                 Calendar(**b, anime=Anime(**b.get("anime"), image=Photo(**b["anime"]["image"]))) for b in response
             ]
+
+        logging.debug(
+            f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
+        )
+
         return response

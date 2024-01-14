@@ -132,6 +132,12 @@ class UserRatesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserRateResponse(**response)
 
+        logging.debug(
+            f"Bad Request(increment): status - {response.status_code}: info - {str(response)}"
+        )
+
+        return response
+
     async def delete(
         self, user_rate_id: int, access_token: str
     ) -> None | RequestError:

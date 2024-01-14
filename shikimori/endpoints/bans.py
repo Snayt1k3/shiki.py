@@ -1,3 +1,5 @@
+import logging
+
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
@@ -19,4 +21,9 @@ class BanEndpoint(BaseEndpoint):
                 Ban(**b, comment=Comment(**b.get("comment")), user=User ** b.get("user"),
                     moderator=User(**b.get("moderator"))) for b in response
             ]
+
+        logging.debug(
+            f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
+        )
+
         return response

@@ -1,3 +1,5 @@
+import logging
+
 from .base import BaseEndpoint
 from ..types.user_ignore import UserIgnore
 from ..exceptions import RequestError
@@ -29,6 +31,10 @@ class UserIgnoreEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserIgnore(**response)
 
+        logging.debug(
+            f"Bad Request(ignore): status - {response.status_code}: info - {str(response)}"
+        )
+
         return response
 
     async def unignore(
@@ -51,5 +57,9 @@ class UserIgnoreEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return UserIgnore(**response)
+
+        logging.debug(
+            f"Bad Request(unignore): status - {response.status_code}: info - {str(response)}"
+        )
 
         return response

@@ -1,3 +1,5 @@
+import logging
+
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
@@ -8,7 +10,7 @@ class AppearsEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def mark(self, ids: str = None) -> None | RequestError:
+    async def markRead(self, ids: str = None) -> None | RequestError:
         """
         Mark comments or topics as read
         """
@@ -24,5 +26,9 @@ class AppearsEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return
+
+        logging.debug(
+            f"Bad Request(mark): status - {response.status_code}: info - {str(response)}"
+        )
 
         return response
