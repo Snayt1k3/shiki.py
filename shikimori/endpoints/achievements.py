@@ -12,8 +12,9 @@ class AchievementsEndpoint(BaseEndpoint):
 
     async def list(self, user_id: int) -> list[Achievement] | RequestError:
         response = await self._request.make_request(
-            "GET", query_params={"user_id": user_id},
-            headers={"User-Agent": self._user_agent}
+            "GET",
+            query_params={"user_id": user_id},
+            headers={"User-Agent": self._user_agent},
         )
 
         if not isinstance(response, RequestError):
@@ -23,4 +24,3 @@ class AchievementsEndpoint(BaseEndpoint):
             f"Bad Request(get_achievements): status - {response.status_code}: info - {str(response)}"
         )
         return response
-

@@ -15,15 +15,27 @@ class CharacterEndpoint(BaseEndpoint):
         super().__init__(base_url, request, user_agent)
 
     async def ById(self, id: int) -> List[Character] | RequestError:
-        response = await self._request.make_request("GET", url=f"{self._base_url}/api/characters/{id}",
-                                                    headers={"User-Agent": self._user_agent})
+        response = await self._request.make_request(
+            "GET",
+            url=f"{self._base_url}/api/characters/{id}",
+            headers={"User-Agent": self._user_agent},
+        )
 
         if not isinstance(response, RequestError):
             return [
-                Character(**ch, image=Photo(**ch["image"]),
-                          seyu=[Ch(**s, image=Photo(**s["image"])) for s in ch["seyu"]],
-                          animes=[AnimeRole(**an, image=Photo(**an["image"])) for an in ch["animes"]],
-                          mangas=[MangaRole(**mn, image=Photo(**mn["image"])) for mn in ch["mangas"]])
+                Character(
+                    **ch,
+                    image=Photo(**ch["image"]),
+                    seyu=[Ch(**s, image=Photo(**s["image"])) for s in ch["seyu"]],
+                    animes=[
+                        AnimeRole(**an, image=Photo(**an["image"]))
+                        for an in ch["animes"]
+                    ],
+                    mangas=[
+                        MangaRole(**mn, image=Photo(**mn["image"]))
+                        for mn in ch["mangas"]
+                    ],
+                )
                 for ch in response
             ]
 
@@ -34,10 +46,12 @@ class CharacterEndpoint(BaseEndpoint):
         return response
 
     async def search(self, search: str) -> list[Ch] | RequestError:
-        response = await self._request.make_request("GET", url=f"{self._base_url}/api/characters/search",
-                                                    query_params={"search": search},
-                                                    headers={"User-Agent": self._user_agent}
-                                                    )
+        response = await self._request.make_request(
+            "GET",
+            url=f"{self._base_url}/api/characters/search",
+            query_params={"search": search},
+            headers={"User-Agent": self._user_agent},
+        )
 
         if not isinstance(response, RequestError):
             return [Ch(**ch, image=Photo(**ch["image"])) for ch in response]

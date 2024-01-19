@@ -19,13 +19,20 @@ class CalendarEndpoint(BaseEndpoint):
         Show a calendar
         :param censored: Set to false to allow hentai, yaoi and yuri
         """
-        response = await self._request.make_request("GET", url=f"{self._base_url}/api/calendar",
-                                                    headers={"User-Agent": self._user_agent},
-                                                    query_params=filter_none_parameters({"censored": censored}))
+        response = await self._request.make_request(
+            "GET",
+            url=f"{self._base_url}/api/calendar",
+            headers={"User-Agent": self._user_agent},
+            query_params=filter_none_parameters({"censored": censored}),
+        )
 
         if not isinstance(response, RequestError):
             return [
-                Calendar(**b, anime=Anime(**b.get("anime"), image=Photo(**b["anime"]["image"]))) for b in response
+                Calendar(
+                    **b,
+                    anime=Anime(**b.get("anime"), image=Photo(**b["anime"]["image"])),
+                )
+                for b in response
             ]
 
         logging.debug(

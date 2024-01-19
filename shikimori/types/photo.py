@@ -15,3 +15,11 @@ class PhotoExtended(BaseModel):
     x48: str
     x32: str
     x16: str
+
+class ClubImage(BaseModel):
+    id: int
+    original_url: str
+    main_url: str
+    preview_url: str
+    can_destroy: bool
+    user_id: int

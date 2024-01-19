@@ -11,9 +11,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def AsOfftopic(
-        self, comment_id: str | int
-    ) -> AbuseRequest | RequestError:
+    async def AsOfftopic(self, comment_id: str | int) -> AbuseRequest | RequestError:
         """
         Mark comment as offtopic
         Request will be sent to moderators.

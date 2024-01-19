@@ -13,13 +13,21 @@ class BanEndpoint(BaseEndpoint):
         super().__init__(base_url, request, user_agent)
 
     async def list(self) -> List[Ban] | RequestError:
-        response = await self._request.make_request("GET", url=f"{self._base_url}/api/bans",
-                                                    headers={"User-Agent": self._user_agent})
+        response = await self._request.make_request(
+            "GET",
+            url=f"{self._base_url}/api/bans",
+            headers={"User-Agent": self._user_agent},
+        )
 
         if not isinstance(response, RequestError):
             return [
-                Ban(**b, comment=Comment(**b.get("comment")), user=User ** b.get("user"),
-                    moderator=User(**b.get("moderator"))) for b in response
+                Ban(
+                    **b,
+                    comment=Comment(**b.get("comment")),
+                    user=User ** b.get("user"),
+                    moderator=User(**b.get("moderator")),
+                )
+                for b in response
             ]
 
         logging.debug(

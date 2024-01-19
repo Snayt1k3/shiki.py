@@ -21,7 +21,7 @@ class AppearsEndpoint(BaseEndpoint):
             headers={
                 "User-Agent": self._user_agent,
             },
-            body=filter_none_parameters({"ids": ids})
+            body=filter_none_parameters({"ids": ids}),
         )
 
         if not isinstance(response, RequestError):
