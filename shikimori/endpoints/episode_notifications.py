@@ -1,5 +1,5 @@
 from .base import BaseEndpoint
-from ..types.episode_notification import (
+from shikimori.types.general.episode_notification import (
     EpisodeNotification,
     EpisodeNotificationResponse,
 )

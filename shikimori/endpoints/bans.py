@@ -5,7 +5,7 @@ from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
 from typing import List
 from ..types.user import User
-from ..types.bans import Comment, Ban
+from shikimori.types.general.bans import Comment, Ban
 
 
 class BanEndpoint(BaseEndpoint):

@@ -5,9 +5,9 @@ from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
 from typing import List
 from ..utils.filter import filter_none_parameters
-from ..types.animes import Anime
-from ..types.photo import Photo
-from ..types.calendar import Calendar
+from shikimori.types.titles.animes import Anime
+from shikimori.types.general.photo import Photo
+from shikimori.types.general.calendar import Calendar
 
 
 class CalendarEndpoint(BaseEndpoint):

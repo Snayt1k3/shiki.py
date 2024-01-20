@@ -4,10 +4,9 @@ from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
 from typing import List
-from ..utils.filter import filter_none_parameters
-from ..types.photo import Photo
-from ..types.roles import Character as Ch
-from ..types.character import Character, AnimeRole, MangaRole
+from shikimori.types.general.photo import Photo
+from shikimori.types.titles.roles import Character as Ch
+from shikimori.types.titles.character import Character, AnimeRole, MangaRole
 
 
 class CharacterEndpoint(BaseEndpoint):

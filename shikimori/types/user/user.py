@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from photo import PhotoExtended
+from ..general.photo import PhotoExtended
 
 class User(BaseModel):
     id: int

@@ -5,14 +5,14 @@ from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
 from typing import List
 from ..utils.filter import filter_none_parameters
-from ..types.club import Logo, Club, ClubImage, ClubInfo, Collection
-from ..types.animes import Anime
-from ..types.manga import Manga
-from ..types.photo import Photo, PhotoExtended
-from ..types.roles import Character
+from shikimori.types.general.club import Logo, Club, ClubImage, ClubInfo, Collection
+from shikimori.types.titles.animes import Anime
+from shikimori.types.titles.manga import Manga
+from shikimori.types.general.photo import Photo, PhotoExtended
+from shikimori.types.titles.roles import Character
 from ..types.user import User
-from ..types.ranobe import Ranobe
-from ..types.topics import Topic, Forum, Linked
+from shikimori.types.titles.ranobe import Ranobe
+from shikimori.types.general.topics import Forum
 
 
 class ClubEndpoint(BaseEndpoint):

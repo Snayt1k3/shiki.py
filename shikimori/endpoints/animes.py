@@ -1,18 +1,18 @@
 import logging
 from typing import List
 from .base import BaseEndpoint
-from ..types.animes import Anime, AnimeInfo, GenreExtended, Relation, ExternalLink
-from ..types.manga import Manga
-from ..types.photo import Photo, PhotoExtended
-from ..types.studios import Studio
-from ..types.screenshots import ScreenShot
-from ..types.videos import Video
+from shikimori.types.titles.animes import Anime, AnimeInfo, GenreExtended, Relation, ExternalLink
+from shikimori.types.titles.manga import Manga
+from shikimori.types.general.photo import Photo, PhotoExtended
+from shikimori.types.titles.studios import Studio
+from shikimori.types.titles.screenshots import ScreenShot
+from shikimori.types.titles.videos import Video
 from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
 from ..utils.filter import filter_none_parameters
-from ..types.roles import Role, Character
-from ..types.franchise import Franchise, Node, Link
-from ..types.topics import Topic, Forum, Linked
+from shikimori.types.titles.roles import Role, Character
+from shikimori.types.titles.franchise import Franchise, Node, Link
+from shikimori.types.general.topics import Topic, Forum, Linked
 from ..types.user import User
 
 

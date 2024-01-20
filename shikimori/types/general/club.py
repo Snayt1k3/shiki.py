@@ -1,8 +1,8 @@
 from pydantic import BaseModel
-from .manga import Manga
-from .animes import Anime
-from .roles import Character
-from .user import User
+from shikimori.types.titles.manga import Manga
+from shikimori.types.titles.animes import Anime
+from shikimori.types.titles.roles import Character
+from shikimori.types.user import User
 from .photo import ClubImage
 from .topics import Topic
 

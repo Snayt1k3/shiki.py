@@ -10,7 +10,7 @@ class AppearsEndpoint(BaseEndpoint):
     def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
         super().__init__(base_url, request, user_agent)
 
-    async def markRead(self, ids: str = None) -> None | RequestError:
+    async def Read(self, ids: str = None) -> None | RequestError:
         """
         Mark comments or topics as read
         """

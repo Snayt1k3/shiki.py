@@ -1,7 +1,7 @@
 import logging
 
 from .base import BaseEndpoint
-from ..types.topic_ignore import Topic
+from shikimori.types.general.topic_ignore import Topic
 from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
 

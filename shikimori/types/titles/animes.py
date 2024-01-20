@@ -1,29 +1,19 @@
 from pydantic import BaseModel
-from photo import Photo
+from ..general.photo import Photo
 from studios import Studio
 from videos import Video
 from screenshots import ScreenShot
 from genres import Genre
 from manga import Manga
+from .base import BaseTitle
 
 class GenreExtended(Genre):
     entry_type: str
 
-class Anime(BaseModel):
-    id: int
-    name: str
-    russian: str
-    image: Photo
-    url: str
-    kind: str
-    score: str
-    status: str
-    episodes: int
-    episodes_aired: int
-    aired_on: str
-    released_on: str
+class Anime(BaseTitle):
+    pass
 
-class AnimeInfo(Anime):
+class AnimeInfo(BaseTitle):
     english: list[str] | list[None]
     japanese: list[str] | list[None]
     synonyms: list[str] | list[None]

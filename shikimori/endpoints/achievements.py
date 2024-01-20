@@ -3,7 +3,7 @@ import logging
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
-from ..types.achievements import Achievement
+from shikimori.types.user.achievements import Achievement
 
 
 class AchievementsEndpoint(BaseEndpoint):

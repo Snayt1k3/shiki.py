@@ -1,12 +1,10 @@
 from pydantic import BaseModel
-from .animes import Photo
+from .base import BaseCharacter
 
-class Character(BaseModel):
-    id: int
-    name: str
-    russian: str
-    image: Photo
-    url: str
+
+class Character(BaseCharacter):
+    pass
+
 
 class Role(BaseModel):
     roles: list[str]

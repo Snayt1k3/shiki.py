@@ -1,5 +1,7 @@
 from pydantic import BaseModel
-from .animes import Anime
+from shikimori.types.titles.animes import Anime
+
+
 class Calendar(BaseModel):
     next_episode: int
     duration: int

@@ -1,7 +1,7 @@
 import logging
 
 from .base import BaseEndpoint
-from ..types.user_ignore import UserIgnore
+from shikimori.types.user.user_ignore import UserIgnore
 from ..exceptions import RequestError
 from ..requestLimiter import RequestLimiter
 

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-from .user import User
+from shikimori.types.user import User
+
 
 class Comment(BaseModel):
     id: int
@@ -11,6 +12,7 @@ class Comment(BaseModel):
     updated_at: str
     is_offtopic: bool
 
+
 class Ban(BaseModel):
     id: int
     user_id: int
@@ -21,4 +23,3 @@ class Ban(BaseModel):
     duration_minutes: int
     user: User
     moderator: User
-
