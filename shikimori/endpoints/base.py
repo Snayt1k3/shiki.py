@@ -8,10 +8,8 @@ class BaseEndpoint(ABC):
         self._request = request
         self._user_agent = user_agent
 
-    @staticmethod
-    def base_headers(user_agent: str) -> dict:
-        return {"User-Agent": user_agent}
+    def base_headers(self) -> dict:
+        return {"User-Agent": self._user_agent}
 
-    @staticmethod
-    def auth_headers(user_agent: str, token: str) -> dict:
-        return {"User-Agent": user_agent, "Authorization": f"Bearer {token}"}
+    def auth_headers(self, token: str) -> dict:
+        return {"User-Agent": self._user_agent, "Authorization": f"Bearer {token}"}
