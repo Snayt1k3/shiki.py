@@ -3,14 +3,10 @@ import logging
 from .base import BaseEndpoint
 from shikimori.types.general.abuse_requests import AbuseRequest
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from ..utils.filter import filter_none_parameters
 
 
 class AbuseRequestEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def AsOfftopic(self, comment_id: str | int) -> AbuseRequest | RequestError:
         """
         Mark comment as offtopic

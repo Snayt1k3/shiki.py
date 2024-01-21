@@ -2,7 +2,6 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from typing import List
 from shikimori.types.general.photo import Photo
 from shikimori.types.titles.roles import Character as Ch
@@ -10,9 +9,6 @@ from shikimori.types.titles.character import Character, AnimeRole, MangaRole
 
 
 class CharacterEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def ById(self, id: int) -> List[Character] | RequestError:
         response = await self._request.make_request(
             "GET",

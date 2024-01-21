@@ -5,7 +5,7 @@ from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters
 
 
-class CharacterEndpoint(BaseEndpoint):
+class FavoritesEndpoint(BaseEndpoint):
     async def add(
         self, id: int, linked_type: str, access_token: str, kind: str = None
     ) -> str | RequestError:

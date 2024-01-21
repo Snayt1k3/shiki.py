@@ -2,7 +2,6 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from typing import List
 from ..utils.filter import filter_none_parameters
 from shikimori.types.general.club import Logo, Club, ClubImage, ClubInfo, Collection
@@ -16,9 +15,6 @@ from shikimori.types.general.topics import Forum
 
 
 class ClubEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def list(
         self, page: int = None, limit: int = None, search: str = None
     ) -> List[Club] | RequestError:
@@ -118,7 +114,10 @@ class ClubEndpoint(BaseEndpoint):
                     }
                 )
             },
-            headers={"User-Agent": self._user_agent, "Authorization": f"Bearer {access_token}"},
+            headers={
+                "User-Agent": self._user_agent,
+                "Authorization": f"Bearer {access_token}",
+            },
         )
 
         if not isinstance(response, RequestError):
@@ -403,4 +402,3 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         return response
-

@@ -2,7 +2,6 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from typing import List
 from ..utils.filter import filter_none_parameters
 from shikimori.types.titles.animes import Anime
@@ -11,8 +10,6 @@ from shikimori.types.general.calendar import Calendar
 
 
 class CalendarEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
 
     async def list(self, censored: bool = None) -> List[Calendar] | RequestError:
         """

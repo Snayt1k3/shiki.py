@@ -2,14 +2,10 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from shikimori.types.user.achievements import Achievement
 
 
 class AchievementsEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def list(self, user_id: int) -> list[Achievement] | RequestError:
         response = await self._request.make_request(
             "GET",

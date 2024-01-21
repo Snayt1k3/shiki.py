@@ -3,12 +3,9 @@ import logging
 from .base import BaseEndpoint
 from shikimori.types.general.topic_ignore import Topic
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 
 
 class TopicIgnoreEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
 
     async def ignore(
         self, topic_id: str | int, access_token: str

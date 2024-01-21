@@ -3,16 +3,12 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from ..types.general.dialogs import Message, Dialog, MessageInfo
 from ..types.user.user import User
 from ..types.general.photo import PhotoExtended
 
 
 class DialogsEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def list(self, access_token: str) -> List[Dialog] | RequestError:
         response = await self._request.make_request(
             "GET",
@@ -80,3 +76,4 @@ class DialogsEndpoint(BaseEndpoint):
         )
 
         return response
+

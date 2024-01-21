@@ -2,15 +2,11 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from shikimori.types.user.user_rates import UserRateResponse
 from ..utils.filter import filter_none_parameters
 
 
 class UserRatesEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def ById(self, id: int) -> UserRateResponse | RequestError:
         response = await self._request.make_request(
             "GET",

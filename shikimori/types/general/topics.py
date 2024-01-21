@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from user import User
-from photo import Photo
+from ..user.user import User
+from ..general.photo import Photo
 
 class Forum(BaseModel):
     id: int

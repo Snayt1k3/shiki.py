@@ -1,7 +1,6 @@
 import logging
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from ..types.general.constants import (
     SmileConstant,
     ClubConstant,
@@ -12,8 +11,6 @@ from ..types.general.constants import (
 
 
 class ConstantsEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
 
     async def animes(self) -> AnimeConstant | RequestError:
         response = await self._request.make_request(

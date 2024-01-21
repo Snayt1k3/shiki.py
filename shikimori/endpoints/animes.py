@@ -1,14 +1,19 @@
 import logging
 from typing import List
 from .base import BaseEndpoint
-from shikimori.types.titles.animes import Anime, AnimeInfo, GenreExtended, Relation, ExternalLink
+from shikimori.types.titles.animes import (
+    Anime,
+    AnimeInfo,
+    GenreExtended,
+    Relation,
+    ExternalLink,
+)
 from shikimori.types.titles.manga import Manga
 from shikimori.types.general.photo import Photo, PhotoExtended
 from shikimori.types.titles.studios import Studio
 from shikimori.types.titles.screenshots import ScreenShot
 from shikimori.types.titles.videos import Video
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from ..utils.filter import filter_none_parameters
 from shikimori.types.titles.roles import Role, Character
 from shikimori.types.titles.franchise import Franchise, Node, Link
@@ -17,9 +22,6 @@ from ..types.user import User
 
 
 class AnimeEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def list(
         self,
         page: int = None,

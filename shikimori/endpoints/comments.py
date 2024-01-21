@@ -2,7 +2,6 @@ import logging
 from typing import List
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 from ..types.general.comment import Comment
 from ..utils.filter import filter_none_parameters
 from ..types.user.user import User
@@ -10,9 +9,6 @@ from ..types.general.photo import PhotoExtended
 
 
 class CommentEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def list(
         self,
         commentable_id: int = None,
@@ -183,4 +179,3 @@ class CommentEndpoint(BaseEndpoint):
         )
 
         return response
-

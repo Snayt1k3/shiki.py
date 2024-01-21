@@ -4,14 +4,10 @@ from shikimori.types.general.episode_notification import (
     EpisodeNotificationResponse,
 )
 from ..exceptions import RequestError
-from ..requestLimiter import RequestLimiter
 import logging
 
 
 class EpisodeNotificationEndpoint(BaseEndpoint):
-    def __init__(self, base_url: str, request: RequestLimiter, user_agent: str):
-        super().__init__(base_url, request, user_agent)
-
     async def notify(
         self, episode: EpisodeNotification, token: str
     ) -> EpisodeNotificationResponse | RequestError:
