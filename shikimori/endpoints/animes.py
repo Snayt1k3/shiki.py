@@ -41,7 +41,6 @@ class AnimeEndpoint(BaseEndpoint):
         ids: str = None,
         exclude_ids: str = None,
         search: str = None,
-        access_token: str = None,
     ) -> list[Anime] | RequestError:
         """
         :param page: must be a number between 1 and 100000.
@@ -61,7 +60,6 @@ class AnimeEndpoint(BaseEndpoint):
         :param ids: List of anime ids separated by comma
         :param exclude_ids: List of anime ids separated by comma
         :param search: Search phrase to filter animes by name
-        :param access_token: auth token, if you want to use mylist parameter
         """
 
         response = await self._request.make_request(
@@ -88,9 +86,7 @@ class AnimeEndpoint(BaseEndpoint):
                     "search": search,
                 }
             ),
-            headers=filter_none_parameters(
-                {"User-Agent": self._user_agent, "Authorization": access_token}
-            ),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -108,7 +104,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -130,7 +126,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/roles",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -155,7 +151,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/similar",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -173,7 +169,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/related",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -206,7 +202,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/screenshots",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -222,7 +218,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/franchise",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -241,7 +237,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/external_links",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -264,7 +260,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/topics",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters(
                 {"page": page, "limit": limit, "kind": kind, "episode": episode}
             ),

@@ -1,7 +1,9 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 from ..user.user import User
 
-class Message(BaseModel):
+
+@dataclass
+class Message:
     id: int
     kind: str
     read: bool
@@ -13,14 +15,13 @@ class Message(BaseModel):
     linked: None
 
 
-class Dialog(BaseModel):
+@dataclass
+class Dialog:
     target_user: User
     message: Message
 
 
-
+@dataclass
 class MessageInfo(Message):
     sender: User
     to: User
-
-

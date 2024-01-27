@@ -1,6 +1,9 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 from ..user.user import User
-class Comment(BaseModel):
+
+
+@dataclass
+class Comment:
     id: int
     user_id: int
     commentable_id: int

@@ -11,7 +11,7 @@ class UserRatesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/v2/user_rates/{id}",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -53,7 +53,7 @@ class UserRatesEndpoint(BaseEndpoint):
                     "limit": limit,
                 }
             ),
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -70,7 +70,6 @@ class UserRatesEndpoint(BaseEndpoint):
         user_id: int,
         target_id: int,
         target_type: str,
-        access_token: str,
         status: str | None = None,
         score: int | None = None,
         chapters: int | None = None,
@@ -80,7 +79,7 @@ class UserRatesEndpoint(BaseEndpoint):
         text: str | None = None,
     ) -> UserRateResponse | RequestError:
         """
-        Requires user_rates oauth scope
+        Requires oauth scope
         """
         response = await self._request.make_request(
             "POST",
@@ -101,10 +100,7 @@ class UserRatesEndpoint(BaseEndpoint):
                     }
                 )
             },
-            headers={
-                "Authorization": f"Bearer {access_token}",
-                "User-Agent": self._user_agent,
-            },
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -119,7 +115,6 @@ class UserRatesEndpoint(BaseEndpoint):
     async def update(
         self,
         user_rate_id: int,
-        access_token: str,
         status: str | None = None,
         score: int | None = None,
         chapters: int | None = None,
@@ -128,6 +123,18 @@ class UserRatesEndpoint(BaseEndpoint):
         rewatches: int | None = None,
         text: str | None = None,
     ) -> UserRateResponse | RequestError:
+        """
+        requires oauth scope
+        :param user_rate_id:
+        :param status:
+        :param score:
+        :param chapters:
+        :param episodes:
+        :param volumes:
+        :param rewatches:
+        :param text:
+        :return:
+        """
         response = await self._request.make_request(
             "PATCH",
             url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}",
@@ -144,10 +151,7 @@ class UserRatesEndpoint(BaseEndpoint):
                     }
                 )
             },
-            headers={
-                "User-Agent": self._user_agent,
-                "Authorization": f"Bearer {access_token}",
-            },
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -159,17 +163,15 @@ class UserRatesEndpoint(BaseEndpoint):
 
         return response
 
-    async def increment(
-        self, user_rate_id: int, access_token: str
-    ) -> UserRateResponse | RequestError:
-        """Increment episodes/chapters by 1"""
+    async def increment(self, user_rate_id: int) -> UserRateResponse | RequestError:
+        """
+        requires oauth scope.
+        Increment episodes/chapters by 1
+        """
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}/increment",
-            headers={
-                "User-Agent": self._user_agent,
-                "Authorization": f"Bearer {access_token}",
-            },
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -181,19 +183,16 @@ class UserRatesEndpoint(BaseEndpoint):
 
         return response
 
-    async def delete(self, user_rate_id: int, access_token: str) -> None | RequestError:
+    async def delete(self, user_rate_id: int) -> None | RequestError:
         """
-        Destroy a user rate
+        Destroy a user rate.
+        requires oauth scope
         :param user_rate_id: must be a number.
-        :param access_token: auth token.
         :return: None - Success, RequestError - Error.
         """
 
         return await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}",
-            headers={
-                "User-Agent": self._user_agent,
-                "Authorization": f"Bearer {access_token}",
-            },
+            headers=self._headers(),
         )

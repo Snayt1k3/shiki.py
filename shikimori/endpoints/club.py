@@ -28,7 +28,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters(
                 {"limit": limit, "page": page, "search": search}
             ),
@@ -47,7 +47,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -81,7 +81,6 @@ class ClubEndpoint(BaseEndpoint):
     async def update(
         self,
         id: int,
-        access_token: str,
         name: str = None,
         description: str = None,
         display_images: bool | int = None,
@@ -90,8 +89,8 @@ class ClubEndpoint(BaseEndpoint):
         image_upload_policy: str = None,
     ) -> ClubInfo | RequestError:
         """
+        requires oauth scope
         :param id: number.
-        :param access_token: auth token
         :param name: string.
         :param description: string.
         :param display_images: Must be one of: true, false, 1, 0.
@@ -114,10 +113,7 @@ class ClubEndpoint(BaseEndpoint):
                     }
                 )
             },
-            headers={
-                "User-Agent": self._user_agent,
-                "Authorization": f"Bearer {access_token}",
-            },
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -147,7 +143,7 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Animes(
+    async def animes(
         self, id: int, limit: int = None, page: int = None
     ) -> List[Anime] | RequestError:
         """
@@ -159,7 +155,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/animes",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -172,7 +168,7 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Mangas(
+    async def mangas(
         self, id: int, page: int = None, limit: int = None
     ) -> List[Manga] | RequestError:
         """
@@ -185,7 +181,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/mangas",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -198,7 +194,7 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Ranobes(
+    async def ranobes(
         self, id: int, limit: int = None, page: int = None
     ) -> List[Ranobe] | RequestError:
         """
@@ -211,7 +207,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/ranobe",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -226,7 +222,7 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Characters(
+    async def characters(
         self, id: int, limit: int = None, page: int = None
     ) -> List[Character] | RequestError:
         """
@@ -238,7 +234,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/characters",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -251,7 +247,7 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Collections(
+    async def collections(
         self, id: int, limit: int = None, page: int = None
     ) -> List[Collection] | RequestError:
         """
@@ -263,7 +259,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/collections",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -286,7 +282,7 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Clubs(
+    async def clubs(
         self, id: int, limit: int = None, page: int = None
     ) -> List[Club] | RequestError:
         """
@@ -298,7 +294,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/clubs",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -311,7 +307,7 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Members(
+    async def members(
         self, id: int, limit: int = None, page: int = None
     ) -> List[User] | RequestError:
         """
@@ -323,7 +319,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/members",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -336,7 +332,7 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Images(
+    async def images(
         self, id: int, limit: int = None, page: int = None
     ) -> List[ClubImage] | RequestError:
         """
@@ -348,7 +344,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/images",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -361,15 +357,13 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Join(self, id: int, access_token: str) -> None | RequestError:
+    async def join(self, id: int) -> None | RequestError:
+        """requires oauth scope"""
         response = (
             await self._request.make_request(
                 "POST",
                 url=f"{self._base_url}/api/clubs/{id}/join",
-                headers={
-                    "User-Agent": self._user_agent,
-                    "Authorization": f"Bearer {access_token}",
-                },
+                headers=self._headers(),
             ),
         )
 
@@ -382,15 +376,13 @@ class ClubEndpoint(BaseEndpoint):
 
         return response
 
-    async def Leave(self, id: int, access_token: str) -> None | RequestError:
+    async def leave(self, id: int) -> None | RequestError:
+        """requires oauth scope !"""
         response = (
             await self._request.make_request(
                 "POST",
                 url=f"{self._base_url}/api/clubs/{id}/leave",
-                headers={
-                    "User-Agent": self._user_agent,
-                    "Authorization": f"Bearer {access_token}",
-                },
+                headers=self._headers(),
             ),
         )
 

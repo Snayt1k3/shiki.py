@@ -1,6 +1,7 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class Topic(BaseModel):
+@dataclass
+class Topic:
     topic_id: str
     is_ignored: bool

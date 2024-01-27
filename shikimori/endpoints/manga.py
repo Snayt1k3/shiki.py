@@ -36,7 +36,6 @@ class MangaEndpoint(BaseEndpoint):
         ids: str = None,
         exclude_ids: str = None,
         search: str = None,
-        access_token: str = None,
     ):
         """
         Most of parameters can be grouped in lists of values separated by comma:
@@ -70,7 +69,6 @@ class MangaEndpoint(BaseEndpoint):
         :param ids: List of manga ids separated by comma
         :param exclude_ids: List of manga ids separated by comma
         :param search: Must be a String
-        :param access_token: if u want use mylist param, it must be set
         """
 
         response = await self._request.make_request(
@@ -95,9 +93,7 @@ class MangaEndpoint(BaseEndpoint):
                     "search": search,
                 }
             ),
-            headers=self.base_headers()
-            if not access_token
-            else self.auth_headers(access_token),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -109,17 +105,11 @@ class MangaEndpoint(BaseEndpoint):
 
         return response
 
-    async def ById(self, id: int, access_token: str = None):
-        """
-        :param id: must be a number
-        :param access_token: if u want to use 'user_rate' from response, must be set it
-        """
+    async def ById(self, id: int):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}api/mangas/{id}",
-            headers=self.auth_headers(access_token)
-            if access_token
-            else self.base_headers(),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -136,7 +126,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/roles",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -161,7 +151,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/similar",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -177,7 +167,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/related",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -209,7 +199,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/franchise",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -228,7 +218,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/external_links",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -251,7 +241,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/topics",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters(
                 {"page": page, "limit": limit, "kind": kind, "episode": episode}
             ),

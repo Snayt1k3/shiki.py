@@ -14,9 +14,7 @@ class AppearsEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/appears",
-            headers={
-                "User-Agent": self._user_agent,
-            },
+            headers=self._headers(),
             body=filter_none_parameters({"ids": ids}),
         )
 

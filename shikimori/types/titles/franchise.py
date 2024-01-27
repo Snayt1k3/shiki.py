@@ -1,6 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
-class Node(BaseModel):
+
+@dataclass
+class Node:
     id: int
     date: int
     name: str
@@ -10,7 +12,9 @@ class Node(BaseModel):
     kind: str
     weight: int
 
-class Link(BaseModel):
+
+@dataclass
+class Link:
     id: int
     source_id: int
     target_id: int
@@ -19,9 +23,7 @@ class Link(BaseModel):
     relation: str
 
 
-class Franchise(BaseModel):
+@dataclass
+class Franchise:
     nodes: list[Node]
     links: list[Link]
-
-
-

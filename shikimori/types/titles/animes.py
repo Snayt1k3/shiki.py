@@ -1,5 +1,4 @@
-from pydantic import BaseModel
-from ..general.photo import Photo
+from dataclasses import dataclass
 from studios import Studio
 from videos import Video
 from screenshots import ScreenShot
@@ -7,16 +6,16 @@ from genres import Genre
 from manga import Manga
 from .base import BaseTitle
 
-
+@dataclass
 class GenreExtended(Genre):
     entry_type: str
 
-
+@dataclass
 class Anime(BaseTitle):
     episodes: int
     episodes_aired: int
 
-
+@dataclass
 class AnimeInfo(Anime):
     english: list[str] | list[None]
     japanese: list[str] | list[None]
@@ -41,15 +40,15 @@ class AnimeInfo(Anime):
     videos: list[Video]
     screenshots: list[ScreenShot]
 
-
-class Relation(BaseModel):
+@dataclass
+class Relation:
     relation: str
     relation_russian: str
     anime: Anime | None
     manga: Manga | None
 
-
-class ExternalLink(BaseModel):
+@dataclass
+class ExternalLink:
     id: int
     kind: str
     url: str

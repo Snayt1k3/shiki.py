@@ -1,14 +1,19 @@
-from pydantic import BaseModel
-from shikimori.types.general.photo import Photo
+from dataclasses import dataclass
 from shikimori.types.titles.roles import Character as Seyu
 from .base import BaseRole, BaseCharacter
 
+
+@dataclass
 class MangaRole(BaseRole):
     pass
 
+
+@dataclass
 class AnimeRole(BaseRole):
     pass
 
+
+@dataclass
 class Character(BaseCharacter):
     altname: str
     japanese: str
@@ -22,6 +27,3 @@ class Character(BaseCharacter):
     seyu: list[Seyu]
     animes: list[AnimeRole]
     mangas: list[MangaRole]
-
-
-

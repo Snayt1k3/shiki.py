@@ -8,7 +8,7 @@ from ..exceptions import RequestError
 class TopicIgnoreEndpoint(BaseEndpoint):
 
     async def ignore(
-        self, topic_id: str | int, access_token: str
+        self, topic_id: str | int
     ) -> Topic | RequestError:
         """
         ignore topic.
@@ -19,10 +19,7 @@ class TopicIgnoreEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/topics/{topic_id}/ignore",
-            headers={
-                "User-Agent": self._user_agent,
-                "Authorization": f"Bearer {access_token}",
-            },
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -35,7 +32,7 @@ class TopicIgnoreEndpoint(BaseEndpoint):
         return response
 
     async def unignore(
-        self, topic_id: str | int, access_token: str
+        self, topic_id: str | int,
     ) -> Topic | RequestError:
         """
         unignore topic.
@@ -46,10 +43,7 @@ class TopicIgnoreEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/v2/topics/{topic_id}/ignore",
-            headers={
-                "User-Agent": self._user_agent,
-                "Authorization": f"Bearer {access_token}",
-            },
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):

@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
-
-class UserIgnore(BaseModel):
+@dataclass
+class UserIgnore:
     user_id: str
     is_ignored: bool

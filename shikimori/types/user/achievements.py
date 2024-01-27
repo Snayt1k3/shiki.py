@@ -1,6 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
-class Achievement(BaseModel):
+
+@dataclass
+class Achievement:
     id: int
     neko_id: str
     level: int

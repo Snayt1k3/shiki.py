@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 from ..general.photo import Photo
 
-
-class BaseTitle(BaseModel):
+@dataclass
+class BaseTitle:
     id: int
     name: str
     russian: str
@@ -14,13 +14,13 @@ class BaseTitle(BaseModel):
     aired_on: str
     released_on: str
 
-
-class BaseRole(BaseModel):
+@dataclass
+class BaseRole:
     role: str
     roles: list[str]
 
-
-class BaseCharacter(BaseModel):
+@dataclass
+class BaseCharacter:
     id: int
     name: str
     russian: str

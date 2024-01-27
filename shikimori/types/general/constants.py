@@ -1,28 +1,35 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class BaseConstant(BaseModel):
+@dataclass
+class BaseConstant:
     kind: list[str]
     status: list[str]
 
 
+@dataclass
 class MangaConstant(BaseConstant):
     pass
 
 
+@dataclass
 class AnimeConstant(BaseConstant):
     pass
 
 
-class UserRateConstant(BaseModel):
+@dataclass
+class UserRateConstant:
     status: list[str]
 
 
-class ClubConstant(BaseModel):
+@dataclass
+class ClubConstant:
     join_policy: list[str]
     comment_policy: list[str]
     image_upload_policy: list[str]
 
-class SmileConstant(BaseModel):
+
+@dataclass
+class SmileConstant:
     bbcode: str
     path: str

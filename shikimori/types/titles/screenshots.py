@@ -1,6 +1,7 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
-class ScreenShot(BaseModel):
+@dataclass
+class ScreenShot:
     preview: str
     original: str
     

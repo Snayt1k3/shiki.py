@@ -10,10 +10,9 @@ class FavoritesEndpoint(BaseEndpoint):
         self, id: int, linked_type: str, access_token: str, kind: str = None
     ) -> str | RequestError:
         """
-
+        requires oauth scope
         :param id:
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Person, Character
-        :param access_token: auth
         :param kind: Must be one of: common, seyu, mangaka, producer, person
         :return:
         """
@@ -23,7 +22,7 @@ class FavoritesEndpoint(BaseEndpoint):
             url += f"/{kind}"
 
         response = await self._request.make_request(
-            "POST", url=url, headers=self.auth_headers(access_token)
+            "POST", url=url, headers=self._headers()
         )
 
         if not isinstance(response, RequestError):
@@ -35,19 +34,16 @@ class FavoritesEndpoint(BaseEndpoint):
 
         return response
 
-    async def delete(
-        self, id: int, linked_type: str, access_token: str
-    ) -> str | RequestError:
+    async def delete(self, id: int, linked_type: str) -> str | RequestError:
         """
-
+        requires oauth scope
         :param id: number
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Person, Character
-        :param access_token: auth
         """
         url = f"{self._base_url}/api/favorites/{linked_type}/{id}"
 
         response = await self._request.make_request(
-            "DELETE", url=url, headers=self.auth_headers(access_token)
+            "DELETE", url=url, headers=self._headers()
         )
 
         if not isinstance(response, RequestError):
@@ -59,19 +55,16 @@ class FavoritesEndpoint(BaseEndpoint):
 
         return response
 
-    async def reorder(
-        self, id: int, access_token: str, new_index: int = None
-    ) -> None | RequestError:
+    async def reorder(self, id: int, new_index: int = None) -> None | RequestError:
         """
-
+        requires oauth scope
         :param id: number.
         :param new_index: number.
-        :param access_token: auth
         """
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/favorites/{id}",
-            headers=self.auth_headers(access_token),
+            headers=self._headers(),
             body=filter_none_parameters({"new_index": new_index}),
         )
 

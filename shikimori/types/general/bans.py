@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 from shikimori.types.user import User
 
-
-class Comment(BaseModel):
+@dataclass
+class Comment:
     id: int
     commentable_id: int
     commentable_type: str
@@ -12,8 +12,8 @@ class Comment(BaseModel):
     updated_at: str
     is_offtopic: bool
 
-
-class Ban(BaseModel):
+@dataclass
+class Ban:
     id: int
     user_id: int
     comment: Comment

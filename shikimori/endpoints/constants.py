@@ -15,7 +15,7 @@ class ConstantsEndpoint(BaseEndpoint):
     async def animes(self) -> AnimeConstant | RequestError:
         response = await self._request.make_request(
             "GET",
-            headers=self.base_headers(),
+            headers=self._headers(),
             url=f"{self._base_url}/api/constants/anime",
         )
 
@@ -31,7 +31,7 @@ class ConstantsEndpoint(BaseEndpoint):
     async def mangas(self) -> MangaConstant | RequestError:
         response = await self._request.make_request(
             "GET",
-            headers=self.base_headers(),
+            headers=self._headers(),
             url=f"{self._base_url}/api/constants/manga",
         )
 
@@ -47,7 +47,7 @@ class ConstantsEndpoint(BaseEndpoint):
     async def UserRates(self) -> UserRateConstant | RequestError:
         response = await self._request.make_request(
             "GET",
-            headers=self.base_headers(),
+            headers=self._headers(),
             url=f"{self._base_url}/api/constants/manga",
         )
 
@@ -63,7 +63,7 @@ class ConstantsEndpoint(BaseEndpoint):
     async def clubs(self) -> ClubConstant | RequestError:
         response = await self._request.make_request(
             "GET",
-            headers=self.base_headers(),
+            headers=self._headers(),
             url=f"{self._base_url}/api/constants/manga",
         )
 
@@ -79,7 +79,7 @@ class ConstantsEndpoint(BaseEndpoint):
     async def smileys(self) -> list[SmileConstant] | RequestError:
         response = await self._request.make_request(
             "GET",
-            headers=self.base_headers(),
+            headers=self._headers(),
             url=f"{self._base_url}/api/constants/smileys",
         )
 

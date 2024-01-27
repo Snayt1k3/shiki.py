@@ -1,7 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class UserRateResponse(BaseModel):
+@dataclass
+class UserRateResponse:
     id: int
     user_id: int
     target_id: int
@@ -16,4 +17,3 @@ class UserRateResponse(BaseModel):
     text_html: str
     created_at: str
     updated_at: str
-

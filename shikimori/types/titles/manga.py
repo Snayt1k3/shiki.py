@@ -1,12 +1,15 @@
 from .base import BaseTitle
 from ..titles.genres import Genre
+from dataclasses import dataclass
 
 
+@dataclass
 class Manga(BaseTitle):
     volumes: int
     chapters: int
 
 
+@dataclass
 class MangaInfo(Manga):
     english: list[str]
     japanese: list[str]

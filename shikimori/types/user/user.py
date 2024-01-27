@@ -1,7 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 from ..general.photo import PhotoExtended
 
-class User(BaseModel):
+@dataclass
+class User:
     id: int
     nickname: str
     image: PhotoExtended

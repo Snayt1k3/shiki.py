@@ -10,7 +10,7 @@ class AchievementsEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             query_params={"user_id": user_id},
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):

@@ -27,15 +27,18 @@ class Shikimori:
             raise ValueError(
                 "You need to specify user-agent otherwise you may be banned"
             )
+
         # dependencies
         self._base_url = SHIKIMORI_URL if not base_url else base_url
-        self._limiter = RequestLimiter(
-            MAX_REQUESTS_PER_SECOND, 1, Request()
-        )  # Auth dependencies
+        self._request = Request()
+        self._limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, 1, self._request)
+
+        # Auth dependencies
         self._options = AuthOptions(
             client_id=client_id, redirect_uri=redirect_uri, client_secret=client_secret
         )
         self._user_agent = user_agent
+        self._token = None
 
         # init auth
         self.Auth = Auth(self._limiter, self._user_agent, self._options)
@@ -56,3 +59,6 @@ class Shikimori:
         self.EpisodeNotify = EpisodeNotificationEndpoint(
             self._base_url, self._limiter, self._user_agent
         )
+
+    def set_token(self, token: str) -> None:
+        self._request.set_token(token)

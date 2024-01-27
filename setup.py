@@ -13,9 +13,9 @@ setup(
     version=pyproject["tool"]["poetry"]["version"],
     packages=find_packages(),
     install_requires=[
-        "pydantic==2.5.3",
         "aiohttp>=3.9.1",
-        "tomli==2.0.1"
+        "tomli>=2.0.1",
+        "setuptools>=69.0.3"
     ],
     author='Snayt1k3',
     author_email='snayt1k3twitch@gmail.com',
@@ -26,5 +26,6 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
     ],
 )

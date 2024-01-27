@@ -1,15 +1,20 @@
 from pydantic import BaseModel
 from ..user.user import User
 from ..general.photo import Photo
+from dataclasses import dataclass
 
-class Forum(BaseModel):
+
+@dataclass
+class Forum:
     id: int
     position: int
     name: str
     permalink: str
     url: str
 
-class Linked(BaseModel):
+
+@dataclass
+class Linked:
     name: str
     russian: str
     image: Photo
@@ -22,7 +27,9 @@ class Linked(BaseModel):
     aired_on: str | None
     released_at: str | None
 
-class Topic(BaseModel):
+
+@dataclass
+class Topic:
     id: int
     topic_title: str
     body: str
@@ -40,5 +47,3 @@ class Topic(BaseModel):
     last_comment_viewed: bool
     event: str
     episode: int
-
-

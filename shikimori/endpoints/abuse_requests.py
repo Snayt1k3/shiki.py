@@ -16,9 +16,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/abuse_requests/offtopic",
-            headers={
-                "User-Agent": self._user_agent,
-            },
+            headers=self._headers(),
             body={"comment_id": comment_id},
         )
 
@@ -42,9 +40,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/topics/{topic_id}/ignore",
-            headers={
-                "User-Agent": self._user_agent,
-            },
+            headers=self._headers(),
             body=filter_none_parameters(
                 {"topic_id": topic_id, "comment_id": comment_id}
             ),
@@ -70,9 +66,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/abuse_requests/abuse",
-            headers={
-                "User-Agent": self._user_agent,
-            },
+            headers=self._headers(),
             body=filter_none_parameters(
                 {"topic_id": topic_id, "comment_id": comment_id, "reason": reason}
             ),
@@ -99,9 +93,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/abuse_requests/spoiler",
-            headers={
-                "User-Agent": self._user_agent,
-            },
+            headers=self._headers(),
             body=filter_none_parameters(
                 {"topic_id": topic_id, "comment_id": comment_id, "reason": reason}
             ),

@@ -37,7 +37,7 @@ class CommentEndpoint(BaseEndpoint):
                     "desc": desc,
                 }
             ),
-            headers=self.base_headers(),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -59,7 +59,7 @@ class CommentEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/comments/{id}",
-            headers=self.base_headers(),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -78,7 +78,6 @@ class CommentEndpoint(BaseEndpoint):
 
     async def create(
         self,
-        access_token: str,
         broadcast: bool = None,
         body: str = None,
         commentable_id: int = None,
@@ -87,13 +86,13 @@ class CommentEndpoint(BaseEndpoint):
         frontend: bool = None,
     ):
         """
+        requires oauth scope
         :param broadcast: Must be one of: true, false
         :param body: Must be a String
         :param commentable_id: Must be a number.
         :param commentable_type: Must be one of: Topic, User, Anime, Manga, Character, Person, Article, Club, ClubPage, Collection, Critique, Review
         :param is_offtopic: Must be one of: true, false
         :param frontend: Must be one of: true, false
-        :param access_token: auth token
         """
 
         response = await self._request.make_request(
@@ -113,7 +112,7 @@ class CommentEndpoint(BaseEndpoint):
                     "frontend": frontend,
                 }
             ),
-            headers=self.base_headers(),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -131,12 +130,11 @@ class CommentEndpoint(BaseEndpoint):
         return response
 
     async def update(
-        self, id: int, access_token: str, body: str, frontend: bool = None
+        self, id: int, body: str, frontend: bool = None
     ) -> Comment | RequestError:
         """
-        Update a comment.
+        Update a comment. requires oauth scope
         Use abuse_requests to change is_offtopic field.
-        :param access_token: auth token
         :param body: string.
         :param frontend: string.
         """
@@ -147,7 +145,7 @@ class CommentEndpoint(BaseEndpoint):
             body=filter_none_parameters(
                 {"comment": {"body": body}, "frontend": frontend}
             ),
-            headers=self.auth_headers(access_token),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -164,11 +162,12 @@ class CommentEndpoint(BaseEndpoint):
 
         return response
 
-    async def delete(self, id: int, access_token: str) -> str | RequestError:
+    async def delete(self, id: int) -> str | RequestError:
+        """requires oauth scope"""
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/comments/{id}",
-            headers=self.auth_headers(access_token),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):

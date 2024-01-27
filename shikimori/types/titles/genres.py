@@ -1,7 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class Genre(BaseModel):
+@dataclass
+class Genre:
     id: int
     name: str
     russian: str

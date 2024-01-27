@@ -1,13 +1,16 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class Photo(BaseModel):
+@dataclass
+class Photo:
     original: str
     preview: str
     x96: str
     x48: str
 
-class PhotoExtended(BaseModel):
+
+@dataclass
+class PhotoExtended:
     x160: str
     x148: str
     x80: str
@@ -16,7 +19,9 @@ class PhotoExtended(BaseModel):
     x32: str
     x16: str
 
-class ClubImage(BaseModel):
+
+@dataclass
+class ClubImage:
     id: int
     original_url: str
     main_url: str

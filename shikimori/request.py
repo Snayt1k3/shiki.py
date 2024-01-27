@@ -6,8 +6,18 @@ from .exceptions import RequestError
 
 class Request:
     """class for send requests"""
+
+    def __init__(self, token: str = None):
+        self._token = token
+
+    def set_token(self, token: str) -> None:
+        self._token = token
+
     async def _get(self, url: str, query_params: dict = None, headers: dict = None):
         try:
+            if self._token:
+                headers["Authorization"] = f"Bearer {self._token}"
+
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.get(url, params=query_params) as response:
 
@@ -20,6 +30,9 @@ class Request:
 
     async def _post(self, url: str, body: dict = None, headers: dict = None):
         try:
+            if self._token:
+                headers["Authorization"] = f"Bearer {self._token}"
+
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.post(url, json=body) as response:
 
@@ -32,6 +45,10 @@ class Request:
 
     async def _patch(self, url: str, body: dict = None, headers: dict = None):
         try:
+
+            if self._token:
+                headers["Authorization"] = f"Bearer {self._token}"
+
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.patch(url, json=body) as response:
 
@@ -44,6 +61,9 @@ class Request:
 
     async def _put(self, url: str, body: dict = None, headers: dict = None):
         try:
+            if self._token:
+                headers["Authorization"] = f"Bearer {self._token}"
+
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.put(url, json=body) as response:
 
@@ -56,6 +76,9 @@ class Request:
 
     async def _delete(self, url: str, body: dict = None, headers: dict = None):
         try:
+            if self._token:
+                headers["Authorization"] = f"Bearer {self._token}"
+
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.delete(url, json=body) as response:
 

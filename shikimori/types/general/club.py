@@ -5,16 +5,18 @@ from shikimori.types.titles.roles import Character
 from shikimori.types.user import User
 from .photo import ClubImage
 from .topics import Topic
+from dataclasses import dataclass
 
-class Logo(BaseModel):
+@dataclass
+class Logo:
     original: str
     main: str
     x96: str
     x73: str
     x48: str
 
-
-class Club(BaseModel):
+@dataclass
+class Club:
     id: int
     name: str
     logo: Logo
@@ -22,7 +24,7 @@ class Club(BaseModel):
     join_policy: str
     comment_policy: str
 
-
+@dataclass
 class ClubInfo(Club):
     description: str
     description_html: str
@@ -36,5 +38,6 @@ class ClubInfo(Club):
     animes: list[Anime]
     images: list[ClubImage]
 
+@dataclass
 class Collection(Topic):
     pass

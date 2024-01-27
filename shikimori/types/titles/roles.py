@@ -1,12 +1,12 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 from .base import BaseCharacter
 
-
+@dataclass
 class Character(BaseCharacter):
     pass
 
-
-class Role(BaseModel):
+@dataclass
+class Role:
     roles: list[str]
     roles_russian: list[str]
     character: Character

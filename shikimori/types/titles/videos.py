@@ -1,6 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
-class Video(BaseModel):
+
+@dataclass
+class Video:
     id: int
     url: str
     image_url: str

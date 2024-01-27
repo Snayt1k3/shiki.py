@@ -12,7 +12,7 @@ class BanEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/bans",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -20,7 +20,7 @@ class BanEndpoint(BaseEndpoint):
                 Ban(
                     **b,
                     comment=Comment(**b.get("comment")),
-                    user=User ** b.get("user"),
+                    user=User(**b.get("user")),
                     moderator=User(**b.get("moderator")),
                 )
                 for b in response

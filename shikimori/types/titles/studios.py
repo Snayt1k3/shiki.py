@@ -1,6 +1,8 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
-class Studio(BaseModel):
+
+@dataclass
+class Studio:
     id: int
     name: str
     filtered_name: str

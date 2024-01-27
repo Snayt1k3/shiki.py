@@ -19,7 +19,7 @@ class CalendarEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/calendar",
-            headers={"User-Agent": self._user_agent},
+            headers=self._headers(),
             query_params=filter_none_parameters({"censored": censored}),
         )
 

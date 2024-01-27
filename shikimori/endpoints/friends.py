@@ -5,11 +5,12 @@ from ..exceptions import RequestError
 
 
 class FriendEndpoint(BaseEndpoint):
-    async def add(self, id: int, access_token: str) -> str | RequestError:
+    async def add(self, id: int) -> str | RequestError:
+        """requires oauth scope """
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/friends/{id}",
-            headers=self.auth_headers(access_token),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -21,11 +22,12 @@ class FriendEndpoint(BaseEndpoint):
 
         return response
 
-    async def delete(self, id: int, access_token) -> str | RequestError:
+    async def delete(self, id: int) -> str | RequestError:
+        """requires oauth scope"""
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/friends/{id}",
-            headers=self.auth_headers(access_token),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):

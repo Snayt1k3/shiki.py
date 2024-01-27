@@ -8,9 +8,9 @@ packages = [{include = "shikimori"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-pydantic = "^2.5.3"
 aiohttp = "^3.9.1"
 tomli = "^2.0.1"
+setuptools = "^69.0.3"
 [build-system]
 requires = [
     "setuptools",

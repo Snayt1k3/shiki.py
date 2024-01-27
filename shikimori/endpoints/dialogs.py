@@ -9,11 +9,12 @@ from ..types.general.photo import PhotoExtended
 
 
 class DialogsEndpoint(BaseEndpoint):
-    async def list(self, access_token: str) -> List[Dialog] | RequestError:
+    async def list(self) -> List[Dialog] | RequestError:
+        """requires oauth scope"""
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/dialogs",
-            headers=self.auth_headers(access_token),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -32,17 +33,16 @@ class DialogsEndpoint(BaseEndpoint):
         return response
 
     async def ById(
-        self, id: str, access_token: str
+        self, id: str
     ) -> List[MessageInfo] | RequestError:
         """
-
+        requires oauth scope
         :param id: like user_id
-        :param access_token: auth token
         """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/dialogs/{id}",
-            headers=self.auth_headers(access_token),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -61,11 +61,12 @@ class DialogsEndpoint(BaseEndpoint):
 
         return response
 
-    async def delete(self, id: str, access_token: str) -> str | RequestError:
+    async def delete(self, id: str) -> str | RequestError:
+        """requires oauth scope"""
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/dialogs/{id}",
-            headers=self.auth_headers(access_token),
+            headers=self._headers(),
         )
 
         if not isinstance(response, RequestError):

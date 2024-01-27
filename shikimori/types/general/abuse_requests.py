@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
-
-class AbuseRequest(BaseModel):
+@dataclass
+class AbuseRequest:
     kind: str
     value: bool
     affected_ids: list[int]
