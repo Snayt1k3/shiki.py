@@ -11,8 +11,6 @@ class BaseTitle(BaseModel):
     kind: str
     score: str
     status: str
-    episodes: int
-    episodes_aired: int
     aired_on: str
     released_on: str
 

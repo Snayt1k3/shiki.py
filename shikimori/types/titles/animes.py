@@ -7,13 +7,17 @@ from genres import Genre
 from manga import Manga
 from .base import BaseTitle
 
+
 class GenreExtended(Genre):
     entry_type: str
 
-class Anime(BaseTitle):
-    pass
 
-class AnimeInfo(BaseTitle):
+class Anime(BaseTitle):
+    episodes: int
+    episodes_aired: int
+
+
+class AnimeInfo(Anime):
     english: list[str] | list[None]
     japanese: list[str] | list[None]
     synonyms: list[str] | list[None]
@@ -44,6 +48,7 @@ class Relation(BaseModel):
     anime: Anime | None
     manga: Manga | None
 
+
 class ExternalLink(BaseModel):
     id: int
     kind: str
@@ -53,4 +58,3 @@ class ExternalLink(BaseModel):
     entry_type: str
     created_at: str
     updated_at: str
-

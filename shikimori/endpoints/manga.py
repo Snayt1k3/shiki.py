@@ -1,27 +1,24 @@
 import logging
 from typing import List
+
 from .base import BaseEndpoint
+from ..utils.filter import filter_none_parameters
+from ..exceptions import RequestError
+from ..types.titles.manga import Manga, MangaInfo
+from ..types.general.photo import Photo, PhotoExtended
+from ..types.titles.genres import Genre
+from ..types.titles.roles import Role, Character
+from shikimori.types.titles.franchise import Franchise, Node, Link
+from shikimori.types.general.topics import Topic, Forum, Linked
+from ..types.user.user import User
 from shikimori.types.titles.animes import (
     Anime,
-    AnimeInfo,
-    GenreExtended,
     Relation,
     ExternalLink,
 )
-from shikimori.types.titles.manga import Manga
-from shikimori.types.general.photo import Photo, PhotoExtended
-from shikimori.types.titles.studios import Studio
-from shikimori.types.titles.screenshots import ScreenShot
-from shikimori.types.titles.videos import Video
-from ..exceptions import RequestError
-from ..utils.filter import filter_none_parameters
-from shikimori.types.titles.roles import Role, Character
-from shikimori.types.titles.franchise import Franchise, Node, Link
-from shikimori.types.general.topics import Topic, Forum, Linked
-from ..types.user import User
 
 
-class AnimeEndpoint(BaseEndpoint):
+class MangaEndpoint(BaseEndpoint):
     async def list(
         self,
         page: int = None,
@@ -30,43 +27,55 @@ class AnimeEndpoint(BaseEndpoint):
         kind: str = None,
         status: str = None,
         season: str = None,
-        score: str = None,
-        duration: str = None,
-        rating: str = None,
+        score: int = None,
         genre: str = None,
-        studio: str = None,
+        publisher: str = None,
         franchise: str = None,
-        censored: str = None,
+        censored: bool = None,
         mylist: str = None,
         ids: str = None,
         exclude_ids: str = None,
         search: str = None,
         access_token: str = None,
-    ) -> list[Anime] | RequestError:
+    ):
         """
-        :param page: must be a number between 1 and 100000.
-        :param limit: Must be a number. 50 - maximum
-        :param order: Must be one of: id, id_desc, ranked, kind, popularity, name, aired_on, episodes, status, random, ranked_random, ranked_shiki, created_at, created_at_desc.
-        :param kind: Must be one of: tv, movie, ova, ona, special, tv_special, music, pv, cm, tv_13, tv_24, tv_48
-        :param status: Must be one of: anons, ongoing, released
-        :param season: ex - summer_2017, 2016, 2014_2016, 199x
-        :param score: Must be a number.
-        :param duration: Must be one of: S - less than 10, D - less than 30, F - more than 30
-        :param rating: Must be one of: none, g, pg, pg_13, r, r_plus, rx
-        :param genre: List of genre ids separated by comma
-        :param studio: List of studio ids separated by comma
-        :param franchise: List of franchises separated by comma
-        :param censored: Must be one of: true, false.
-        :param mylist: Must be one of: planned, watching, rewatching, completed, on_hold, dropped
-        :param ids: List of anime ids separated by comma
-        :param exclude_ids: List of anime ids separated by comma
-        :param search: Search phrase to filter animes by name
-        :param access_token: auth token, if you want to use mylist parameter
+        Most of parameters can be grouped in lists of values separated by comma:
+
+        - season=2016,2015 – mangas with season 2016 year or with season 2015 year.
+
+        - kind=manga,one_shot – mangas with kind Manga or with kind One Shot.
+
+        Most of the parameters can be used in the subtraction mode:
+
+        - season=!2016,!2015 – mangas without season 2016 year and without season 2015 year.
+
+        - kind=!manga,!one_shot – mangas without kind Manga and without kind One Shot.
+
+        Most of the parameters can be used in the combined mode:
+
+        - season=2016,!summer_2016 – mangas with season 2016 year and without season summer_2016.
+
+        :param page: Must be a number between 1 and 100000.
+        :param limit: 50 maximum.
+        :param order: Must be one of: id, id_desc, ranked, kind, popularity, name, aired_on, volumes, chapters, status, random, ranked_random, ranked_shiki, created_at, created_at_desc.
+        :param kind: Must be one of: manga, manhwa, manhua, light_novel, novel, one_shot, doujin.
+        :param status: Must be one of: anons, ongoing, released, paused, discontinued.
+        :param season: summer_2017 spring_2016,fall_2016.
+        :param score: must be a number.
+        :param genre: List of genre ids separated by comma.
+        :param publisher: List of publisher ids separated by comma.
+        :param franchise: List of franchises separated by comma.
+        :param censored: Set to false to allow hentai, yaoi and yuri.
+        :param mylist: Must be one of: planned, watching, rewatching, completed, on_hold, dropped.
+        :param ids: List of manga ids separated by comma
+        :param exclude_ids: List of manga ids separated by comma
+        :param search: Must be a String
+        :param access_token: if u want use mylist param, it must be set
         """
 
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/animes",
+            url=f"{self._base_url}/api/mangas",
             query_params=filter_none_parameters(
                 {
                     "page": page,
@@ -75,11 +84,9 @@ class AnimeEndpoint(BaseEndpoint):
                     "kind": kind,
                     "status": status,
                     "season": season,
-                    "studio": studio,
                     "score": score,
-                    "duration": duration,
-                    "rating": rating,
                     "genre": genre,
+                    "publisher": publisher,
                     "franchise": franchise,
                     "censored": censored,
                     "mylist": mylist,
@@ -88,48 +95,47 @@ class AnimeEndpoint(BaseEndpoint):
                     "search": search,
                 }
             ),
-            headers=filter_none_parameters(
-                {"User-Agent": self._user_agent, "Authorization": access_token}
-            ),
+            headers=self.base_headers()
+            if not access_token
+            else self.auth_headers(access_token),
+        )
+
+        if not isinstance(response, RequestError):
+            return [Manga(**s, image=Photo(**s["image"])) for s in response]
+
+        logging.debug(
+            f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
+        )
+
+        return response
+
+    async def ById(self, id: int, access_token: str = None):
+        """
+        :param id: must be a number
+        :param access_token: if u want to use 'user_rate' from response, must be set it
+        """
+        response = await self._request.make_request(
+            "GET",
+            url=f"{self._base_url}api/mangas/{id}",
+            headers=self.auth_headers(access_token)
+            if access_token
+            else self.base_headers(),
         )
 
         if not isinstance(response, RequestError):
             return [
-                Anime(**anime, image=Photo(**anime.get("image"))) for anime in response
+                MangaInfo(
+                    **s,
+                    image=Photo(**s["image"]),
+                    genres=[Genre(**g["genres"]) for g in s["genres"]],
+                )
+                for s in response
             ]
-
-        logging.debug(
-            f"Bad Request(anime_list): status - {response.status_code}: info - {str(response)}"
-        )
-
-        return response
-
-    async def byId(self, id: int) -> AnimeInfo | RequestError:
-        response = await self._request.make_request(
-            "GET",
-            url=f"{self._base_url}/api/animes/{id}",
-            headers={"User-Agent": self._user_agent},
-        )
-
-        if not isinstance(response, RequestError):
-            return AnimeInfo(
-                **response,
-                genres=[GenreExtended(**genre) for genre in response.get("genres")],
-                screenshots=[ScreenShot(**s) for s in response.get("screenshots")],
-                studios=[Studio(**s) for s in response.get("studios")],
-                videos=[Video(**v) for v in response.get("videos")],
-            )
-
-        logging.debug(
-            f"Bad Request(byId): status - {response.status_code}: info - {str(response)}"
-        )
-
-        return response
 
     async def roles(self, id: int) -> List[Role] | RequestError:
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/animes/{id}/roles",
+            url=f"{self._base_url}/api/mangas/{id}/roles",
             headers={"User-Agent": self._user_agent},
         )
 
@@ -151,17 +157,15 @@ class AnimeEndpoint(BaseEndpoint):
 
         return response
 
-    async def similar(self, id: int) -> List[Anime] | RequestError:
+    async def similar(self, id: int) -> List[Manga] | RequestError:
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/animes/{id}/similar",
+            url=f"{self._base_url}/api/mangas/{id}/similar",
             headers={"User-Agent": self._user_agent},
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Anime(**anime, image=Photo(**anime.get("image"))) for anime in response
-            ]
+            return [Manga(**s, image=Photo(**s["image"])) for s in response]
 
         logging.debug(
             f"Bad Request(similar): status - {response.status_code}: info - {str(response)}"
@@ -172,7 +176,7 @@ class AnimeEndpoint(BaseEndpoint):
     async def related(self, id: int) -> List[Relation] | RequestError:
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/animes/{id}/related",
+            url=f"{self._base_url}/api/mangas/{id}/related",
             headers={"User-Agent": self._user_agent},
         )
 
@@ -199,29 +203,12 @@ class AnimeEndpoint(BaseEndpoint):
         logging.debug(
             f"Bad Request(related): status - {response.status_code}: info - {str(response)}"
         )
-
-        return response
-
-    async def screenshots(self, id: int) -> List[ScreenShot] | RequestError:
-        response = await self._request.make_request(
-            "GET",
-            url=f"{self._base_url}/api/animes/{id}/screenshots",
-            headers={"User-Agent": self._user_agent},
-        )
-
-        if not isinstance(response, RequestError):
-            return [ScreenShot(**s) for s in response]
-
-        logging.debug(
-            f"Bad Request(related): status - {response.status_code}: info - {str(response)}"
-        )
-
         return response
 
     async def franchise(self, id: int) -> Franchise | RequestError:
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/animes/{id}/franchise",
+            url=f"{self._base_url}/api/mangas/{id}/franchise",
             headers={"User-Agent": self._user_agent},
         )
 
@@ -237,10 +224,10 @@ class AnimeEndpoint(BaseEndpoint):
 
         return response
 
-    async def externalLinks(self, id: int) -> List[ExternalLink] | RequestError:
+    async def ExternalLinks(self, id: int) -> List[ExternalLink] | RequestError:
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/animes/{id}/external_links",
+            url=f"{self._base_url}/api/mangas/{id}/external_links",
             headers={"User-Agent": self._user_agent},
         )
 
@@ -263,7 +250,7 @@ class AnimeEndpoint(BaseEndpoint):
     ) -> List[Topic] | RequestError:
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/animes/{id}/topics",
+            url=f"{self._base_url}/api/mangas/{id}/topics",
             headers={"User-Agent": self._user_agent},
             query_params=filter_none_parameters(
                 {"page": page, "limit": limit, "kind": kind, "episode": episode}
