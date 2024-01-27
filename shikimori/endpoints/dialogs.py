@@ -3,7 +3,8 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.dialogs import Message, Dialog, MessageInfo
+from ..types.user.message import Message, MessageInfo
+from ..types.user.dialog import Dialog
 from ..types.user.user import User
 from ..types.general.photo import PhotoExtended
 

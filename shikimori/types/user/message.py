@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from ..user.user import User
+from shikimori.types.user.user import User
 
 
 @dataclass
@@ -13,12 +13,6 @@ class Message:
     linked_id: int
     linked_type: None
     linked: None
-
-
-@dataclass
-class Dialog:
-    target_user: User
-    message: Message
 
 
 @dataclass
