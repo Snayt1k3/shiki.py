@@ -7,6 +7,7 @@ from .photo import ClubImage
 from .topics import Topic
 from dataclasses import dataclass
 
+
 @dataclass
 class Logo:
     original: str
@@ -14,6 +15,7 @@ class Logo:
     x96: str
     x73: str
     x48: str
+
 
 @dataclass
 class Club:
@@ -23,6 +25,7 @@ class Club:
     is_censored: str
     join_policy: str
     comment_policy: str
+
 
 @dataclass
 class ClubInfo(Club):
@@ -37,6 +40,7 @@ class ClubInfo(Club):
     members: list[User]
     animes: list[Anime]
     images: list[ClubImage]
+
 
 @dataclass
 class Collection(Topic):

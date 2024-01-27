@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from shikimori.types.titles.animes import Anime
 
+
 @dataclass
 class Calendar:
     next_episode: int

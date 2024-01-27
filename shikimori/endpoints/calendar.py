@@ -10,7 +10,6 @@ from shikimori.types.general.calendar import Calendar
 
 
 class CalendarEndpoint(BaseEndpoint):
-
     async def list(self, censored: bool = None) -> List[Calendar] | RequestError:
         """
         Show a calendar

@@ -32,9 +32,7 @@ class DialogsEndpoint(BaseEndpoint):
 
         return response
 
-    async def ById(
-        self, id: str
-    ) -> List[MessageInfo] | RequestError:
+    async def ById(self, id: str) -> List[MessageInfo] | RequestError:
         """
         requires oauth scope
         :param id: like user_id
@@ -77,4 +75,3 @@ class DialogsEndpoint(BaseEndpoint):
         )
 
         return response
-

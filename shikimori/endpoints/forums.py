@@ -18,4 +18,3 @@ class FavoritesEndpoint(BaseEndpoint):
         )
 
         return response
-

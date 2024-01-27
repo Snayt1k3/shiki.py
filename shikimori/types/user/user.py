@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from ..general.photo import PhotoExtended
 
+
 @dataclass
 class User:
     id: int

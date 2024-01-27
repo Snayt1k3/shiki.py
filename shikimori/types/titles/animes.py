@@ -6,14 +6,17 @@ from genres import Genre
 from manga import Manga
 from .base import BaseTitle
 
+
 @dataclass
 class GenreExtended(Genre):
     entry_type: str
+
 
 @dataclass
 class Anime(BaseTitle):
     episodes: int
     episodes_aired: int
+
 
 @dataclass
 class AnimeInfo(Anime):
@@ -40,12 +43,14 @@ class AnimeInfo(Anime):
     videos: list[Video]
     screenshots: list[ScreenShot]
 
+
 @dataclass
 class Relation:
     relation: str
     relation_russian: str
     anime: Anime | None
     manga: Manga | None
+
 
 @dataclass
 class ExternalLink:

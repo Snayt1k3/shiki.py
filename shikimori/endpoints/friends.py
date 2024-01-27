@@ -6,7 +6,7 @@ from ..exceptions import RequestError
 
 class FriendEndpoint(BaseEndpoint):
     async def add(self, id: int) -> str | RequestError:
-        """requires oauth scope """
+        """requires oauth scope"""
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/friends/{id}",

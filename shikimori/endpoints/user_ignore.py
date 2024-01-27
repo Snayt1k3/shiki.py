@@ -6,10 +6,7 @@ from ..exceptions import RequestError
 
 
 class UserIgnoreEndpoint(BaseEndpoint):
-
-    async def ignore(
-        self, user_id: str | int
-    ) -> UserIgnore | RequestError:
+    async def ignore(self, user_id: str | int) -> UserIgnore | RequestError:
         """
         ignore user.
 
@@ -31,9 +28,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
 
         return response
 
-    async def unignore(
-        self, user_id: str | int
-    ) -> UserIgnore | RequestError:
+    async def unignore(self, user_id: str | int) -> UserIgnore | RequestError:
         """
         unignore user
 

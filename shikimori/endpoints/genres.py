@@ -19,4 +19,3 @@ class GenreEndpoint(BaseEndpoint):
         )
 
         return response
-    

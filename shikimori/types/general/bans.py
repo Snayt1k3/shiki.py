@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from shikimori.types.user import User
 
+
 @dataclass
 class Comment:
     id: int
@@ -11,6 +12,7 @@ class Comment:
     created_at: str
     updated_at: str
     is_offtopic: bool
+
 
 @dataclass
 class Ban:

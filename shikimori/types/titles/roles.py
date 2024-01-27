@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 from .base import BaseCharacter
 
+
 @dataclass
 class Character(BaseCharacter):
     pass
+
 
 @dataclass
 class Role:

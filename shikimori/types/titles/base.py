@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from ..general.photo import Photo
 
+
 @dataclass
 class BaseTitle:
     id: int
@@ -14,10 +15,12 @@ class BaseTitle:
     aired_on: str
     released_on: str
 
+
 @dataclass
 class BaseRole:
     role: str
     roles: list[str]
+
 
 @dataclass
 class BaseCharacter:

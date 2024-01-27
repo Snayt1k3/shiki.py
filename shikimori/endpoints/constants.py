@@ -11,7 +11,6 @@ from ..types.general.constants import (
 
 
 class ConstantsEndpoint(BaseEndpoint):
-
     async def animes(self) -> AnimeConstant | RequestError:
         response = await self._request.make_request(
             "GET",

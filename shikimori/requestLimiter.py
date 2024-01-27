@@ -5,6 +5,7 @@ from .request import Request
 
 class RequestLimiter:
     """Limiter for requests"""
+
     def __init__(self, max_requests: int, interval: int, request: Request):
         self.max_requests = max_requests
         self.interval = interval

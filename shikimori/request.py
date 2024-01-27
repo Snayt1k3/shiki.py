@@ -20,7 +20,6 @@ class Request:
 
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.get(url, params=query_params) as response:
-
                     response.raise_for_status()
                     return await response.json()
 
@@ -35,7 +34,6 @@ class Request:
 
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.post(url, json=body) as response:
-
                     response.raise_for_status()
                     return await response.json()
 
@@ -45,13 +43,11 @@ class Request:
 
     async def _patch(self, url: str, body: dict = None, headers: dict = None):
         try:
-
             if self._token:
                 headers["Authorization"] = f"Bearer {self._token}"
 
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.patch(url, json=body) as response:
-
                     response.raise_for_status()
                     return await response.json()
 
@@ -66,7 +62,6 @@ class Request:
 
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.put(url, json=body) as response:
-
                     response.raise_for_status()
                     return await response.json()
 
@@ -81,7 +76,6 @@ class Request:
 
             async with aiohttp.ClientSession(headers=headers) as session:
                 async with session.delete(url, json=body) as response:
-
                     response.raise_for_status()
                     return await response.json()
 

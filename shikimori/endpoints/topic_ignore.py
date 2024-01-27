@@ -6,10 +6,7 @@ from ..exceptions import RequestError
 
 
 class TopicIgnoreEndpoint(BaseEndpoint):
-
-    async def ignore(
-        self, topic_id: str | int
-    ) -> Topic | RequestError:
+    async def ignore(self, topic_id: str | int) -> Topic | RequestError:
         """
         ignore topic.
 
@@ -32,7 +29,8 @@ class TopicIgnoreEndpoint(BaseEndpoint):
         return response
 
     async def unignore(
-        self, topic_id: str | int,
+        self,
+        topic_id: str | int,
     ) -> Topic | RequestError:
         """
         unignore topic.
