@@ -15,6 +15,7 @@ class StatsEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/stats/active_users",
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):

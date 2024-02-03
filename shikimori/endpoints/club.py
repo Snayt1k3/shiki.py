@@ -28,7 +28,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters(
                 {"limit": limit, "page": page, "search": search}
             ),
@@ -47,7 +47,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -113,7 +113,7 @@ class ClubEndpoint(BaseEndpoint):
                     }
                 )
             },
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -155,7 +155,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/animes",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -181,7 +181,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/mangas",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -207,7 +207,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/ranobe",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -234,7 +234,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/characters",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -259,7 +259,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/collections",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -294,7 +294,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/clubs",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -319,7 +319,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/members",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -344,7 +344,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/images",
-            headers=self._headers(),
+            headers=self.headers(),
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -363,7 +363,7 @@ class ClubEndpoint(BaseEndpoint):
             await self._request.make_request(
                 "POST",
                 url=f"{self._base_url}/api/clubs/{id}/join",
-                headers=self._headers(),
+                headers=self.headers,
             ),
         )
 
@@ -382,7 +382,7 @@ class ClubEndpoint(BaseEndpoint):
             await self._request.make_request(
                 "POST",
                 url=f"{self._base_url}/api/clubs/{id}/leave",
-                headers=self._headers(),
+                headers=self.headers,
             ),
         )
 

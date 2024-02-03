@@ -37,7 +37,7 @@ class CommentEndpoint(BaseEndpoint):
                     "desc": desc,
                 }
             ),
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -59,7 +59,7 @@ class CommentEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/comments/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -112,7 +112,7 @@ class CommentEndpoint(BaseEndpoint):
                     "frontend": frontend,
                 }
             ),
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -145,7 +145,7 @@ class CommentEndpoint(BaseEndpoint):
             body=filter_none_parameters(
                 {"comment": {"body": body}, "frontend": frontend}
             ),
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -167,7 +167,7 @@ class CommentEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/comments/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):

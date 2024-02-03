@@ -11,7 +11,7 @@ class UserRatesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/v2/user_rates/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -53,7 +53,7 @@ class UserRatesEndpoint(BaseEndpoint):
                     "limit": limit,
                 }
             ),
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -100,7 +100,7 @@ class UserRatesEndpoint(BaseEndpoint):
                     }
                 )
             },
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -151,7 +151,7 @@ class UserRatesEndpoint(BaseEndpoint):
                     }
                 )
             },
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -171,7 +171,7 @@ class UserRatesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}/increment",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -194,5 +194,5 @@ class UserRatesEndpoint(BaseEndpoint):
         return await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}",
-            headers=self._headers(),
+            headers=self.headers,
         )

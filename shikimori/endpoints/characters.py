@@ -13,7 +13,7 @@ class CharacterEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/characters/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -45,7 +45,7 @@ class CharacterEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/characters/search",
             query_params={"search": search},
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):

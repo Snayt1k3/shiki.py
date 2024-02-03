@@ -15,7 +15,7 @@ class PeopleEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/peoples/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -73,7 +73,7 @@ class PeopleEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/peoples/{id}",
             query_params=filter_none_parameters({"type": type}),
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):

@@ -47,6 +47,7 @@ class ReviewEndpoint(BaseEndpoint):
         """
         response = await self._request.make_request(
             "PATCH",
+            headers=self.headers,
             url=f"{self._base_url}/api/reviews/{id}",
             body={"review": filter_none_parameters({"body": body, "opinion": opinion})},
         )
@@ -66,6 +67,7 @@ class ReviewEndpoint(BaseEndpoint):
         """
         response = await self._request.make_request(
             "DELETE",
+            headers=self.headers,
             url=f"{self._base_url}/api/reviews/{id}",
         )
 

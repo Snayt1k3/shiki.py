@@ -86,7 +86,7 @@ class RanobeEndpoint(BaseEndpoint):
                     "search": search,
                 }
             ),
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -102,7 +102,7 @@ class RanobeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}api/ranobe/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -119,7 +119,7 @@ class RanobeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/roles",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -144,7 +144,7 @@ class RanobeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/similar",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -160,7 +160,7 @@ class RanobeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/related",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -192,7 +192,7 @@ class RanobeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/franchise",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -211,7 +211,7 @@ class RanobeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/external_links",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -232,7 +232,7 @@ class RanobeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/topics",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters(
                 {"page": page, "limit": limit}
             ),

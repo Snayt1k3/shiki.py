@@ -10,7 +10,7 @@ class FriendEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/friends/{id}",
-            headers=self._headers(),
+            headers=self.headers(),
         )
 
         if not isinstance(response, RequestError):
@@ -27,7 +27,7 @@ class FriendEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/friends/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):

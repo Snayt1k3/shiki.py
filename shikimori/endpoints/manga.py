@@ -93,7 +93,7 @@ class MangaEndpoint(BaseEndpoint):
                     "search": search,
                 }
             ),
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -109,7 +109,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}api/mangas/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -126,7 +126,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/roles",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -151,7 +151,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/similar",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -167,7 +167,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/related",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -199,7 +199,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/franchise",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -218,7 +218,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/external_links",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -241,7 +241,7 @@ class MangaEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/topics",
-            headers=self._headers(),
+            headers=self.headers,
             query_params=filter_none_parameters(
                 {"page": page, "limit": limit, "kind": kind, "episode": episode}
             ),

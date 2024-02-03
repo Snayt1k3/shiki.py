@@ -22,7 +22,7 @@ class FavoritesEndpoint(BaseEndpoint):
             url += f"/{kind}"
 
         response = await self._request.make_request(
-            "POST", url=url, headers=self._headers()
+            "POST", url=url, headers=self.headers
         )
 
         if not isinstance(response, RequestError):
@@ -43,7 +43,7 @@ class FavoritesEndpoint(BaseEndpoint):
         url = f"{self._base_url}/api/favorites/{linked_type}/{id}"
 
         response = await self._request.make_request(
-            "DELETE", url=url, headers=self._headers()
+            "DELETE", url=url, headers=self.headers
         )
 
         if not isinstance(response, RequestError):
@@ -64,7 +64,7 @@ class FavoritesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/favorites/{id}",
-            headers=self._headers(),
+            headers=self.headers,
             body=filter_none_parameters({"new_index": new_index}),
         )
 

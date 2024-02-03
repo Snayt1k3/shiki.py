@@ -13,7 +13,7 @@ class MessageEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/messages/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -48,7 +48,7 @@ class MessageEndpoint(BaseEndpoint):
                     "kind": kind,
                 }
             },
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -79,7 +79,7 @@ class MessageEndpoint(BaseEndpoint):
                     "body": body,
                 }
             },
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -105,7 +105,7 @@ class MessageEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/messages/{id}",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -128,7 +128,7 @@ class MessageEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/messages/mark_read",
             body={"ids": ids, "is_read": "1" if is_read else "0"},
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -149,7 +149,7 @@ class MessageEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/messages/read_all",
             body={"type": type},
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -170,7 +170,7 @@ class MessageEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/messages/delete_all",
             body={"type": type},
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):

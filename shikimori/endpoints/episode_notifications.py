@@ -20,7 +20,7 @@ class EpisodeNotificationEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/v2/episode_notifications",
             body={"episode_notification": episode.to_dict(), "token": token},
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):

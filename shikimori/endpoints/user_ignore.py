@@ -16,7 +16,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/users/{user_id}/ignore",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):
@@ -38,7 +38,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/v2/users/{user_id}/ignore",
-            headers=self._headers(),
+            headers=self.headers,
         )
 
         if not isinstance(response, RequestError):

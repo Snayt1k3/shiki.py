@@ -8,5 +8,6 @@ class BaseEndpoint(ABC):
         self._request = request
         self._user_agent = user_agent
 
-    def _headers(self) -> dict:
+    @property
+    def headers(self) -> dict:
         return {"User-Agent": self._user_agent}

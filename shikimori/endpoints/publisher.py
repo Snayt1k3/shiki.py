@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 class PublisherEndpoint(BaseEndpoint):
     async def list(self) -> List[Publisher] | RequestError:
         response = await self._request.make_request(
-            "GET", url=f"{self._base_url}/api/publishers", headers=self._headers()
+            "GET", url=f"{self._base_url}/api/publishers", headers=self.headers
         )
 
         if not isinstance(response, RequestError):
