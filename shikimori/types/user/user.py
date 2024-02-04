@@ -10,3 +10,4 @@ class User:
     avatar: str
     last_online_at: str
     url: str
+

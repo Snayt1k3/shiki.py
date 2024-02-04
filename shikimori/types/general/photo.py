@@ -28,3 +28,10 @@ class ClubImage:
     preview_url: str
     can_destroy: bool
     user_id: int
+
+@dataclass
+class UserImage:
+    id: int
+    preview: str
+    url: str
+    bbcode: str

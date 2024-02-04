@@ -196,3 +196,27 @@ class UserRatesEndpoint(BaseEndpoint):
             url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}",
             headers=self.headers,
         )
+
+    async def cleanup(self, type: str) -> dict | RequestError:
+        """
+        Be careful to use
+        :param type: Must be one of: anime, manga.
+        """
+        return await self._request.make_request(
+            "DELETE",
+            url=f"{self._base_url}/api/v2/user_rates/{type}/cleanup",
+            headers=self.headers,
+        )
+
+    async def reset(self, type: str) -> dict | RequestError:
+        """
+        Be careful to use.
+        Reset all user scores to 0.
+        :param type: Must be one of: anime, manga.
+        """
+        return await self._request.make_request(
+            "DELETE",
+            url=f"{self._base_url}/api/v2/user_rates/{type}/reset",
+            headers=self.headers,
+        )
+
