@@ -265,7 +265,7 @@ class TopicsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return
+            return response["notice"]
 
         logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"
