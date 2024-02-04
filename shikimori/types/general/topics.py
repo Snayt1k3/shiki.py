@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from ..user.user import User
 from ..general.photo import Photo
 from dataclasses import dataclass
@@ -47,3 +46,13 @@ class Topic:
     last_comment_viewed: bool
     event: str
     episode: int
+
+
+@dataclass
+class Status:
+    id: int
+    linked: Linked
+    event: str
+    episode: int
+    created_at: str
+    url: str
