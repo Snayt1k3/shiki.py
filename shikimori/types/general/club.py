@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from shikimori.types.titles.manga import Manga
 from shikimori.types.titles.animes import Anime
 from shikimori.types.titles.roles import Character

@@ -233,9 +233,7 @@ class RanobeEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/topics",
             headers=self.headers,
-            query_params=filter_none_parameters(
-                {"page": page, "limit": limit}
-            ),
+            query_params=filter_none_parameters({"page": page, "limit": limit}),
         )
 
         if not isinstance(response, RequestError):

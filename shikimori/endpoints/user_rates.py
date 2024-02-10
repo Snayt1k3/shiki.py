@@ -219,4 +219,3 @@ class UserRatesEndpoint(BaseEndpoint):
             url=f"{self._base_url}/api/v2/user_rates/{type}/reset",
             headers=self.headers,
         )
-

@@ -29,6 +29,7 @@ class ClubImage:
     can_destroy: bool
     user_id: int
 
+
 @dataclass
 class UserImage:
     id: int

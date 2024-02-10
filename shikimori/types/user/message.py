@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from shikimori.types.user.user import User
+from ..general.topics import Linked
 
 
 @dataclass
@@ -11,8 +12,8 @@ class Message:
     html_body: str
     created_at: str
     linked_id: int
-    linked_type: None
-    linked: None
+    linked_type: str
+    linked: Linked
 
 
 @dataclass

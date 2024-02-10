@@ -31,4 +31,3 @@ class PublisherEndpoint(BaseEndpoint):
         )
 
         return response
-

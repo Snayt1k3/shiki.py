@@ -66,7 +66,9 @@ class StylesEndpoint(BaseEndpoint):
 
         return response
 
-    async def update(self, id: int, css: str = None, name: str = None) -> Style | RequestError:
+    async def update(
+        self, id: int, css: str = None, name: str = None
+    ) -> Style | RequestError:
         response = await self._request.make_request(
             "PATCH",
             url=f"{self._base_url}/api/styles/{id}",
@@ -87,6 +89,3 @@ class StylesEndpoint(BaseEndpoint):
         )
 
         return response
-
-
-

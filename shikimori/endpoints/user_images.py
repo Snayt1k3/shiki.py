@@ -29,4 +29,3 @@ class UserImageEndpoint(BaseEndpoint):
         )
 
         return response
-
