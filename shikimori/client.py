@@ -42,7 +42,7 @@ class Shikimori:
         # dependencies
         self._base_url = SHIKIMORI_URL if not base_url else base_url
         self._request = Request()
-        self._limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, 1, self._request)
+        self._limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, 1, self._request, REQUEST_WAITING)
 
         # Auth dependencies
         self._options = AuthOptions(

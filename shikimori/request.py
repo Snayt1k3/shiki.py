@@ -3,6 +3,7 @@ from typing import Callable, Coroutine
 import aiohttp
 from .exceptions import RequestError
 
+logger = logging.getLogger(__name__)
 
 class Request:
     """class for send requests"""
@@ -24,7 +25,7 @@ class Request:
                     return await response.json()
 
         except aiohttp.ClientResponseError as exc:
-            logging.debug(f"Error occurred with get request - {exc}")
+            logger.error(f"Error occurred with get request - {exc}")
             return RequestError(exc.message, exc.status)
 
     async def _post(self, url: str, body: dict = None, headers: dict = None):
@@ -38,7 +39,7 @@ class Request:
                     return await response.json()
 
         except aiohttp.ClientResponseError as exc:
-            logging.debug(f"Error occurred with post request - {exc}")
+            logger.error(f"Error occurred with post request - {exc}")
             return RequestError(exc.message, exc.status)
 
     async def _patch(self, url: str, body: dict = None, headers: dict = None):
@@ -52,7 +53,7 @@ class Request:
                     return await response.json()
 
         except aiohttp.ClientResponseError as exc:
-            logging.debug(f"Error occurred with patch request - {exc}")
+            logger.error(f"Error occurred with patch request - {exc}")
             return RequestError(exc.message, exc.status)
 
     async def _put(self, url: str, body: dict = None, headers: dict = None):
@@ -66,7 +67,7 @@ class Request:
                     return await response.json()
 
         except aiohttp.ClientResponseError as exc:
-            logging.debug(f"Error occurred with put request - {exc}")
+            logger.error(f"Error occurred with put request - {exc}")
             return RequestError(exc.message, exc.status)
 
     async def _delete(self, url: str, body: dict = None, headers: dict = None):
@@ -80,7 +81,7 @@ class Request:
                     return await response.json()
 
         except aiohttp.ClientResponseError as exc:
-            logging.debug(f"Error occurred with delete request - {exc}")
+            logger.debug(f"Error occurred with delete request - {exc}")
             return RequestError(exc.message, exc.status)
 
     async def make_request(self, method: str, **kwargs):
