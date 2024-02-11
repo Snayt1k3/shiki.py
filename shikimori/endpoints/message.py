@@ -6,6 +6,8 @@ from ..types.general.photo import PhotoExtended
 from ..types.user import User
 from ..types.user.message import MessageInfo
 
+logger = logging.getLogger(__name__)
+
 
 class MessageEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> MessageInfo | RequestError:
@@ -27,7 +29,7 @@ class MessageEndpoint(BaseEndpoint):
                 ),
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(byId): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -63,7 +65,7 @@ class MessageEndpoint(BaseEndpoint):
                 ),
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -94,7 +96,7 @@ class MessageEndpoint(BaseEndpoint):
                 ),
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -111,7 +113,7 @@ class MessageEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(delete): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -134,7 +136,7 @@ class MessageEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(mark_read): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -155,7 +157,7 @@ class MessageEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(readAll): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -176,7 +178,7 @@ class MessageEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(deleteAll): status - {response.status_code}: info - {str(response)}"
         )
 

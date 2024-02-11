@@ -1,8 +1,10 @@
 import logging
 
+from shikimori.types.user.achievements import Achievement
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.user.achievements import Achievement
+
+logger = logging.getLogger(__name__)
 
 
 class AchievementsEndpoint(BaseEndpoint):
@@ -16,7 +18,7 @@ class AchievementsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Achievement(**obj) for obj in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(get_achievements): status - {response.status_code}: info - {str(response)}"
         )
         return response

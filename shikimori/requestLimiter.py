@@ -1,6 +1,10 @@
+import logging
 import time
+
 from .exceptions import TooManyRequests
 from .request import Request
+
+logger = logging.getLogger(__name__)
 
 
 class RequestLimiter:
@@ -33,9 +37,12 @@ class RequestLimiter:
         :return: response or 'RequestError' or Raise 'TooManyRequests'
         """
         if self._is_limit_exceeded():
+            logger.error("RATE LIMIT EXCEEDED")
             raise TooManyRequests("Rate limit exceeded")
 
         self.current_requests += 1
         self.last_request_time = time.time()
+
+        logger.info(f"{method} Request to url - {kwargs['url']}")
 
         return await self.request.make_request(method, **kwargs)

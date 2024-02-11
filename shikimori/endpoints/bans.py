@@ -1,10 +1,12 @@
 import logging
+from typing import List
 
+from shikimori.types.general.bans import Comment, Ban
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from typing import List
 from ..types.user import User
-from shikimori.types.general.bans import Comment, Ban
+
+logger = logging.getLogger(__name__)
 
 
 class BanEndpoint(BaseEndpoint):
@@ -26,7 +28,7 @@ class BanEndpoint(BaseEndpoint):
                 for b in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
 

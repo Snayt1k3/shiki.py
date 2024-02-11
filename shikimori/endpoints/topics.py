@@ -3,8 +3,8 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.topics import Topic, Forum, Linked, Status
 from ..types.general.photo import Photo, PhotoExtended
+from ..types.general.topics import Topic, Forum, Linked, Status
 from ..types.user.user import User
 from ..utils.filter import filter_none_parameters
 

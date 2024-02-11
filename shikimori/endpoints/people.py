@@ -2,12 +2,14 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.photo import Photo
 from ..types.general.people import People, Date, Works, Role
-from ..types.titles.character import Character
-from ..utils.filter import filter_none_parameters
+from ..types.general.photo import Photo
 from ..types.titles.animes import Anime
+from ..types.titles.character import Character
 from ..types.titles.manga import Manga
+from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
 
 
 class PeopleEndpoint(BaseEndpoint):
@@ -56,7 +58,7 @@ class PeopleEndpoint(BaseEndpoint):
                 ],
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -79,7 +81,7 @@ class PeopleEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Character(**ch, image=Photo(**ch["image"])) for ch in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(search): status - {response.status_code}: info - {str(response)}"
         )
 

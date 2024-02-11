@@ -1,12 +1,14 @@
 import logging
+from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from typing import List
+from ..types.general.calendar import Calendar
+from ..types.general.photo import Photo
+from ..types.titles.animes import Anime
 from ..utils.filter import filter_none_parameters
-from shikimori.types.titles.animes import Anime
-from shikimori.types.general.photo import Photo
-from shikimori.types.general.calendar import Calendar
+
+logger = logging.getLogger(__name__)
 
 
 class CalendarEndpoint(BaseEndpoint):
@@ -31,7 +33,7 @@ class CalendarEndpoint(BaseEndpoint):
                 for b in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
 

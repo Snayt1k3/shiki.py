@@ -1,5 +1,4 @@
 import logging
-from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError

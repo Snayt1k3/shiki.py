@@ -1,8 +1,10 @@
 import logging
 
-from .base import BaseEndpoint
 from shikimori.types.user.user_ignore import UserIgnore
+from .base import BaseEndpoint
 from ..exceptions import RequestError
+
+logger = logging.getLogger(__name__)
 
 
 class UserIgnoreEndpoint(BaseEndpoint):
@@ -22,7 +24,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserIgnore(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(ignore): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -44,7 +46,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserIgnore(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(unignore): status - {response.status_code}: info - {str(response)}"
         )
 

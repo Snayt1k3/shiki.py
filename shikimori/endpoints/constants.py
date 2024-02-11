@@ -1,4 +1,5 @@
 import logging
+
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.general.constants import (
@@ -8,6 +9,8 @@ from ..types.general.constants import (
     MangaConstant,
     UserRateConstant,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class ConstantsEndpoint(BaseEndpoint):
@@ -21,7 +24,7 @@ class ConstantsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return AnimeConstant(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(animes): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -37,7 +40,7 @@ class ConstantsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return MangaConstant(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(manga): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -53,7 +56,7 @@ class ConstantsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserRateConstant(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(user_rate): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -69,7 +72,7 @@ class ConstantsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return ClubConstant(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(club): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -85,7 +88,7 @@ class ConstantsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [SmileConstant(**s) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(smileys): status - {response.status_code}: info - {str(response)}"
         )
 

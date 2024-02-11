@@ -1,10 +1,9 @@
 import logging
-from typing import List
 
 from .base import BaseEndpoint
-from ..utils.filter import filter_none_parameters
 from ..exceptions import RequestError
 from ..types.titles.review import Review
+from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
 

@@ -4,6 +4,8 @@ from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters
 
+logger = logging.getLogger(__name__)
+
 
 class AppearsEndpoint(BaseEndpoint):
     async def Read(self, ids: str = None) -> None | RequestError:
@@ -21,7 +23,7 @@ class AppearsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(mark): status - {response.status_code}: info - {str(response)}"
         )
 

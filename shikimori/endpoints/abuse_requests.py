@@ -1,9 +1,11 @@
 import logging
 
-from .base import BaseEndpoint
 from shikimori.types.general.abuse_requests import AbuseRequest
+from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
 
 
 class AbuseRequestEndpoint(BaseEndpoint):
@@ -23,7 +25,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return AbuseRequest(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(mark_comment_as_offtopic): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -49,7 +51,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return None
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(convert_comment_to_review): status - {response.status_code}: info - {str(response)}"
         )
         return response
@@ -75,7 +77,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return None
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(create_abuse_about_violation_of_site_rules): status - {response.status_code}: info - {str(response)}"  # NOQA
         )
 
@@ -102,7 +104,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return None
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(create_abuse_about_spoiler_in_content): status - {response.status_code}: info - {str(response)}"  # NOQA
         )
 

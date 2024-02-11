@@ -1,6 +1,8 @@
 import logging
 from typing import List
-from .base import BaseEndpoint
+
+from shikimori.types.general.photo import Photo, PhotoExtended
+from shikimori.types.general.topics import Topic, Forum, Linked
 from shikimori.types.titles.animes import (
     Anime,
     AnimeInfo,
@@ -8,17 +10,18 @@ from shikimori.types.titles.animes import (
     Relation,
     ExternalLink,
 )
-from shikimori.types.titles.manga import Manga
-from shikimori.types.general.photo import Photo, PhotoExtended
-from shikimori.types.titles.studios import Studio
-from shikimori.types.titles.screenshots import ScreenShot
-from shikimori.types.titles.videos import Video
-from ..exceptions import RequestError
-from ..utils.filter import filter_none_parameters
-from shikimori.types.titles.roles import Role, Character
 from shikimori.types.titles.franchise import Franchise, Node, Link
-from shikimori.types.general.topics import Topic, Forum, Linked
+from shikimori.types.titles.manga import Manga
+from shikimori.types.titles.roles import Role, Character
+from shikimori.types.titles.screenshots import ScreenShot
+from shikimori.types.titles.studios import Studio
+from shikimori.types.titles.videos import Video
+from .base import BaseEndpoint
+from ..exceptions import RequestError
 from ..types.user import User
+from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
 
 
 class AnimeEndpoint(BaseEndpoint):
@@ -94,7 +97,7 @@ class AnimeEndpoint(BaseEndpoint):
                 Anime(**anime, image=Photo(**anime.get("image"))) for anime in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(anime_list): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -116,7 +119,7 @@ class AnimeEndpoint(BaseEndpoint):
                 videos=[Video(**v) for v in response.get("videos")],
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(byId): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -141,7 +144,7 @@ class AnimeEndpoint(BaseEndpoint):
                 for role in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(roles): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -159,7 +162,7 @@ class AnimeEndpoint(BaseEndpoint):
                 Anime(**anime, image=Photo(**anime.get("image"))) for anime in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(similar): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -192,7 +195,7 @@ class AnimeEndpoint(BaseEndpoint):
                 for relation in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(related): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -208,7 +211,7 @@ class AnimeEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [ScreenShot(**s) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(related): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -227,7 +230,7 @@ class AnimeEndpoint(BaseEndpoint):
                 links=[Link(**link) for link in response.get("links")],
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(franchise): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -243,7 +246,7 @@ class AnimeEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [ExternalLink(**s) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(externalLinks): status - {response.status_code}: info - {str(response)}"
         )
 

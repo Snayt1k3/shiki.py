@@ -3,10 +3,12 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.photo import Photo, PhotoExtended
+from ..types.general.bans import Ban, Comment
 from ..types.general.club import Club, Logo
-from ..types.titles.animes import Anime
+from ..types.general.photo import Photo, PhotoExtended
 from ..types.general.topics import Linked
+from ..types.titles.animes import Anime
+from ..types.user.message import MessageInfo
 from ..types.user.user import (
     User,
     UserTitle,
@@ -23,8 +25,6 @@ from ..types.user.user import (
     TitleHistory,
     HistoryObj,
 )
-from ..types.general.bans import Ban, Comment
-from ..types.user.message import MessageInfo
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)

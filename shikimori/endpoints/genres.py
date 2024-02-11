@@ -4,6 +4,8 @@ from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.titles.genres import Genre
 
+logger = logging.getLogger(__name__)
+
 
 class GenreEndpoint(BaseEndpoint):
     async def list(self) -> list[Genre] | RequestError:
@@ -14,7 +16,7 @@ class GenreEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Genre(**s) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
 

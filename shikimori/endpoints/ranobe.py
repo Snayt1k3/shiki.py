@@ -1,22 +1,24 @@
 import logging
 from typing import List
 
-from .base import BaseEndpoint
-from ..utils.filter import filter_none_parameters
-from ..exceptions import RequestError
-from ..types.titles.ranobe import Ranobe, RanobeInfo
-from ..types.titles.manga import Manga
-from ..types.general.photo import Photo, PhotoExtended
-from ..types.titles.genres import Genre
-from ..types.titles.roles import Role, Character
-from shikimori.types.titles.franchise import Franchise, Node, Link
 from shikimori.types.general.topics import Topic, Forum, Linked
-from ..types.user.user import User
 from shikimori.types.titles.animes import (
     Anime,
     Relation,
     ExternalLink,
 )
+from shikimori.types.titles.franchise import Franchise, Node, Link
+from .base import BaseEndpoint
+from ..exceptions import RequestError
+from ..types.general.photo import Photo, PhotoExtended
+from ..types.titles.genres import Genre
+from ..types.titles.manga import Manga
+from ..types.titles.ranobe import Ranobe, RanobeInfo
+from ..types.titles.roles import Role, Character
+from ..types.user.user import User
+from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
 
 
 class RanobeEndpoint(BaseEndpoint):
@@ -92,7 +94,7 @@ class RanobeEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Ranobe(**s, image=Photo(**s["image"])) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -134,7 +136,7 @@ class RanobeEndpoint(BaseEndpoint):
                 for role in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(roles): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -150,7 +152,7 @@ class RanobeEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Ranobe(**s, image=Photo(**s["image"])) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(similar): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -183,7 +185,7 @@ class RanobeEndpoint(BaseEndpoint):
                 for relation in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(related): status - {response.status_code}: info - {str(response)}"
         )
         return response
@@ -201,7 +203,7 @@ class RanobeEndpoint(BaseEndpoint):
                 links=[Link(**link) for link in response.get("links")],
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(franchise): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -217,7 +219,7 @@ class RanobeEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [ExternalLink(**s) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(externalLinks): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -251,5 +253,9 @@ class RanobeEndpoint(BaseEndpoint):
                 )
                 for topic in response
             ]
+
+        logger.debug(
+            f"Bad Request(topics): status - {response.status_code}: info - {str(response)}"
+        )
 
         return response

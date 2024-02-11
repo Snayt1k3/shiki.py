@@ -4,10 +4,12 @@ from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters
 
+logger = logging.getLogger(__name__)
+
 
 class FavoritesEndpoint(BaseEndpoint):
     async def add(
-        self, id: int, linked_type: str, access_token: str, kind: str = None
+        self, id: int, linked_type: str, kind: str = None
     ) -> str | RequestError:
         """
         requires oauth scope
@@ -28,7 +30,7 @@ class FavoritesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return response["notice"]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(add): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -49,7 +51,7 @@ class FavoritesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return response["notice"]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(delete): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -71,7 +73,7 @@ class FavoritesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(reorder): status - {response.status_code}: info - {str(response)}"
         )
 

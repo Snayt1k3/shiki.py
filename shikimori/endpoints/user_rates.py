@@ -1,9 +1,11 @@
 import logging
 
+from shikimori.types.user.user_rates import UserRateResponse
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.user.user_rates import UserRateResponse
 from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
 
 
 class UserRatesEndpoint(BaseEndpoint):
@@ -17,7 +19,7 @@ class UserRatesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserRateResponse(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(get_user_rate): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -59,7 +61,7 @@ class UserRatesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [UserRateResponse(**obj) for obj in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(get_user_rate): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -106,7 +108,7 @@ class UserRatesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserRateResponse(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(create_user_rate): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -157,7 +159,7 @@ class UserRatesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserRateResponse(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(update_user_rate): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -177,7 +179,7 @@ class UserRatesEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return UserRateResponse(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(increment): status - {response.status_code}: info - {str(response)}"
         )
 

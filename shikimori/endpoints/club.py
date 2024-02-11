@@ -1,17 +1,19 @@
 import logging
-
-from .base import BaseEndpoint
-from ..exceptions import RequestError
 from typing import List
-from ..utils.filter import filter_none_parameters
+
 from shikimori.types.general.club import Logo, Club, ClubImage, ClubInfo, Collection
+from shikimori.types.general.photo import Photo, PhotoExtended
+from shikimori.types.general.topics import Forum
 from shikimori.types.titles.animes import Anime
 from shikimori.types.titles.manga import Manga
-from shikimori.types.general.photo import Photo, PhotoExtended
-from shikimori.types.titles.roles import Character
-from ..types.user import User
 from shikimori.types.titles.ranobe import Ranobe
-from shikimori.types.general.topics import Forum
+from shikimori.types.titles.roles import Character
+from .base import BaseEndpoint
+from ..exceptions import RequestError
+from ..types.user import User
+from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
 
 
 class ClubEndpoint(BaseEndpoint):
@@ -37,7 +39,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Club(**c, logo=Logo(**c["logo"])) for c in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -72,7 +74,7 @@ class ClubEndpoint(BaseEndpoint):
                 images=[ClubImage(**image) for image in response["images"]],
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -137,7 +139,7 @@ class ClubEndpoint(BaseEndpoint):
                 ],
                 images=[ClubImage(**image) for image in response["images"]],
             )
-        logging.debug(
+        logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -162,7 +164,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Anime(**anime, image=Photo(**anime["image"])) for anime in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(GetAnimes): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -188,7 +190,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Manga(**manga, image=Photo(**manga["image"])) for manga in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(GetMangas): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -216,7 +218,7 @@ class ClubEndpoint(BaseEndpoint):
                 Ranobe(**ranobe, image=Photo(**ranobe["image"])) for ranobe in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(GetRanobes): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -241,7 +243,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Character(**s, image=Photo(**s["image"])) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(GetCharacters): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -276,7 +278,7 @@ class ClubEndpoint(BaseEndpoint):
                 for s in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(GetCollections): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -301,7 +303,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Club(**s, logo=Logo(**s["logo"])) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(Clubs): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -326,7 +328,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [User(**s, image=PhotoExtended(**s["image"])) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(Members): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -351,7 +353,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [ClubImage(**s) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(Images): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -370,7 +372,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(Join): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -389,7 +391,7 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(Leave): status - {response.status_code}: info - {str(response)}"
         )
 

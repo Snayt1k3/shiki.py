@@ -1,11 +1,14 @@
 import logging
 from typing import List
+
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.general.comment import Comment
-from ..utils.filter import filter_none_parameters
-from ..types.user.user import User
 from ..types.general.photo import PhotoExtended
+from ..types.user.user import User
+from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
 
 
 class CommentEndpoint(BaseEndpoint):
@@ -49,7 +52,7 @@ class CommentEndpoint(BaseEndpoint):
                 for s in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -70,7 +73,7 @@ class CommentEndpoint(BaseEndpoint):
                 ),
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -123,7 +126,7 @@ class CommentEndpoint(BaseEndpoint):
                 ),
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -156,7 +159,7 @@ class CommentEndpoint(BaseEndpoint):
                 ),
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -173,7 +176,7 @@ class CommentEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return response["notice"]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(delete): status - {response.status_code}: info - {str(response)}"
         )
 

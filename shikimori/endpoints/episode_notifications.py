@@ -1,8 +1,12 @@
+import logging
+
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-import logging
-from ..utils.filter import filter_none_parameters
 from ..types.general.episode_notification import EpisodeNotification
+from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
+
 
 class EpisodeNotificationEndpoint(BaseEndpoint):
     async def notify(
@@ -50,7 +54,7 @@ class EpisodeNotificationEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return EpisodeNotification(**response)
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(notify): status - {response.status_code}: info - {str(response)}"
         )
 

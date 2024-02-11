@@ -1,21 +1,23 @@
 import logging
 from typing import List
 
-from .base import BaseEndpoint
-from ..utils.filter import filter_none_parameters
-from ..exceptions import RequestError
-from ..types.titles.manga import Manga, MangaInfo
-from ..types.general.photo import Photo, PhotoExtended
-from ..types.titles.genres import Genre
-from ..types.titles.roles import Role, Character
-from shikimori.types.titles.franchise import Franchise, Node, Link
 from shikimori.types.general.topics import Topic, Forum, Linked
-from ..types.user.user import User
 from shikimori.types.titles.animes import (
     Anime,
     Relation,
     ExternalLink,
 )
+from shikimori.types.titles.franchise import Franchise, Node, Link
+from .base import BaseEndpoint
+from ..exceptions import RequestError
+from ..types.general.photo import Photo, PhotoExtended
+from ..types.titles.genres import Genre
+from ..types.titles.manga import Manga, MangaInfo
+from ..types.titles.roles import Role, Character
+from ..types.user.user import User
+from ..utils.filter import filter_none_parameters
+
+logger = logging.getLogger(__name__)
 
 
 class MangaEndpoint(BaseEndpoint):
@@ -99,7 +101,7 @@ class MangaEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Manga(**s, image=Photo(**s["image"])) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -141,7 +143,7 @@ class MangaEndpoint(BaseEndpoint):
                 for role in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(roles): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -157,7 +159,7 @@ class MangaEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [Manga(**s, image=Photo(**s["image"])) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(similar): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -190,7 +192,7 @@ class MangaEndpoint(BaseEndpoint):
                 for relation in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(related): status - {response.status_code}: info - {str(response)}"
         )
         return response
@@ -208,7 +210,7 @@ class MangaEndpoint(BaseEndpoint):
                 links=[Link(**link) for link in response.get("links")],
             )
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(franchise): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -224,7 +226,7 @@ class MangaEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [ExternalLink(**s) for s in response]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(externalLinks): status - {response.status_code}: info - {str(response)}"
         )
 

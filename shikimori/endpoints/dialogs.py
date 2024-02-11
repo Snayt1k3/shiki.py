@@ -3,10 +3,12 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.user.message import Message, MessageInfo
-from ..types.user.dialog import Dialog
-from ..types.user.user import User
 from ..types.general.photo import PhotoExtended
+from ..types.user.dialog import Dialog
+from ..types.user.message import Message, MessageInfo
+from ..types.user.user import User
+
+logger = logging.getLogger(__name__)
 
 
 class DialogsEndpoint(BaseEndpoint):
@@ -27,7 +29,7 @@ class DialogsEndpoint(BaseEndpoint):
                 for s in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -54,7 +56,7 @@ class DialogsEndpoint(BaseEndpoint):
                 for s in response
             ]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
         )
 
@@ -71,7 +73,7 @@ class DialogsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return response["notice"]
 
-        logging.debug(
+        logger.debug(
             f"Bad Request(delete): status - {response.status_code}: info - {str(response)}"
         )
 
