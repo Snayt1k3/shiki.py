@@ -1,5 +1,5 @@
 from .base import BaseTitle
-from ..titles.genres import Genre
+from shikimori.types.genres import Genre
 from dataclasses import dataclass
 
 

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from ..user.user import User
+from shikimori.types.user import User
 
 
 @dataclass

@@ -1,9 +1,9 @@
 import logging
 from typing import List
 
-from shikimori.types.general.photo import Photo
-from shikimori.types.titles.character import Character, AnimeRole, MangaRole
-from shikimori.types.titles.roles import Character as Ch
+from shikimori.types.photo import Photo
+from shikimori.types.character import Character, AnimeRole, MangaRole
+from shikimori.types.roles import Character as Ch
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 

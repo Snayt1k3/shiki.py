@@ -3,13 +3,13 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.bans import Ban, Comment
-from ..types.general.club import Club, Logo
-from ..types.general.photo import Photo, PhotoExtended
-from ..types.general.topics import Linked
-from ..types.titles.animes import Anime
-from ..types.user.message import MessageInfo
-from ..types.user.user import (
+from shikimori.types.bans import Ban, Comment
+from shikimori.types.club import Club, Logo
+from shikimori.types.photo import Photo, PhotoExtended
+from shikimori.types.topics import Linked
+from shikimori.types.animes import Anime
+from shikimori.types.message import MessageInfo
+from shikimori.types.user import (
     User,
     UserTitle,
     UserInfo,

@@ -2,9 +2,9 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.photo import PhotoExtended
+from shikimori.types.photo import PhotoExtended
 from ..types.user import User
-from ..types.user.message import MessageInfo
+from shikimori.types.message import MessageInfo
 
 logger = logging.getLogger(__name__)
 

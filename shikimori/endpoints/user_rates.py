@@ -1,6 +1,6 @@
 import logging
 
-from shikimori.types.user.user_rates import UserRateResponse
+from shikimori.types.user_rates import UserRateResponse
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters

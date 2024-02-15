@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-from shikimori.types.general.bans import Comment, Ban
+from shikimori.types.bans import Comment, Ban
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.user import User

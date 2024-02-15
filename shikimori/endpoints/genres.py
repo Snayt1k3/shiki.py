@@ -2,7 +2,7 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.titles.genres import Genre
+from shikimori.types.genres import Genre
 
 logger = logging.getLogger(__name__)
 

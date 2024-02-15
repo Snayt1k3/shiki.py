@@ -1,5 +1,5 @@
-from ..user.user import User
-from ..general.photo import Photo
+from shikimori.types.user import User
+from shikimori.types.photo import Photo
 from dataclasses import dataclass
 
 

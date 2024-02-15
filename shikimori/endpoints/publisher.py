@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-from shikimori.types.general.publisher import Publisher
+from shikimori.types.publisher import Publisher
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 

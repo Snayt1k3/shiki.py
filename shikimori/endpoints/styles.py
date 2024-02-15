@@ -2,7 +2,7 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.user.style import Style
+from shikimori.types.style import Style
 
 logger = logging.getLogger(__name__)
 

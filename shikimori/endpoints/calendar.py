@@ -3,9 +3,9 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.calendar import Calendar
-from ..types.general.photo import Photo
-from ..types.titles.animes import Anime
+from shikimori.types.calendar import Calendar
+from shikimori.types.photo import Photo
+from shikimori.types.animes import Anime
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from .photo import Photo
-from ..titles.animes import Anime
-from ..titles.manga import Manga
-from ..titles.character import Character
+from shikimori.types.animes import Anime
+from shikimori.types.manga import Manga
+from shikimori.types.character import Character
 
 
 @dataclass

@@ -2,7 +2,7 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.photo import UserImage
+from shikimori.types.photo import UserImage
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)

@@ -1,3 +1,6 @@
+
+__all__ = ["TooManyRequests", "RequestError"]
+
 class TooManyRequests(Exception):
     pass
 

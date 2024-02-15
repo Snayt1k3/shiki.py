@@ -2,7 +2,7 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.topics import Forum
+from shikimori.types.topics import Forum
 
 logger = logging.getLogger(__name__)
 

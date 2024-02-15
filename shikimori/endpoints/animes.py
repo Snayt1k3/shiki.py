@@ -1,21 +1,21 @@
 import logging
 from typing import List
 
-from shikimori.types.general.photo import Photo, PhotoExtended
-from shikimori.types.general.topics import Topic, Forum, Linked
-from shikimori.types.titles.animes import (
+from shikimori.types.photo import Photo, PhotoExtended
+from shikimori.types.topics import Topic, Forum, Linked
+from shikimori.types.animes import (
     Anime,
     AnimeInfo,
     GenreExtended,
     Relation,
     ExternalLink,
 )
-from shikimori.types.titles.franchise import Franchise, Node, Link
-from shikimori.types.titles.manga import Manga
-from shikimori.types.titles.roles import Role, Character
-from shikimori.types.titles.screenshots import ScreenShot
-from shikimori.types.titles.studios import Studio
-from shikimori.types.titles.videos import Video
+from shikimori.types.franchise import Franchise, Node, Link
+from shikimori.types.manga import Manga
+from shikimori.types.roles import Role, Character
+from shikimori.types.screenshots import ScreenShot
+from shikimori.types.studios import Studio
+from shikimori.types.videos import Video
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.user import User

@@ -2,11 +2,11 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.people import People, Date, Works, Role
-from ..types.general.photo import Photo
-from ..types.titles.animes import Anime
-from ..types.titles.character import Character
-from ..types.titles.manga import Manga
+from shikimori.types.people import People, Date, Works, Role
+from shikimori.types.photo import Photo
+from shikimori.types.animes import Anime
+from shikimori.types.character import Character
+from shikimori.types.manga import Manga
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)

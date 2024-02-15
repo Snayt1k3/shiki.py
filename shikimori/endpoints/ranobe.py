@@ -1,21 +1,21 @@
 import logging
 from typing import List
 
-from shikimori.types.general.topics import Topic, Forum, Linked
-from shikimori.types.titles.animes import (
+from shikimori.types.topics import Topic, Forum, Linked
+from shikimori.types.animes import (
     Anime,
     Relation,
     ExternalLink,
 )
-from shikimori.types.titles.franchise import Franchise, Node, Link
+from shikimori.types.franchise import Franchise, Node, Link
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.photo import Photo, PhotoExtended
-from ..types.titles.genres import Genre
-from ..types.titles.manga import Manga
-from ..types.titles.ranobe import Ranobe, RanobeInfo
-from ..types.titles.roles import Role, Character
-from ..types.user.user import User
+from shikimori.types.photo import Photo, PhotoExtended
+from shikimori.types.genres import Genre
+from shikimori.types.manga import Manga
+from shikimori.types.ranobe import Ranobe, RanobeInfo
+from shikimori.types.roles import Role, Character
+from shikimori.types.user import User
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)

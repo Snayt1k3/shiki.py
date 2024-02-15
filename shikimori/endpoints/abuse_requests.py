@@ -1,6 +1,6 @@
 import logging
 
-from shikimori.types.general.abuse_requests import AbuseRequest
+from shikimori.types.abuse_requests import AbuseRequest
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters

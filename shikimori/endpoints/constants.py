@@ -2,7 +2,7 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.constants import (
+from shikimori.types.constants import (
     SmileConstant,
     ClubConstant,
     AnimeConstant,

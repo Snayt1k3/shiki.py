@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from shikimori.types.titles.animes import Anime
+from shikimori.types.animes import Anime
 
 
 @dataclass

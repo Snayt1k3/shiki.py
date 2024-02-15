@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from shikimori.types.user.user import User
-from ..general.topics import Linked
+from shikimori.types.user import User
+from shikimori.types.topics import Linked
 
 
 @dataclass

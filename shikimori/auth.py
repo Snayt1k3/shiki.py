@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+__all__ = ["Auth", "AuthOptions"]
 
 @dataclass
 class AuthOptions:

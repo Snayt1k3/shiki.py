@@ -3,7 +3,7 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.titles.studios import Studio
+from shikimori.types.studios import Studio
 
 logger = logging.getLogger(__name__)
 

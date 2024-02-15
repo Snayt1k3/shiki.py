@@ -1,13 +1,13 @@
 import logging
 from typing import List
 
-from shikimori.types.general.club import Logo, Club, ClubImage, ClubInfo, Collection
-from shikimori.types.general.photo import Photo, PhotoExtended
-from shikimori.types.general.topics import Forum
-from shikimori.types.titles.animes import Anime
-from shikimori.types.titles.manga import Manga
-from shikimori.types.titles.ranobe import Ranobe
-from shikimori.types.titles.roles import Character
+from shikimori.types.club import Logo, Club, ClubImage, ClubInfo, Collection
+from shikimori.types.photo import Photo, PhotoExtended
+from shikimori.types.topics import Forum
+from shikimori.types.animes import Anime
+from shikimori.types.manga import Manga
+from shikimori.types.ranobe import Ranobe
+from shikimori.types.roles import Character
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.user import User

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from ..general.photo import Photo
+from shikimori.types.photo import Photo
 
 
 @dataclass

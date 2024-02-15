@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from shikimori.types.titles.roles import Character as Seyu
+from shikimori.types.roles import Character as Seyu
 from .base import BaseRole, BaseCharacter
 
 

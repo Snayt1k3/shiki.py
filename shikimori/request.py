@@ -5,6 +5,8 @@ from .exceptions import RequestError
 
 logger = logging.getLogger(__name__)
 
+__all__ = ["Request"]
+
 class Request:
     """class for send requests"""
 

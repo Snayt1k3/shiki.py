@@ -3,10 +3,10 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.photo import PhotoExtended
-from ..types.user.dialog import Dialog
-from ..types.user.message import Message, MessageInfo
-from ..types.user.user import User
+from shikimori.types.photo import PhotoExtended
+from shikimori.types.dialog import Dialog
+from shikimori.types.message import Message, MessageInfo
+from shikimori.types.user import User
 
 logger = logging.getLogger(__name__)
 

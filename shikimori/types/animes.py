@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from studios import Studio
-from videos import Video
-from screenshots import ScreenShot
-from genres import Genre
-from manga import Manga
+from .studios import Studio
+from .videos import Video
+from .screenshots import ScreenShot
+from .genres import Genre
+from .manga import Manga
 from .base import BaseTitle
 
 

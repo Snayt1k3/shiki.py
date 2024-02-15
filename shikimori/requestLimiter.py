@@ -7,6 +7,7 @@ from .request import Request
 
 logger = logging.getLogger(__name__)
 
+__all__ = ["RequestLimiter"]
 
 class RequestLimiter:
     """Limiter for requests"""

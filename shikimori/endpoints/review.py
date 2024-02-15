@@ -2,7 +2,7 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.titles.review import Review
+from shikimori.types.review import Review
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)

@@ -2,7 +2,7 @@ from .requestLimiter import RequestLimiter
 from .constants import MAX_REQUESTS_PER_SECOND, SHIKIMORI_URL
 from .request import Request
 from .auth import Auth, AuthOptions
-import endpoints
+from shikimori import endpoints
 from logging import basicConfig, DEBUG
 
 __all__ = ["Shikimori"]

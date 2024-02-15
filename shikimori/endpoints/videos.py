@@ -3,7 +3,7 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.titles.videos import Video
+from shikimori.types.videos import Video
 
 logger = logging.getLogger(__name__)
 

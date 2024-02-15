@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from ..general.photo import PhotoExtended
-from ..titles.animes import Anime
+from shikimori.types.photo import PhotoExtended
+from shikimori.types.animes import Anime
 from typing import Any
 from .user_rates import UserRateResponse
-from ..titles.base import BaseTitle
+from shikimori.types.base import BaseTitle
 
 
 @dataclass

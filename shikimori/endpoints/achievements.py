@@ -1,6 +1,6 @@
 import logging
 
-from shikimori.types.user.achievements import Achievement
+from shikimori.types.achievements import Achievement
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 

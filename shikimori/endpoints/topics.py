@@ -3,9 +3,9 @@ from typing import List
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.photo import Photo, PhotoExtended
-from ..types.general.topics import Topic, Forum, Linked, Status
-from ..types.user.user import User
+from shikimori.types.photo import Photo, PhotoExtended
+from shikimori.types.topics import Topic, Forum, Linked, Status
+from shikimori.types.user import User
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)

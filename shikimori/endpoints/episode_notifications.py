@@ -2,7 +2,7 @@ import logging
 
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.general.episode_notification import EpisodeNotification
+from shikimori.types.episode_notification import EpisodeNotification
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
