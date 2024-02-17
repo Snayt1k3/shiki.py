@@ -1,5 +1,5 @@
 from .requestLimiter import RequestLimiter
-from .constants import MAX_REQUESTS_PER_SECOND, SHIKIMORI_URL
+from .constants import MAX_REQUESTS_PER_SECOND, SHIKIMORI_URL, MAX_REQUESTS_PER_MINUTE
 from .request import Request
 from .auth import Auth, AuthOptions
 from shikimori import endpoints
@@ -22,7 +22,6 @@ class Shikimori:
         redirect_uri: str = "urn:ietf:wg:oauth:2.0:oob",
         base_url: str = None,
         logging: int | bool = None,
-        REQUEST_WAITING: bool = True  # in develop
     ):
         """
         Initialize client for work with shikimori api
@@ -42,7 +41,7 @@ class Shikimori:
         # dependencies
         self._base_url = SHIKIMORI_URL if not base_url else base_url
         self._request = Request()
-        self._limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, 1, self._request, REQUEST_WAITING)
+        self._limiter = RequestLimiter(MAX_REQUESTS_PER_SECOND, MAX_REQUESTS_PER_MINUTE, self._request,)
 
         # Auth dependencies
         self._options = AuthOptions(
