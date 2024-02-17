@@ -1,10 +1,25 @@
-import pytest
 from unittest import mock
-from tests.fixtures.unit.api_client import client
+
+import pytest
+
+from tests.fixtures.unit.api_client import FakeResponse
+
 
 @pytest.mark.asyncio
-async def test_get_request(client):
-    with mock.patch("aiohttp.ClientSession.get", return_value={"some_key": "some_value"}):
-        response = await client.make_request("GET", url="https://url", query_params={"some": 123})
+@pytest.mark.parametrize(
+    ["method", "kwargs"],
+    [
+        ("GET", {"query_params": {"some": 123}}),
+        ("POST", {"body": {}}),
+        ("PATCH", {"body": {}}),
+        ("DELETE", {"body": {}}),
+        ("PUT", {"body": {}}),
+    ],
+)
+async def test_request(client, method, kwargs):
+    resp = FakeResponse({"some_key": "some_value"})
+
+    with mock.patch(f"aiohttp.ClientSession.{method.lower()}", return_value=resp):
+        response = await client.make_request(method, url="https://url", **kwargs)
 
     assert response == {"some_key": "some_value"}
