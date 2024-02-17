@@ -1,4 +1,3 @@
-import asyncio
 import logging
 import time
 
@@ -12,26 +11,32 @@ __all__ = ["RequestLimiter"]
 class RequestLimiter:
     """Limiter for requests"""
 
-    def __init__(self, max_requests: int, interval: int, request: Request, REQUEST_WAITING: bool):
-        self._max_requests = max_requests
-        self._request_waiting = REQUEST_WAITING
-        self._interval = interval
-        self._current_requests = 0
-        self._request = request
-        self._last_request_time = time.time()
+    def __init__(self, max_requests_sec: int, max_requests_min: int, request: Request):
+        self._max_requests_sec = max_requests_sec
+        self._max_requests_min = max_requests_min
 
-    def _reset(self):
-        self._current_requests = 0
-        self._last_request_time = time.time()
+        self._current_requests_sec = 0
+        self._current_requests_min = 0
+
+        self._request = request
+        self._last_request_time_minute = time.time()
+        self._last_request_time_second = time.time()
 
     def _is_limit_exceeded(self):
         current_time = time.time()
-        time_since_last_request = current_time - self._last_request_time
 
-        if time_since_last_request > self._interval:
-            self._reset()
+        if current_time - self._last_request_time_second >= 1:
+            self._current_requests_sec = 0
+            self._last_request_time_second = current_time
 
-        return self._current_requests >= self._max_requests
+        if current_time - self._last_request_time_minute >= 60:
+            self._current_requests_min = 0
+            self._last_request_time_minute = current_time
+
+        return (
+            self._current_requests_sec > self._max_requests_sec
+            or self._current_requests_min > self._max_requests_min
+        )
 
     async def make_request(self, method: str, **kwargs):
         """
@@ -41,14 +46,11 @@ class RequestLimiter:
         """
         if self._is_limit_exceeded():
 
-            await asyncio.sleep(self._interval)
+            logger.error("RATE LIMIT EXCEEDED")
+            raise TooManyRequests("Rate limit exceeded")
 
-            if not self._request_waiting:
-                logger.error("RATE LIMIT EXCEEDED")
-                raise TooManyRequests("Rate limit exceeded")
-
-        self._current_requests += 1
-        self._last_request_time = time.time()
+        self._current_requests_min += 1
+        self._current_requests_sec += 1
 
         logger.info(f"{method} Request to url - {kwargs['url']}")
 

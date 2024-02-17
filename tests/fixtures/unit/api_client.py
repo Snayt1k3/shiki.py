@@ -43,3 +43,7 @@ class FakeResponse:
 @pytest.fixture
 def request_client():
     return Request()
+
+@pytest.fixture
+def fake_request_client():
+    return FakeRequest({})
