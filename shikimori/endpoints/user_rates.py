@@ -127,15 +127,6 @@ class UserRatesEndpoint(BaseEndpoint):
     ) -> UserRateResponse | RequestError:
         """
         requires oauth scope
-        :param user_rate_id:
-        :param status:
-        :param score:
-        :param chapters:
-        :param episodes:
-        :param volumes:
-        :param rewatches:
-        :param text:
-        :return:
         """
         response = await self._request.make_request(
             "PATCH",
@@ -193,22 +184,40 @@ class UserRatesEndpoint(BaseEndpoint):
         :return: None - Success, RequestError - Error.
         """
 
-        return await self._request.make_request(
+        response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}",
             headers=self.headers,
         )
+
+        if not isinstance(response, RequestError):
+            return
+
+        logger.debug(
+            f"Bad Request(delete): status - {response.status_code}: info - {str(response)}"
+        )
+
+        return response
 
     async def cleanup(self, type: str) -> dict | RequestError:
         """
         Be careful to use
         :param type: Must be one of: anime, manga.
         """
-        return await self._request.make_request(
+        response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/v2/user_rates/{type}/cleanup",
             headers=self.headers,
         )
+
+        if not isinstance(response, RequestError):
+            return response
+
+        logger.debug(
+            f"Bad Request(cleanup): status - {response.status_code}: info - {str(response)}"
+        )
+
+        return response
 
     async def reset(self, type: str) -> dict | RequestError:
         """
@@ -216,8 +225,17 @@ class UserRatesEndpoint(BaseEndpoint):
         Reset all user scores to 0.
         :param type: Must be one of: anime, manga.
         """
-        return await self._request.make_request(
+        response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/v2/user_rates/{type}/reset",
             headers=self.headers,
         )
+
+        if not isinstance(response, RequestError):
+            return response
+
+        logger.debug(
+            f"Bad Request(reset): status - {response.status_code}: info - {str(response)}"
+        )
+
+        return response
