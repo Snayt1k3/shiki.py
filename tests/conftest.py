@@ -12,3 +12,4 @@ from tests.fixtures.unit.limiter import *
 from tests.fixtures.unit.endpoints.abuse_request import *
 from tests.fixtures.unit.endpoints.topic_ignore import *
 from tests.fixtures.unit.endpoints.user_ignore import *
+from tests.fixtures.unit.endpoints.episode_notification import *
