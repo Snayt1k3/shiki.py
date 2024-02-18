@@ -4,7 +4,7 @@ from shikimori.request import Request
 
 
 class FakeRequest:
-    def __init__(self, response: dict) -> None:
+    def __init__(self, response) -> None:
         self.response = response
 
     async def _post(self, *args, **kwargs):
