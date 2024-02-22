@@ -1,13 +1,13 @@
 import logging
 from typing import List
 
-from shikimori.types.club import Logo, Club, ClubImage, ClubInfo, Collection
-from shikimori.types.photo import Photo, PhotoExtended
-from shikimori.types.topics import Forum
 from shikimori.types.animes import Anime
+from shikimori.types.club import Logo, Club, ClubImage, ClubInfo, Collection
 from shikimori.types.manga import Manga
+from shikimori.types.photo import Photo, PhotoExtended
 from shikimori.types.ranobe import Ranobe
 from shikimori.types.roles import Character
+from shikimori.types.topics import Forum
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.user import User
@@ -346,7 +346,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/images",
-            headers=self.headers(),
+            headers=self.headers,
             query_params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
@@ -361,13 +361,12 @@ class ClubEndpoint(BaseEndpoint):
 
     async def join(self, id: int) -> None | RequestError:
         """requires oauth scope"""
-        response = (
-            await self._request.make_request(
+        response = await self._request.make_request(
                 "POST",
                 url=f"{self._base_url}/api/clubs/{id}/join",
                 headers=self.headers,
-            ),
-        )
+            )
+
 
         if not isinstance(response, RequestError):
             return
@@ -380,13 +379,12 @@ class ClubEndpoint(BaseEndpoint):
 
     async def leave(self, id: int) -> None | RequestError:
         """requires oauth scope !"""
-        response = (
-            await self._request.make_request(
+        response = await self._request.make_request(
                 "POST",
                 url=f"{self._base_url}/api/clubs/{id}/leave",
                 headers=self.headers,
-            ),
-        )
+            )
+
 
         if not isinstance(response, RequestError):
             return
