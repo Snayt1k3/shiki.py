@@ -14,3 +14,4 @@ from tests.fixtures.unit.endpoints.topic_ignore import *
 from tests.fixtures.unit.endpoints.user_ignore import *
 from tests.fixtures.unit.endpoints.episode_notification import *
 from tests.fixtures.unit.endpoints.user_rates import *
+from tests.fixtures.unit.endpoints.achievements import *
