@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class AppearsEndpoint(BaseEndpoint):
-    async def Read(self, ids: str = None) -> None | RequestError:
+    async def read(self, ids: str = None) -> None | RequestError:
         """
         Mark comments or topics as read
         """

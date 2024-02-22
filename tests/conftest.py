@@ -16,3 +16,4 @@ from tests.fixtures.unit.endpoints.episode_notification import *
 from tests.fixtures.unit.endpoints.user_rates import *
 from tests.fixtures.unit.endpoints.achievements import *
 from tests.fixtures.unit.endpoints.animes import *
+from tests.fixtures.unit.endpoints.appears import *
