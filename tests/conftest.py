@@ -17,3 +17,5 @@ from tests.fixtures.unit.endpoints.user_rates import *
 from tests.fixtures.unit.endpoints.achievements import *
 from tests.fixtures.unit.endpoints.animes import *
 from tests.fixtures.unit.endpoints.appears import *
+from tests.fixtures.unit.endpoints.bans import *
+from tests.fixtures.unit.endpoints.calendar import *
