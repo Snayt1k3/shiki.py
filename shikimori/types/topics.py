@@ -14,6 +14,7 @@ class Forum:
 
 @dataclass
 class Linked:
+    id: int
     name: str
     russian: str
     image: Photo
@@ -24,7 +25,7 @@ class Linked:
     episodes: int
     episodes_aired: int
     aired_on: str | None
-    released_at: str | None
+    released_on: str | None
 
 
 @dataclass

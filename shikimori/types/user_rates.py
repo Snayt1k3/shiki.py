@@ -2,6 +2,21 @@ from dataclasses import dataclass
 
 
 @dataclass
+class MiniUserRate:
+    id: int
+    score: int
+    status: str
+    rewatches: int
+    episodes: int
+    volumes: int
+    chapters: int
+    text: str
+    text_html: str
+    created_at: str
+    updated_at: str
+
+
+@dataclass
 class UserRateResponse:
     id: int
     user_id: int

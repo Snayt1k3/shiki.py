@@ -12,3 +12,4 @@ class Role:
     roles: list[str]
     roles_russian: list[str]
     character: Character
+    person: Character

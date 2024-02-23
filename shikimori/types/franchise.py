@@ -17,6 +17,7 @@ class Node:
 class Link:
     id: int
     source_id: int
+    source: int
     target_id: int
     target: int
     weight: int
@@ -27,3 +28,4 @@ class Link:
 class Franchise:
     nodes: list[Node]
     links: list[Link]
+    current_id: int
