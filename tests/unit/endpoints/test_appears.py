@@ -8,7 +8,7 @@ from shikimori.exceptions import RequestError
 async def test_read_success(appears_client):
     appears_client._request = FakeRequest({})
     response = await appears_client.read(123)
-    assert response
+    assert response is None
 
 @pytest.mark.asyncio
 async def test_read_error(appears_client):
