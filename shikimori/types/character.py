@@ -1,16 +1,18 @@
 from dataclasses import dataclass
 from shikimori.types.roles import Character as Seyu
-from .base import BaseRole, BaseCharacter
+from .base import BaseRole, BaseCharacter, BaseTitle
 
 
 @dataclass
-class MangaRole(BaseRole):
-    pass
+class MangaRole(BaseRole, BaseTitle):
+    volumes: int
+    chapters: int
 
 
 @dataclass
-class AnimeRole(BaseRole):
-    pass
+class AnimeRole(BaseRole, BaseTitle):
+    episodes: int
+    episodes_aired: int
 
 
 @dataclass
