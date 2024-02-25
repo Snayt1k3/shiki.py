@@ -21,3 +21,4 @@ from tests.fixtures.unit.endpoints.characters import *
 from tests.fixtures.unit.endpoints.club import *
 from tests.fixtures.unit.endpoints.comments import *
 from tests.fixtures.unit.endpoints.constants import *
+from tests.fixtures.unit.endpoints.dialogs import *

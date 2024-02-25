@@ -11,9 +11,9 @@ class Message:
     body: str
     html_body: str
     created_at: str
-    linked_id: int
-    linked_type: str
-    linked: Linked
+    linked_id: int | None
+    linked_type: str | None
+    linked: Linked | None
 
 
 @dataclass
