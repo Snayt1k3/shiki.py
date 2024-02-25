@@ -23,3 +23,4 @@ from tests.fixtures.unit.endpoints.comments import *
 from tests.fixtures.unit.endpoints.constants import *
 from tests.fixtures.unit.endpoints.dialogs import *
 from tests.fixtures.unit.endpoints.favorites import *
+from tests.fixtures.unit.endpoints.forums import *
