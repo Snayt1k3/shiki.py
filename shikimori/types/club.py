@@ -21,7 +21,7 @@ class Club:
     id: int
     name: str
     logo: Logo
-    is_censored: str
+    is_censored: bool
     join_policy: str
     comment_policy: str
 

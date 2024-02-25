@@ -42,7 +42,7 @@ class Topic:
     type: str
     linked_id: int
     linked_type: str
-    linked: Linked
+    linked: Linked | None
     viewed: bool
     last_comment_viewed: bool
     event: str

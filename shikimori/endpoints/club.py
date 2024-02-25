@@ -37,7 +37,17 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Club(**c, logo=Logo(**c["logo"])) for c in response]
+            return [
+                Club(
+                    logo=Logo(**c["logo"]),
+                    comment_policy=c["comment_policy"],
+                    id=c["id"],
+                    name=c["name"],
+                    is_censored=c["is_censored"],
+                    join_policy=c["join_policy"],
+                )
+                for c in response
+            ]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
@@ -54,21 +64,71 @@ class ClubEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return ClubInfo(
-                **response,
+                id=response["id"],
+                name=response["name"],
+                is_censored=response["is_censored"],
+                logo=Logo(**response["logo"]),
+                join_policy=response["join_policy"],
+                comment_policy=response["comment_policy"],
+                description=response["description"],
+                description_html=response["description_html"],
+                style_id=response["style_id"],
+                topic_id=response["topic_id"],
+                thread_id=response["thread_id"],
+                user_role=response["user_role"],
                 animes=[
-                    Anime(**anime, image=Photo(**anime["image"]))
+                    Anime(
+                        id=anime["id"],
+                        name=anime["name"],
+                        russian=anime["russian"],
+                        image=Photo(**anime["image"]),
+                        url=anime["url"],
+                        kind=anime["kind"],
+                        score=anime["score"],
+                        status=anime["status"],
+                        episodes=anime["episodes"],
+                        episodes_aired=anime["episodes_aired"],
+                        aired_on=anime["aired_on"],
+                        released_on=anime["released_on"],
+                    )
                     for anime in response["animes"]
                 ],
                 mangas=[
-                    Manga(**manga, image=Photo(**manga["image"]))
+                    Manga(
+                        id=manga["id"],
+                        name=manga["name"],
+                        russian=manga["russian"],
+                        image=Photo(**manga["image"]),
+                        url=manga["url"],
+                        kind=manga["kind"],
+                        score=manga["score"],
+                        status=manga["status"],
+                        volumes=manga["volumes"],
+                        chapters=manga["chapters"],
+                        aired_on=manga["aired_on"],
+                        released_on=manga["released_on"],
+                    )
                     for manga in response["mangas"]
                 ],
                 characters=[
-                    Character(**ch, image=Photo(**ch["image"]))
+                    Character(
+                        id=ch["id"],
+                        name=ch["name"],
+                        russian=ch["russian"],
+                        url=ch["url"],
+                        image=Photo(**ch["image"]),
+                    )
                     for ch in response["characters"]
                 ],
                 members=[
-                    User(**u, image=PhotoExtended(**u["image"]))
+                    User(
+                        id=u["id"],
+                        nickname=u["nickname"],
+                        avatar=u["avatar"],
+                        last_online_at=u["last_online_at"],
+                        url=u["url"],
+                        image=PhotoExtended(**u["image"]),
+                    )
                     for u in response["members"]
                 ],
                 images=[ClubImage(**image) for image in response["images"]],
@@ -120,25 +180,76 @@ class ClubEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return ClubInfo(
-                **response,
+                id=response["id"],
+                name=response["name"],
+                is_censored=response["is_censored"],
+                logo=Logo(**response["logo"]),
+                join_policy=response["join_policy"],
+                comment_policy=response["comment_policy"],
+                description=response["description"],
+                description_html=response["description_html"],
+                style_id=response["style_id"],
+                topic_id=response["topic_id"],
+                thread_id=response["thread_id"],
+                user_role=response["user_role"],
                 animes=[
-                    Anime(**anime, image=Photo(**anime["image"]))
+                    Anime(
+                        id=anime["id"],
+                        name=anime["name"],
+                        russian=anime["russian"],
+                        image=Photo(**anime["image"]),
+                        url=anime["url"],
+                        kind=anime["kind"],
+                        score=anime["score"],
+                        status=anime["status"],
+                        episodes=anime["episodes"],
+                        episodes_aired=anime["episodes_aired"],
+                        aired_on=anime["aired_on"],
+                        released_on=anime["released_on"],
+                    )
                     for anime in response["animes"]
                 ],
                 mangas=[
-                    Manga(**manga, image=Photo(**manga["image"]))
+                    Manga(
+                        id=manga["id"],
+                        name=manga["name"],
+                        russian=manga["russian"],
+                        image=Photo(**manga["image"]),
+                        url=manga["url"],
+                        kind=manga["kind"],
+                        score=manga["score"],
+                        status=manga["status"],
+                        volumes=manga["volumes"],
+                        chapters=manga["chapters"],
+                        aired_on=manga["aired_on"],
+                        released_on=manga["released_on"],
+                    )
                     for manga in response["mangas"]
                 ],
                 characters=[
-                    Character(**ch, image=Photo(**ch["image"]))
+                    Character(
+                        id=ch["id"],
+                        name=ch["name"],
+                        russian=ch["russian"],
+                        url=ch["url"],
+                        image=Photo(**ch["image"]),
+                    )
                     for ch in response["characters"]
                 ],
                 members=[
-                    User(**u, image=PhotoExtended(**u["image"]))
+                    User(
+                        id=u["id"],
+                        nickname=u["nickname"],
+                        avatar=u["avatar"],
+                        last_online_at=u["last_online_at"],
+                        url=u["url"],
+                        image=PhotoExtended(**u["image"]),
+                    )
                     for u in response["members"]
                 ],
                 images=[ClubImage(**image) for image in response["images"]],
             )
+
         logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"
         )
@@ -162,7 +273,23 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Anime(**anime, image=Photo(**anime["image"])) for anime in response]
+            return [
+                Anime(
+                    id=anime["id"],
+                    name=anime["name"],
+                    russian=anime["russian"],
+                    image=Photo(**anime["image"]),
+                    url=anime["url"],
+                    kind=anime["kind"],
+                    score=anime["score"],
+                    status=anime["status"],
+                    episodes=anime["episodes"],
+                    episodes_aired=anime["episodes_aired"],
+                    aired_on=anime["aired_on"],
+                    released_on=anime["released_on"],
+                )
+                for anime in response
+            ]
 
         logger.debug(
             f"Bad Request(GetAnimes): status - {response.status_code}: info - {str(response)}"
@@ -188,7 +315,23 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Manga(**manga, image=Photo(**manga["image"])) for manga in response]
+            return [
+                Manga(
+                    id=manga["id"],
+                    name=manga["name"],
+                    russian=manga["russian"],
+                    image=Photo(**manga["image"]),
+                    url=manga["url"],
+                    kind=manga["kind"],
+                    score=manga["score"],
+                    status=manga["status"],
+                    volumes=manga["volumes"],
+                    chapters=manga["chapters"],
+                    aired_on=manga["aired_on"],
+                    released_on=manga["released_on"],
+                )
+                for manga in response
+            ]
 
         logger.debug(
             f"Bad Request(GetMangas): status - {response.status_code}: info - {str(response)}"
@@ -215,7 +358,21 @@ class ClubEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return [
-                Ranobe(**ranobe, image=Photo(**ranobe["image"])) for ranobe in response
+                Ranobe(
+                    id=ranobe["id"],
+                    name=ranobe["name"],
+                    russian=ranobe["russian"],
+                    image=Photo(**ranobe["image"]),
+                    url=ranobe["url"],
+                    kind=ranobe["kind"],
+                    score=ranobe["score"],
+                    status=ranobe["status"],
+                    volumes=ranobe["volumes"],
+                    chapters=ranobe["chapters"],
+                    aired_on=ranobe["aired_on"],
+                    released_on=ranobe["released_on"],
+                )
+                for ranobe in response
             ]
 
         logger.debug(
@@ -241,7 +398,16 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Character(**s, image=Photo(**s["image"])) for s in response]
+            return [
+                Character(
+                    id=s["id"],
+                    name=s["name"],
+                    russian=s["russian"],
+                    url=s["url"],
+                    image=Photo(**s["image"]),
+                )
+                for s in response
+            ]
 
         logger.debug(
             f"Bad Request(GetCharacters): status - {response.status_code}: info - {str(response)}"
@@ -268,10 +434,28 @@ class ClubEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Collection(
-                    **s,
+                    body=s["body"],
+                    comments_count=s["comments_count"],
+                    id=s["id"],
+                    linked=s["linked"],
+                    linked_id=s["linked_id"],
+                    created_at=s["created_at"],
+                    episode=s["episode"],
+                    event=s["event"],
+                    html_body=s["html_body"],
+                    html_footer=s["html_footer"],
+                    last_comment_viewed=s["last_comment_viewed"],
+                    linked_type=s["linked_type"],
+                    topic_title=s["topic_title"],
+                    type=s["type"],
+                    viewed=s["viewed"],
                     forum=Forum(**s.get("forum")),
                     user=User(
-                        **s.get("user"),
+                        id=s["user"]["id"],
+                        avatar=s["user"]["avatar"],
+                        url=s["user"]["url"],
+                        last_online_at=s["user"]["last_online_at"],
+                        nickname=s["user"]["nickname"],
                         image=PhotoExtended(**s["user"]["image"]),
                     ),
                 )
@@ -301,7 +485,17 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Club(**s, logo=Logo(**s["logo"])) for s in response]
+            return [
+                Club(
+                    logo=Logo(**c["logo"]),
+                    comment_policy=c["comment_policy"],
+                    id=c["id"],
+                    name=c["name"],
+                    is_censored=c["is_censored"],
+                    join_policy=c["join_policy"],
+                )
+                for c in response
+            ]
 
         logger.debug(
             f"Bad Request(Clubs): status - {response.status_code}: info - {str(response)}"
@@ -326,7 +520,14 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [User(**s, image=PhotoExtended(**s["image"])) for s in response]
+            return [User(
+                        id=u["id"],
+                        nickname=u["nickname"],
+                        avatar=u["avatar"],
+                        last_online_at=u["last_online_at"],
+                        url=u["url"],
+                        image=PhotoExtended(**u["image"]),
+                    ) for u in response]
 
         logger.debug(
             f"Bad Request(Members): status - {response.status_code}: info - {str(response)}"
@@ -362,11 +563,10 @@ class ClubEndpoint(BaseEndpoint):
     async def join(self, id: int) -> None | RequestError:
         """requires oauth scope"""
         response = await self._request.make_request(
-                "POST",
-                url=f"{self._base_url}/api/clubs/{id}/join",
-                headers=self.headers,
-            )
-
+            "POST",
+            url=f"{self._base_url}/api/clubs/{id}/join",
+            headers=self.headers,
+        )
 
         if not isinstance(response, RequestError):
             return
@@ -380,11 +580,10 @@ class ClubEndpoint(BaseEndpoint):
     async def leave(self, id: int) -> None | RequestError:
         """requires oauth scope !"""
         response = await self._request.make_request(
-                "POST",
-                url=f"{self._base_url}/api/clubs/{id}/leave",
-                headers=self.headers,
-            )
-
+            "POST",
+            url=f"{self._base_url}/api/clubs/{id}/leave",
+            headers=self.headers,
+        )
 
         if not isinstance(response, RequestError):
             return
