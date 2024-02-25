@@ -1,11 +1,11 @@
 import logging
 from typing import List
 
-from .base import BaseEndpoint
-from ..exceptions import RequestError
 from shikimori.types.comment import Comment
 from shikimori.types.photo import PhotoExtended
 from shikimori.types.user import User
+from .base import BaseEndpoint
+from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
@@ -26,7 +26,6 @@ class CommentEndpoint(BaseEndpoint):
         :param page: Must be a number between 1 and 100000
         :param limit: 30 maximum
         :param desc: Must be one of: 1, 0.
-        :return:
         """
         response = await self._request.make_request(
             "GET",
@@ -46,8 +45,25 @@ class CommentEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Comment(
-                    **response,
-                    user=User(**s["user"], image=PhotoExtended(**s["user"]["image"])),
+                    id=s["id"],
+                    body=s["body"],
+                    commentable_id=s["commentable_id"],
+                    commentable_type=s["commentable_type"],
+                    created_at=s["created_at"],
+                    can_be_edited=s["can_be_edited"],
+                    is_offtopic=s["is_offtopic"],
+                    html_body=s["html_body"],
+                    user_id=s["user_id"],
+                    is_summary=s["is_summary"],
+                    updated_at=s["updated_at"],
+                    user=User(
+                        id=s["user"]["id"],
+                        avatar=s["user"]["avatar"],
+                        url=s["user"]["url"],
+                        last_online_at=s["user"]["last_online_at"],
+                        nickname=s["user"]["nickname"],
+                        image=PhotoExtended(**s["user"]["image"]),
+                    ),
                 )
                 for s in response
             ]
@@ -67,11 +83,26 @@ class CommentEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return Comment(
-                **response,
-                user=User(
-                    **response["user"], image=PhotoExtended(**response["user"]["image"])
-                ),
-            )
+                    id=response["id"],
+                    body=response["body"],
+                    commentable_id=response["commentable_id"],
+                    commentable_type=response["commentable_type"],
+                    created_at=response["created_at"],
+                    can_be_edited=response["can_be_edited"],
+                    is_offtopic=response["is_offtopic"],
+                    html_body=response["html_body"],
+                    user_id=response["user_id"],
+                    is_summary=response["is_summary"],
+                    updated_at=response["updated_at"],
+                    user=User(
+                        id=response["user"]["id"],
+                        avatar=response["user"]["avatar"],
+                        url=response["user"]["url"],
+                        last_online_at=response["user"]["last_online_at"],
+                        nickname=response["user"]["nickname"],
+                        image=PhotoExtended(**response["user"]["image"]),
+                    ),
+                )
 
         logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
@@ -120,11 +151,26 @@ class CommentEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return Comment(
-                **response,
-                user=User(
-                    **response["user"], image=PhotoExtended(**response["user"]["image"])
-                ),
-            )
+                    id=response["id"],
+                    body=response["body"],
+                    commentable_id=response["commentable_id"],
+                    commentable_type=response["commentable_type"],
+                    created_at=response["created_at"],
+                    can_be_edited=response["can_be_edited"],
+                    is_offtopic=response["is_offtopic"],
+                    html_body=response["html_body"],
+                    user_id=response["user_id"],
+                    is_summary=response["is_summary"],
+                    updated_at=response["updated_at"],
+                    user=User(
+                        id=response["user"]["id"],
+                        avatar=response["user"]["avatar"],
+                        url=response["user"]["url"],
+                        last_online_at=response["user"]["last_online_at"],
+                        nickname=response["user"]["nickname"],
+                        image=PhotoExtended(**response["user"]["image"]),
+                    ),
+                )
 
         logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"
@@ -153,11 +199,27 @@ class CommentEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return Comment(
-                **response,
-                user=User(
-                    **response["user"], image=PhotoExtended(**response["user"]["image"])
-                ),
-            )
+                    id=response["id"],
+                    body=response["body"],
+                    commentable_id=response["commentable_id"],
+                    commentable_type=response["commentable_type"],
+                    created_at=response["created_at"],
+                    can_be_edited=response["can_be_edited"],
+                    is_offtopic=response["is_offtopic"],
+                    html_body=response["html_body"],
+                    user_id=response["user_id"],
+                    is_summary=response["is_summary"],
+                    updated_at=response["updated_at"],
+                    user=User(
+                        id=response["user"]["id"],
+                        avatar=response["user"]["avatar"],
+                        url=response["user"]["url"],
+                        last_online_at=response["user"]["last_online_at"],
+                        nickname=response["user"]["nickname"],
+                        image=PhotoExtended(**response["user"]["image"]),
+                    ),
+                )
+
 
         logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"

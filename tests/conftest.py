@@ -19,3 +19,4 @@ from tests.fixtures.unit.endpoints.bans import *
 from tests.fixtures.unit.endpoints.calendar import *
 from tests.fixtures.unit.endpoints.characters import *
 from tests.fixtures.unit.endpoints.club import *
+from tests.fixtures.unit.endpoints.comments import *
