@@ -1,7 +1,6 @@
 import logging
 from typing import List
 
-from shikimori.types.photo import Photo, PhotoExtended
 from shikimori.types.topics import Topic, Forum, Linked
 from shikimori.types.animes import (
     Anime,

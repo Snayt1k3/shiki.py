@@ -26,3 +26,4 @@ from tests.fixtures.unit.endpoints.favorites import *
 from tests.fixtures.unit.endpoints.forums import *
 from tests.fixtures.unit.endpoints.friends import *
 from tests.fixtures.unit.endpoints.genres import *
+from tests.fixtures.unit.endpoints.mangas import *

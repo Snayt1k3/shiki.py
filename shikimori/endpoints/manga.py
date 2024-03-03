@@ -15,6 +15,7 @@ from shikimori.types.genres import Genre
 from shikimori.types.manga import Manga, MangaInfo
 from shikimori.types.roles import Role, Character
 from shikimori.types.user import User
+from shikimori.types.user_rates import MiniUserRate
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
@@ -99,7 +100,23 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Manga(**s, image=Photo(**s["image"])) for s in response]
+            return [
+                Manga(
+                    id=s["id"],
+                    name=s["name"],
+                    russian=s["russian"],
+                    image=Photo(**s["image"]),
+                    url=s["url"],
+                    kind=s["kind"],
+                    score=s["score"],
+                    status=s["status"],
+                    chapters=s["chapters"],
+                    volumes=s["volumes"],
+                    aired_on=s["aired_on"],
+                    released_on=s["released_on"],
+                )
+                for s in response
+            ]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
@@ -107,7 +124,7 @@ class MangaEndpoint(BaseEndpoint):
 
         return response
 
-    async def ById(self, id: int):
+    async def ById(self, id: int) -> MangaInfo | RequestError:
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}api/mangas/{id}",
@@ -115,14 +132,47 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                MangaInfo(
-                    **s,
-                    image=Photo(**s["image"]),
-                    genres=[Genre(**g["genres"]) for g in s["genres"]],
-                )
-                for s in response
-            ]
+            return MangaInfo(
+                id=response["id"],
+                name=response["name"],
+                russian=response["russian"],
+                image=response["image"],
+                url=response["url"],
+                kind=response["kind"],
+                score=response["score"],
+                status=response["status"],
+                volumes=response["volumes"],
+                chapters=response["chapters"],
+                aired_on=response["aired_on"],
+                released_on=response["released_on"],
+                english=response["english"],
+                japanese=response["japanese"],
+                synonyms=response["synonyms"],
+                license_name_ru=response["license_name_ru"],
+                description=response["description"],
+                description_html=response["description_html"],
+                description_source=response["description_source"],
+                franchise=response["franchise"],
+                favoured=response["favoured"],
+                anons=response["anons"],
+                ongoing=response["ongoing"],
+                thread_id=response["thread_id"],
+                topic_id=response["topic_id"],
+                myanimelist_id=response["myanimelist_id"],
+                rates_scores_stats=response["rates_scores_stats"],
+                rates_statuses_stats=response["rates_statuses_stats"],
+                licensors=response["licensors"],
+                genres=[Genre(**genre) for genre in response["genres"]],
+                user_rate=MiniUserRate(**response["user_rate"])
+                if response["user_rate"]
+                else None,
+            )
+
+        logger.debug(
+            f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
+        )
+
+        return response
 
     async def roles(self, id: int) -> List[Role] | RequestError:
         response = await self._request.make_request(
@@ -134,11 +184,26 @@ class MangaEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Role(
-                    **role,
+                    roles=role["roles"],
+                    roles_russian=role["roles_russian"],
                     character=Character(
-                        **role.get("character"),
+                        id=role["character"]["id"],
+                        name=role["character"]["name"],
+                        russian=role["character"]["russian"],
+                        url=role["character"]["url"],
                         image=Photo(**role["character"]["image"]),
-                    ),
+                    )
+                    if role["character"]
+                    else None,
+                    person=Character(
+                        id=role["person"]["id"],
+                        name=role["person"]["name"],
+                        russian=role["person"]["russian"],
+                        url=role["person"]["url"],
+                        image=Photo(**role["person"]["image"]),
+                    )
+                    if role["person"]
+                    else None,
                 )
                 for role in response
             ]
@@ -157,7 +222,23 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Manga(**s, image=Photo(**s["image"])) for s in response]
+            return [
+                Manga(
+                    id=s["id"],
+                    name=s["name"],
+                    russian=s["russian"],
+                    image=Photo(**s["image"]),
+                    url=s["url"],
+                    kind=s["kind"],
+                    score=s["score"],
+                    status=s["status"],
+                    chapters=s["chapters"],
+                    volumes=s["volumes"],
+                    aired_on=s["aired_on"],
+                    released_on=s["released_on"],
+                )
+                for s in response
+            ]
 
         logger.debug(
             f"Bad Request(similar): status - {response.status_code}: info - {str(response)}"
@@ -175,19 +256,38 @@ class MangaEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Relation(
-                    **relation,
+                    relation=relation["relation"],
+                    relation_russian=relation["relation_russian"],
                     anime=Anime(
-                        **relation.get("anime"),
-                        image=Photo(**relation["anime"]["image"])
-                        if relation.get("anime")
-                        else None,
-                    ),
+                        id=relation["anime"]["id"],
+                        name=relation["anime"]["name"],
+                        russian=relation["anime"]["russian"],
+                        image=Photo(**relation["anime"]["image"]),
+                        url=relation["anime"]["url"],
+                        kind=relation["anime"]["kind"],
+                        score=relation["anime"]["score"],
+                        status=relation["anime"]["status"],
+                        episodes=relation["anime"]["episodes"],
+                        episodes_aired=relation["anime"]["episodes_aired"],
+                        aired_on=relation["anime"]["aired_on"],
+                        released_on=relation["anime"]["released_on"],
+                    )
+                    if relation["anime"]
+                    else None,
                     manga=Manga(
-                        **relation.get("manga"),
-                        image=Photo(**relation["anime"]["image"])
-                        if relation.get("manga")
-                        else None,
-                    ),
+                        id=relation["manga"]["id"],
+                        name=relation["manga"]["name"],
+                        russian=relation["manga"]["russian"],
+                        image=Photo(**relation["manga"]["image"]),
+                        url=relation["manga"]["url"],
+                        kind=relation["manga"]["kind"],
+                        score=relation["manga"]["score"],
+                        status=relation["manga"]["status"],
+                        chapters=relation["manga"]["chapters"],
+                        volumes=relation["manga"]["volumes"],
+                        aired_on=relation["manga"]["aired_on"],
+                        released_on=relation["manga"]["released_on"],
+                    ) if relation["manga"] else None,
                 )
                 for relation in response
             ]
@@ -208,6 +308,7 @@ class MangaEndpoint(BaseEndpoint):
             return Franchise(
                 nodes=[Node(**node) for node in response.get("nodes")],
                 links=[Link(**link) for link in response.get("links")],
+                current_id=response["current_id"]
             )
 
         logger.debug(
@@ -252,14 +353,43 @@ class MangaEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Topic(
-                    **topic,
-                    forum=Forum(**topic.get("forum")),
+                    id=topic["id"],
+                    topic_title=topic["topic_title"],
+                    body=topic["body"],
+                    html_body=topic["html_body"],
+                    html_footer=topic["html_footer"],
+                    created_at=topic["created_at"],
+                    comments_count=topic["comments_count"],
+                    type=topic["type"],
+                    linked_id=topic["linked_id"],
+                    linked_type=topic["linked_type"],
+                    viewed=topic["viewed"],
+                    last_comment_viewed=topic["last_comment_viewed"],
+                    event=topic["event"],
+                    episode=topic["episode"],
+
+                    forum=Forum(**topic["forum"]),
                     user=User(
-                        **topic.get("user"),
+                        id=topic["user"]["id"],
+                        nickname=topic["user"]["nickname"],
+                        avatar=topic["user"]["avatar"],
+                        last_online_at=topic["user"]["last_online_at"],
+                        url=topic["user"]["url"],
                         image=PhotoExtended(**topic["user"]["image"]),
                     ),
                     linked=Linked(
-                        **topic["linked"], image=Photo(**topic["linked"]["image"])
+                        name=topic["linked"]["name"],
+                        id=topic["linked"]["id"],
+                        russian=topic["linked"]["russian"],
+                        url=topic["linked"]["url"],
+                        kind=topic["linked"]["kind"],
+                        score=topic["linked"]["score"],
+                        status=topic["linked"]["status"],
+                        chapters=topic["linked"]["chapters"],
+                        volumes=topic["linked"]["volumes"],
+                        aired_on=topic["linked"]["aired_on"],
+                        released_on=topic["linked"]["released_on"],
+                        image=Photo(**topic["linked"]["image"])
                     ),
                 )
                 for topic in response

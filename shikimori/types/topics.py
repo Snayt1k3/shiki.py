@@ -22,10 +22,12 @@ class Linked:
     kind: str
     score: str
     status: str
-    episodes: int
-    episodes_aired: int
     aired_on: str | None
     released_on: str | None
+    episodes: int = None
+    episodes_aired: int = None
+    volumes: int = None
+    chapters: int = None
 
 
 @dataclass
