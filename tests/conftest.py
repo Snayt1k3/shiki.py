@@ -29,3 +29,4 @@ from tests.fixtures.unit.endpoints.genres import *
 from tests.fixtures.unit.endpoints.mangas import *
 from tests.fixtures.unit.endpoints.messages import *
 from tests.fixtures.unit.endpoints.people import *
+from tests.fixtures.unit.endpoints.publisher import *
