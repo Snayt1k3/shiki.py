@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+
+from .base import BaseCharacter
 from .photo import Photo
 from shikimori.types.animes import Anime
 from shikimori.types.manga import Manga
@@ -7,9 +9,9 @@ from shikimori.types.character import Character
 
 @dataclass
 class Date:
-    day: int
-    month: int
-    year: int
+    day: int = None
+    month: int = None
+    year: int = None
 
 
 @dataclass
@@ -22,7 +24,7 @@ class Works:
 @dataclass
 class Role:
     animes: list[Anime]
-    characters: list[Character]
+    characters: list[Character | BaseCharacter]
 
 
 @dataclass
