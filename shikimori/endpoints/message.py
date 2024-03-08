@@ -1,10 +1,11 @@
 import logging
 
+from shikimori.types.message import MessageInfo
+from shikimori.types.photo import PhotoExtended, Photo
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.photo import PhotoExtended
+from ..types.topics import Linked
 from ..types.user import User
-from shikimori.types.message import MessageInfo
 
 logger = logging.getLogger(__name__)
 
@@ -20,12 +21,49 @@ class MessageEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return MessageInfo(
-                **response,
+                id=response["id"],
+                body=response["body"],
+                created_at=response["created_at"],
+                html_body=response["html_body"],
+                kind=response["kind"],
+                linked=(
+                    Linked(
+                        name=response["linked"]["name"],
+                        id=response["linked"]["id"],
+                        russian=response["linked"]["russian"],
+                        url=response["linked"]["url"],
+                        kind=response["linked"]["kind"],
+                        score=response["linked"]["score"],
+                        status=response["linked"]["status"],
+                        episodes=response["linked"].get("episodes"),
+                        episodes_aired=response["linked"].get("episodes_aired"),
+                        volumes=response["linked"].get("volumes"),
+                        chapters=response["linked"].get("chapters"),
+                        aired_on=response["linked"]["aired_on"],
+                        released_on=response["linked"]["released_on"],
+                        image=Photo(**response["linked"]["image"]),
+                    )
+                    if response["linked"]
+                    else None
+                ),
+                linked_id=response["linked_id"],
+                linked_type=response["linked_id"],
+                read=response["read"],
                 to=User(
-                    **response["to"], image=PhotoExtended(**response["to"]["image"])
+                    id=response["to"]["id"],
+                    nickname=response["to"]["nickname"],
+                    avatar=response["to"]["avatar"],
+                    last_online_at=response["to"]["last_online_at"],
+                    url=response["to"]["url"],
+                    image=PhotoExtended(**response["to"]["image"]),
                 ),
                 sender=User(
-                    **response["from"], image=PhotoExtended(**response["from"]["image"])
+                    id=response["from"]["id"],
+                    nickname=response["from"]["nickname"],
+                    avatar=response["from"]["avatar"],
+                    last_online_at=response["from"]["last_online_at"],
+                    url=response["from"]["url"],
+                    image=PhotoExtended(**response["from"]["image"]),
                 ),
             )
 
@@ -55,12 +93,48 @@ class MessageEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return MessageInfo(
-                **response,
+                id=response["id"],
+                body=response["body"],
+                created_at=response["created_at"],
+                html_body=response["html_body"],
+                kind=response["kind"],
+                linked=(
+                    Linked(
+                        name=response["linked"]["name"],
+                        id=response["linked"]["id"],
+                        russian=response["linked"]["russian"],
+                        url=response["linked"]["url"],
+                        kind=response["linked"]["kind"],
+                        score=response["linked"]["score"],
+                        status=response["linked"]["status"],
+                        episodes=response["linked"].get("episodes"),
+                        episodes_aired=response["linked"].get("episodes_aired"),
+                        volumes=response["linked"].get("volumes"),
+                        chapters=response["linked"].get("chapters"),
+                        aired_on=response["linked"]["aired_on"],
+                        released_on=response["linked"]["released_on"],
+                        image=Photo(**response["linked"]["image"]),
+                    )
+                    if response["linked"]
+                    else None
+                ),
+                linked_id=response["linked_id"],
+                linked_type=response["linked_id"],
+                read=response["read"],
                 to=User(
-                    **response["to"], image=PhotoExtended(**response["to"]["image"])
+                    id=response["to"]["id"],
+                    nickname=response["to"]["nickname"],
+                    avatar=response["to"]["avatar"],
+                    last_online_at=response["to"]["last_online_at"],
+                    url=response["to"]["url"],
+                    image=PhotoExtended(**response["to"]["image"]),
                 ),
                 sender=User(
-                    **response["from"],
+                    id=response["from"]["id"],
+                    nickname=response["from"]["nickname"],
+                    avatar=response["from"]["avatar"],
+                    last_online_at=response["from"]["last_online_at"],
+                    url=response["from"]["url"],
                     image=PhotoExtended(**response["from"]["image"]),
                 ),
             )
@@ -86,12 +160,48 @@ class MessageEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return MessageInfo(
-                **response,
+                id=response["id"],
+                body=response["body"],
+                created_at=response["created_at"],
+                html_body=response["html_body"],
+                kind=response["kind"],
+                linked=(
+                    Linked(
+                        name=response["linked"]["name"],
+                        id=response["linked"]["id"],
+                        russian=response["linked"]["russian"],
+                        url=response["linked"]["url"],
+                        kind=response["linked"]["kind"],
+                        score=response["linked"]["score"],
+                        status=response["linked"]["status"],
+                        episodes=response["linked"].get("episodes"),
+                        episodes_aired=response["linked"].get("episodes_aired"),
+                        volumes=response["linked"].get("volumes"),
+                        chapters=response["linked"].get("chapters"),
+                        aired_on=response["linked"]["aired_on"],
+                        released_on=response["linked"]["released_on"],
+                        image=Photo(**response["linked"]["image"]),
+                    )
+                    if response["linked"]
+                    else None
+                ),
+                linked_id=response["linked_id"],
+                linked_type=response["linked_id"],
+                read=response["read"],
                 to=User(
-                    **response["to"], image=PhotoExtended(**response["to"]["image"])
+                    id=response["to"]["id"],
+                    nickname=response["to"]["nickname"],
+                    avatar=response["to"]["avatar"],
+                    last_online_at=response["to"]["last_online_at"],
+                    url=response["to"]["url"],
+                    image=PhotoExtended(**response["to"]["image"]),
                 ),
                 sender=User(
-                    **response["from"],
+                    id=response["from"]["id"],
+                    nickname=response["from"]["nickname"],
+                    avatar=response["from"]["avatar"],
+                    last_online_at=response["from"]["last_online_at"],
+                    url=response["from"]["url"],
                     image=PhotoExtended(**response["from"]["image"]),
                 ),
             )

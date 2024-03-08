@@ -14,7 +14,7 @@ async def test_list_success(manga_client, mangas_list_json, mangas_list_resp):
 @pytest.mark.asyncio
 async def test_list_error(manga_client):
     manga_client._request = FakeRequest(RequestError("Test Message", 404))
-    response = await manga_client.ById()
+    response = await manga_client.list()
     assert isinstance(response, RequestError)
 
 
