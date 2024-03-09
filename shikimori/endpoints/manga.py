@@ -390,7 +390,7 @@ class MangaEndpoint(BaseEndpoint):
                         aired_on=topic["linked"]["aired_on"],
                         released_on=topic["linked"]["released_on"],
                         image=Photo(**topic["linked"]["image"])
-                    ),
+                    ) if topic["linked"] else None,
                 )
                 for topic in response
             ]
