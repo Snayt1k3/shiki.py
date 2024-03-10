@@ -33,3 +33,4 @@ from tests.fixtures.unit.endpoints.publisher import *
 from tests.fixtures.unit.endpoints.ranobes import *
 from tests.fixtures.unit.endpoints.reviews import *
 from tests.fixtures.unit.endpoints.stats import *
+from tests.fixtures.unit.endpoints.studios import *
