@@ -31,3 +31,4 @@ from tests.fixtures.unit.endpoints.messages import *
 from tests.fixtures.unit.endpoints.people import *
 from tests.fixtures.unit.endpoints.publisher import *
 from tests.fixtures.unit.endpoints.ranobes import *
+from tests.fixtures.unit.endpoints.reviews import *

@@ -6,7 +6,6 @@ from shikimori.types.franchise import Franchise, Node, Link
 from shikimori.types.genres import Genre
 from shikimori.types.manga import Manga
 from shikimori.types.photo import Photo, PhotoExtended
-from shikimori.types.publisher import Publisher
 from shikimori.types.ranobe import Ranobe, RanobeInfo
 from shikimori.types.roles import Role, Character
 from shikimori.types.topics import Topic, Linked, Forum
