@@ -25,6 +25,7 @@ from shikimori.types.user import (
     TitleHistory,
     HistoryObj,
 )
+from ..types.manga import Manga
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
@@ -44,7 +45,17 @@ class UserEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [User(**u, image=PhotoExtended(**u["image"])) for u in response]
+            return [
+                User(
+                    id=u["id"],
+                    nickname=u["nickname"],
+                    avatar=u["avatar"],
+                    last_online_at=u["last_online_at"],
+                    url=u["url"],
+                    image=PhotoExtended(**u["image"]),
+                )
+                for u in response
+            ]
 
         logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"
@@ -67,52 +78,78 @@ class UserEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return UserInfo(
-                **response,
+                id=response["id"],
+                avatar=response["avatar"],
+                about_html=response["about_html"],
+                about=response["about"],
+                last_online_at=response["last_online_at"],
+                nickname=response["nickname"],
+                name=response["name"],
+                location=response["location"],
+                full_years=response["full_years"],
+                is_ignored=response["is_ignored"],
+                in_friends=response["in_friends"],
+                style_id=response["style_id"],
+                common_info=response["common_info"],
+                last_online=response["last_online"],
+                banned=response["banned"],
+                website=response["website"],
+                show_comments=response["show_comments"],
+                sex=response["sex"],
+                url=response["show_comments"],
                 image=PhotoExtended(**response["image"]),
                 stats=Stats(
-                    **response["stats"],
+                    genres=response["stats"]["genres"],
+                    studios=response["stats"]["studios"],
+                    publishers=response["stats"]["publishers"],
                     statuses=Statuses(
                         animes=[
                             UserTitle(**a)
-                            for a in response["stats"]["statuses"]["anime"]
+                            for a in response["stats"]["statuses"].get("anime", [])
                         ],
                         manga=[
                             UserTitle(**a)
-                            for a in response["stats"]["statuses"]["manga"]
+                            for a in response["stats"]["statuses"].get("manga", [])
                         ],
                     ),
                     full_statuses=Statuses(
                         animes=[
                             UserTitle(**a)
-                            for a in response["stats"]["full_statuses"]["anime"]
+                            for a in response["stats"]["full_statuses"].get("anime", [])
                         ],
                         manga=[
                             UserTitle(**a)
-                            for a in response["stats"]["full_statuses"]["manga"]
+                            for a in response["stats"]["full_statuses"].get("manga", [])
                         ],
                     ),
                     scores=Obj(
                         anime=[
-                            ValueObj(**a) for a in response["stats"]["scores"]["anime"]
+                            ValueObj(**a)
+                            for a in response["stats"]["scores"].get("anime", [])
                         ],
                         manga=[
-                            ValueObj(**a) for a in response["stats"]["scores"]["manga"]
+                            ValueObj(**a)
+                            for a in response["stats"]["scores"].get("manga", [])
                         ],
                     ),
                     types=Obj(
                         anime=[
-                            ValueObj(**a) for a in response["stats"]["types"]["anime"]
+                            ValueObj(**a)
+                            for a in response["stats"]["types"].get("anime", [])
                         ],
                         manga=[
-                            ValueObj(**a) for a in response["stats"]["types"]["manga"]
+                            ValueObj(**a)
+                            for a in response["stats"]["types"].get("manga", [])
                         ],
                     ),
                     ratings=Obj(
                         anime=[
-                            ValueObj(**a) for a in response["stats"]["ratings"]["anime"]
+                            ValueObj(**a)
+                            for a in response["stats"]["ratings"].get("anime", [])
                         ],
                         manga=[
-                            ValueObj(**a) for a in response["stats"]["ratings"]["manga"]
+                            ValueObj(**a)
+                            for a in response["stats"]["ratings"].get("manga", [])
                         ],
                     ),
                     activity=[ValueObj(**a) for a in response["stats"]["activity"]],
@@ -134,7 +171,19 @@ class UserEndpoint(BaseEndpoint):
             headers=self.headers,
         )
         if not isinstance(response, RequestError):
-            return UserInfoInc(**response, image=PhotoExtended(**response["image"]))
+            return UserInfoInc(
+                sex=response["sex"],
+                full_years=response["full_years"],
+                avatar=response["avatar"],
+                id=response["id"],
+                birth_on=response["birth_on"],
+                last_online_at=response["last_online_at"],
+                locale=response["locale"],
+                url=response["url"],
+                name=response["name"],
+                nickname=response["name"],
+                image=PhotoExtended(**response["image"]),
+            )
 
         logger.debug(
             f"Bad Request(info): status - {response.status_code}: info - {str(response)}"
@@ -149,7 +198,19 @@ class UserEndpoint(BaseEndpoint):
             headers=self.headers,
         )
         if not isinstance(response, RequestError):
-            return UserInfoInc(**response, image=PhotoExtended(**response["image"]))
+            return UserInfoInc(
+                sex=response["sex"],
+                full_years=response["full_years"],
+                avatar=response["avatar"],
+                id=response["id"],
+                birth_on=response["birth_on"],
+                last_online_at=response["last_online_at"],
+                locale=response["locale"],
+                url=response["url"],
+                name=response["name"],
+                nickname=response["name"],
+                image=PhotoExtended(**response["image"]),
+            )
 
         logger.debug(
             f"Bad Request(whoami): status - {response.status_code}: info - {str(response)}"
@@ -164,7 +225,19 @@ class UserEndpoint(BaseEndpoint):
             headers=self.headers,
         )
         if not isinstance(response, RequestError):
-            return UserInfoInc(**response, image=PhotoExtended(**response["image"]))
+            return UserInfoInc(
+                sex=response["sex"],
+                full_years=response["full_years"],
+                avatar=response["avatar"],
+                id=response["id"],
+                birth_on=response["birth_on"],
+                last_online_at=response["last_online_at"],
+                locale=response["locale"],
+                url=response["url"],
+                name=response["name"],
+                nickname=response["name"],
+                image=PhotoExtended(**response["image"]),
+            )
 
         logger.debug(
             f"Bad Request(whoami): status - {response.status_code}: info - {str(response)}"
@@ -180,7 +253,15 @@ class UserEndpoint(BaseEndpoint):
         )
         if not isinstance(response, RequestError):
             return [
-                User(**user, image=PhotoExtended(**user["image"])) for user in response
+                User(
+                    id=u["id"],
+                    nickname=u["nickname"],
+                    avatar=u["avatar"],
+                    last_online_at=u["last_online_at"],
+                    url=u["url"],
+                    image=PhotoExtended(**u["image"]),
+                )
+                for u in response
             ]
 
         logger.debug(
@@ -196,7 +277,17 @@ class UserEndpoint(BaseEndpoint):
             headers=self.headers,
         )
         if not isinstance(response, RequestError):
-            return [Club(**club, logo=Logo(**club["logo"])) for club in response]
+            return [
+                Club(
+                    logo=Logo(**club["logo"]),
+                    comment_policy=club["comment_policy"],
+                    id=club["id"],
+                    name=club["name"],
+                    is_censored=club["is_censored"],
+                    join_policy=club["join_policy"],
+                )
+                for club in response
+            ]
 
         logger.debug(
             f"Bad Request(clubs): status - {response.status_code}: info - {str(response)}"
@@ -222,9 +313,38 @@ class UserEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Rate(
-                    **a,
-                    user=User(**a["user"], image=PhotoExtended(**a["user"]["image"])),
-                    anime=Anime(**a["anime"], image=Photo(**a["anime"]["image"])),
+                    id=a["id"],
+                    chapters=a["chapters"],
+                    episodes=a["episodes"],
+                    manga=None,
+                    rewatches=a["rewatches"],
+                    status=a["status"],
+                    score=a["score"],
+                    text=a["text"],
+                    text_html=a["text_html"],
+                    volumes=a["volumes"],
+                    user=User(
+                        id=a["user"]["id"],
+                        nickname=a["user"]["nickname"],
+                        avatar=a["user"]["avatar"],
+                        last_online_at=a["user"]["last_online_at"],
+                        url=a["user"]["url"],
+                        image=PhotoExtended(**a["user"]["image"]),
+                    ),
+                    anime=Anime(
+                        id=a["anime"]["id"],
+                        name=a["anime"]["name"],
+                        russian=a["anime"]["russian"],
+                        image=Photo(**a["anime"]["image"]),
+                        url=a["anime"]["url"],
+                        kind=a["anime"]["kind"],
+                        score=a["anime"]["score"],
+                        status=a["anime"]["status"],
+                        episodes=a["anime"]["episodes"],
+                        episodes_aired=a["anime"]["episodes_aired"],
+                        aired_on=a["anime"]["aired_on"],
+                        released_on=a["anime"]["released_on"],
+                    ),
                 )
                 for a in response
             ]
@@ -252,9 +372,38 @@ class UserEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Rate(
-                    **a,
-                    user=User(**a["user"], image=PhotoExtended(**a["user"]["image"])),
-                    anime=Anime(**a["manga"], image=Photo(**a["manga"]["image"])),
+                    id=a["id"],
+                    chapters=a["chapters"],
+                    episodes=a["episodes"],
+                    rewatches=a["rewatches"],
+                    status=a["status"],
+                    score=a["score"],
+                    text=a["text"],
+                    anime=None,
+                    text_html=a["text_html"],
+                    volumes=a["volumes"],
+                    user=User(
+                        id=a["user"]["id"],
+                        nickname=a["user"]["nickname"],
+                        avatar=a["user"]["avatar"],
+                        last_online_at=a["user"]["last_online_at"],
+                        url=a["user"]["url"],
+                        image=PhotoExtended(**a["user"]["image"]),
+                    ),
+                    manga=Manga(
+                        id=a["manga"]["id"],
+                        name=a["manga"]["name"],
+                        russian=a["manga"]["russian"],
+                        image=Photo(**a["manga"]["image"]),
+                        url=a["manga"]["url"],
+                        kind=a["manga"]["kind"],
+                        score=a["manga"]["score"],
+                        status=a["manga"]["status"],
+                        volumes=a["manga"]["volumes"],
+                        chapters=a["manga"]["chapters"],
+                        aired_on=a["manga"]["aired_on"],
+                        released_on=a["manga"]["released_on"],
+                    ),
                 )
                 for a in response
             ]
@@ -273,7 +422,7 @@ class UserEndpoint(BaseEndpoint):
         )
         if not isinstance(response, RequestError):
             return Favourites(
-                animes=[FavouritesObj(**a) for a in response["anime"]],
+                animes=[FavouritesObj(**a) for a in response["animes"]],
                 characters=[FavouritesObj(**a) for a in response["characters"]],
                 producers=[FavouritesObj(**a) for a in response["producers"]],
                 mangakas=[FavouritesObj(**a) for a in response["mangakas"]],
@@ -309,12 +458,50 @@ class UserEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 MessageInfo(
-                    **r,
-                    to=User(**r["to"], image=PhotoExtended(**r["to"]["image"])),
-                    sender=User(**r["from"], image=PhotoExtended(**r["from"]["image"])),
-                    linked=Linked(**r["linked"], image=Photo(**r["linked"]["image"])),
+                    id=s["id"],
+                    kind=s["kind"],
+                    body=s["body"],
+                    html_body=s["html_body"],
+                    created_at=s["created_at"],
+                    linked_id=s["linked_id"],
+                    linked_type=s["linked_type"],
+                    read=s["read"],
+                    linked=(
+                        Linked(
+                            name=s["linked"]["name"],
+                            id=s["linked"]["id"],
+                            russian=s["linked"]["russian"],
+                            url=s["linked"]["url"],
+                            kind=s["linked"]["kind"],
+                            score=s["linked"]["score"],
+                            status=s["linked"]["status"],
+                            episodes=s["linked"]["episodes"],
+                            episodes_aired=s["linked"]["episodes_aired"],
+                            aired_on=s["linked"]["aired_on"],
+                            released_on=s["linked"]["released_on"],
+                            image=Photo(**s["linked"]["image"]),
+                        )
+                        if s["linked"]
+                        else None
+                    ),
+                    to=User(
+                        id=s["to"]["id"],
+                        avatar=s["to"]["avatar"],
+                        image=PhotoExtended(**s["to"]["image"]),
+                        last_online_at=s["to"]["last_online_at"],
+                        nickname=s["to"]["nickname"],
+                        url=s["to"]["url"],
+                    ),
+                    sender=User(
+                        id=s["from"]["id"],
+                        avatar=s["from"]["avatar"],
+                        image=PhotoExtended(**s["from"]["image"]),
+                        last_online_at=s["from"]["last_online_at"],
+                        nickname=s["from"]["nickname"],
+                        url=s["from"]["url"],
+                    ),
                 )
-                for r in response
+                for s in response
             ]
 
         logger.debug(
@@ -370,12 +557,28 @@ class UserEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 HistoryObj(
-                    **obj,
-                    target=TitleHistory(
-                        **obj["target"], image=Photo(**obj["target"]["image"])
-                    )
-                    if obj["target"]
-                    else None,
+                    id=obj["id"],
+                    description=obj["description"],
+                    target=(
+                        TitleHistory(
+                            id=obj["target"]["id"],
+                            name=obj["target"]["name"],
+                            russian=obj["target"]["russian"],
+                            image=Photo(**obj["target"]["image"]),
+                            url=obj["target"]["url"],
+                            kind=obj["target"]["kind"],
+                            score=obj["target"]["score"],
+                            status=obj["target"]["status"],
+                            episodes=obj["target"].get("episodes"),
+                            volumes=obj["target"].get("volumes"),
+                            chapters=obj["target"].get("chapters"),
+                            episodes_aired=obj["target"].get("episodes_aired"),
+                            aired_on=obj["target"]["aired_on"],
+                            released_on=obj["target"]["released_on"],
+                        )
+                        if obj["target"]
+                        else None
+                    ),
                 )
                 for obj in response
             ]
@@ -394,17 +597,31 @@ class UserEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Ban(
-                    **obj,
-                    comment=Comment(**obj["comment"]),
+                    id=b["id"],
+                    created_at=b["created_at"],
+                    duration_minutes=b["duration_minutes"],
+                    moderator_id=b["moderator_id"],
+                    reason=b["reason"],
+                    user_id=b["user_id"],
+                    comment=Comment(**b["comment"]),
                     user=User(
-                        **obj["user"], image=PhotoExtended(**obj["user"]["image"])
+                        id=b["user"]["id"],
+                        avatar=b["user"]["avatar"],
+                        image=PhotoExtended(**b["user"]["image"]),
+                        last_online_at=b["user"]["last_online_at"],
+                        nickname=b["user"]["nickname"],
+                        url=b["user"]["url"],
                     ),
                     moderator=User(
-                        **obj["moderator"],
-                        image=PhotoExtended(**obj["moderator"]["image"]),
+                        id=b["moderator"]["id"],
+                        avatar=b["moderator"]["avatar"],
+                        image=PhotoExtended(**b["moderator"]["image"]),
+                        last_online_at=b["moderator"]["last_online_at"],
+                        nickname=b["moderator"]["nickname"],
+                        url=b["moderator"]["url"],
                     ),
                 )
-                for obj in response
+                for b in response
             ]
 
         logger.debug(

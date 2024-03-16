@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from shikimori.types.photo import PhotoExtended
 from shikimori.types.animes import Anime
 from typing import Any
+
+from .manga import Manga
 from .user_rates import UserRateResponse
 from shikimori.types.base import BaseTitle
 
@@ -88,10 +90,19 @@ class UserInfo(User):
 
 
 @dataclass
-class Rate(UserRateResponse):
-    anime: Anime
-    manga: None
+class Rate:
+    anime: Anime | None
+    manga: Manga | None
     user: User
+    id: int
+    score: int
+    status: str
+    text: str
+    episodes: int
+    chapters: int
+    volumes: int
+    text_html: str
+    rewatches: int
 
 
 @dataclass
@@ -116,7 +127,7 @@ class Favourites:
 
 @dataclass
 class UnreadMessages:
-    message: int
+    messages: int
     news: int
     notifications: int
 
