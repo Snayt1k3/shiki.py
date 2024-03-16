@@ -4,7 +4,7 @@ from typing import List
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from shikimori.types.photo import Photo, PhotoExtended
-from shikimori.types.topics import Topic, Forum, Linked, Status
+from shikimori.types.topics import Topic, Forum, Linked, Status, ReviewLinked, Title
 from shikimori.types.user import User
 from ..utils.filter import filter_none_parameters
 
@@ -51,10 +51,47 @@ class TopicsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Topic(
-                    **t,
+                    id=t["id"],
+                    body=t["body"],
+                    linked_id=t["linked_id"],
+                    linked_type=t["linked_type"],
+                    created_at=t["created_at"],
+                    last_comment_viewed=t["last_comment_viewed"],
+                    html_body=t["html_body"],
+                    topic_title=t["topic_title"],
+                    html_footer=t["html_footer"],
+                    comments_count=t["comments_count"],
+                    viewed=t["viewed"],
+                    episode=t["episode"],
+                    event=t["event"],
+                    type=t["type"],
                     forum=Forum(**t["forum"]),
-                    user=User(**t["user"], image=PhotoExtended(**t["user"]["image"])),
-                    linked=Linked(**t["linked"], image=Photo(**t["linked"]["image"])),
+                    user=User(
+                        id=t["user"]["id"],
+                        nickname=t["user"]["nickname"],
+                        avatar=t["user"]["avatar"],
+                        last_online_at=t["user"]["last_online_at"],
+                        url=t["user"]["url"],
+                        image=PhotoExtended(**t["user"]["image"]),
+                    ),
+                    linked=(
+                        Linked(
+                            name=t["linked"]["name"],
+                            id=t["linked"]["id"],
+                            russian=t["linked"]["russian"],
+                            url=t["linked"]["url"],
+                            kind=t["linked"]["kind"],
+                            score=t["linked"]["score"],
+                            status=t["linked"]["status"],
+                            episodes=t["linked"]["episodes"],
+                            episodes_aired=t["linked"]["episodes_aired"],
+                            aired_on=t["linked"]["aired_on"],
+                            released_on=t["linked"]["released_on"],
+                            image=Photo(**t["linked"]["image"]),
+                        )
+                        if t["linked"]
+                        else None
+                    ),
                 )
                 for t in response
             ]
@@ -87,8 +124,29 @@ class TopicsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Status(
-                    **t,
-                    linked=Linked(**t["linked"], image=Photo(**t["linked"]["image"])),
+                    id=t["id"],
+                    event=t["event"],
+                    episode=t["episode"],
+                    created_at=t["created_at"],
+                    url=t["id"],
+                    linked=(
+                        Linked(
+                            name=t["linked"]["name"],
+                            id=t["linked"]["id"],
+                            russian=t["linked"]["russian"],
+                            url=t["linked"]["url"],
+                            kind=t["linked"]["kind"],
+                            score=t["linked"]["score"],
+                            status=t["linked"]["status"],
+                            episodes=t["linked"]["episodes"],
+                            episodes_aired=t["linked"]["episodes_aired"],
+                            aired_on=t["linked"]["aired_on"],
+                            released_on=t["linked"]["released_on"],
+                            image=Photo(**t["linked"]["image"]),
+                        )
+                        if t["linked"]
+                        else None
+                    ),
                 )
                 for t in response
             ]
@@ -116,10 +174,47 @@ class TopicsEndpoint(BaseEndpoint):
         if not isinstance(response, RequestError):
             return [
                 Topic(
-                    **t,
+                    id=t["id"],
+                    body=t["body"],
+                    linked_id=t["linked_id"],
+                    linked_type=t["linked_type"],
+                    created_at=t["created_at"],
+                    last_comment_viewed=t["last_comment_viewed"],
+                    html_body=t["html_body"],
+                    topic_title=t["topic_title"],
+                    html_footer=t["html_footer"],
+                    comments_count=t["comments_count"],
+                    viewed=t["viewed"],
+                    episode=t["episode"],
+                    event=t["event"],
+                    type=t["type"],
                     forum=Forum(**t["forum"]),
-                    user=User(**t["user"], image=PhotoExtended(**t["user"]["image"])),
-                    linked=Linked(**t["linked"], image=Photo(**t["linked"]["image"])),
+                    user=User(
+                        id=t["user"]["id"],
+                        nickname=t["user"]["nickname"],
+                        avatar=t["user"]["avatar"],
+                        last_online_at=t["user"]["last_online_at"],
+                        url=t["user"]["url"],
+                        image=PhotoExtended(**t["user"]["image"]),
+                    ),
+                    linked=(
+                        Linked(
+                            name=t["linked"]["name"],
+                            id=t["linked"]["id"],
+                            russian=t["linked"]["russian"],
+                            url=t["linked"]["url"],
+                            kind=t["linked"]["kind"],
+                            score=t["linked"]["score"],
+                            status=t["linked"]["status"],
+                            episodes=t["linked"]["episodes"],
+                            episodes_aired=t["linked"]["episodes_aired"],
+                            aired_on=t["linked"]["aired_on"],
+                            released_on=t["linked"]["released_on"],
+                            image=Photo(**t["linked"]["image"])
+                        )
+                        if t["linked"]
+                        else None
+                    )
                 )
                 for t in response
             ]
@@ -138,14 +233,68 @@ class TopicsEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return Topic(
-                **response,
+                id=response["id"],
+                body=response["body"],
+                linked_id=response["linked_id"],
+                linked_type=response["linked_type"],
+                created_at=response["created_at"],
+                last_comment_viewed=response["last_comment_viewed"],
+                html_body=response["html_body"],
+                topic_title=response["topic_title"],
+                html_footer=response["html_footer"],
+                comments_count=response["comments_count"],
+                viewed=response["viewed"],
+                episode=response["episode"],
+                event=response["event"],
+                type=response["type"],
                 forum=Forum(**response["forum"]),
                 user=User(
-                    **response["user"], image=PhotoExtended(**response["user"]["image"])
+                    id=response["user"]["id"],
+                    nickname=response["user"]["nickname"],
+                    avatar=response["user"]["avatar"],
+                    last_online_at=response["user"]["last_online_at"],
+                    url=response["user"]["url"],
+                    image=PhotoExtended(**response["user"]["image"]),
                 ),
-                linked=Linked(
-                    **response["linked"], image=Photo(**response["linked"]["image"])
-                ),
+                linked=(
+                        ReviewLinked(
+                            id=response["linked"]["id"],
+                            animation=response["linked"]["animation"],
+                            body=response["linked"]["body"],
+                            created_at=response["linked"]["created_at"],
+                            characters=response["linked"]["characters"],
+                            overall=response["linked"]["overall"],
+                            html_body=response["linked"]["html_body"],
+                            music=response["linked"]["music"],
+                            storyline=response["linked"]["storyline"],
+                            votes_for=response["linked"]["votes_for"],
+                            votes_count=response["linked"]["votes_count"],
+                            target=Title(
+                                id=response["linked"]["target"]["id"],
+                                name=response["linked"]["target"]["name"],
+                                russian=response["linked"]["target"]["russian"],
+                                aired_on=response["linked"]["target"]["aired_on"],
+                                image=Photo(
+                                    **response["linked"]["target"]["image"]
+                                ),
+                                kind=response["linked"]["target"]["kind"],
+                                released_on=response["linked"]["target"]["released_on"],
+                                status=response["linked"]["target"]["status"],
+                                score=response["linked"]["target"]["score"],
+                                url=response["linked"]["target"]["url"],
+                            ),
+                            user=User(
+                                id=response["linked"]["user"]["id"],
+                                nickname=response["linked"]["user"]["nickname"],
+                                avatar=response["linked"]["user"]["avatar"],
+                                last_online_at=response["linked"]["user"]["last_online_at"],
+                                url=response["linked"]["user"]["url"],
+                                image=PhotoExtended(**response["linked"]["user"]["image"]),
+                            ),
+                        )
+                        if response["linked"]
+                        else None
+                    )
             )
 
         logger.debug(
@@ -194,14 +343,68 @@ class TopicsEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return Topic(
-                **response,
+                id=response["id"],
+                body=response["body"],
+                linked_id=response["linked_id"],
+                linked_type=response["linked_type"],
+                created_at=response["created_at"],
+                last_comment_viewed=response["last_comment_viewed"],
+                html_body=response["html_body"],
+                topic_title=response["topic_title"],
+                html_footer=response["html_footer"],
+                comments_count=response["comments_count"],
+                viewed=response["viewed"],
+                episode=response["episode"],
+                event=response["event"],
+                type=response["type"],
                 forum=Forum(**response["forum"]),
                 user=User(
-                    **response["user"], image=PhotoExtended(**response["user"]["image"])
+                    id=response["user"]["id"],
+                    nickname=response["user"]["nickname"],
+                    avatar=response["user"]["avatar"],
+                    last_online_at=response["user"]["last_online_at"],
+                    url=response["user"]["url"],
+                    image=PhotoExtended(**response["user"]["image"]),
                 ),
-                linked=Linked(
-                    **response["linked"], image=Photo(**response["linked"]["image"])
-                ),
+                linked=(
+                        ReviewLinked(
+                            id=response["linked"]["id"],
+                            animation=response["linked"]["animation"],
+                            body=response["linked"]["body"],
+                            created_at=response["linked"]["created_at"],
+                            characters=response["linked"]["characters"],
+                            overall=response["linked"]["overall"],
+                            html_body=response["linked"]["html_body"],
+                            music=response["linked"]["music"],
+                            storyline=response["linked"]["storyline"],
+                            votes_for=response["linked"]["votes_for"],
+                            votes_count=response["linked"]["votes_count"],
+                            target=Title(
+                                id=response["linked"]["target"]["id"],
+                                name=response["linked"]["target"]["name"],
+                                russian=response["linked"]["target"]["russian"],
+                                aired_on=response["linked"]["target"]["aired_on"],
+                                image=Photo(
+                                    **response["linked"]["target"]["image"]
+                                ),
+                                kind=response["linked"]["target"]["kind"],
+                                released_on=response["linked"]["target"]["released_on"],
+                                status=response["linked"]["target"]["status"],
+                                score=response["linked"]["target"]["score"],
+                                url=response["linked"]["target"]["url"],
+                            ),
+                            user=User(
+                                id=response["linked"]["user"]["id"],
+                                nickname=response["linked"]["user"]["nickname"],
+                                avatar=response["linked"]["user"]["avatar"],
+                                last_online_at=response["linked"]["user"]["last_online_at"],
+                                url=response["linked"]["user"]["url"],
+                                image=PhotoExtended(**response["linked"]["user"]["image"]),
+                            ),
+                        )
+                        if response["linked"]
+                        else None
+                    )
             )
 
         logger.debug(
@@ -241,15 +444,70 @@ class TopicsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
+
             return Topic(
-                **response,
+                id=response["id"],
+                body=response["body"],
+                linked_id=response["linked_id"],
+                linked_type=response["linked_type"],
+                created_at=response["created_at"],
+                last_comment_viewed=response["last_comment_viewed"],
+                html_body=response["html_body"],
+                topic_title=response["topic_title"],
+                html_footer=response["html_footer"],
+                comments_count=response["comments_count"],
+                viewed=response["viewed"],
+                episode=response["episode"],
+                event=response["event"],
+                type=response["type"],
                 forum=Forum(**response["forum"]),
                 user=User(
-                    **response["user"], image=PhotoExtended(**response["user"]["image"])
+                    id=response["user"]["id"],
+                    nickname=response["user"]["nickname"],
+                    avatar=response["user"]["avatar"],
+                    last_online_at=response["user"]["last_online_at"],
+                    url=response["user"]["url"],
+                    image=PhotoExtended(**response["user"]["image"]),
                 ),
-                linked=Linked(
-                    **response["linked"], image=Photo(**response["linked"]["image"])
-                ),
+                linked=(
+                        ReviewLinked(
+                            id=response["linked"]["id"],
+                            animation=response["linked"]["animation"],
+                            body=response["linked"]["body"],
+                            created_at=response["linked"]["created_at"],
+                            characters=response["linked"]["characters"],
+                            overall=response["linked"]["overall"],
+                            html_body=response["linked"]["html_body"],
+                            music=response["linked"]["music"],
+                            storyline=response["linked"]["storyline"],
+                            votes_for=response["linked"]["votes_for"],
+                            votes_count=response["linked"]["votes_count"],
+                            target=Title(
+                                id=response["linked"]["target"]["id"],
+                                name=response["linked"]["target"]["name"],
+                                russian=response["linked"]["target"]["russian"],
+                                aired_on=response["linked"]["target"]["aired_on"],
+                                image=Photo(
+                                    **response["linked"]["target"]["image"]
+                                ),
+                                kind=response["linked"]["target"]["kind"],
+                                released_on=response["linked"]["target"]["released_on"],
+                                status=response["linked"]["target"]["status"],
+                                score=response["linked"]["target"]["score"],
+                                url=response["linked"]["target"]["url"],
+                            ),
+                            user=User(
+                                id=response["linked"]["user"]["id"],
+                                nickname=response["linked"]["user"]["nickname"],
+                                avatar=response["linked"]["user"]["avatar"],
+                                last_online_at=response["linked"]["user"]["last_online_at"],
+                                url=response["linked"]["user"]["url"],
+                                image=PhotoExtended(**response["linked"]["user"]["image"]),
+                            ),
+                        )
+                        if response["linked"]
+                        else None
+                    )
             )
 
         logger.debug(

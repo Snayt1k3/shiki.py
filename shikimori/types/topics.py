@@ -1,6 +1,15 @@
 from shikimori.types.user import User
 from shikimori.types.photo import Photo
 from dataclasses import dataclass
+from shikimori.types.base import BaseTitle
+
+
+@dataclass
+class Title(BaseTitle):
+    episodes: int = None
+    episodes_aired: int = None
+    volumes: int = None
+    chapters: int = None
 
 
 @dataclass
@@ -59,3 +68,20 @@ class Status:
     episode: int
     created_at: str
     url: str
+
+
+@dataclass
+class ReviewLinked:
+    id: int
+    user: User
+    target: Title
+    votes_count: int
+    votes_for: int
+    body: str
+    html_body: str
+    overall: int
+    storyline: int
+    music: int
+    characters: int
+    animation: int
+    created_at: str
