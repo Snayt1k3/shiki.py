@@ -98,5 +98,5 @@ async def test_delete_success(topic_client):
 @pytest.mark.asyncio
 async def test_delete_error(topic_client):
     topic_client._request = FakeRequest(RequestError("Test Message", 404))
-    response = await topic_client.delete(123, 1, 1, 1)
+    response = await topic_client.delete(123)
     assert isinstance(response, RequestError)

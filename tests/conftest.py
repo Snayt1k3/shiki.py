@@ -36,3 +36,4 @@ from tests.fixtures.unit.endpoints.stats import *
 from tests.fixtures.unit.endpoints.studios import *
 from tests.fixtures.unit.endpoints.topic import *
 from tests.fixtures.unit.endpoints.users import *
+from tests.fixtures.unit.endpoints.videos import *
