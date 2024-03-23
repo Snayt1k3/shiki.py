@@ -120,7 +120,7 @@ class RanobeEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> RanobeInfo | RequestError:
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}api/ranobe/{id}",
+            url=f"{self._base_url}/api/ranobe/{id}",
             headers=self.headers,
         )
 

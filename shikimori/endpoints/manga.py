@@ -130,7 +130,7 @@ class MangaEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> MangaInfo | RequestError:
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}api/mangas/{id}",
+            url=f"{self._base_url}/api/mangas/{id}",
             headers=self.headers,
         )
 

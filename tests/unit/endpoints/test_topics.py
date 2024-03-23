@@ -49,14 +49,14 @@ async def test_hot_error(topic_client):
 @pytest.mark.asyncio
 async def test_byid_success(topic_client, topics_byid_json, topics_byid_resp):
     topic_client._request = FakeRequest(topics_byid_json)
-    response = await topic_client.byId(123)
+    response = await topic_client.ById(123)
     assert response == topics_byid_resp
 
 
 @pytest.mark.asyncio
 async def test_byid_error(topic_client):
     topic_client._request = FakeRequest(RequestError("Test Message", 404))
-    response = await topic_client.byId(123)
+    response = await topic_client.ById(123)
     assert isinstance(response, RequestError)
 
 

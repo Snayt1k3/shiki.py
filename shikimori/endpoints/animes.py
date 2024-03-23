@@ -121,7 +121,7 @@ class AnimeEndpoint(BaseEndpoint):
 
         return response
 
-    async def byId(self, id: int) -> AnimeInfo | RequestError:
+    async def ById(self, id: int) -> AnimeInfo | RequestError:
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}",

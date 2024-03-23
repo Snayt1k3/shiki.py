@@ -19,13 +19,13 @@ async def test_list_error(anime_client):
 @pytest.mark.asyncio
 async def test_by_id_success(anime_client, animes_byId_json, animes_byId_resp):
     anime_client._request = FakeRequest(animes_byId_json)
-    response = await anime_client.byId(123)
+    response = await anime_client.ById(123)
     assert response == animes_byId_resp
 
 @pytest.mark.asyncio
 async def test_by_id_error(anime_client):
     anime_client._request = FakeRequest(RequestError("Test Message", 404))
-    response = await anime_client.byId(123)
+    response = await anime_client.ById(123)
     assert isinstance(response, RequestError)
 
 @pytest.mark.asyncio

@@ -224,7 +224,7 @@ class TopicsEndpoint(BaseEndpoint):
         )
         return response
 
-    async def byId(self, id: int) -> Topic | RequestError:
+    async def ById(self, id: int) -> Topic | RequestError:
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/topics/{id}",
