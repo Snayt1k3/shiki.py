@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
-from shikimori import RequestError
+from .exceptions import RequestError
+from typing import Any
 
+__all__ = ["BaseRequest", "BaseLimiter"]
 
 class BaseRequest(ABC):
     """
@@ -8,7 +10,7 @@ class BaseRequest(ABC):
     """
 
     @abstractmethod
-    async def make_request(self, method: str, headers: dict = None, **kwargs) -> RequestError | any:
+    async def make_request(self, method: str, headers: dict = None, **kwargs) -> RequestError | Any:
         """
         :param method: one of [get, post, patch, delete]
         :param headers: headers of request
@@ -22,7 +24,7 @@ class BaseLimiter(ABC):
     """
 
     @abstractmethod
-    async def make_request(self, method: str, **kwargs) -> RequestError | any:
+    async def make_request(self, method: str, **kwargs) -> RequestError | Any:
         """
         :param method: one of [get, post, patch, delete]
         :param kwargs: other parameters

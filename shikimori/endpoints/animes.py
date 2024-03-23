@@ -69,7 +69,7 @@ class AnimeEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes",
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {
                     "page": page,
                     "limit": limit,

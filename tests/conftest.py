@@ -37,3 +37,4 @@ from tests.fixtures.unit.endpoints.studios import *
 from tests.fixtures.unit.endpoints.topic import *
 from tests.fixtures.unit.endpoints.users import *
 from tests.fixtures.unit.endpoints.videos import *
+from tests.fixtures.integration.client import *
