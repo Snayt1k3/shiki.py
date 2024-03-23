@@ -77,6 +77,7 @@ async def test_markRead_error(message_client):
     response = await message_client.markRead(12, True)
     assert isinstance(response, RequestError)
 
+
 @pytest.mark.asyncio
 async def test_readAll_success(message_client):
     message_client._request = FakeRequest({})
@@ -89,6 +90,7 @@ async def test_readAll_error(message_client):
     message_client._request = FakeRequest(RequestError("Test Message", 404))
     response = await message_client.readAll(12)
     assert isinstance(response, RequestError)
+
 
 @pytest.mark.asyncio
 async def test_deleteAll_success(message_client):

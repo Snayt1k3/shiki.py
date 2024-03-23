@@ -219,12 +219,12 @@ def character_search_json():
 @pytest.fixture
 def character_search_resp(character_search_json):
     return [
-                MiniCharacter(
-                    image=Photo(**s["image"]),
-                    id=s["id"],
-                    name=s["name"],
-                    russian=s["russian"],
-                    url=s["url"],
-                )
-                for s in character_search_json
-            ]
+        MiniCharacter(
+            image=Photo(**s["image"]),
+            id=s["id"],
+            name=s["name"],
+            russian=s["russian"],
+            url=s["url"],
+        )
+        for s in character_search_json
+    ]

@@ -10,6 +10,7 @@ async def test_read_success(appears_client):
     response = await appears_client.read(123)
     assert response is None
 
+
 @pytest.mark.asyncio
 async def test_read_error(appears_client):
     appears_client._request = FakeRequest(RequestError("Test Message", 404))

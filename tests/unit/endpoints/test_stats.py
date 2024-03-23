@@ -5,7 +5,9 @@ from shikimori.exceptions import RequestError
 
 
 @pytest.mark.asyncio
-async def test_list_success(stats_client,):
+async def test_list_success(
+    stats_client,
+):
     stats_client._request = FakeRequest([123, 123])
     response = await stats_client.list()
     assert response == [123, 123]

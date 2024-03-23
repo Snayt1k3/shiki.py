@@ -210,11 +210,11 @@ class TopicsEndpoint(BaseEndpoint):
                             episodes_aired=t["linked"]["episodes_aired"],
                             aired_on=t["linked"]["aired_on"],
                             released_on=t["linked"]["released_on"],
-                            image=Photo(**t["linked"]["image"])
+                            image=Photo(**t["linked"]["image"]),
                         )
                         if t["linked"]
                         else None
-                    )
+                    ),
                 )
                 for t in response
             ]
@@ -257,44 +257,42 @@ class TopicsEndpoint(BaseEndpoint):
                     image=PhotoExtended(**response["user"]["image"]),
                 ),
                 linked=(
-                        ReviewLinked(
-                            id=response["linked"]["id"],
-                            animation=response["linked"]["animation"],
-                            body=response["linked"]["body"],
-                            created_at=response["linked"]["created_at"],
-                            characters=response["linked"]["characters"],
-                            overall=response["linked"]["overall"],
-                            html_body=response["linked"]["html_body"],
-                            music=response["linked"]["music"],
-                            storyline=response["linked"]["storyline"],
-                            votes_for=response["linked"]["votes_for"],
-                            votes_count=response["linked"]["votes_count"],
-                            target=Title(
-                                id=response["linked"]["target"]["id"],
-                                name=response["linked"]["target"]["name"],
-                                russian=response["linked"]["target"]["russian"],
-                                aired_on=response["linked"]["target"]["aired_on"],
-                                image=Photo(
-                                    **response["linked"]["target"]["image"]
-                                ),
-                                kind=response["linked"]["target"]["kind"],
-                                released_on=response["linked"]["target"]["released_on"],
-                                status=response["linked"]["target"]["status"],
-                                score=response["linked"]["target"]["score"],
-                                url=response["linked"]["target"]["url"],
-                            ),
-                            user=User(
-                                id=response["linked"]["user"]["id"],
-                                nickname=response["linked"]["user"]["nickname"],
-                                avatar=response["linked"]["user"]["avatar"],
-                                last_online_at=response["linked"]["user"]["last_online_at"],
-                                url=response["linked"]["user"]["url"],
-                                image=PhotoExtended(**response["linked"]["user"]["image"]),
-                            ),
-                        )
-                        if response["linked"]
-                        else None
+                    ReviewLinked(
+                        id=response["linked"]["id"],
+                        animation=response["linked"]["animation"],
+                        body=response["linked"]["body"],
+                        created_at=response["linked"]["created_at"],
+                        characters=response["linked"]["characters"],
+                        overall=response["linked"]["overall"],
+                        html_body=response["linked"]["html_body"],
+                        music=response["linked"]["music"],
+                        storyline=response["linked"]["storyline"],
+                        votes_for=response["linked"]["votes_for"],
+                        votes_count=response["linked"]["votes_count"],
+                        target=Title(
+                            id=response["linked"]["target"]["id"],
+                            name=response["linked"]["target"]["name"],
+                            russian=response["linked"]["target"]["russian"],
+                            aired_on=response["linked"]["target"]["aired_on"],
+                            image=Photo(**response["linked"]["target"]["image"]),
+                            kind=response["linked"]["target"]["kind"],
+                            released_on=response["linked"]["target"]["released_on"],
+                            status=response["linked"]["target"]["status"],
+                            score=response["linked"]["target"]["score"],
+                            url=response["linked"]["target"]["url"],
+                        ),
+                        user=User(
+                            id=response["linked"]["user"]["id"],
+                            nickname=response["linked"]["user"]["nickname"],
+                            avatar=response["linked"]["user"]["avatar"],
+                            last_online_at=response["linked"]["user"]["last_online_at"],
+                            url=response["linked"]["user"]["url"],
+                            image=PhotoExtended(**response["linked"]["user"]["image"]),
+                        ),
                     )
+                    if response["linked"]
+                    else None
+                ),
             )
 
         logger.debug(
@@ -367,44 +365,42 @@ class TopicsEndpoint(BaseEndpoint):
                     image=PhotoExtended(**response["user"]["image"]),
                 ),
                 linked=(
-                        ReviewLinked(
-                            id=response["linked"]["id"],
-                            animation=response["linked"]["animation"],
-                            body=response["linked"]["body"],
-                            created_at=response["linked"]["created_at"],
-                            characters=response["linked"]["characters"],
-                            overall=response["linked"]["overall"],
-                            html_body=response["linked"]["html_body"],
-                            music=response["linked"]["music"],
-                            storyline=response["linked"]["storyline"],
-                            votes_for=response["linked"]["votes_for"],
-                            votes_count=response["linked"]["votes_count"],
-                            target=Title(
-                                id=response["linked"]["target"]["id"],
-                                name=response["linked"]["target"]["name"],
-                                russian=response["linked"]["target"]["russian"],
-                                aired_on=response["linked"]["target"]["aired_on"],
-                                image=Photo(
-                                    **response["linked"]["target"]["image"]
-                                ),
-                                kind=response["linked"]["target"]["kind"],
-                                released_on=response["linked"]["target"]["released_on"],
-                                status=response["linked"]["target"]["status"],
-                                score=response["linked"]["target"]["score"],
-                                url=response["linked"]["target"]["url"],
-                            ),
-                            user=User(
-                                id=response["linked"]["user"]["id"],
-                                nickname=response["linked"]["user"]["nickname"],
-                                avatar=response["linked"]["user"]["avatar"],
-                                last_online_at=response["linked"]["user"]["last_online_at"],
-                                url=response["linked"]["user"]["url"],
-                                image=PhotoExtended(**response["linked"]["user"]["image"]),
-                            ),
-                        )
-                        if response["linked"]
-                        else None
+                    ReviewLinked(
+                        id=response["linked"]["id"],
+                        animation=response["linked"]["animation"],
+                        body=response["linked"]["body"],
+                        created_at=response["linked"]["created_at"],
+                        characters=response["linked"]["characters"],
+                        overall=response["linked"]["overall"],
+                        html_body=response["linked"]["html_body"],
+                        music=response["linked"]["music"],
+                        storyline=response["linked"]["storyline"],
+                        votes_for=response["linked"]["votes_for"],
+                        votes_count=response["linked"]["votes_count"],
+                        target=Title(
+                            id=response["linked"]["target"]["id"],
+                            name=response["linked"]["target"]["name"],
+                            russian=response["linked"]["target"]["russian"],
+                            aired_on=response["linked"]["target"]["aired_on"],
+                            image=Photo(**response["linked"]["target"]["image"]),
+                            kind=response["linked"]["target"]["kind"],
+                            released_on=response["linked"]["target"]["released_on"],
+                            status=response["linked"]["target"]["status"],
+                            score=response["linked"]["target"]["score"],
+                            url=response["linked"]["target"]["url"],
+                        ),
+                        user=User(
+                            id=response["linked"]["user"]["id"],
+                            nickname=response["linked"]["user"]["nickname"],
+                            avatar=response["linked"]["user"]["avatar"],
+                            last_online_at=response["linked"]["user"]["last_online_at"],
+                            url=response["linked"]["user"]["url"],
+                            image=PhotoExtended(**response["linked"]["user"]["image"]),
+                        ),
                     )
+                    if response["linked"]
+                    else None
+                ),
             )
 
         logger.debug(
@@ -470,44 +466,42 @@ class TopicsEndpoint(BaseEndpoint):
                     image=PhotoExtended(**response["user"]["image"]),
                 ),
                 linked=(
-                        ReviewLinked(
-                            id=response["linked"]["id"],
-                            animation=response["linked"]["animation"],
-                            body=response["linked"]["body"],
-                            created_at=response["linked"]["created_at"],
-                            characters=response["linked"]["characters"],
-                            overall=response["linked"]["overall"],
-                            html_body=response["linked"]["html_body"],
-                            music=response["linked"]["music"],
-                            storyline=response["linked"]["storyline"],
-                            votes_for=response["linked"]["votes_for"],
-                            votes_count=response["linked"]["votes_count"],
-                            target=Title(
-                                id=response["linked"]["target"]["id"],
-                                name=response["linked"]["target"]["name"],
-                                russian=response["linked"]["target"]["russian"],
-                                aired_on=response["linked"]["target"]["aired_on"],
-                                image=Photo(
-                                    **response["linked"]["target"]["image"]
-                                ),
-                                kind=response["linked"]["target"]["kind"],
-                                released_on=response["linked"]["target"]["released_on"],
-                                status=response["linked"]["target"]["status"],
-                                score=response["linked"]["target"]["score"],
-                                url=response["linked"]["target"]["url"],
-                            ),
-                            user=User(
-                                id=response["linked"]["user"]["id"],
-                                nickname=response["linked"]["user"]["nickname"],
-                                avatar=response["linked"]["user"]["avatar"],
-                                last_online_at=response["linked"]["user"]["last_online_at"],
-                                url=response["linked"]["user"]["url"],
-                                image=PhotoExtended(**response["linked"]["user"]["image"]),
-                            ),
-                        )
-                        if response["linked"]
-                        else None
+                    ReviewLinked(
+                        id=response["linked"]["id"],
+                        animation=response["linked"]["animation"],
+                        body=response["linked"]["body"],
+                        created_at=response["linked"]["created_at"],
+                        characters=response["linked"]["characters"],
+                        overall=response["linked"]["overall"],
+                        html_body=response["linked"]["html_body"],
+                        music=response["linked"]["music"],
+                        storyline=response["linked"]["storyline"],
+                        votes_for=response["linked"]["votes_for"],
+                        votes_count=response["linked"]["votes_count"],
+                        target=Title(
+                            id=response["linked"]["target"]["id"],
+                            name=response["linked"]["target"]["name"],
+                            russian=response["linked"]["target"]["russian"],
+                            aired_on=response["linked"]["target"]["aired_on"],
+                            image=Photo(**response["linked"]["target"]["image"]),
+                            kind=response["linked"]["target"]["kind"],
+                            released_on=response["linked"]["target"]["released_on"],
+                            status=response["linked"]["target"]["status"],
+                            score=response["linked"]["target"]["score"],
+                            url=response["linked"]["target"]["url"],
+                        ),
+                        user=User(
+                            id=response["linked"]["user"]["id"],
+                            nickname=response["linked"]["user"]["nickname"],
+                            avatar=response["linked"]["user"]["avatar"],
+                            last_online_at=response["linked"]["user"]["last_online_at"],
+                            url=response["linked"]["user"]["url"],
+                            image=PhotoExtended(**response["linked"]["user"]["image"]),
+                        ),
                     )
+                    if response["linked"]
+                    else None
+                ),
             )
 
         logger.debug(

@@ -3,6 +3,7 @@ import pytest
 from shikimori.endpoints.achievements import AchievementsEndpoint
 from shikimori.types.achievements import Achievement
 
+
 @pytest.fixture
 def achievements_client():
     return AchievementsEndpoint("", "", "")
@@ -30,6 +31,7 @@ def achievements_list_json():
             "updated_at": "2023-04-07T19:21:46.136+03:00",
         },
     ]
+
 
 @pytest.fixture
 def achievements_list_expected(achievements_list_json):

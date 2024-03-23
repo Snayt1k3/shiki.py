@@ -10,6 +10,7 @@ async def test_list_success(calendar_client, calendar_list_json, calendar_list_r
     response = await calendar_client.list(123)
     assert response == calendar_list_resp
 
+
 @pytest.mark.asyncio
 async def test_list_error(calendar_client):
     calendar_client._request = FakeRequest(RequestError("Test Message", 404))

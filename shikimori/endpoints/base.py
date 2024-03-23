@@ -2,6 +2,7 @@ from abc import ABC
 
 from shikimori.base import BaseLimiter
 
+
 class BaseEndpoint(ABC):
     def __init__(self, base_url: str, request: BaseLimiter, user_agent: str):
         self._base_url = base_url

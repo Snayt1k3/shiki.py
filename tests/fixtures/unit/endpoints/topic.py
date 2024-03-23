@@ -618,6 +618,7 @@ def topics_create_resp(topics_byid_json):
         ),
     )
 
+
 @pytest.fixture
 def topics_update_json():
     return {

@@ -523,29 +523,30 @@ def people_byid_resp(people_byid_json):
 @pytest.fixture
 def people_search_json():
     return [
-  {
-    "id": 5,
-    "name": "asdf",
-    "russian": "человек_5",
-    "image": {
-      "original": "/assets/globals/missing_original.jpg",
-      "preview": "/assets/globals/missing_preview.jpg",
-      "x96": "/assets/globals/missing_x96.jpg",
-      "x48": "/assets/globals/missing_x48.jpg"
-    },
-    "url": "/people/5-asdf"
-  }
-]
+        {
+            "id": 5,
+            "name": "asdf",
+            "russian": "человек_5",
+            "image": {
+                "original": "/assets/globals/missing_original.jpg",
+                "preview": "/assets/globals/missing_preview.jpg",
+                "x96": "/assets/globals/missing_x96.jpg",
+                "x48": "/assets/globals/missing_x48.jpg",
+            },
+            "url": "/people/5-asdf",
+        }
+    ]
+
 
 @pytest.fixture
 def people_search_resp(people_search_json):
     return [
-                BaseCharacter(
-                    id=ch["id"],
-                    russian=ch["russian"],
-                    url=ch["url"],
-                    name=ch["name"],
-                    image=Photo(**ch["image"]),
-                )
-                for ch in people_search_json
-            ]
+        BaseCharacter(
+            id=ch["id"],
+            russian=ch["russian"],
+            url=ch["url"],
+            name=ch["name"],
+            image=Photo(**ch["image"]),
+        )
+        for ch in people_search_json
+    ]

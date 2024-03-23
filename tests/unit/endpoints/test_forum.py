@@ -10,6 +10,7 @@ async def test_list_success(forum_client, forum_list_json, forum_list_resp):
     response = await forum_client.list()
     assert response == forum_list_resp
 
+
 @pytest.mark.asyncio
 async def test_list_error(forum_client):
     forum_client._request = FakeRequest(RequestError("Test Message", 404))

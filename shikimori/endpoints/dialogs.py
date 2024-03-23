@@ -41,22 +41,24 @@ class DialogsEndpoint(BaseEndpoint):
                         kind=s["message"]["kind"],
                         linked_id=s["message"]["linked_id"],
                         linked_type=s["message"]["linked_type"],
-                        linked=Linked(
-                            name=s["message"]["linked"]["name"],
-                            id=s["message"]["linked"]["id"],
-                            russian=s["message"]["linked"]["russian"],
-                            url=s["message"]["linked"]["url"],
-                            kind=s["message"]["linked"]["kind"],
-                            score=s["message"]["linked"]["score"],
-                            status=s["message"]["linked"]["status"],
-                            episodes=s["message"]["linked"]["episodes"],
-                            episodes_aired=s["message"]["linked"]["episodes_aired"],
-                            aired_on=s["message"]["linked"]["aired_on"],
-                            released_on=s["message"]["linked"]["released_on"],
-                            image=Photo(**s["message"]["linked"]["image"]),
-                        )
-                        if s["message"]["linked"]
-                        else None,
+                        linked=(
+                            Linked(
+                                name=s["message"]["linked"]["name"],
+                                id=s["message"]["linked"]["id"],
+                                russian=s["message"]["linked"]["russian"],
+                                url=s["message"]["linked"]["url"],
+                                kind=s["message"]["linked"]["kind"],
+                                score=s["message"]["linked"]["score"],
+                                status=s["message"]["linked"]["status"],
+                                episodes=s["message"]["linked"]["episodes"],
+                                episodes_aired=s["message"]["linked"]["episodes_aired"],
+                                aired_on=s["message"]["linked"]["aired_on"],
+                                released_on=s["message"]["linked"]["released_on"],
+                                image=Photo(**s["message"]["linked"]["image"]),
+                            )
+                            if s["message"]["linked"]
+                            else None
+                        ),
                     ),
                 )
                 for s in response
@@ -90,7 +92,8 @@ class DialogsEndpoint(BaseEndpoint):
                     linked_id=s["linked_id"],
                     linked_type=s["linked_type"],
                     read=s["read"],
-                    linked=Linked(
+                    linked=(
+                        Linked(
                             name=s["linked"]["name"],
                             id=s["linked"]["id"],
                             russian=s["linked"]["russian"],
@@ -103,7 +106,10 @@ class DialogsEndpoint(BaseEndpoint):
                             aired_on=s["linked"]["aired_on"],
                             released_on=s["linked"]["released_on"],
                             image=Photo(**s["linked"]["image"]),
-                        ) if s["linked"] else None,
+                        )
+                        if s["linked"]
+                        else None
+                    ),
                     to=User(
                         id=s["to"]["id"],
                         avatar=s["to"]["avatar"],

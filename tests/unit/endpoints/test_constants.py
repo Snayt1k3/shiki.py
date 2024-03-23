@@ -17,6 +17,7 @@ async def test_animes_error(const_client):
     response = await const_client.animes()
     assert isinstance(response, RequestError)
 
+
 @pytest.mark.asyncio
 async def test_mangas_success(const_client, const_mangas_json, const_mangas_resp):
     const_client._request = FakeRequest(const_mangas_json)
@@ -30,8 +31,11 @@ async def test_mangas_error(const_client):
     response = await const_client.mangas()
     assert isinstance(response, RequestError)
 
+
 @pytest.mark.asyncio
-async def test_UserRates_success(const_client, const_user_rate_json, const_user_rate_resp):
+async def test_UserRates_success(
+    const_client, const_user_rate_json, const_user_rate_resp
+):
     const_client._request = FakeRequest(const_user_rate_json)
     response = await const_client.UserRates()
     assert response == const_user_rate_resp
@@ -42,6 +46,7 @@ async def test_UserRates_error(const_client):
     const_client._request = FakeRequest(RequestError("Test Message", 404))
     response = await const_client.UserRates()
     assert isinstance(response, RequestError)
+
 
 @pytest.mark.asyncio
 async def test_clubs_success(const_client, const_club_json, const_club_resp):
@@ -55,6 +60,7 @@ async def test_clubs_error(const_client):
     const_client._request = FakeRequest(RequestError("Test Message", 404))
     response = await const_client.clubs()
     assert isinstance(response, RequestError)
+
 
 @pytest.mark.asyncio
 async def test_smile_success(const_client, const_smile_json, const_smile_resp):

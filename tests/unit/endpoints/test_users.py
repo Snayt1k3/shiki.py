@@ -45,6 +45,7 @@ async def test_info_error(user_client):
     response = await user_client.info(123)
     assert isinstance(response, RequestError)
 
+
 @pytest.mark.asyncio
 async def test_info_success(user_client, users_info_json, users_info_resp):
     user_client._request = FakeRequest(users_info_json)
@@ -58,6 +59,7 @@ async def test_info_error(user_client):
     response = await user_client.info(123)
     assert isinstance(response, RequestError)
 
+
 @pytest.mark.asyncio
 async def test_whoami_success(user_client, users_whoami_json, users_whoami_resp):
     user_client._request = FakeRequest(users_whoami_json)
@@ -70,6 +72,7 @@ async def test_info_error(user_client):
     user_client._request = FakeRequest(RequestError("Test Message", 404))
     response = await user_client.whoami()
     assert isinstance(response, RequestError)
+
 
 @pytest.mark.asyncio
 async def test_whoami_success(user_client, users_signout_json, users_signout_resp):
@@ -140,8 +143,11 @@ async def test_clubs_error(user_client):
     response = await user_client.clubs(123)
     assert isinstance(response, RequestError)
 
+
 @pytest.mark.asyncio
-async def test_animesrates_success(user_client, users_animerates_json, users_animerates_resp):
+async def test_animesrates_success(
+    user_client, users_animerates_json, users_animerates_resp
+):
     user_client._request = FakeRequest(users_animerates_json)
     response = await user_client.animeRates(123)
     assert response == users_animerates_resp
@@ -155,7 +161,9 @@ async def test_animesrates_error(user_client):
 
 
 @pytest.mark.asyncio
-async def test_mangarates_success(user_client, users_mangarates_json, users_mangarates_resp):
+async def test_mangarates_success(
+    user_client, users_mangarates_json, users_mangarates_resp
+):
     user_client._request = FakeRequest(users_mangarates_json)
     response = await user_client.mangaRates(123)
     assert response == users_mangarates_resp
@@ -169,7 +177,9 @@ async def test_mangarates_error(user_client):
 
 
 @pytest.mark.asyncio
-async def test_mangarates_success(user_client, users_mangarates_json, users_mangarates_resp):
+async def test_mangarates_success(
+    user_client, users_mangarates_json, users_mangarates_resp
+):
     user_client._request = FakeRequest(users_mangarates_json)
     response = await user_client.mangaRates(123)
     assert response == users_mangarates_resp
@@ -183,7 +193,9 @@ async def test_mangarates_error(user_client):
 
 
 @pytest.mark.asyncio
-async def test_favourites_success(user_client, users_favourites_json, users_favourites_resp):
+async def test_favourites_success(
+    user_client, users_favourites_json, users_favourites_resp
+):
     user_client._request = FakeRequest(users_favourites_json)
     response = await user_client.favourites(123)
     assert response == users_favourites_resp
@@ -194,6 +206,7 @@ async def test_favourites_error(user_client):
     user_client._request = FakeRequest(RequestError("Test Message", 404))
     response = await user_client.favourites(123)
     assert isinstance(response, RequestError)
+
 
 @pytest.mark.asyncio
 async def test_messages_success(user_client, users_messages_json, users_messages_resp):
@@ -210,7 +223,9 @@ async def test_messages_error(user_client):
 
 
 @pytest.mark.asyncio
-async def test_unreadMessages_success(user_client, users_unread_json, users_unread_resp):
+async def test_unreadMessages_success(
+    user_client, users_unread_json, users_unread_resp
+):
     user_client._request = FakeRequest(users_unread_json)
     response = await user_client.unread(123)
     assert response == users_unread_resp
@@ -235,6 +250,7 @@ async def test_history_error(user_client):
     user_client._request = FakeRequest(RequestError("Test Message", 404))
     response = await user_client.history(123)
     assert isinstance(response, RequestError)
+
 
 @pytest.mark.asyncio
 async def test_bans_success(user_client, users_bans_json, users_bans_resp):

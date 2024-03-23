@@ -89,6 +89,7 @@ def const_smile_json():
         {"bbcode": ":D", "path": "/images/smileys/:D.gif"},
     ]
 
+
 @pytest.fixture
 def const_smile_resp(const_smile_json):
     return [SmileConstant(**s) for s in const_smile_json]

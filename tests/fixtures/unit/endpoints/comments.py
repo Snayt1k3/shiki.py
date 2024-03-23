@@ -135,27 +135,28 @@ def comments_byId_json():
         },
     }
 
+
 @pytest.fixture
 def comments_byId_resp(comments_byId_json):
     s = comments_byId_json
     return Comment(
-            id=s["id"],
-            body=s["body"],
-            commentable_id=s["commentable_id"],
-            commentable_type=s["commentable_type"],
-            created_at=s["created_at"],
-            can_be_edited=s["can_be_edited"],
-            is_offtopic=s["is_offtopic"],
-            html_body=s["html_body"],
-            user_id=s["user_id"],
-            is_summary=s["is_summary"],
-            updated_at=s["updated_at"],
-            user=User(
-                id=s["user"]["id"],
-                avatar=s["user"]["avatar"],
-                url=s["user"]["url"],
-                last_online_at=s["user"]["last_online_at"],
-                nickname=s["user"]["nickname"],
-                image=PhotoExtended(**s["user"]["image"]),
-            ),
-        )
+        id=s["id"],
+        body=s["body"],
+        commentable_id=s["commentable_id"],
+        commentable_type=s["commentable_type"],
+        created_at=s["created_at"],
+        can_be_edited=s["can_be_edited"],
+        is_offtopic=s["is_offtopic"],
+        html_body=s["html_body"],
+        user_id=s["user_id"],
+        is_summary=s["is_summary"],
+        updated_at=s["updated_at"],
+        user=User(
+            id=s["user"]["id"],
+            avatar=s["user"]["avatar"],
+            url=s["user"]["url"],
+            last_online_at=s["user"]["last_online_at"],
+            nickname=s["user"]["nickname"],
+            image=PhotoExtended(**s["user"]["image"]),
+        ),
+    )

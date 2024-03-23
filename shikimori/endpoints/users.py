@@ -450,9 +450,7 @@ class UserEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/users/{id}/messages",
             headers=self.headers,
-            params=filter_none_parameters(
-                {"page": page, "limit": limit, "type": type}
-            ),
+            params=filter_none_parameters({"page": page, "limit": limit, "type": type}),
         )
 
         if not isinstance(response, RequestError):

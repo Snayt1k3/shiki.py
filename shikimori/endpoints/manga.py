@@ -166,9 +166,11 @@ class MangaEndpoint(BaseEndpoint):
                 rates_statuses_stats=response["rates_statuses_stats"],
                 licensors=response["licensors"],
                 genres=[Genre(**genre) for genre in response["genres"]],
-                user_rate=MiniUserRate(**response["user_rate"])
-                if response["user_rate"]
-                else None,
+                user_rate=(
+                    MiniUserRate(**response["user_rate"])
+                    if response["user_rate"]
+                    else None
+                ),
             )
 
         logger.debug(
@@ -189,24 +191,28 @@ class MangaEndpoint(BaseEndpoint):
                 Role(
                     roles=role["roles"],
                     roles_russian=role["roles_russian"],
-                    character=Character(
-                        id=role["character"]["id"],
-                        name=role["character"]["name"],
-                        russian=role["character"]["russian"],
-                        url=role["character"]["url"],
-                        image=Photo(**role["character"]["image"]),
-                    )
-                    if role["character"]
-                    else None,
-                    person=Character(
-                        id=role["person"]["id"],
-                        name=role["person"]["name"],
-                        russian=role["person"]["russian"],
-                        url=role["person"]["url"],
-                        image=Photo(**role["person"]["image"]),
-                    )
-                    if role["person"]
-                    else None,
+                    character=(
+                        Character(
+                            id=role["character"]["id"],
+                            name=role["character"]["name"],
+                            russian=role["character"]["russian"],
+                            url=role["character"]["url"],
+                            image=Photo(**role["character"]["image"]),
+                        )
+                        if role["character"]
+                        else None
+                    ),
+                    person=(
+                        Character(
+                            id=role["person"]["id"],
+                            name=role["person"]["name"],
+                            russian=role["person"]["russian"],
+                            url=role["person"]["url"],
+                            image=Photo(**role["person"]["image"]),
+                        )
+                        if role["person"]
+                        else None
+                    ),
                 )
                 for role in response
             ]
@@ -261,36 +267,42 @@ class MangaEndpoint(BaseEndpoint):
                 Relation(
                     relation=relation["relation"],
                     relation_russian=relation["relation_russian"],
-                    anime=Anime(
-                        id=relation["anime"]["id"],
-                        name=relation["anime"]["name"],
-                        russian=relation["anime"]["russian"],
-                        image=Photo(**relation["anime"]["image"]),
-                        url=relation["anime"]["url"],
-                        kind=relation["anime"]["kind"],
-                        score=relation["anime"]["score"],
-                        status=relation["anime"]["status"],
-                        episodes=relation["anime"]["episodes"],
-                        episodes_aired=relation["anime"]["episodes_aired"],
-                        aired_on=relation["anime"]["aired_on"],
-                        released_on=relation["anime"]["released_on"],
-                    )
-                    if relation["anime"]
-                    else None,
-                    manga=Manga(
-                        id=relation["manga"]["id"],
-                        name=relation["manga"]["name"],
-                        russian=relation["manga"]["russian"],
-                        image=Photo(**relation["manga"]["image"]),
-                        url=relation["manga"]["url"],
-                        kind=relation["manga"]["kind"],
-                        score=relation["manga"]["score"],
-                        status=relation["manga"]["status"],
-                        chapters=relation["manga"]["chapters"],
-                        volumes=relation["manga"]["volumes"],
-                        aired_on=relation["manga"]["aired_on"],
-                        released_on=relation["manga"]["released_on"],
-                    ) if relation["manga"] else None,
+                    anime=(
+                        Anime(
+                            id=relation["anime"]["id"],
+                            name=relation["anime"]["name"],
+                            russian=relation["anime"]["russian"],
+                            image=Photo(**relation["anime"]["image"]),
+                            url=relation["anime"]["url"],
+                            kind=relation["anime"]["kind"],
+                            score=relation["anime"]["score"],
+                            status=relation["anime"]["status"],
+                            episodes=relation["anime"]["episodes"],
+                            episodes_aired=relation["anime"]["episodes_aired"],
+                            aired_on=relation["anime"]["aired_on"],
+                            released_on=relation["anime"]["released_on"],
+                        )
+                        if relation["anime"]
+                        else None
+                    ),
+                    manga=(
+                        Manga(
+                            id=relation["manga"]["id"],
+                            name=relation["manga"]["name"],
+                            russian=relation["manga"]["russian"],
+                            image=Photo(**relation["manga"]["image"]),
+                            url=relation["manga"]["url"],
+                            kind=relation["manga"]["kind"],
+                            score=relation["manga"]["score"],
+                            status=relation["manga"]["status"],
+                            chapters=relation["manga"]["chapters"],
+                            volumes=relation["manga"]["volumes"],
+                            aired_on=relation["manga"]["aired_on"],
+                            released_on=relation["manga"]["released_on"],
+                        )
+                        if relation["manga"]
+                        else None
+                    ),
                 )
                 for relation in response
             ]
@@ -311,7 +323,7 @@ class MangaEndpoint(BaseEndpoint):
             return Franchise(
                 nodes=[Node(**node) for node in response.get("nodes")],
                 links=[Link(**link) for link in response.get("links")],
-                current_id=response["current_id"]
+                current_id=response["current_id"],
             )
 
         logger.debug(
@@ -370,7 +382,6 @@ class MangaEndpoint(BaseEndpoint):
                     last_comment_viewed=topic["last_comment_viewed"],
                     event=topic["event"],
                     episode=topic["episode"],
-
                     forum=Forum(**topic["forum"]),
                     user=User(
                         id=topic["user"]["id"],
@@ -380,20 +391,24 @@ class MangaEndpoint(BaseEndpoint):
                         url=topic["user"]["url"],
                         image=PhotoExtended(**topic["user"]["image"]),
                     ),
-                    linked=Linked(
-                        name=topic["linked"]["name"],
-                        id=topic["linked"]["id"],
-                        russian=topic["linked"]["russian"],
-                        url=topic["linked"]["url"],
-                        kind=topic["linked"]["kind"],
-                        score=topic["linked"]["score"],
-                        status=topic["linked"]["status"],
-                        chapters=topic["linked"]["chapters"],
-                        volumes=topic["linked"]["volumes"],
-                        aired_on=topic["linked"]["aired_on"],
-                        released_on=topic["linked"]["released_on"],
-                        image=Photo(**topic["linked"]["image"])
-                    ) if topic["linked"] else None,
+                    linked=(
+                        Linked(
+                            name=topic["linked"]["name"],
+                            id=topic["linked"]["id"],
+                            russian=topic["linked"]["russian"],
+                            url=topic["linked"]["url"],
+                            kind=topic["linked"]["kind"],
+                            score=topic["linked"]["score"],
+                            status=topic["linked"]["status"],
+                            chapters=topic["linked"]["chapters"],
+                            volumes=topic["linked"]["volumes"],
+                            aired_on=topic["linked"]["aired_on"],
+                            released_on=topic["linked"]["released_on"],
+                            image=Photo(**topic["linked"]["image"]),
+                        )
+                        if topic["linked"]
+                        else None
+                    ),
                 )
                 for topic in response
             ]

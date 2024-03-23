@@ -54,8 +54,8 @@ async def test_spoiler_in_content_success(abuse_request):
     response = await abuse_request.SpoilerInContent()
     assert response is None
 
+
 async def test_spoiler_in_content_error(abuse_request):
     abuse_request._request = FakeRequest(RequestError("Test Message", 404))
     response = await abuse_request.SpoilerInContent()
     assert isinstance(response, RequestError)
-

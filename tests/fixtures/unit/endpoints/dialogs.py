@@ -69,22 +69,24 @@ def dialogs_list_resp(dialogs_list_json):
                 kind=s["message"]["kind"],
                 linked_id=s["message"]["linked_id"],
                 linked_type=s["message"]["linked_type"],
-                linked=Linked(
-                    name=s["message"]["linked"]["name"],
-                    id=s["message"]["linked"]["id"],
-                    russian=s["message"]["linked"]["russian"],
-                    url=s["message"]["linked"]["url"],
-                    kind=s["message"]["linked"]["kind"],
-                    score=s["message"]["linked"]["score"],
-                    status=s["message"]["linked"]["status"],
-                    episodes=s["message"]["linked"]["episodes"],
-                    episodes_aired=s["message"]["linked"]["episodes_aired"],
-                    aired_on=s["message"]["linked"]["aired_on"],
-                    released_on=s["message"]["linked"]["released_on"],
-                    image=Photo(**s["message"]["linked"]["image"]),
-                )
-                if s["message"]["linked"]
-                else None,
+                linked=(
+                    Linked(
+                        name=s["message"]["linked"]["name"],
+                        id=s["message"]["linked"]["id"],
+                        russian=s["message"]["linked"]["russian"],
+                        url=s["message"]["linked"]["url"],
+                        kind=s["message"]["linked"]["kind"],
+                        score=s["message"]["linked"]["score"],
+                        status=s["message"]["linked"]["status"],
+                        episodes=s["message"]["linked"]["episodes"],
+                        episodes_aired=s["message"]["linked"]["episodes_aired"],
+                        aired_on=s["message"]["linked"]["aired_on"],
+                        released_on=s["message"]["linked"]["released_on"],
+                        image=Photo(**s["message"]["linked"]["image"]),
+                    )
+                    if s["message"]["linked"]
+                    else None
+                ),
             ),
         )
         for s in dialogs_list_json
@@ -195,22 +197,24 @@ def dialogs_ById_resp(dialogs_ById_json):
             linked_id=s["linked_id"],
             linked_type=s["linked_type"],
             read=s["read"],
-            linked=Linked(
-                name=s["linked"]["name"],
-                id=s["linked"]["id"],
-                russian=s["linked"]["russian"],
-                url=s["linked"]["url"],
-                kind=s["linked"]["kind"],
-                score=s["linked"]["score"],
-                status=s["linked"]["status"],
-                episodes=s["linked"]["episodes"],
-                episodes_aired=s["linked"]["episodes_aired"],
-                aired_on=s["linked"]["aired_on"],
-                released_on=s["linked"]["released_on"],
-                image=Photo(**s["linked"]["image"]),
-            )
-            if s["linked"]
-            else None,
+            linked=(
+                Linked(
+                    name=s["linked"]["name"],
+                    id=s["linked"]["id"],
+                    russian=s["linked"]["russian"],
+                    url=s["linked"]["url"],
+                    kind=s["linked"]["kind"],
+                    score=s["linked"]["score"],
+                    status=s["linked"]["status"],
+                    episodes=s["linked"]["episodes"],
+                    episodes_aired=s["linked"]["episodes_aired"],
+                    aired_on=s["linked"]["aired_on"],
+                    released_on=s["linked"]["released_on"],
+                    image=Photo(**s["linked"]["image"]),
+                )
+                if s["linked"]
+                else None
+            ),
             to=User(
                 id=s["to"]["id"],
                 avatar=s["to"]["avatar"],

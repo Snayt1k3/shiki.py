@@ -520,14 +520,17 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [User(
-                        id=u["id"],
-                        nickname=u["nickname"],
-                        avatar=u["avatar"],
-                        last_online_at=u["last_online_at"],
-                        url=u["url"],
-                        image=PhotoExtended(**u["image"]),
-                    ) for u in response]
+            return [
+                User(
+                    id=u["id"],
+                    nickname=u["nickname"],
+                    avatar=u["avatar"],
+                    last_online_at=u["last_online_at"],
+                    url=u["url"],
+                    image=PhotoExtended(**u["image"]),
+                )
+                for u in response
+            ]
 
         logger.debug(
             f"Bad Request(Members): status - {response.status_code}: info - {str(response)}"

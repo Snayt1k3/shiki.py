@@ -6,8 +6,7 @@ from shikimori.endpoints.appears import AppearsEndpoint
 def appears_client():
     return AppearsEndpoint("", "", "")
 
+
 @pytest.fixture
 def response_json():
     return {}
-
-

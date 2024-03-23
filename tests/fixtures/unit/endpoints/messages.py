@@ -254,6 +254,7 @@ def messages_update_json():
         },
     }
 
+
 @pytest.fixture
 def messages_update_resp(messages_update_json):
     response = messages_update_json

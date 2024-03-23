@@ -3,6 +3,7 @@ import pytest
 from shikimori.endpoints.forums import ForumEndpoint
 from shikimori.types.topics import Forum
 
+
 @pytest.fixture
 def forum_client():
     return ForumEndpoint("", "", "")
@@ -26,6 +27,8 @@ def forum_list_json():
             "url": "/forum/critiques",
         },
     ]
+
+
 @pytest.fixture
 def forum_list_resp(forum_list_json):
     return [Forum(**f) for f in forum_list_json]

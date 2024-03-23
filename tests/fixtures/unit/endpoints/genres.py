@@ -13,7 +13,7 @@ def genre_client():
 def genres_list_json():
     return [{"id": 1, "name": "genre_1", "russian": None, "kind": "anime"}]
 
+
 @pytest.fixture
 def genres_list_resp(genres_list_json):
     return [Genre(**a) for a in genres_list_json]
-

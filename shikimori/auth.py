@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 __all__ = ["Auth", "AuthOptions"]
 
+
 @dataclass
 class AuthOptions:
     client_id: str
