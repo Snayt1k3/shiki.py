@@ -26,7 +26,7 @@ class StylesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/styles/preview",
-            body={"style": {"css": css}},
+            json={"style": {"css": css}},
             headers=self.headers,
         )
 
@@ -45,7 +45,7 @@ class StylesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/styles",
-            body={
+            json={
                 "style": {
                     "css": css,
                     "name": name,
@@ -71,7 +71,7 @@ class StylesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "PATCH",
             url=f"{self._base_url}/api/styles/{id}",
-            body={
+            json={
                 "style": {
                     "css": css,
                     "name": name,

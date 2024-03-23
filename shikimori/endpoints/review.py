@@ -21,7 +21,7 @@ class ReviewEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/reviews",
-            body={
+            json={
                 "review": filter_none_parameters(
                     {"anime_id": anime_id, "body": body, "opinion": opinion}
                 )
@@ -48,7 +48,7 @@ class ReviewEndpoint(BaseEndpoint):
             "PATCH",
             headers=self.headers,
             url=f"{self._base_url}/api/reviews/{id}",
-            body={"review": filter_none_parameters({"body": body, "opinion": opinion})},
+            json={"review": filter_none_parameters({"body": body, "opinion": opinion})},
         )
 
         if not isinstance(response, RequestError):

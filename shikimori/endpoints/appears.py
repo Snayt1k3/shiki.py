@@ -17,7 +17,7 @@ class AppearsEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/appears",
             headers=self.headers,
-            body=filter_none_parameters({"ids": ids}),
+            json=filter_none_parameters({"ids": ids}),
         )
 
         if not isinstance(response, RequestError):

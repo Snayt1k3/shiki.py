@@ -18,7 +18,7 @@ class UserImageEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/user_images",
             headers=self.headers,
-            body=filter_none_parameters({"image": image, "linked_type": linked_type}),
+            json=filter_none_parameters({"image": image, "linked_type": linked_type}),
         )
 
         if not isinstance(response, RequestError):

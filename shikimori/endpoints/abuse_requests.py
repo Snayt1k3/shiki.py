@@ -19,7 +19,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/v2/abuse_requests/offtopic",
             headers=self.headers,
-            body={"comment_id": comment_id},
+            json={"comment_id": comment_id},
         )
 
         if not isinstance(response, RequestError):
@@ -43,7 +43,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/v2/topics/{topic_id}/ignore",
             headers=self.headers,
-            body=filter_none_parameters(
+            json=filter_none_parameters(
                 {"topic_id": topic_id, "comment_id": comment_id}
             ),
         )
@@ -69,7 +69,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/v2/abuse_requests/abuse",
             headers=self.headers,
-            body=filter_none_parameters(
+            json=filter_none_parameters(
                 {"topic_id": topic_id, "comment_id": comment_id, "reason": reason}
             ),
         )
@@ -96,7 +96,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/v2/abuse_requests/spoiler",
             headers=self.headers,
-            body=filter_none_parameters(
+            json=filter_none_parameters(
                 {"topic_id": topic_id, "comment_id": comment_id, "reason": reason}
             ),
         )

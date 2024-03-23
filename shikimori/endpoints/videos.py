@@ -39,7 +39,7 @@ class VideosEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/animes/{anime_id}/videos",
-            body={"video": {"url": url, "kind": kind, "name": name}},
+            json={"video": {"url": url, "kind": kind, "name": name}},
             headers=self.headers,
         )
 

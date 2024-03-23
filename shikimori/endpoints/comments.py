@@ -132,7 +132,7 @@ class CommentEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/comments",
-            body=filter_none_parameters(
+            json=filter_none_parameters(
                 {
                     "broadcast": broadcast,
                     "comment": filter_none_parameters(
@@ -191,7 +191,7 @@ class CommentEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "PATCH",
             url=f"{self._base_url}api/comments/{id}",
-            body=filter_none_parameters(
+            json=filter_none_parameters(
                 {"comment": {"body": body}, "frontend": frontend}
             ),
             headers=self.headers,

@@ -326,7 +326,7 @@ class TopicsEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/topics",
             headers=self.headers,
-            body={
+            json={
                 "topic": filter_none_parameters(
                     {
                         "body": body,
@@ -431,7 +431,7 @@ class TopicsEndpoint(BaseEndpoint):
             "PATCH",
             url=f"{self._base_url}/api/topics/{id}",
             headers=self.headers,
-            body={
+            json={
                 "topic": filter_none_parameters(
                     {
                         "body": body,

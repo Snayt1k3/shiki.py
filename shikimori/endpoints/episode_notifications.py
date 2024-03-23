@@ -34,7 +34,7 @@ class EpisodeNotificationEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/v2/episode_notifications",
-            body={
+            json={
                 "episode_notification": filter_none_parameters(
                     {
                         "anime_id": anime_id,

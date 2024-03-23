@@ -67,7 +67,7 @@ class FavoritesEndpoint(BaseEndpoint):
             "POST",
             url=f"{self._base_url}/api/favorites/{id}",
             headers=self.headers,
-            body=filter_none_parameters({"new_index": new_index}),
+            json=filter_none_parameters({"new_index": new_index}),
         )
 
         if not isinstance(response, RequestError):

@@ -163,7 +163,7 @@ class ClubEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "PATCH",
             url=f"{self._base_url}/api/clubs/{id}",
-            body={
+            json={
                 "club": filter_none_parameters(
                     {
                         "description": description,

@@ -80,7 +80,7 @@ class MessageEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/messages/",
-            body={
+            json={
                 "message": {
                     "from_id": from_id,
                     "to_id": to_id,
@@ -150,7 +150,7 @@ class MessageEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "PATCH",
             url=f"{self._base_url}/api/messages/{id}",
-            body={
+            json={
                 "message": {
                     "body": body,
                 }
@@ -239,7 +239,7 @@ class MessageEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/messages/mark_read",
-            body={"ids": ids, "is_read": "1" if is_read else "0"},
+            json={"ids": ids, "is_read": "1" if is_read else "0"},
             headers=self.headers,
         )
 
@@ -260,7 +260,7 @@ class MessageEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/messages/read_all",
-            body={"type": type},
+            json={"type": type},
             headers=self.headers,
         )
 
@@ -281,7 +281,7 @@ class MessageEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/messages/delete_all",
-            body={"type": type},
+            json={"type": type},
             headers=self.headers,
         )
 
