@@ -365,7 +365,7 @@ class AnimeEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/animes/{id}/topics",
             headers=self.headers,
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {"page": page, "limit": limit, "kind": kind, "episode": episode}
             ),
         )

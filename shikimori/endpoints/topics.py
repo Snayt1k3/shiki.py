@@ -36,7 +36,7 @@ class TopicsEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/topics",
             headers=self.headers,
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {
                     "page": page,
                     "limit": limit,
@@ -113,7 +113,7 @@ class TopicsEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/topics/updates",
             headers=self.headers,
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {
                     "page": page,
                     "limit": limit,
@@ -164,7 +164,7 @@ class TopicsEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/topics/hot",
             headers=self.headers,
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {
                     "limit": limit,
                 }

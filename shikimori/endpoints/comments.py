@@ -30,7 +30,7 @@ class CommentEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/comments",
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {
                     "commentable_id": commentable_id,
                     "commentable_type": commentable_type,

@@ -11,7 +11,7 @@ class AchievementsEndpoint(BaseEndpoint):
     async def list(self, user_id: int) -> list[Achievement] | RequestError:
         response = await self._request.make_request(
             "GET",
-            query_params={"user_id": user_id},
+            params={"user_id": user_id},
             headers=self.headers,
         )
 

@@ -31,7 +31,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs",
             headers=self.headers,
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {"limit": limit, "page": page, "search": search}
             ),
         )
@@ -269,7 +269,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/animes",
             headers=self.headers,
-            query_params=filter_none_parameters({"limit": limit, "page": page}),
+            params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
         if not isinstance(response, RequestError):
@@ -311,7 +311,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/mangas",
             headers=self.headers,
-            query_params=filter_none_parameters({"limit": limit, "page": page}),
+            params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
         if not isinstance(response, RequestError):
@@ -353,7 +353,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/ranobe",
             headers=self.headers,
-            query_params=filter_none_parameters({"limit": limit, "page": page}),
+            params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
         if not isinstance(response, RequestError):
@@ -394,7 +394,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/characters",
             headers=self.headers,
-            query_params=filter_none_parameters({"limit": limit, "page": page}),
+            params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
         if not isinstance(response, RequestError):
@@ -428,7 +428,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/collections",
             headers=self.headers,
-            query_params=filter_none_parameters({"limit": limit, "page": page}),
+            params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
         if not isinstance(response, RequestError):
@@ -481,7 +481,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/clubs",
             headers=self.headers,
-            query_params=filter_none_parameters({"limit": limit, "page": page}),
+            params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
         if not isinstance(response, RequestError):
@@ -516,7 +516,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/members",
             headers=self.headers,
-            query_params=filter_none_parameters({"limit": limit, "page": page}),
+            params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
         if not isinstance(response, RequestError):
@@ -548,7 +548,7 @@ class ClubEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/clubs/{id}/images",
             headers=self.headers,
-            query_params=filter_none_parameters({"limit": limit, "page": page}),
+            params=filter_none_parameters({"limit": limit, "page": page}),
         )
 
         if not isinstance(response, RequestError):

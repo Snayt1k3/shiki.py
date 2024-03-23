@@ -93,7 +93,7 @@ class CharacterEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/characters/search",
-            query_params={"search": search},
+            params={"search": search},
             headers=self.headers,
         )
 

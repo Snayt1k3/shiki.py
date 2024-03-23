@@ -38,7 +38,7 @@ class UserEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users",
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {"search": search, "page": page, "limit": limit}
             ),
             headers=self.headers,
@@ -72,7 +72,7 @@ class UserEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}",
-            query_params=filter_none_parameters({"is_nickname": is_nickname}),
+            params=filter_none_parameters({"is_nickname": is_nickname}),
             headers=self.headers,
         )
 
@@ -305,7 +305,7 @@ class UserEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/anime_rates",
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {"limit": limit, "page": page, "status": status, "censored": censored}
             ),
             headers=self.headers,
@@ -364,7 +364,7 @@ class UserEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/manga_rates",
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {"limit": limit, "page": page, "censored": censored}
             ),
             headers=self.headers,
@@ -450,7 +450,7 @@ class UserEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/users/{id}/messages",
             headers=self.headers,
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {"page": page, "limit": limit, "type": type}
             ),
         )
@@ -544,7 +544,7 @@ class UserEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/users/{id}/history",
             headers=self.headers,
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {
                     "page": page,
                     "limit": limit,

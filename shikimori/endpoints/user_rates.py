@@ -45,7 +45,7 @@ class UserRatesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/v2/user_rates",
-            query_params=filter_none_parameters(
+            params=filter_none_parameters(
                 {
                     "user_id": user_id,
                     "target_id": target_id,

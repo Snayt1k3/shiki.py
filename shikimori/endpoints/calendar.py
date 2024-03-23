@@ -21,7 +21,7 @@ class CalendarEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/calendar",
             headers=self.headers,
-            query_params=filter_none_parameters({"censored": censored}),
+            params=filter_none_parameters({"censored": censored}),
         )
 
         if not isinstance(response, RequestError):
