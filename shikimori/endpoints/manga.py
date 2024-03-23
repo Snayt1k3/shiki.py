@@ -39,6 +39,7 @@ class MangaEndpoint(BaseEndpoint):
         ids: str = None,
         exclude_ids: str = None,
         search: str = None,
+        genre_v2: str = None,
     ):
         """
         Most of parameters can be grouped in lists of values separated by comma:
@@ -72,6 +73,7 @@ class MangaEndpoint(BaseEndpoint):
         :param ids: List of manga ids separated by comma
         :param exclude_ids: List of manga ids separated by comma
         :param search: Must be a String
+        :param genre_v2: List of genre v2 ids separated by comma
         """
 
         response = await self._request.make_request(
@@ -94,6 +96,7 @@ class MangaEndpoint(BaseEndpoint):
                     "ids": ids,
                     "exclude_ids": exclude_ids,
                     "search": search,
+                    "genre_v2": genre_v2,
                 }
             ),
             headers=self.headers,
