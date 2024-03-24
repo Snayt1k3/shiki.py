@@ -11,10 +11,10 @@ with open("pyproject.toml", "rb") as f:
 setup(
     name=pyproject["tool"]["poetry"]["name"],
     version=pyproject["tool"]["poetry"]["version"],
-    packages=find_packages(),
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=["aiohttp>=3.9.1", "tomli>=2.0.1", "setuptools>=69.0.3"],
     author="Snayt1k3",
-    author_email="snayt1k3twitch@gmail.com",
+    author_email="snayt1k3@gmail.com",
     description="Description of your library",
     url="https://github.com/Snayt1k3/shiki.py",
     classifiers=[
