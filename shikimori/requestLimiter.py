@@ -3,13 +3,14 @@ import time
 
 from .exceptions import TooManyRequests
 from .request import Request
+from shikimori.base import BaseLimiter
 
 logger = logging.getLogger(__name__)
 
 __all__ = ["RequestLimiter"]
 
 
-class RequestLimiter:
+class RequestLimiter(BaseLimiter):
     """Limiter for requests"""
 
     def __init__(self, max_requests_sec: int, max_requests_min: int, request: Request):

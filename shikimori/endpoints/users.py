@@ -218,29 +218,17 @@ class UserEndpoint(BaseEndpoint):
 
         return response
 
-    async def signOut(self) -> User | RequestError:
+    async def signOut(self) -> None | RequestError:
         response = await self._request.make_request(
-            "GET",
-            url=f"{self._base_url}/api/users/whoami",
+            "POST",
+            url=f"{self._base_url}/api/users/sign_out",
             headers=self.headers,
         )
         if not isinstance(response, RequestError):
-            return UserInfoInc(
-                sex=response["sex"],
-                full_years=response["full_years"],
-                avatar=response["avatar"],
-                id=response["id"],
-                birth_on=response["birth_on"],
-                last_online_at=response["last_online_at"],
-                locale=response["locale"],
-                url=response["url"],
-                name=response["name"],
-                nickname=response["name"],
-                image=PhotoExtended(**response["image"]),
-            )
+            return
 
         logger.debug(
-            f"Bad Request(whoami): status - {response.status_code}: info - {str(response)}"
+            f"Bad Request(signOut): status - {response.status_code}: info - {str(response)}"
         )
 
         return response

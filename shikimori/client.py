@@ -28,9 +28,7 @@ class Shikimori:
 
         """
         if not user_agent:
-            raise ValueError(
-                "You need to specify user-agent otherwise you may be banned"
-            )
+            raise ValueError("You need to specify user-agent")
 
         if logging is not None:
             if logging is True:
@@ -55,7 +53,7 @@ class Shikimori:
         self._token = None
 
         # init auth
-        self.Auth = Auth(self._limiter, self._user_agent, self._options)
+        self.auth = Auth(self._limiter, self._user_agent, self._options, self._base_url)
 
         # dependencies
         self._deps = {
