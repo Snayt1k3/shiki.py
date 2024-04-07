@@ -11,6 +11,7 @@ python = "^3.11"
 aiohttp = "^3.9.1"
 tomli = "^2.0.1"
 setuptools = "^69.0.3"
+flake8 = "^7.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
