@@ -8,6 +8,15 @@ class Photo:
     x96: str
     x48: str
 
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            original=data.get("original"),
+            preview=data.get("preview"),
+            x96=data.get("x96"),
+            x48=data.get("x48"),
+        )
+
 
 @dataclass
 class PhotoExtended:
@@ -19,6 +28,18 @@ class PhotoExtended:
     x32: str
     x16: str
 
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            x160=data.get("x160"),
+            x148=data.get("x148"),
+            x80=data.get("x80"),
+            x64=data.get("x64"),
+            x48=data.get("x48"),
+            x32=data.get("x32"),
+            x16=data.get("x16"),
+        )
+
 
 @dataclass
 class ClubImage:
@@ -29,6 +50,17 @@ class ClubImage:
     can_destroy: bool
     user_id: int
 
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            original_url=data.get("original_url"),
+            main_url=data.get("main_url"),
+            preview_url=data.get("preview_url"),
+            can_destroy=data.get("can_destroy"),
+            user_id=data.get("user_id"),
+        )
+
 
 @dataclass
 class UserImage:
@@ -36,3 +68,12 @@ class UserImage:
     preview: str
     url: str
     bbcode: str
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            preview=data.get("preview"),
+            url=data.get("url"),
+            bbcode=data.get("bbcode"),
+        )

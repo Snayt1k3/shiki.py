@@ -15,8 +15,38 @@ class Message:
     linked_type: str | None
     linked: Linked | None
 
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            kind=data.get("kind"),
+            read=data.get("read"),
+            body=data.get("body"),
+            html_body=data.get("html_body"),
+            created_at=data.get("created_at"),
+            linked_id=data.get("linked_id"),
+            linked_type=data.get("linked_type"),
+            linked=Linked.from_dict(data.get("linked")) if data.get("linked") else None,
+        )
+
 
 @dataclass
 class MessageInfo(Message):
     sender: User
     to: User
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            kind=data.get("kind"),
+            read=data.get("read"),
+            body=data.get("body"),
+            html_body=data.get("html_body"),
+            created_at=data.get("created_at"),
+            linked_id=data.get("linked_id"),
+            linked_type=data.get("linked_type"),
+            linked=Linked.from_dict(data.get("linked")) if data.get("linked") else None,
+            sender=User.from_dict(data.get("from")),
+            to=User.from_dict(data.get("to")),
+        )

@@ -11,6 +11,25 @@ class Title(BaseTitle):
     volumes: int = None
     chapters: int = None
 
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            episodes=data.get("episodes"),
+            episodes_aired=data.get("episodes_aired"),
+            volumes=data.get("volumes"),
+            chapters=data.get("chapters"),
+            id=data["id"],
+            name=data["name"],
+            russian=data["russian"],
+            image=Photo.from_dict(data.get("image")),
+            url=data["url"],
+            kind=data["kind"],
+            score=data["score"],
+            status=data["status"],
+            aired_on=data["aired_on"],
+            released_on=data["released_on"],
+        )
+
 
 @dataclass
 class Forum:
@@ -19,6 +38,16 @@ class Forum:
     name: str
     permalink: str
     url: str
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            position=data.get("position"),
+            name=data.get("name"),
+            permalink=data.get("permalink"),
+            url=data.get("url"),
+        )
 
 
 @dataclass
@@ -37,6 +66,25 @@ class Linked:
     episodes_aired: int = None
     volumes: int = None
     chapters: int = None
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            name=data.get("name"),
+            russian=data.get("russian"),
+            image=Photo.from_dict(data.get("image")),
+            url=data.get("url"),
+            kind=data.get("kind"),
+            score=data.get("score"),
+            status=data.get("status"),
+            aired_on=data.get("aired_on"),
+            released_on=data.get("released_on"),
+            episodes=data.get("episodes"),
+            episodes_aired=data.get("episodes_aired"),
+            volumes=data.get("volumes"),
+            chapters=data.get("chapters"),
+        )
 
 
 @dataclass
@@ -59,6 +107,28 @@ class Topic:
     event: str
     episode: int
 
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            topic_title=data.get("topic_title"),
+            body=data.get("body"),
+            html_body=data.get("html_body"),
+            html_footer=data.get("html_footer"),
+            created_at=data.get("created_at"),
+            comments_count=data.get("comments_count"),
+            forum=Forum.from_dict(data.get("forum")),
+            user=User.from_dict(data.get("user")),
+            type=data.get("type"),
+            linked_id=data.get("linked_id"),
+            linked_type=data.get("linked_type"),
+            linked=Linked.from_dict(data.get("linked")) if data.get("linked") else None,
+            viewed=data.get("viewed"),
+            last_comment_viewed=data.get("last_comment_viewed"),
+            event=data.get("event"),
+            episode=data.get("episode"),
+        )
+
 
 @dataclass
 class Status:
@@ -68,6 +138,17 @@ class Status:
     episode: int
     created_at: str
     url: str
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            linked=Linked.from_dict(data.get("linked")),
+            event=data.get("event"),
+            episode=data.get("episode"),
+            created_at=data.get("created_at"),
+            url=data.get("url"),
+        )
 
 
 @dataclass
@@ -85,3 +166,21 @@ class ReviewLinked:
     characters: int
     animation: int
     created_at: str
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            user=User.from_dict(data.get("user")),
+            target=Title.from_dict(data.get("target")),
+            votes_count=data.get("votes_count"),
+            votes_for=data.get("votes_for"),
+            body=data.get("body"),
+            html_body=data.get("html_body"),
+            overall=data.get("overall"),
+            storyline=data.get("storyline"),
+            music=data.get("music"),
+            characters=data.get("characters"),
+            animation=data.get("animation"),
+            created_at=data.get("created_at"),
+        )

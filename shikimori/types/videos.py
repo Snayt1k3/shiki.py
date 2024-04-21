@@ -10,3 +10,15 @@ class Video:
     name: str
     kind: str
     hosting: str
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            url=data.get("url"),
+            image_url=data.get("image_url"),
+            player_url=data.get("player_url"),
+            name=data.get("name"),
+            kind=data.get("kind"),
+            hosting=data.get("hosting"),
+        )

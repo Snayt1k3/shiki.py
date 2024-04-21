@@ -7,3 +7,10 @@ from .message import Message
 class Dialog:
     target_user: User
     message: Message
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            target_user=User.from_dict(data.get("target_user")),
+            message=Message.from_dict(data.get("message")),
+        )

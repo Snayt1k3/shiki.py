@@ -11,3 +11,16 @@ class EpisodeNotification:
     is_fandub: bool
     is_anime365: bool
     topic_id: bool
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            anime_id=data.get("anime_id"),
+            episode=data.get("episode"),
+            is_raw=data.get("is_raw"),
+            is_subtitles=data.get("is_subtitles"),
+            is_fandub=data.get("is_fandub"),
+            is_anime365=data.get("is_anime365"),
+            topic_id=data.get("topic_id"),
+        )

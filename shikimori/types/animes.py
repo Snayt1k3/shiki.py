@@ -1,14 +1,16 @@
 from dataclasses import dataclass
-from .studios import Studio
-from .videos import Video
-from .screenshots import ScreenShot
+
+from .base import BaseTitle
 from .genres import Genre
 from .manga import Manga
-from .base import BaseTitle
+from .photo import Photo
+from .screenshots import ScreenShot
+from .studios import Studio
 from .user_rates import MiniUserRate
+from .videos import Video
 
 
-@dataclass
+@dataclass  # TODO перенести в genre.py
 class GenreExtended(Genre):
     entry_type: str
 
@@ -17,6 +19,23 @@ class GenreExtended(Genre):
 class Anime(BaseTitle):
     episodes: int
     episodes_aired: int
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            name=data.get("name"),
+            russian=data.get("russian"),
+            image=Photo.from_dict(data.get("image")),
+            url=data.get("url"),
+            kind=data.get("kind"),
+            score=data.get("score"),
+            status=data.get("status"),
+            episodes=data.get("episodes"),
+            episodes_aired=data.get("episodes_aired"),
+            aired_on=data.get("aired_on"),
+            released_on=data.get("released_on")
+        )
 
 
 @dataclass
@@ -50,6 +69,55 @@ class AnimeInfo(Anime):
     screenshots: list[ScreenShot]
     user_rate: MiniUserRate
 
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            name=data.get("name"),
+            russian=data.get("russian"),
+            image=data.get("image"),
+            url=data.get("url"),
+            kind=data.get("kind"),
+            score=data.get("score"),
+            status=data.get("status"),
+            episodes=data.get("episodes"),
+            episodes_aired=data.get("episodes_aired"),
+            aired_on=data.get("aired_on"),
+            released_on=data.get("released_on"),
+            rating=data.get("rating"),
+            english=data.get("english"),
+            japanese=data.get("japanese"),
+            synonyms=data.get("synonyms"),
+            license_name_ru=data.get("license_name_ru"),
+            duration=data.get("duration"),
+            description=data.get("description"),
+            description_html=data.get("description_html"),
+            description_source=data.get("description_source"),
+            franchise=data.get("franchise"),
+            favoured=data.get("favoured"),
+            anons=data.get("anons"),
+            ongoing=data.get("ongoing"),
+            thread_id=data.get("thread_id"),
+            topic_id=data.get("topic_id"),
+            myanimelist_id=data.get("myanimelist_id"),
+            rates_scores_stats=data.get("rates_scores_stats"),
+            rates_statuses_stats=data.get("rates_statuses_stats"),
+            updated_at=data.get("updated_at"),
+            next_episode_at=data.get("next_episode_at"),
+            fansubbers=data.get("fansubbers"),
+            fandubbers=data.get("fandubbers"),
+            licensors=data.get("licensors"),
+            genres=[GenreExtended.from_dict(genre) for genre in data.get("genres", [])],
+            screenshots=[ScreenShot.from_dict(s) for s in data.get("screenshots", [])],
+            studios=[Studio.from_dict(s) for s in data.get("studios", [])],
+            videos=[Video.from_dict(v) for v in data.get("videos", [])],
+            user_rate=(
+                MiniUserRate.from_dict(**data.get("user_rate"))
+                if data.get("user_rate")
+                else None
+            ),
+        )
+
 
 @dataclass
 class Relation:
@@ -57,6 +125,15 @@ class Relation:
     relation_russian: str
     anime: Anime | None
     manga: Manga | None
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            relation=data.get("relation"),
+            relation_russian=data.get("relation_russian"),
+            anime=Anime.from_dict(anime) if (anime := data.get("anime")) else None,
+            manga=Manga.from_dict(manga) if (manga := data.get("manga")) else None,
+        )
 
 
 @dataclass
@@ -70,3 +147,17 @@ class ExternalLink:
     created_at: str
     updated_at: str
     imported_at: str
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(
+            id=int(data.get("id")),
+            kind=data.get("kind"),
+            url=data.get("url"),
+            source=data.get("source"),
+            entry_id=data.get("entry_id"),
+            entry_type=data.get("entry_type"),
+            created_at=data.get("created_at"),
+            updated_at=data.get("updated_at"),
+            imported_at=data.get("imported_at"),
+        )
