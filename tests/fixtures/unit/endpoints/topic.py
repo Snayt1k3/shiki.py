@@ -2,7 +2,15 @@ import pytest
 
 from shikimori.endpoints.topics import TopicsEndpoint
 from shikimori.types.photo import PhotoExtended, Photo
-from shikimori.types.topics import Topic, Linked, Forum, Status, ReviewLinked, Title
+from shikimori.types.topics import (
+    Topic,
+    Linked,
+    Forum,
+    Status,
+    ReviewLinked,
+    Title,
+    TopicReview,
+)
 from shikimori.types.user import User
 
 
@@ -165,7 +173,7 @@ def topic_updates_resp(topic_updates_json):
             event=t["event"],
             episode=t["episode"],
             created_at=t["created_at"],
-            url=t["id"],
+            url=t["url"],
             linked=(
                 Linked(
                     name=t["linked"]["name"],
@@ -397,7 +405,7 @@ def topics_byid_json():
 @pytest.fixture
 def topics_byid_resp(topics_byid_json):
     response = topics_byid_json
-    return Topic(
+    return TopicReview(
         id=response["id"],
         body=response["body"],
         linked_id=response["linked_id"],
@@ -555,7 +563,7 @@ def topics_create_json():
 @pytest.fixture
 def topics_create_resp(topics_byid_json):
     response = topics_byid_json
-    return Topic(
+    return TopicReview(
         id=response["id"],
         body=response["body"],
         linked_id=response["linked_id"],
@@ -713,7 +721,7 @@ def topics_update_json():
 @pytest.fixture
 def topics_update_resp(topics_byid_json):
     response = topics_byid_json
-    return Topic(
+    return TopicReview(
         id=response["id"],
         body=response["body"],
         linked_id=response["linked_id"],

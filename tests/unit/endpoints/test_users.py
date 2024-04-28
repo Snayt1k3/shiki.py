@@ -75,10 +75,10 @@ async def test_info_error(user_client):
 
 
 @pytest.mark.asyncio
-async def test_whoami_success(user_client, users_signout_json, users_signout_resp):
+async def test_signout_success(user_client, users_signout_json):
     user_client._request = FakeRequest(users_signout_json)
     response = await user_client.signOut()
-    assert response == users_signout_resp
+    assert response is None
 
 
 @pytest.mark.asyncio

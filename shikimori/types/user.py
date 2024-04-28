@@ -6,6 +6,7 @@ from typing import Any
 from .manga import Manga
 from .user_rates import UserRateResponse
 from shikimori.types.base import BaseTitle
+from ..utils.filter import handle_none_data
 
 
 @dataclass
@@ -18,6 +19,7 @@ class User:
     url: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -35,6 +37,7 @@ class ValueObj:
     value: Any
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(name=data["name"], value=data["value"])
 
@@ -48,6 +51,7 @@ class UserTitle:
     type: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data):
         return cls(
             id=data.get("id"),
@@ -64,10 +68,11 @@ class Statuses:
     manga: list[UserTitle]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             animes=[
-                UserTitle.from_dict(anime_data) for anime_data in data.get("animes", [])
+                UserTitle.from_dict(anime_data) for anime_data in data.get("anime", [])
             ],
             manga=[
                 UserTitle.from_dict(manga_data) for manga_data in data.get("manga", [])
@@ -81,6 +86,7 @@ class Obj:
     manga: list[ValueObj]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             anime=[ValueObj.from_dict(obj_data) for obj_data in data.get("anime", [])],
@@ -104,6 +110,7 @@ class Stats:
     activity: list[ValueObj]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             statuses=Statuses.from_dict(data.get("statuses")),
@@ -111,8 +118,8 @@ class Stats:
             scores=Obj.from_dict(data.get("scores")),
             types=Obj.from_dict(data.get("types")),
             ratings=Obj.from_dict(data.get("ratings")),
-            has_anime=data.get("has_anime"),
-            has_manga=data.get("has_manga"),
+            has_anime=data.get("has_anime?"),
+            has_manga=data.get("has_manga?"),
             genres=data.get("genres", []),
             studios=data.get("studios", []),
             publishers=data.get("publishers", []),
@@ -131,6 +138,7 @@ class UserInfoInc(User):
     locale: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             name=data.get("name"),
@@ -166,6 +174,7 @@ class UserInfo(User):
     style_id: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             name=data.get("name"),
@@ -208,6 +217,7 @@ class Rate:
     rewatches: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             anime=Anime.from_dict(data.get("anime")) if data.get("anime") else None,
@@ -234,6 +244,7 @@ class FavouritesObj:
     url: None
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data["id"],
@@ -255,6 +266,7 @@ class Favourites:
     producers: list[FavouritesObj]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             animes=[
@@ -291,6 +303,7 @@ class UnreadMessages:
     notifications: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             messages=data.get("messages"),
@@ -307,6 +320,7 @@ class TitleHistory(BaseTitle):
     episodes_aired: int | None
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             volumes=data.get("volumes"),
@@ -333,6 +347,7 @@ class HistoryObj:
     target: TitleHistory | None
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data["id"],

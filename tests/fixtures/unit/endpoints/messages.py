@@ -89,7 +89,7 @@ def messages_byid_resp(messages_byid_json):
             else None
         ),
         linked_id=response["linked_id"],
-        linked_type=response["linked_id"],
+        linked_type=response["linked_type"],
         read=response["read"],
         to=User(
             id=response["to"]["id"],
@@ -187,7 +187,7 @@ def messages_create_resp(messages_create_json):
             else None
         ),
         linked_id=response["linked_id"],
-        linked_type=response["linked_id"],
+        linked_type=response["linked_type"],
         read=response["read"],
         to=User(
             id=response["to"]["id"],
@@ -285,7 +285,7 @@ def messages_update_resp(messages_update_json):
             else None
         ),
         linked_id=response["linked_id"],
-        linked_type=response["linked_id"],
+        linked_type=response["linked_type"],
         read=response["read"],
         to=User(
             id=response["to"]["id"],

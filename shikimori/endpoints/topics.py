@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-from shikimori.types.topics import Topic, Status
+from shikimori.types.topics import Topic, Status, TopicReview
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters
@@ -113,7 +113,7 @@ class TopicsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Topic.from_dict(response)
+            return TopicReview.from_dict(response)
 
         logger.debug(
             f"Bad Request(byId): status - {response.status_code}: info - {str(response)}"
@@ -160,7 +160,7 @@ class TopicsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Topic.from_dict(response)
+            return TopicReview.from_dict(response)
 
         logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"
@@ -199,7 +199,7 @@ class TopicsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Topic.from_dict(response)
+            return TopicReview.from_dict(response)
 
         logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"

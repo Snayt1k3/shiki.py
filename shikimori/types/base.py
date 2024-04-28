@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from shikimori.types.photo import Photo
+from shikimori.utils.filter import handle_none_data
 
 
 @dataclass
@@ -16,6 +17,7 @@ class BaseTitle:
     released_on: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -37,6 +39,7 @@ class BaseRole:
     roles: list[str]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(role=data.get("role"), roles=data.get("roles", []))
 
@@ -50,6 +53,7 @@ class BaseCharacter:
     url: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=int(data.get("id")),

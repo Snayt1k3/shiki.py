@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from shikimori.utils.filter import handle_none_data
+
 
 @dataclass
 class Photo:
@@ -9,6 +11,7 @@ class Photo:
     x48: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             original=data.get("original"),
@@ -29,6 +32,7 @@ class PhotoExtended:
     x16: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             x160=data.get("x160"),
@@ -51,6 +55,7 @@ class ClubImage:
     user_id: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -70,6 +75,7 @@ class UserImage:
     bbcode: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),

@@ -114,7 +114,7 @@ def ranobe_byid_resp(ranobe_byid_json):
         id=response["id"],
         name=response["name"],
         russian=response["russian"],
-        image=response["image"],
+        image=Photo(**response["image"]),
         url=response["url"],
         kind=response["kind"],
         score=response["score"],

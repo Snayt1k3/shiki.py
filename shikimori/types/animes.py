@@ -8,11 +8,23 @@ from .screenshots import ScreenShot
 from .studios import Studio
 from .user_rates import MiniUserRate
 from .videos import Video
+from ..utils.filter import handle_none_data
 
 
 @dataclass  # TODO перенести в genre.py
 class GenreExtended(Genre):
     entry_type: str
+
+    @classmethod
+    @handle_none_data
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            name=data.get("name"),
+            russian=data.get("russian"),
+            kind=data.get("kind"),
+            entry_type=data.get("entry_type"),
+        )
 
 
 @dataclass
@@ -21,6 +33,7 @@ class Anime(BaseTitle):
     episodes_aired: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -34,7 +47,7 @@ class Anime(BaseTitle):
             episodes=data.get("episodes"),
             episodes_aired=data.get("episodes_aired"),
             aired_on=data.get("aired_on"),
-            released_on=data.get("released_on")
+            released_on=data.get("released_on"),
         )
 
 
@@ -70,6 +83,7 @@ class AnimeInfo(Anime):
     user_rate: MiniUserRate
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -112,7 +126,7 @@ class AnimeInfo(Anime):
             studios=[Studio.from_dict(s) for s in data.get("studios", [])],
             videos=[Video.from_dict(v) for v in data.get("videos", [])],
             user_rate=(
-                MiniUserRate.from_dict(**data.get("user_rate"))
+                MiniUserRate.from_dict(data.get("user_rate"))
                 if data.get("user_rate")
                 else None
             ),
@@ -127,6 +141,7 @@ class Relation:
     manga: Manga | None
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             relation=data.get("relation"),
@@ -149,9 +164,10 @@ class ExternalLink:
     imported_at: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
-            id=int(data.get("id")),
+            id=data.get("id"),
             kind=data.get("kind"),
             url=data.get("url"),
             source=data.get("source"),

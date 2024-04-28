@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from shikimori.types.animes import Anime
+from shikimori.utils.filter import handle_none_data
 
 
 @dataclass
@@ -10,6 +11,7 @@ class Calendar:
     anime: Anime
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             next_episode=int(data.get("next_episode")),

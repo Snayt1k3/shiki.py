@@ -424,7 +424,7 @@ def people_byid_resp(people_byid_json):
         id=response["id"],
         website=response["website"],
         url=response["url"],
-        updated_at=response["url"],
+        updated_at=response["updated_at"],
         russian=response["russian"],
         groupped_roles=response["groupped_roles"],
         mangaka_favoured=response["mangaka_favoured"],

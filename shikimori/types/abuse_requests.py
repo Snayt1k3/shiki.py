@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from shikimori.utils.filter import handle_none_data
 
 @dataclass
 class AbuseRequest:
@@ -8,6 +8,7 @@ class AbuseRequest:
     affected_ids: list[int]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             kind=data.get("kind"),

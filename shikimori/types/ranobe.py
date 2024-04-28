@@ -4,6 +4,8 @@ from shikimori.types.photo import Photo
 from shikimori.types.user_rates import UserRateResponse
 from dataclasses import dataclass
 
+from ..utils.filter import handle_none_data
+
 
 @dataclass
 class Ranobe(BaseTitle):
@@ -11,6 +13,7 @@ class Ranobe(BaseTitle):
     chapters: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             volumes=data.get("volumes"),
@@ -51,6 +54,7 @@ class RanobeInfo(Ranobe):
     user_rate: dict | None
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             english=data.get("english", []),

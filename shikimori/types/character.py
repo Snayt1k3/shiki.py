@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from shikimori.types.roles import Character as Seyu
 from .base import BaseRole, BaseCharacter, BaseTitle
 from .photo import Photo
+from ..utils.filter import handle_none_data
 
 
 @dataclass
@@ -10,6 +11,7 @@ class MangaRole(BaseRole, BaseTitle):
     chapters: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             role=data.get("role"),
@@ -35,6 +37,7 @@ class AnimeRole(BaseRole, BaseTitle):
     episodes_aired: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             role=data.get("role"),
@@ -70,6 +73,7 @@ class Character(BaseCharacter):
     mangas: list[MangaRole]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             altname=data.get("altname"),

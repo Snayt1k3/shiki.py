@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-
 from shikimori.types.animes import Anime
 from shikimori.types.character import Character
 from shikimori.types.manga import Manga
 from .photo import Photo
+from ..utils.filter import handle_none_data
 
 
 @dataclass
@@ -13,17 +13,19 @@ class Date:
     year: int = None
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(day=data.get("day"), month=data.get("month"), year=data.get("year"))
 
 
 @dataclass
 class Works:
-    anime: Anime
-    manga: Manga
+    anime: Anime | None
+    manga: Manga | None
     role: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             anime=Anime.from_dict(data.get("anime")),
@@ -38,6 +40,7 @@ class Role:
     characters: list[Character]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             animes=[
@@ -60,7 +63,7 @@ class People:
     japanese: str
     job_title: str
     birth_on: Date
-    deceased_on: Date | None
+    deceased_on: Date
     website: str
     groupped_roles: list[str | int]
     works: list[Works]
@@ -78,6 +81,7 @@ class People:
     birthday: Date
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -88,11 +92,7 @@ class People:
             japanese=data.get("japanese"),
             job_title=data.get("job_title"),
             birth_on=Date.from_dict(data.get("birth_on")),
-            deceased_on=(
-                Date.from_dict(data.get("deceased_on"))
-                if data.get("deceased_on")
-                else None
-            ),
+            deceased_on=Date.from_dict(data.get("deceased_on")),
             website=data.get("website"),
             groupped_roles=data.get("groupped_roles", []),
             works=[Works.from_dict(works_data) for works_data in data.get("works", [])],

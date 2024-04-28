@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from shikimori.types.user import User
+from shikimori.utils.filter import handle_none_data
 
 
 @dataclass
@@ -18,6 +19,7 @@ class Comment:
     user: User
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),

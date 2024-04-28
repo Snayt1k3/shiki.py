@@ -6,6 +6,8 @@ from .photo import ClubImage
 from .topics import Topic
 from dataclasses import dataclass
 
+from ..utils.filter import handle_none_data
+
 
 @dataclass
 class Logo:  # todo перенести в photo.py
@@ -16,6 +18,7 @@ class Logo:  # todo перенести в photo.py
     x48: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             original=data.get("original"),
@@ -36,6 +39,7 @@ class Club:
     comment_policy: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -62,6 +66,7 @@ class ClubInfo(Club):
     images: list[ClubImage]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             description=data.get("description"),

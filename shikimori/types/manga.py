@@ -3,6 +3,8 @@ from shikimori.types.genres import Genre
 from shikimori.types.photo import Photo
 from dataclasses import dataclass
 from shikimori.types.user_rates import UserRateResponse
+from ..utils.filter import handle_none_data
+
 
 @dataclass
 class Manga(BaseTitle):
@@ -10,6 +12,7 @@ class Manga(BaseTitle):
     chapters: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             volumes=data.get("volumes"),
@@ -50,6 +53,7 @@ class MangaInfo(Manga):
     user_rate: UserRateResponse | None
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             english=data.get("english", []),

@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from shikimori.utils.filter import handle_none_data
+
 
 @dataclass
 class BaseConstant:
@@ -7,6 +9,7 @@ class BaseConstant:
     status: list[str]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(kind=data.get("kind", []), status=data.get("status", []))
 
@@ -26,6 +29,7 @@ class UserRateConstant:
     status: list[str]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(status=data.get("status", []))
 
@@ -37,7 +41,9 @@ class ClubConstant:
     image_upload_policy: list[str]
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
+
         return cls(
             join_policy=data.get("join_policy", []),
             comment_policy=data.get("comment_policy", []),
@@ -51,5 +57,6 @@ class SmileConstant:
     path: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(bbcode=data.get("bbcode"), path=data.get("path"))

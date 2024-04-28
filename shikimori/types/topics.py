@@ -2,22 +2,24 @@ from shikimori.types.user import User
 from shikimori.types.photo import Photo
 from dataclasses import dataclass
 from shikimori.types.base import BaseTitle
+from shikimori.utils.filter import handle_none_data
 
 
 @dataclass
 class Title(BaseTitle):
-    episodes: int = None
-    episodes_aired: int = None
-    volumes: int = None
-    chapters: int = None
+    episodes: int = 0
+    episodes_aired: int = 0
+    volumes: int = 0
+    chapters: int = 0
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
-            episodes=data.get("episodes"),
-            episodes_aired=data.get("episodes_aired"),
-            volumes=data.get("volumes"),
-            chapters=data.get("chapters"),
+            episodes=data.get("episodes", 0),
+            episodes_aired=data.get("episodes_aired", 0),
+            volumes=data.get("volumes", 0),
+            chapters=data.get("chapters", 0),
             id=data["id"],
             name=data["name"],
             russian=data["russian"],
@@ -40,6 +42,7 @@ class Forum:
     url: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -68,6 +71,7 @@ class Linked:
     chapters: int = None
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -108,6 +112,7 @@ class Topic:
     episode: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -140,6 +145,7 @@ class Status:
     url: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -168,6 +174,7 @@ class ReviewLinked:
     created_at: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -183,4 +190,31 @@ class ReviewLinked:
             characters=data.get("characters"),
             animation=data.get("animation"),
             created_at=data.get("created_at"),
+        )
+
+
+class TopicReview(Topic):
+    linked: ReviewLinked | None
+
+    @classmethod
+    @handle_none_data
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            topic_title=data.get("topic_title"),
+            body=data.get("body"),
+            html_body=data.get("html_body"),
+            html_footer=data.get("html_footer"),
+            created_at=data.get("created_at"),
+            comments_count=data.get("comments_count"),
+            forum=Forum.from_dict(data.get("forum")),
+            user=User.from_dict(data.get("user")),
+            type=data.get("type"),
+            linked_id=data.get("linked_id"),
+            linked_type=data.get("linked_type"),
+            linked=ReviewLinked.from_dict(data.get("linked")),
+            viewed=data.get("viewed"),
+            last_comment_viewed=data.get("last_comment_viewed"),
+            event=data.get("event"),
+            episode=data.get("episode"),
         )

@@ -320,7 +320,7 @@ def users_byid_resp(users_byid_json):
         website=response["website"],
         show_comments=response["show_comments"],
         sex=response["sex"],
-        url=response["show_comments"],
+        url=response["url"],
         image=PhotoExtended(**response["image"]),
         stats=Stats(
             genres=response["stats"]["genres"],
@@ -416,7 +416,7 @@ def users_info_resp(users_info_json):
         locale=response["locale"],
         url=response["url"],
         name=response["name"],
-        nickname=response["name"],
+        nickname=response["nickname"],
         image=PhotoExtended(**response["image"]),
     )
 
@@ -460,7 +460,7 @@ def users_whoami_resp(users_whoami_json):
         locale=response["locale"],
         url=response["url"],
         name=response["name"],
-        nickname=response["name"],
+        nickname=response["nickname"],
         image=PhotoExtended(**response["image"]),
     )
 

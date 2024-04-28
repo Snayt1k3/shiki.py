@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from shikimori.utils.filter import handle_none_data
+
 
 @dataclass
 class Node:
@@ -13,6 +15,7 @@ class Node:
     weight: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -37,6 +40,7 @@ class Link:
     relation: str
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             id=data.get("id"),
@@ -56,6 +60,7 @@ class Franchise:
     current_id: int
 
     @classmethod
+    @handle_none_data
     def from_dict(cls, data: dict):
         return cls(
             nodes=[Node.from_dict(node_data) for node_data in data.get("nodes", [])],
