@@ -15,7 +15,7 @@ class PublisherEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Publisher(**v) for v in response]
+            return [Publisher.from_dict(publisher) for publisher in response]
 
         logger.debug(
             f"Bad Request(anime_list): status - {response.status_code}: info - {str(response)}"

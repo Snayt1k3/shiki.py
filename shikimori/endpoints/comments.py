@@ -43,30 +43,7 @@ class CommentEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Comment(
-                    id=s["id"],
-                    body=s["body"],
-                    commentable_id=s["commentable_id"],
-                    commentable_type=s["commentable_type"],
-                    created_at=s["created_at"],
-                    can_be_edited=s["can_be_edited"],
-                    is_offtopic=s["is_offtopic"],
-                    html_body=s["html_body"],
-                    user_id=s["user_id"],
-                    is_summary=s["is_summary"],
-                    updated_at=s["updated_at"],
-                    user=User(
-                        id=s["user"]["id"],
-                        avatar=s["user"]["avatar"],
-                        url=s["user"]["url"],
-                        last_online_at=s["user"]["last_online_at"],
-                        nickname=s["user"]["nickname"],
-                        image=PhotoExtended(**s["user"]["image"]),
-                    ),
-                )
-                for s in response
-            ]
+            return [Comment.from_dict(com) for com in response]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
@@ -82,27 +59,7 @@ class CommentEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Comment(
-                id=response["id"],
-                body=response["body"],
-                commentable_id=response["commentable_id"],
-                commentable_type=response["commentable_type"],
-                created_at=response["created_at"],
-                can_be_edited=response["can_be_edited"],
-                is_offtopic=response["is_offtopic"],
-                html_body=response["html_body"],
-                user_id=response["user_id"],
-                is_summary=response["is_summary"],
-                updated_at=response["updated_at"],
-                user=User(
-                    id=response["user"]["id"],
-                    avatar=response["user"]["avatar"],
-                    url=response["user"]["url"],
-                    last_online_at=response["user"]["last_online_at"],
-                    nickname=response["user"]["nickname"],
-                    image=PhotoExtended(**response["user"]["image"]),
-                ),
-            )
+            return Comment.from_dict(response)
 
         logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
@@ -150,27 +107,7 @@ class CommentEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Comment(
-                id=response["id"],
-                body=response["body"],
-                commentable_id=response["commentable_id"],
-                commentable_type=response["commentable_type"],
-                created_at=response["created_at"],
-                can_be_edited=response["can_be_edited"],
-                is_offtopic=response["is_offtopic"],
-                html_body=response["html_body"],
-                user_id=response["user_id"],
-                is_summary=response["is_summary"],
-                updated_at=response["updated_at"],
-                user=User(
-                    id=response["user"]["id"],
-                    avatar=response["user"]["avatar"],
-                    url=response["user"]["url"],
-                    last_online_at=response["user"]["last_online_at"],
-                    nickname=response["user"]["nickname"],
-                    image=PhotoExtended(**response["user"]["image"]),
-                ),
-            )
+            return Comment.from_dict(response)
 
         logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"
@@ -198,27 +135,7 @@ class CommentEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Comment(
-                id=response["id"],
-                body=response["body"],
-                commentable_id=response["commentable_id"],
-                commentable_type=response["commentable_type"],
-                created_at=response["created_at"],
-                can_be_edited=response["can_be_edited"],
-                is_offtopic=response["is_offtopic"],
-                html_body=response["html_body"],
-                user_id=response["user_id"],
-                is_summary=response["is_summary"],
-                updated_at=response["updated_at"],
-                user=User(
-                    id=response["user"]["id"],
-                    avatar=response["user"]["avatar"],
-                    url=response["user"]["url"],
-                    last_online_at=response["user"]["last_online_at"],
-                    nickname=response["user"]["nickname"],
-                    image=PhotoExtended(**response["user"]["image"]),
-                ),
-            )
+            return Comment.from_dict(response)
 
         logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"

@@ -52,7 +52,7 @@ class EpisodeNotificationEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return EpisodeNotification(**response)
+            return EpisodeNotification.from_dict(response)
 
         logger.debug(
             f"Bad Request(notify): status - {response.status_code}: info - {str(response)}"

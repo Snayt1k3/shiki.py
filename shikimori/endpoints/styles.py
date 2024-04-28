@@ -14,7 +14,7 @@ class StylesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Style(**response)
+            return Style.from_dict(response)
 
         logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
@@ -31,7 +31,7 @@ class StylesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Style(**response)
+            return Style.from_dict(response)
 
         logger.debug(
             f"Bad Request(preview): status - {response.status_code}: info - {str(response)}"
@@ -57,7 +57,7 @@ class StylesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Style(**response)
+            return Style.from_dict(response)
 
         logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"
@@ -81,7 +81,7 @@ class StylesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Style(**response)
+            return Style.from_dict(response)
 
         logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"

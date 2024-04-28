@@ -14,7 +14,7 @@ class GenreEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Genre(**s) for s in response]
+            return [Genre.from_dict(s) for s in response]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"

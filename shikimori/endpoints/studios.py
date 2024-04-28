@@ -15,7 +15,7 @@ class StudiosEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Studio(**s) for s in response]
+            return [Studio.from_dict(studio) for studio in response]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"

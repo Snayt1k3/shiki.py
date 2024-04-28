@@ -17,7 +17,7 @@ class VideosEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Video(**v) for v in response]
+            return [Video.from_dict(v) for v in response]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
@@ -44,7 +44,7 @@ class VideosEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Video(**response)
+            return Video.from_dict(response)
 
         logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"

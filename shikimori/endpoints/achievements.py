@@ -16,9 +16,9 @@ class AchievementsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Achievement(**obj) for obj in response]
+            return [Achievement.from_dict(obj) for obj in response]
 
         logger.debug(
-            f"Bad Request(get_achievements): status - {response.status_code}: info - {str(response)}"
+            f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
         )
         return response

@@ -29,7 +29,7 @@ class ReviewEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Review(**response)
+            return Review.from_dict(response)
 
         logger.debug(
             f"Bad Request(create): status - {response.status_code}: info - {str(response)}"
@@ -52,7 +52,7 @@ class ReviewEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Review(**response)
+            return Review.from_dict(response)
 
         logger.debug(
             f"Bad Request(update): status - {response.status_code}: info - {str(response)}"

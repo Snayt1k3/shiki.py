@@ -1,21 +1,16 @@
 import logging
 from typing import List
 
-from shikimori.types.topics import Topic, Forum, Linked
 from shikimori.types.animes import (
-    Anime,
     Relation,
     ExternalLink,
 )
-from shikimori.types.franchise import Franchise, Node, Link
+from shikimori.types.franchise import Franchise
+from shikimori.types.manga import Manga, MangaInfo
+from shikimori.types.roles import Role
+from shikimori.types.topics import Topic
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.photo import Photo, PhotoExtended
-from shikimori.types.genres import Genre
-from shikimori.types.manga import Manga, MangaInfo
-from shikimori.types.roles import Role, Character
-from shikimori.types.user import User
-from shikimori.types.user_rates import MiniUserRate
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
@@ -103,23 +98,7 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Manga(
-                    id=s["id"],
-                    name=s["name"],
-                    russian=s["russian"],
-                    image=Photo(**s["image"]),
-                    url=s["url"],
-                    kind=s["kind"],
-                    score=s["score"],
-                    status=s["status"],
-                    chapters=s["chapters"],
-                    volumes=s["volumes"],
-                    aired_on=s["aired_on"],
-                    released_on=s["released_on"],
-                )
-                for s in response
-            ]
+            return [Manga.from_dict(manga) for manga in response]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
@@ -135,43 +114,7 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return MangaInfo(
-                id=response["id"],
-                name=response["name"],
-                russian=response["russian"],
-                image=response["image"],
-                url=response["url"],
-                kind=response["kind"],
-                score=response["score"],
-                status=response["status"],
-                volumes=response["volumes"],
-                chapters=response["chapters"],
-                aired_on=response["aired_on"],
-                released_on=response["released_on"],
-                english=response["english"],
-                japanese=response["japanese"],
-                synonyms=response["synonyms"],
-                license_name_ru=response["license_name_ru"],
-                description=response["description"],
-                description_html=response["description_html"],
-                description_source=response["description_source"],
-                franchise=response["franchise"],
-                favoured=response["favoured"],
-                anons=response["anons"],
-                ongoing=response["ongoing"],
-                thread_id=response["thread_id"],
-                topic_id=response["topic_id"],
-                myanimelist_id=response["myanimelist_id"],
-                rates_scores_stats=response["rates_scores_stats"],
-                rates_statuses_stats=response["rates_statuses_stats"],
-                licensors=response["licensors"],
-                genres=[Genre(**genre) for genre in response["genres"]],
-                user_rate=(
-                    MiniUserRate(**response["user_rate"])
-                    if response["user_rate"]
-                    else None
-                ),
-            )
+            return MangaInfo.from_dict(response)
 
         logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
@@ -187,35 +130,7 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Role(
-                    roles=role["roles"],
-                    roles_russian=role["roles_russian"],
-                    character=(
-                        Character(
-                            id=role["character"]["id"],
-                            name=role["character"]["name"],
-                            russian=role["character"]["russian"],
-                            url=role["character"]["url"],
-                            image=Photo(**role["character"]["image"]),
-                        )
-                        if role["character"]
-                        else None
-                    ),
-                    person=(
-                        Character(
-                            id=role["person"]["id"],
-                            name=role["person"]["name"],
-                            russian=role["person"]["russian"],
-                            url=role["person"]["url"],
-                            image=Photo(**role["person"]["image"]),
-                        )
-                        if role["person"]
-                        else None
-                    ),
-                )
-                for role in response
-            ]
+            return [Role.from_dict(role) for role in response]
 
         logger.debug(
             f"Bad Request(roles): status - {response.status_code}: info - {str(response)}"
@@ -231,23 +146,7 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Manga(
-                    id=s["id"],
-                    name=s["name"],
-                    russian=s["russian"],
-                    image=Photo(**s["image"]),
-                    url=s["url"],
-                    kind=s["kind"],
-                    score=s["score"],
-                    status=s["status"],
-                    chapters=s["chapters"],
-                    volumes=s["volumes"],
-                    aired_on=s["aired_on"],
-                    released_on=s["released_on"],
-                )
-                for s in response
-            ]
+            return [Manga.from_dict(manga) for manga in response]
 
         logger.debug(
             f"Bad Request(similar): status - {response.status_code}: info - {str(response)}"
@@ -263,49 +162,7 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Relation(
-                    relation=relation["relation"],
-                    relation_russian=relation["relation_russian"],
-                    anime=(
-                        Anime(
-                            id=relation["anime"]["id"],
-                            name=relation["anime"]["name"],
-                            russian=relation["anime"]["russian"],
-                            image=Photo(**relation["anime"]["image"]),
-                            url=relation["anime"]["url"],
-                            kind=relation["anime"]["kind"],
-                            score=relation["anime"]["score"],
-                            status=relation["anime"]["status"],
-                            episodes=relation["anime"]["episodes"],
-                            episodes_aired=relation["anime"]["episodes_aired"],
-                            aired_on=relation["anime"]["aired_on"],
-                            released_on=relation["anime"]["released_on"],
-                        )
-                        if relation["anime"]
-                        else None
-                    ),
-                    manga=(
-                        Manga(
-                            id=relation["manga"]["id"],
-                            name=relation["manga"]["name"],
-                            russian=relation["manga"]["russian"],
-                            image=Photo(**relation["manga"]["image"]),
-                            url=relation["manga"]["url"],
-                            kind=relation["manga"]["kind"],
-                            score=relation["manga"]["score"],
-                            status=relation["manga"]["status"],
-                            chapters=relation["manga"]["chapters"],
-                            volumes=relation["manga"]["volumes"],
-                            aired_on=relation["manga"]["aired_on"],
-                            released_on=relation["manga"]["released_on"],
-                        )
-                        if relation["manga"]
-                        else None
-                    ),
-                )
-                for relation in response
-            ]
+            return [Relation.from_dict(relation) for relation in response]
 
         logger.debug(
             f"Bad Request(related): status - {response.status_code}: info - {str(response)}"
@@ -320,11 +177,7 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Franchise(
-                nodes=[Node(**node) for node in response.get("nodes")],
-                links=[Link(**link) for link in response.get("links")],
-                current_id=response["current_id"],
-            )
+            return Franchise.from_dict(response)
 
         logger.debug(
             f"Bad Request(franchise): status - {response.status_code}: info - {str(response)}"
@@ -340,7 +193,7 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [ExternalLink(**s) for s in response]
+            return [ExternalLink.from_dict(link) for link in response]
 
         logger.debug(
             f"Bad Request(externalLinks): status - {response.status_code}: info - {str(response)}"
@@ -366,51 +219,6 @@ class MangaEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Topic(
-                    id=topic["id"],
-                    topic_title=topic["topic_title"],
-                    body=topic["body"],
-                    html_body=topic["html_body"],
-                    html_footer=topic["html_footer"],
-                    created_at=topic["created_at"],
-                    comments_count=topic["comments_count"],
-                    type=topic["type"],
-                    linked_id=topic["linked_id"],
-                    linked_type=topic["linked_type"],
-                    viewed=topic["viewed"],
-                    last_comment_viewed=topic["last_comment_viewed"],
-                    event=topic["event"],
-                    episode=topic["episode"],
-                    forum=Forum(**topic["forum"]),
-                    user=User(
-                        id=topic["user"]["id"],
-                        nickname=topic["user"]["nickname"],
-                        avatar=topic["user"]["avatar"],
-                        last_online_at=topic["user"]["last_online_at"],
-                        url=topic["user"]["url"],
-                        image=PhotoExtended(**topic["user"]["image"]),
-                    ),
-                    linked=(
-                        Linked(
-                            name=topic["linked"]["name"],
-                            id=topic["linked"]["id"],
-                            russian=topic["linked"]["russian"],
-                            url=topic["linked"]["url"],
-                            kind=topic["linked"]["kind"],
-                            score=topic["linked"]["score"],
-                            status=topic["linked"]["status"],
-                            chapters=topic["linked"]["chapters"],
-                            volumes=topic["linked"]["volumes"],
-                            aired_on=topic["linked"]["aired_on"],
-                            released_on=topic["linked"]["released_on"],
-                            image=Photo(**topic["linked"]["image"]),
-                        )
-                        if topic["linked"]
-                        else None
-                    ),
-                )
-                for topic in response
-            ]
+            return [Topic.from_dict(topic) for topic in response]
 
         return response

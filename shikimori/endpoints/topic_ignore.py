@@ -22,7 +22,7 @@ class TopicIgnoreEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Topic(**response)
+            return Topic.from_dict(response)
 
         logger.debug(
             f"Bad Request(ignore): status - {response.status_code}: info - {str(response)}"
@@ -47,7 +47,7 @@ class TopicIgnoreEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return Topic(**response)
+            return Topic.from_dict(response)
 
         logger.debug(
             f"Bad Request(unignore): status - {response.status_code}: info - {str(response)}"

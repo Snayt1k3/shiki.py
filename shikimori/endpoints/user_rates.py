@@ -17,7 +17,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateResponse(**response)
+            return UserRateResponse.from_dict(response)
 
         logger.debug(
             f"Bad Request(get_user_rate): status - {response.status_code}: info - {str(response)}"
@@ -59,7 +59,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [UserRateResponse(**obj) for obj in response]
+            return [UserRateResponse.from_dict(user_rate) for user_rate in response]
 
         logger.debug(
             f"Bad Request(get_user_rate): status - {response.status_code}: info - {str(response)}"
@@ -106,7 +106,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateResponse(**response)
+            return UserRateResponse.from_dict(response)
 
         logger.debug(
             f"Bad Request(create_user_rate): status - {response.status_code}: info - {str(response)}"
@@ -148,7 +148,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateResponse(**response)
+            return UserRateResponse.from_dict(response)
 
         logger.debug(
             f"Bad Request(update_user_rate): status - {response.status_code}: info - {str(response)}"
@@ -168,7 +168,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateResponse(**response)
+            return UserRateResponse.from_dict(response)
 
         logger.debug(
             f"Bad Request(increment): status - {response.status_code}: info - {str(response)}"

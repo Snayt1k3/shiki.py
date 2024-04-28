@@ -23,7 +23,7 @@ class AbuseRequestEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return AbuseRequest(**response)
+            return AbuseRequest.from_dict(response)
 
         logger.debug(
             f"Bad Request(mark_comment_as_offtopic): status - {response.status_code}: info - {str(response)}"

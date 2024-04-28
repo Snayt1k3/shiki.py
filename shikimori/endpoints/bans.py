@@ -20,32 +20,8 @@ class BanEndpoint(BaseEndpoint):
 
         if not isinstance(response, RequestError):
             return [
-                Ban(
-                    id=b["id"],
-                    created_at=b["created_at"],
-                    duration_minutes=b["duration_minutes"],
-                    moderator_id=b["moderator_id"],
-                    reason=b["reason"],
-                    user_id=b["user_id"],
-                    comment=Comment(**b["comment"]),
-                    user=User(
-                        id=b["user"]["id"],
-                        avatar=b["user"]["avatar"],
-                        image=PhotoExtended(**b["user"]["image"]),
-                        last_online_at=b["user"]["last_online_at"],
-                        nickname=b["user"]["nickname"],
-                        url=b["user"]["url"],
-                    ),
-                    moderator=User(
-                        id=b["moderator"]["id"],
-                        avatar=b["moderator"]["avatar"],
-                        image=PhotoExtended(**b["moderator"]["image"]),
-                        last_online_at=b["moderator"]["last_online_at"],
-                        nickname=b["moderator"]["nickname"],
-                        url=b["moderator"]["url"],
-                    ),
-                )
-                for b in response
+                Ban.from_dict(ban)
+                for ban in response
             ]
 
         logger.debug(

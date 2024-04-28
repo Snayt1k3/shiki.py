@@ -14,7 +14,7 @@ class ForumEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Forum(**s) for s in response]
+            return [Forum.from_dict(s) for s in response]
 
         logger.debug(
             f"Bad Request(add): status - {response.status_code}: info - {str(response)}"

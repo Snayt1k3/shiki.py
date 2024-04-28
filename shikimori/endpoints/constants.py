@@ -22,7 +22,7 @@ class ConstantsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return AnimeConstant(**response)
+            return AnimeConstant.from_dict(response)
 
         logger.debug(
             f"Bad Request(animes): status - {response.status_code}: info - {str(response)}"
@@ -38,7 +38,7 @@ class ConstantsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return MangaConstant(**response)
+            return MangaConstant.from_dict(response)
 
         logger.debug(
             f"Bad Request(manga): status - {response.status_code}: info - {str(response)}"
@@ -54,7 +54,7 @@ class ConstantsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateConstant(**response)
+            return UserRateConstant.from_dict(response)
 
         logger.debug(
             f"Bad Request(user_rate): status - {response.status_code}: info - {str(response)}"
@@ -70,7 +70,7 @@ class ConstantsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return ClubConstant(**response)
+            return ClubConstant.from_dict(response)
 
         logger.debug(
             f"Bad Request(club): status - {response.status_code}: info - {str(response)}"
@@ -86,7 +86,7 @@ class ConstantsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [SmileConstant(**s) for s in response]
+            return [SmileConstant.from_dict(s) for s in response]
 
         logger.debug(
             f"Bad Request(smileys): status - {response.status_code}: info - {str(response)}"

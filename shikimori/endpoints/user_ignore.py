@@ -22,7 +22,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserIgnore(**response)
+            return UserIgnore.from_dict(response)
 
         logger.debug(
             f"Bad Request(ignore): status - {response.status_code}: info - {str(response)}"
@@ -44,7 +44,7 @@ class UserIgnoreEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserIgnore(**response)
+            return UserIgnore.from_dict(response)
 
         logger.debug(
             f"Bad Request(unignore): status - {response.status_code}: info - {str(response)}"

@@ -25,28 +25,7 @@ class CalendarEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Calendar(
-                    next_episode=b["next_episode"],
-                    duration=b["duration"],
-                    next_episode_at=b["next_episode_at"],
-                    anime=Anime(
-                        id=b["anime"]["id"],
-                        name=b["anime"]["name"],
-                        russian=b["anime"]["russian"],
-                        aired_on=b["anime"]["aired_on"],
-                        episodes=b["anime"]["episodes"],
-                        episodes_aired=b["anime"]["episodes_aired"],
-                        kind=b["anime"]["kind"],
-                        released_on=b["anime"]["released_on"],
-                        score=b["anime"]["score"],
-                        status=b["anime"]["status"],
-                        url=b["anime"]["url"],
-                        image=Photo(**b["anime"]["image"]),
-                    ),
-                )
-                for b in response
-            ]
+            return [Calendar.from_dict(calendar) for calendar in response]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"

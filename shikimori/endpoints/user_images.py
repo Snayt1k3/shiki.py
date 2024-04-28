@@ -22,7 +22,7 @@ class UserImageEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserImage(**response)
+            return UserImage.from_dict(response)
 
         logger.debug(
             f"Bad Request(upload): status - {response.status_code}: info - {str(response)}"

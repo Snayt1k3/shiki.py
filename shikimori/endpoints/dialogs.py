@@ -22,47 +22,7 @@ class DialogsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Dialog(
-                    target_user=User(
-                        id=s["target_user"]["id"],
-                        nickname=s["target_user"]["nickname"],
-                        avatar=s["target_user"]["avatar"],
-                        last_online_at=s["target_user"]["last_online_at"],
-                        url=s["target_user"]["url"],
-                        image=PhotoExtended(**s["target_user"]["image"]),
-                    ),
-                    message=Message(
-                        id=s["message"]["id"],
-                        body=s["message"]["body"],
-                        html_body=s["message"]["html_body"],
-                        created_at=s["message"]["created_at"],
-                        read=s["message"]["read"],
-                        kind=s["message"]["kind"],
-                        linked_id=s["message"]["linked_id"],
-                        linked_type=s["message"]["linked_type"],
-                        linked=(
-                            Linked(
-                                name=s["message"]["linked"]["name"],
-                                id=s["message"]["linked"]["id"],
-                                russian=s["message"]["linked"]["russian"],
-                                url=s["message"]["linked"]["url"],
-                                kind=s["message"]["linked"]["kind"],
-                                score=s["message"]["linked"]["score"],
-                                status=s["message"]["linked"]["status"],
-                                episodes=s["message"]["linked"]["episodes"],
-                                episodes_aired=s["message"]["linked"]["episodes_aired"],
-                                aired_on=s["message"]["linked"]["aired_on"],
-                                released_on=s["message"]["linked"]["released_on"],
-                                image=Photo(**s["message"]["linked"]["image"]),
-                            )
-                            if s["message"]["linked"]
-                            else None
-                        ),
-                    ),
-                )
-                for s in response
-            ]
+            return [Dialog.from_dict(dialog) for dialog in response]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"
@@ -82,53 +42,7 @@ class DialogsEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                MessageInfo(
-                    id=s["id"],
-                    kind=s["kind"],
-                    body=s["body"],
-                    html_body=s["html_body"],
-                    created_at=s["created_at"],
-                    linked_id=s["linked_id"],
-                    linked_type=s["linked_type"],
-                    read=s["read"],
-                    linked=(
-                        Linked(
-                            name=s["linked"]["name"],
-                            id=s["linked"]["id"],
-                            russian=s["linked"]["russian"],
-                            url=s["linked"]["url"],
-                            kind=s["linked"]["kind"],
-                            score=s["linked"]["score"],
-                            status=s["linked"]["status"],
-                            episodes=s["linked"]["episodes"],
-                            episodes_aired=s["linked"]["episodes_aired"],
-                            aired_on=s["linked"]["aired_on"],
-                            released_on=s["linked"]["released_on"],
-                            image=Photo(**s["linked"]["image"]),
-                        )
-                        if s["linked"]
-                        else None
-                    ),
-                    to=User(
-                        id=s["to"]["id"],
-                        avatar=s["to"]["avatar"],
-                        image=PhotoExtended(**s["to"]["image"]),
-                        last_online_at=s["to"]["last_online_at"],
-                        nickname=s["to"]["nickname"],
-                        url=s["to"]["url"],
-                    ),
-                    sender=User(
-                        id=s["from"]["id"],
-                        avatar=s["from"]["avatar"],
-                        image=PhotoExtended(**s["from"]["image"]),
-                        last_online_at=s["from"]["last_online_at"],
-                        nickname=s["from"]["nickname"],
-                        url=s["from"]["url"],
-                    ),
-                )
-                for s in response
-            ]
+            return [MessageInfo.from_dict(msg) for msg in response]
 
         logger.debug(
             f"Bad Request(ById): status - {response.status_code}: info - {str(response)}"
