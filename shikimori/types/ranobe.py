@@ -1,7 +1,7 @@
 from .base import BaseTitle
 from shikimori.types.genres import Genre
 from shikimori.types.photo import Photo
-from shikimori.types.user_rates import UserRateResponse
+from shikimori.types.user_rates import UserRate
 from dataclasses import dataclass
 
 from ..utils.filter import handle_none_data
@@ -78,7 +78,7 @@ class RanobeInfo(Ranobe):
                 Genre.from_dict(genre_data) for genre_data in data.get("genres", [])
             ],
             user_rate=(
-                UserRateResponse.from_dict(data.get("user_rate"))
+                UserRate.from_dict(data.get("user_rate"))
                 if data.get("user_rate")
                 else None
             ),

@@ -1,4 +1,4 @@
-from shikimori.types.user_rates import UserRateResponse
+from shikimori.types.user_rates import UserRate
 from shikimori.exceptions import RequestError
 from tests.fixtures.unit.api_client import FakeRequest
 
@@ -9,7 +9,7 @@ import pytest
 async def test_by_id_success(user_rate, user_rate_json):
     user_rate._request = FakeRequest(user_rate_json)
     response = await user_rate.ById(9)
-    assert UserRateResponse(**user_rate_json) == response
+    assert UserRate(**user_rate_json) == response
 
 
 @pytest.mark.asyncio
@@ -51,7 +51,7 @@ async def test_create_error(user_rate):
 async def test_update_success(user_rate, user_rate_json):
     user_rate._request = FakeRequest(user_rate_json)
     response = await user_rate.update(14)
-    assert UserRateResponse(**user_rate_json) == response
+    assert UserRate(**user_rate_json) == response
 
 
 @pytest.mark.asyncio
@@ -65,7 +65,7 @@ async def test_update_error(user_rate):
 async def test_increment_success(user_rate_json, user_rate):
     user_rate._request = FakeRequest(user_rate_json)
     response = await user_rate.increment(14)
-    assert UserRateResponse(**user_rate_json) == response
+    assert UserRate(**user_rate_json) == response
 
 
 @pytest.mark.asyncio

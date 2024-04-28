@@ -1,7 +1,7 @@
 import pytest
 
 from shikimori.endpoints.user_rates import UserRatesEndpoint
-from shikimori.types.user_rates import UserRateResponse
+from shikimori.types.user_rates import UserRate
 
 
 @pytest.fixture
@@ -70,7 +70,7 @@ def user_rates_json():
 @pytest.fixture
 def exp_list_response():
     return [
-        UserRateResponse(
+        UserRate(
             13,
             23456789,
             12,
@@ -86,7 +86,7 @@ def exp_list_response():
             "2022-11-26T17:19:28.708+03:00",
             "2022-11-26T17:19:28.708+03:00",
         ),
-        UserRateResponse(
+        UserRate(
             14,
             23456789,
             13,
@@ -127,7 +127,7 @@ def create_user_rate_json():
 
 @pytest.fixture
 def create_user_rate_exp():
-    return UserRateResponse(
+    return UserRate(
         16,
         23456789,
         15,

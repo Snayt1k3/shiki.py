@@ -2,7 +2,7 @@ from .base import BaseTitle
 from shikimori.types.genres import Genre
 from shikimori.types.photo import Photo
 from dataclasses import dataclass
-from shikimori.types.user_rates import UserRateResponse
+from shikimori.types.user_rates import UserRate
 from ..utils.filter import handle_none_data
 
 
@@ -50,7 +50,7 @@ class MangaInfo(Manga):
     rates_statuses_stats: list[dict]
     licensors: list[str]
     genres: list[Genre]
-    user_rate: UserRateResponse | None
+    user_rate: UserRate | None
 
     @classmethod
     @handle_none_data
@@ -77,7 +77,7 @@ class MangaInfo(Manga):
                 Genre.from_dict(genre_data) for genre_data in data.get("genres", [])
             ],
             user_rate=(
-                UserRateResponse.from_dict(data.get("user_rate"))
+                UserRate.from_dict(data.get("user_rate"))
                 if data.get("user_rate")
                 else None
             ),

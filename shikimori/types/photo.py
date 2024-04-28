@@ -83,3 +83,23 @@ class UserImage:
             url=data.get("url"),
             bbcode=data.get("bbcode"),
         )
+
+
+@dataclass
+class Logo:
+    original: str
+    main: str
+    x96: str
+    x73: str
+    x48: str
+
+    @classmethod
+    @handle_none_data
+    def from_dict(cls, data: dict):
+        return cls(
+            original=data.get("original"),
+            main=data.get("main"),
+            x96=data.get("x96"),
+            x73=data.get("x73"),
+            x48=data.get("x48"),
+        )

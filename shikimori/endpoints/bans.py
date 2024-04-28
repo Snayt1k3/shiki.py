@@ -19,10 +19,7 @@ class BanEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [
-                Ban.from_dict(ban)
-                for ban in response
-            ]
+            return [Ban.from_dict(ban) for ban in response]
 
         logger.debug(
             f"Bad Request(list): status - {response.status_code}: info - {str(response)}"

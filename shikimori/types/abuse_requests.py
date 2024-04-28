@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from shikimori.utils.filter import handle_none_data
 
+
 @dataclass
 class AbuseRequest:
     kind: str

@@ -36,7 +36,7 @@ class MiniUserRate:
 
 
 @dataclass
-class UserRateResponse:
+class UserRate:
     id: int
     user_id: int
     target_id: int

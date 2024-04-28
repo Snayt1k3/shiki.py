@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 
 from .base import BaseTitle
-from .genres import Genre
 from .manga import Manga
 from .photo import Photo
 from .screenshots import ScreenShot
@@ -9,22 +8,7 @@ from .studios import Studio
 from .user_rates import MiniUserRate
 from .videos import Video
 from ..utils.filter import handle_none_data
-
-
-@dataclass  # TODO перенести в genre.py
-class GenreExtended(Genre):
-    entry_type: str
-
-    @classmethod
-    @handle_none_data
-    def from_dict(cls, data: dict):
-        return cls(
-            id=data.get("id"),
-            name=data.get("name"),
-            russian=data.get("russian"),
-            kind=data.get("kind"),
-            entry_type=data.get("entry_type"),
-        )
+from .genres import GenreExtended
 
 
 @dataclass

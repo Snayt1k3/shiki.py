@@ -2,31 +2,11 @@ from shikimori.types.manga import Manga
 from shikimori.types.animes import Anime
 from shikimori.types.roles import Character
 from shikimori.types.user import User
-from .photo import ClubImage
+from .photo import ClubImage, Logo
 from .topics import Topic
 from dataclasses import dataclass
 
 from ..utils.filter import handle_none_data
-
-
-@dataclass
-class Logo:  # todo перенести в photo.py
-    original: str
-    main: str
-    x96: str
-    x73: str
-    x48: str
-
-    @classmethod
-    @handle_none_data
-    def from_dict(cls, data: dict):
-        return cls(
-            original=data.get("original"),
-            main=data.get("main"),
-            x96=data.get("x96"),
-            x73=data.get("x73"),
-            x48=data.get("x48"),
-        )
 
 
 @dataclass

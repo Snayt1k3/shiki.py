@@ -4,7 +4,7 @@ from shikimori.types.animes import Anime
 from typing import Any
 
 from .manga import Manga
-from .user_rates import UserRateResponse
+from .user_rates import UserRate
 from shikimori.types.base import BaseTitle
 from ..utils.filter import handle_none_data
 

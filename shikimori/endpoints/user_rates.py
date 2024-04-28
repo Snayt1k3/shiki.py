@@ -1,6 +1,6 @@
 import logging
 
-from shikimori.types.user_rates import UserRateResponse
+from shikimori.types.user_rates import UserRate
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters
@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 class UserRatesEndpoint(BaseEndpoint):
-    async def ById(self, id: int) -> UserRateResponse | RequestError:
+    async def ById(self, id: int) -> UserRate | RequestError:
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/v2/user_rates/{id}",
@@ -17,7 +17,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateResponse.from_dict(response)
+            return UserRate.from_dict(response)
 
         logger.debug(
             f"Bad Request(get_user_rate): status - {response.status_code}: info - {str(response)}"
@@ -33,7 +33,7 @@ class UserRatesEndpoint(BaseEndpoint):
         status: str = None,
         page: int = None,
         limit: int = None,
-    ) -> list[UserRateResponse] | RequestError:
+    ) -> list[UserRate] | RequestError:
         """
         :param user_id: must be a number
         :param target_id: must be a number
@@ -59,7 +59,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [UserRateResponse.from_dict(user_rate) for user_rate in response]
+            return [UserRate.from_dict(user_rate) for user_rate in response]
 
         logger.debug(
             f"Bad Request(get_user_rate): status - {response.status_code}: info - {str(response)}"
@@ -79,7 +79,7 @@ class UserRatesEndpoint(BaseEndpoint):
         volumes: int | None = None,
         rewatches: int | None = None,
         text: str | None = None,
-    ) -> UserRateResponse | RequestError:
+    ) -> UserRate | RequestError:
         """
         Requires oauth scope
         """
@@ -106,7 +106,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateResponse.from_dict(response)
+            return UserRate.from_dict(response)
 
         logger.debug(
             f"Bad Request(create_user_rate): status - {response.status_code}: info - {str(response)}"
@@ -124,7 +124,7 @@ class UserRatesEndpoint(BaseEndpoint):
         volumes: int | None = None,
         rewatches: int | None = None,
         text: str | None = None,
-    ) -> UserRateResponse | RequestError:
+    ) -> UserRate | RequestError:
         """
         requires oauth scope
         """
@@ -148,7 +148,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateResponse.from_dict(response)
+            return UserRate.from_dict(response)
 
         logger.debug(
             f"Bad Request(update_user_rate): status - {response.status_code}: info - {str(response)}"
@@ -156,7 +156,7 @@ class UserRatesEndpoint(BaseEndpoint):
 
         return response
 
-    async def increment(self, user_rate_id: int) -> UserRateResponse | RequestError:
+    async def increment(self, user_rate_id: int) -> UserRate | RequestError:
         """
         requires oauth scope.
         Increment episodes/chapters by 1
@@ -168,7 +168,7 @@ class UserRatesEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return UserRateResponse.from_dict(response)
+            return UserRate.from_dict(response)
 
         logger.debug(
             f"Bad Request(increment): status - {response.status_code}: info - {str(response)}"
