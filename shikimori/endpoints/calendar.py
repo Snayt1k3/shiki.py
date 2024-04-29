@@ -1,11 +1,9 @@
 import logging
 from typing import List
 
+from shikimori.types.calendar import Calendar
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.calendar import Calendar
-from shikimori.types.photo import Photo
-from shikimori.types.animes import Anime
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)

@@ -24,6 +24,12 @@ class UserEndpoint(BaseEndpoint):
     async def list(
         self, page: int = None, limit: int = None, search: str = None
     ) -> List[User] | RequestError:
+        """
+        list users
+        :param page: Must be a number between 1 and 100000.
+        :param limit: 100 maximum
+        :param search: Must be a String
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users",
@@ -44,8 +50,8 @@ class UserEndpoint(BaseEndpoint):
 
     async def ById(self, id: int, is_nickname: str = None) -> UserInfo | RequestError:
         """
-
-        :param id: num
+        Show a user
+        :param id: must be a number
         :param is_nickname: 1 if you want to get user by its nickname
         """
         response = await self._request.make_request(
@@ -65,6 +71,10 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def info(self, id: int) -> User | RequestError:
+        """
+        Show user's brief info
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/info",
@@ -80,6 +90,9 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def whoami(self) -> User | RequestError:
+        """
+        Show current user's brief info
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/whoami",
@@ -95,6 +108,9 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def signOut(self) -> None | RequestError:
+        """
+        Sign out the user
+        """
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/users/sign_out",
@@ -110,6 +126,9 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def friends(self) -> List[User] | RequestError:
+        """
+        Show user's friends
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/friends",
@@ -125,6 +144,10 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def clubs(self, id: int) -> List[Club] | RequestError:
+        """
+        Show user's clubs
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/clubs",
@@ -146,6 +169,14 @@ class UserEndpoint(BaseEndpoint):
         status: str = None,
         censored: bool = None,
     ) -> List[Rate] | RequestError:
+        """
+        Show user's anime list
+        :param id: must be a number
+        :param limit: Must be a number between 1 and 100000
+        :param page: 5000 maximum
+        :param status: Must be one of: planned, watching, rewatching, completed, on_hold, dropped.
+        :param censored: Must be one of: true, false.
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/anime_rates",
@@ -169,6 +200,13 @@ class UserEndpoint(BaseEndpoint):
         page: int = None,
         censored: bool = None,
     ) -> List[Rate] | RequestError:
+        """
+        Show user's manga list
+        :param id: must be a number
+        :param limit: Must be a number between 1 and 100000
+        :param page: 5000 maximum
+        :param censored: Must be one of: true, false.
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/manga_rates",
@@ -187,6 +225,10 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def favourites(self, id: int) -> Favourites | RequestError:
+        """
+        Show user's favourites
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/favourites",
@@ -205,7 +247,8 @@ class UserEndpoint(BaseEndpoint):
         self, id: int, page: int = None, limit: int = None, type: str = None
     ) -> List[MessageInfo] | RequestError:
         """
-        :param id: user id
+        Show current user's messages
+        :param id: must be a number.
         :param page: Must be a number between 1 and 100000.
         :param limit: 100 maximum
         :param type: Must be one of: inbox, private, sent, news, notifications.
@@ -226,6 +269,10 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def unread(self, id: int) -> UnreadMessages | RequestError:
+        """
+        Show current user's unread messages counts
+        :param id: must be a number.
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/unread_messages",
@@ -249,7 +296,7 @@ class UserEndpoint(BaseEndpoint):
         target_id: int = None,
     ) -> List[HistoryObj] | RequestError:
         """
-
+        Show user history
         :param id: Must be a number.
         :param page: Must be a number between 1 and 100000.
         :param limit: 100 maximum
@@ -279,6 +326,11 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def bans(self, id: int) -> List[Ban] | RequestError:
+        """
+        Show user's bans
+        :param id: Must be a number.
+        :return:
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/users/{id}/bans",

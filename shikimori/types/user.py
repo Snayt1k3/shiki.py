@@ -4,8 +4,8 @@ from shikimori.types.animes import Anime
 from typing import Any
 
 from .manga import Manga
-from .user_rates import UserRate
 from shikimori.types.base import BaseTitle
+from shikimori.constants import SHIKIMORI_URL
 from ..utils.filter import handle_none_data
 
 
@@ -153,6 +153,10 @@ class UserInfoInc(User):
             last_online_at=data.get("last_online_at"),
             url=data.get("url"),
         )
+
+    @property
+    def avatar_url(self) -> str:
+        return f"{SHIKIMORI_URL}{self.avatar_url}"
 
 
 @dataclass

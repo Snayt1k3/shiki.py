@@ -2,10 +2,7 @@ import logging
 from typing import List
 
 from shikimori.types.dialog import Dialog
-from shikimori.types.message import Message, MessageInfo
-from shikimori.types.photo import PhotoExtended, Photo
-from shikimori.types.topics import Linked
-from shikimori.types.user import User
+from shikimori.types.message import MessageInfo
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 
@@ -14,7 +11,10 @@ logger = logging.getLogger(__name__)
 
 class DialogsEndpoint(BaseEndpoint):
     async def list(self) -> List[Dialog] | RequestError:
-        """requires oauth scope"""
+        """
+        List dialogs
+        Requires messages oauth scope
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/dialogs",
@@ -32,8 +32,9 @@ class DialogsEndpoint(BaseEndpoint):
 
     async def ById(self, id: str) -> List[MessageInfo] | RequestError:
         """
-        requires oauth scope
-        :param id: like user_id
+        Show a dialog
+        Requires messages oauth scope
+        :param id: like user_{id}
         """
         response = await self._request.make_request(
             "GET",
@@ -51,7 +52,11 @@ class DialogsEndpoint(BaseEndpoint):
         return response
 
     async def delete(self, id: str) -> str | RequestError:
-        """requires oauth scope"""
+        """
+        Destroy a dialog
+        Requires messages oauth scope
+        :param id: like user_{id}
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/dialogs/{id}",

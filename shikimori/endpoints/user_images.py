@@ -1,8 +1,8 @@
 import logging
 
+from shikimori.types.photo import UserImage
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.photo import UserImage
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
@@ -12,7 +12,12 @@ class UserImageEndpoint(BaseEndpoint):
     async def upload(
         self, image: str, linked_type: str = None
     ) -> UserImage | RequestError:
-        """Requires comments oauth scope"""
+        """
+        Create a user image
+        Requires comments oauth scope
+        :param image: Must be a String
+        :param linked_type: Must be a String
+        """
 
         response = await self._request.make_request(
             "POST",

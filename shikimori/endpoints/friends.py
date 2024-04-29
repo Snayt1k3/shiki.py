@@ -8,7 +8,11 @@ logger = logging.getLogger(__name__)
 
 class FriendEndpoint(BaseEndpoint):
     async def add(self, id: int) -> str | RequestError:
-        """requires oauth scope"""
+        """
+        Create a friend
+        Requires friends oauth scope
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/friends/{id}",
@@ -25,7 +29,12 @@ class FriendEndpoint(BaseEndpoint):
         return response
 
     async def delete(self, id: int) -> str | RequestError:
-        """requires oauth scope"""
+        """
+        Destroy a friend
+        Requires friends oauth scope
+
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/friends/{id}",

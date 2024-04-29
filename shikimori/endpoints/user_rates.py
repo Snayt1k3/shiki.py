@@ -10,6 +10,11 @@ logger = logging.getLogger(__name__)
 
 class UserRatesEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> UserRate | RequestError:
+        """
+        Show a user rate
+        :param id: must be a number
+        """
+
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/v2/user_rates/{id}",
@@ -35,6 +40,7 @@ class UserRatesEndpoint(BaseEndpoint):
         limit: int = None,
     ) -> list[UserRate] | RequestError:
         """
+        List user rates
         :param user_id: must be a number
         :param target_id: must be a number
         :param target_type: Must be one of: Anime, Manga
@@ -81,7 +87,18 @@ class UserRatesEndpoint(BaseEndpoint):
         text: str | None = None,
     ) -> UserRate | RequestError:
         """
-        Requires oauth scope
+        Create a user rate
+        Requires user_rates oauth scope
+        :param text: Must be a String
+        :param rewatches: Must be a number.
+        :param volumes: Must be a number.
+        :param episodes: Must be a number.
+        :param chapters: Must be a number.
+        :param score: Must be a number.
+        :param status: Must be one of: planned, watching, rewatching, completed, on_hold, dropped
+        :param target_type:  Must be one of: Anime, Manga.
+        :param target_id: Must be a number.
+        :param user_id: Must be a number.
         """
         response = await self._request.make_request(
             "POST",
@@ -126,7 +143,17 @@ class UserRatesEndpoint(BaseEndpoint):
         text: str | None = None,
     ) -> UserRate | RequestError:
         """
-        requires oauth scope
+        Update an user rate
+        Requires user_rates oauth scope
+
+        :param user_rate_id: Must be a number.
+        :param status: Must be a number.
+        :param score: Must be a number.
+        :param chapters: Must be a number.
+        :param episodes: Must be a number.
+        :param volumes: Must be a number.
+        :param rewatches: Must be a number.
+        :param text: Must be a String
         """
         response = await self._request.make_request(
             "PATCH",
@@ -158,8 +185,9 @@ class UserRatesEndpoint(BaseEndpoint):
 
     async def increment(self, user_rate_id: int) -> UserRate | RequestError:
         """
-        requires oauth scope.
+        requires user_rates oauth scope.
         Increment episodes/chapters by 1
+        :param user_rate_id:  Must be a number.
         """
         response = await self._request.make_request(
             "POST",
@@ -179,9 +207,8 @@ class UserRatesEndpoint(BaseEndpoint):
     async def delete(self, user_rate_id: int) -> None | RequestError:
         """
         Destroy a user rate.
-        requires oauth scope
+        requires user_rates oauth scope
         :param user_rate_id: must be a number.
-        :return: None - Success, RequestError - Error.
         """
 
         response = await self._request.make_request(

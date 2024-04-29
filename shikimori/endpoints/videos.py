@@ -1,18 +1,23 @@
 import logging
 from typing import List
 
+from shikimori.types.videos import Video
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.videos import Video
 
 logger = logging.getLogger(__name__)
 
 
 class VideosEndpoint(BaseEndpoint):
-    async def list(self, anime_id: int) -> List[Video] | RequestError:
+    async def list(self, id: int) -> List[Video] | RequestError:
+        """
+        List videos
+        :param id: must be a number
+        :return:
+        """
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/animes/{anime_id}/videos",
+            url=f"{self._base_url}/api/animes/{id}/videos",
             headers=self.headers,
         )
 
@@ -26,11 +31,12 @@ class VideosEndpoint(BaseEndpoint):
         return response
 
     async def create(
-        self, anime_id: int, kind: str, url: str, name: str
+        self, id: int, kind: str, url: str, name: str
     ) -> Video | RequestError:
         """
+        Create a video
         Requires content oauth scope
-        :param anime_id:
+        :param id: must be a number
         :param kind: Must be one of: pv, character_trailer, cm, op, ed, op_ed_clip, clip, other, episode_preview.
         :param url: Supported hostings: YouTube,vk,ok,coub,rutube,vimeo,sibnet,yandex,streamable,smotret_anime,myvi,youmite,viuly,stormo,mediafile
         :param name: str.
@@ -38,7 +44,7 @@ class VideosEndpoint(BaseEndpoint):
         """
         response = await self._request.make_request(
             "POST",
-            url=f"{self._base_url}/api/animes/{anime_id}/videos",
+            url=f"{self._base_url}/api/animes/{id}/videos",
             json={"video": {"url": url, "kind": kind, "name": name}},
             headers=self.headers,
         )
@@ -53,6 +59,13 @@ class VideosEndpoint(BaseEndpoint):
         return response
 
     async def delete(self, anime_id: int, id: int) -> None | RequestError:
+        """
+        Destroy a video
+        Requires content oauth scope
+        :param anime_id: must be a number
+        :param id: must be a number
+        :return:
+        """
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/animes/{anime_id}/videos/{id}",

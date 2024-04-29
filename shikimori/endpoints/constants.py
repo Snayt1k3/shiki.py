@@ -1,7 +1,5 @@
 import logging
 
-from .base import BaseEndpoint
-from ..exceptions import RequestError
 from shikimori.types.constants import (
     SmileConstant,
     ClubConstant,
@@ -9,6 +7,8 @@ from shikimori.types.constants import (
     MangaConstant,
     UserRateConstant,
 )
+from .base import BaseEndpoint
+from ..exceptions import RequestError
 
 logger = logging.getLogger(__name__)
 

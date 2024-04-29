@@ -96,6 +96,10 @@ class RanobeEndpoint(BaseEndpoint):
         return response
 
     async def ById(self, id: int) -> RanobeInfo | RequestError:
+        """
+        Show a ranobe
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}",
@@ -112,6 +116,10 @@ class RanobeEndpoint(BaseEndpoint):
         return response
 
     async def roles(self, id: int) -> List[Role] | RequestError:
+        """
+        list roles
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/roles",
@@ -128,6 +136,10 @@ class RanobeEndpoint(BaseEndpoint):
         return response
 
     async def similar(self, id: int) -> List[Ranobe] | RequestError:
+        """
+        list similar
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/similar",
@@ -144,6 +156,10 @@ class RanobeEndpoint(BaseEndpoint):
         return response
 
     async def related(self, id: int) -> List[Relation] | RequestError:
+        """
+        list related
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/related",
@@ -159,6 +175,10 @@ class RanobeEndpoint(BaseEndpoint):
         return response
 
     async def franchise(self, id: int) -> Franchise | RequestError:
+        """
+        list franchise
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/franchise",
@@ -175,6 +195,10 @@ class RanobeEndpoint(BaseEndpoint):
         return response
 
     async def ExternalLinks(self, id: int) -> List[ExternalLink] | RequestError:
+        """
+        list ExternalLinks
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/external_links",
@@ -196,6 +220,12 @@ class RanobeEndpoint(BaseEndpoint):
         page: int = None,
         limit: int = None,
     ) -> List[Topic] | RequestError:
+        """
+        list ExternalLinks
+        :param limit: 30 maximum
+        :param page: Must be a number between 1 and 100000.
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/ranobe/{id}/topics",

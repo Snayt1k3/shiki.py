@@ -2,12 +2,10 @@ import logging
 from typing import List
 
 from shikimori.types.animes import Anime
-from shikimori.types.club import Logo, Club, ClubImage, ClubInfo, Collection
+from shikimori.types.club import Club, ClubImage, ClubInfo, Collection
 from shikimori.types.manga import Manga
-from shikimori.types.photo import Photo, PhotoExtended
 from shikimori.types.ranobe import Ranobe
 from shikimori.types.roles import Character
-from shikimori.types.topics import Forum
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.user import User
@@ -25,7 +23,6 @@ class ClubEndpoint(BaseEndpoint):
         :param page: Must be a number between 1 and 100000.
         :param limit: 30 max
         :param search: string
-
         """
         response = await self._request.make_request(
             "GET",
@@ -46,6 +43,10 @@ class ClubEndpoint(BaseEndpoint):
         return response
 
     async def ById(self, id: int) -> ClubInfo | RequestError:
+        """
+        Show a club
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/clubs/{id}",
@@ -72,7 +73,8 @@ class ClubEndpoint(BaseEndpoint):
         image_upload_policy: str = None,
     ) -> ClubInfo | RequestError:
         """
-        requires oauth scope
+        Update a club
+        Requires clubs oauth scope
         :param id: number.
         :param name: string.
         :param description: string.
@@ -311,7 +313,11 @@ class ClubEndpoint(BaseEndpoint):
         return response
 
     async def join(self, id: int) -> None | RequestError:
-        """requires oauth scope"""
+        """
+        Join a club
+        Requires clubs oauth scope
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/clubs/{id}/join",
@@ -328,7 +334,11 @@ class ClubEndpoint(BaseEndpoint):
         return response
 
     async def leave(self, id: int) -> None | RequestError:
-        """requires oauth scope !"""
+        """
+        Leave a club
+        Requires clubs oauth scope
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/clubs/{id}/leave",

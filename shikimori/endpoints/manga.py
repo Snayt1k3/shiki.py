@@ -107,6 +107,10 @@ class MangaEndpoint(BaseEndpoint):
         return response
 
     async def ById(self, id: int) -> MangaInfo | RequestError:
+        """
+        Show a manga
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}",
@@ -123,6 +127,10 @@ class MangaEndpoint(BaseEndpoint):
         return response
 
     async def roles(self, id: int) -> List[Role] | RequestError:
+        """
+        list roles
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/roles",
@@ -139,6 +147,10 @@ class MangaEndpoint(BaseEndpoint):
         return response
 
     async def similar(self, id: int) -> List[Manga] | RequestError:
+        """
+        list similar
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/similar",
@@ -155,6 +167,10 @@ class MangaEndpoint(BaseEndpoint):
         return response
 
     async def related(self, id: int) -> List[Relation] | RequestError:
+        """
+        list related
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/related",
@@ -170,6 +186,10 @@ class MangaEndpoint(BaseEndpoint):
         return response
 
     async def franchise(self, id: int) -> Franchise | RequestError:
+        """
+        list franchises
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/franchise",
@@ -186,6 +206,10 @@ class MangaEndpoint(BaseEndpoint):
         return response
 
     async def ExternalLinks(self, id: int) -> List[ExternalLink] | RequestError:
+        """
+        list ExternalLinks
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/external_links",
@@ -206,16 +230,18 @@ class MangaEndpoint(BaseEndpoint):
         id: int,
         page: int = None,
         limit: int = None,
-        kind: str = None,
-        episode: int = None,
     ) -> List[Topic] | RequestError:
+        """
+        list topics
+        :param id: must be a number
+        :param page: Must be a number between 1 and 100000.
+        :param limit: 30 maximum
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/mangas/{id}/topics",
             headers=self.headers,
-            params=filter_none_parameters(
-                {"page": page, "limit": limit, "kind": kind, "episode": episode}
-            ),
+            params=filter_none_parameters({"page": page, "limit": limit}),
         )
 
         if not isinstance(response, RequestError):

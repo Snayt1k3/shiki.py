@@ -12,7 +12,7 @@ class FavoritesEndpoint(BaseEndpoint):
         self, id: int, linked_type: str, kind: str = None
     ) -> str | RequestError:
         """
-        requires oauth scope
+        Create a favorite
         :param id:
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Person, Character
         :param kind: Must be one of: common, seyu, mangaka, producer, person
@@ -38,7 +38,7 @@ class FavoritesEndpoint(BaseEndpoint):
 
     async def delete(self, id: int, linked_type: str) -> str | RequestError:
         """
-        requires oauth scope
+        Destroy a favorite
         :param id: number
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Person, Character
         """
@@ -59,7 +59,7 @@ class FavoritesEndpoint(BaseEndpoint):
 
     async def reorder(self, id: int, new_index: int = None) -> None | RequestError:
         """
-        requires oauth scope
+        Assign a new position to a favorite
         :param id: number.
         :param new_index: number.
         """

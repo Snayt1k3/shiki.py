@@ -20,7 +20,7 @@ class TopicsEndpoint(BaseEndpoint):
         type: str = None,
     ) -> List[Topic] | RequestError:
         """
-
+        List topics
         :param page: Must be a number between 1 and 100000.
         :param limit: 30 maximum
         :param forum: Must be one of: all, animanga, site, games, vn, contests, offtopic, clubs, my_clubs, critiques, news, collections, articles, cosplay.
@@ -58,7 +58,7 @@ class TopicsEndpoint(BaseEndpoint):
         self, page: int = None, limit: int = None
     ) -> List[Status] | RequestError:
         """
-
+        NewsTopics about database updates
         :param page: Must be a number between 1 and 100000.
         :param limit: 30 maximum
         """
@@ -84,6 +84,7 @@ class TopicsEndpoint(BaseEndpoint):
 
     async def hot(self, limit: int = None) -> List[Topic] | RequestError:
         """
+        Hot topics
         :param limit: 10 maximum
         """
         response = await self._request.make_request(
@@ -106,6 +107,11 @@ class TopicsEndpoint(BaseEndpoint):
         return response
 
     async def ById(self, id: int) -> Topic | RequestError:
+        """
+        Show a topic
+        :param id: must be a number
+        :return:
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/topics/{id}",
@@ -131,13 +137,14 @@ class TopicsEndpoint(BaseEndpoint):
         linked_type: str = None,
     ) -> Topic | RequestError:
         """
+        Create a topic
         Requires topics oauth scope
-        :param body: str.
-        :param forum_id: num.
-        :param title: str.
-        :param user_id:num .
+        :param body: Must be a String.
+        :param forum_id: Must be a number..
+        :param title: Must be a String.
+        :param user_id: Must be a number. .
         :param type: Must be one of: Topic.
-        :param linked_id: num.
+        :param linked_id: Must be a number..
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Character, Person, Club, ClubPage, Critique, Review, Contest, CosplayGallery, Collection, Article.
         """
         response = await self._request.make_request(
@@ -176,11 +183,13 @@ class TopicsEndpoint(BaseEndpoint):
         title: str = None,
     ) -> Topic | RequestError:
         """
-        :param id: num.
-        :param body: str.
-        :param linked_id: num.
+        Update a topic
+        Requires topics oauth scope
+        :param id: Must be a number.
+        :param body: Must be a String.
+        :param linked_id: Must be a number.
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Character, Person, Club, ClubPage, Critique, Review, Contest, CosplayGallery, Collection, Article.
-        :param title: str.
+        :param title: Must be a String.
         """
         response = await self._request.make_request(
             "PATCH",
@@ -207,6 +216,13 @@ class TopicsEndpoint(BaseEndpoint):
         return response
 
     async def delete(self, id: int) -> None | RequestError:
+        """
+        Destroy a topic
+        Requires topics oauth scope
+
+        :param id: Must be a number
+        :return:
+        """
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/topics/{id}",

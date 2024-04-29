@@ -12,7 +12,9 @@ class UserIgnoreEndpoint(BaseEndpoint):
         """
         ignore user.
 
-        Requires oauth scope
+        Requires ignores oauth scope
+
+        :param user_id: must be a number
         """
 
         response = await self._request.make_request(
@@ -32,9 +34,11 @@ class UserIgnoreEndpoint(BaseEndpoint):
 
     async def unignore(self, user_id: str | int) -> UserIgnore | RequestError:
         """
-        unignore user
+        unignore user.
 
-        Requires oauth scope
+        Requires ignores oauth scope
+
+        :param user_id: must be a number
         """
 
         response = await self._request.make_request(

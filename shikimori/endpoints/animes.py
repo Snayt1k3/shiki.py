@@ -1,26 +1,19 @@
 import logging
 from typing import List
 
-from shikimori.types.topics import Topic, Forum, Linked
 from shikimori.types.animes import (
     Anime,
     AnimeInfo,
-    GenreExtended,
     Relation,
     ExternalLink,
 )
-from shikimori.types.franchise import Franchise, Node, Link
-from shikimori.types.manga import Manga
-from shikimori.types.photo import Photo, PhotoExtended
-from shikimori.types.roles import Role, Character
+from shikimori.types.franchise import Franchise
+from shikimori.types.roles import Role
 from shikimori.types.screenshots import ScreenShot
-from shikimori.types.studios import Studio
-from shikimori.types.videos import Video
+from shikimori.types.topics import Topic
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.user import User
 from ..utils.filter import filter_none_parameters
-from shikimori.types.user_rates import MiniUserRate
 
 logger = logging.getLogger(__name__)
 
@@ -48,6 +41,7 @@ class AnimeEndpoint(BaseEndpoint):
         genre_v2: str = None,
     ) -> list[Anime] | RequestError:
         """
+        List animes
         :param page: must be a number between 1 and 100000.
         :param limit: Must be a number. 50 - maximum
         :param order: Must be one of: id, id_desc, ranked, kind, popularity, name, aired_on, episodes, status, random, ranked_random, ranked_shiki, created_at, created_at_desc.
@@ -106,6 +100,10 @@ class AnimeEndpoint(BaseEndpoint):
         return response
 
     async def ById(self, id: int) -> AnimeInfo | RequestError:
+        """
+        Show an anime
+        :param id: Must be a Number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}",
@@ -122,6 +120,10 @@ class AnimeEndpoint(BaseEndpoint):
         return response
 
     async def roles(self, id: int) -> List[Role] | RequestError:
+        """
+        List anime roles
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/roles",
@@ -138,6 +140,10 @@ class AnimeEndpoint(BaseEndpoint):
         return response
 
     async def similar(self, id: int) -> List[Anime] | RequestError:
+        """
+        List similar animes
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/similar",
@@ -154,6 +160,10 @@ class AnimeEndpoint(BaseEndpoint):
         return response
 
     async def related(self, id: int) -> List[Relation] | RequestError:
+        """
+        List related animes
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/related",
@@ -170,6 +180,10 @@ class AnimeEndpoint(BaseEndpoint):
         return response
 
     async def screenshots(self, id: int) -> List[ScreenShot] | RequestError:
+        """
+        List screenshots anime
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/screenshots",
@@ -186,6 +200,11 @@ class AnimeEndpoint(BaseEndpoint):
         return response
 
     async def franchise(self, id: int) -> Franchise | RequestError:
+        """
+        Show the whole franchise
+        :param id: must be a number
+        :return:
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/franchise",
@@ -202,6 +221,10 @@ class AnimeEndpoint(BaseEndpoint):
         return response
 
     async def externalLinks(self, id: int) -> List[ExternalLink] | RequestError:
+        """
+        Show the externalLinks of an anime
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/external_links",
@@ -225,6 +248,14 @@ class AnimeEndpoint(BaseEndpoint):
         kind: str = None,
         episode: int = None,
     ) -> List[Topic] | RequestError:
+        """
+        list of topics that relate to anime
+        :param id: Must be a number.
+        :param page: Must be a number between 1 and 100000.
+        :param limit: 30 maximum
+        :param kind: Must be one of: anons, ongoing, released, episode.
+        :param episode: Must be a number.
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/animes/{id}/topics",

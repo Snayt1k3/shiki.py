@@ -1,7 +1,6 @@
 import logging
 
-from shikimori.types.character import Character, AnimeRole, MangaRole
-from shikimori.types.photo import Photo
+from shikimori.types.character import Character
 from shikimori.types.roles import Character as MiniCharacter
 from .base import BaseEndpoint
 from ..exceptions import RequestError
@@ -11,6 +10,11 @@ logger = logging.getLogger(__name__)
 
 class CharacterEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> Character | RequestError:
+        """
+        Show a character
+        :param id: must be a number
+        """
+
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/characters/{id}",
@@ -27,6 +31,10 @@ class CharacterEndpoint(BaseEndpoint):
         return response
 
     async def search(self, search: str) -> list[MiniCharacter] | RequestError:
+        """
+        Search characters
+        :param search: Must be a String
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/characters/search",

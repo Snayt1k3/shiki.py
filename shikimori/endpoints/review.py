@@ -1,8 +1,8 @@
 import logging
 
+from shikimori.types.review import Review
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.review import Review
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
@@ -13,7 +13,7 @@ class ReviewEndpoint(BaseEndpoint):
         self, anime_id: int, body: str, opinion: str
     ) -> Review | RequestError:
         """
-
+        Create a review
         :param anime_id: Must be a number.
         :param body: Must be a String
         :param opinion: Must be one of: positive, neutral, negative
@@ -39,7 +39,7 @@ class ReviewEndpoint(BaseEndpoint):
 
     async def update(self, id: int, body: str, opinion: str) -> Review | RequestError:
         """
-
+        Update a review
         :param id: Must be a number.
         :param body: Must be a String
         :param opinion: Must be one of: positive, neutral, negative
@@ -62,6 +62,7 @@ class ReviewEndpoint(BaseEndpoint):
 
     async def delete(self, id: int) -> Review | RequestError:
         """
+        Destroy a review
         :param id: Must be a number.
         """
         response = await self._request.make_request(

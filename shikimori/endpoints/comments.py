@@ -2,8 +2,6 @@ import logging
 from typing import List
 
 from shikimori.types.comment import Comment
-from shikimori.types.photo import PhotoExtended
-from shikimori.types.user import User
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..utils.filter import filter_none_parameters
@@ -21,6 +19,7 @@ class CommentEndpoint(BaseEndpoint):
         desc: int = None,
     ) -> List[Comment] | RequestError:
         """
+        List comments
         :param commentable_id: number
         :param commentable_type: Must be one of: Topic, User.
         :param page: Must be a number between 1 and 100000
@@ -52,6 +51,10 @@ class CommentEndpoint(BaseEndpoint):
         return response
 
     async def ById(self, id: int) -> Comment | RequestError:
+        """
+        Show a comment
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "GET",
             url=f"{self._base_url}/api/comments/{id}",
@@ -77,7 +80,8 @@ class CommentEndpoint(BaseEndpoint):
         frontend: bool = None,
     ):
         """
-        requires oauth scope
+        Create a comment
+        Requires comments oauth scope
         :param broadcast: Must be one of: true, false
         :param body: Must be a String
         :param commentable_id: Must be a number.
@@ -119,7 +123,7 @@ class CommentEndpoint(BaseEndpoint):
         self, id: int, body: str, frontend: bool = None
     ) -> Comment | RequestError:
         """
-        Update a comment. requires oauth scope
+        Update a comment. Requires comments oauth scope
         Use abuse_requests to change is_offtopic field.
         :param body: string.
         :param frontend: string.
@@ -144,7 +148,11 @@ class CommentEndpoint(BaseEndpoint):
         return response
 
     async def delete(self, id: int) -> str | RequestError:
-        """requires oauth scope"""
+        """
+        Destroy a comment
+        Requires comments oauth scope
+        :param id: must be a number
+        """
         response = await self._request.make_request(
             "DELETE",
             url=f"{self._base_url}/api/comments/{id}",

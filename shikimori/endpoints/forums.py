@@ -1,14 +1,15 @@
 import logging
 
+from shikimori.types.topics import Forum
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.topics import Forum
 
 logger = logging.getLogger(__name__)
 
 
 class ForumEndpoint(BaseEndpoint):
     async def list(self) -> RequestError | list[Forum]:
+        """List of forums"""
         response = await self._request.make_request(
             "GET", url=f"{self._base_url}/api/forums", headers=self.headers
         )

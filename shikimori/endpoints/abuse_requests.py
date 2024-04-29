@@ -13,6 +13,8 @@ class AbuseRequestEndpoint(BaseEndpoint):
         """
         Mark comment as offtopic
         Request will be sent to moderators.
+
+        :param comment_id: Must be a number.
         """
 
         response = await self._request.make_request(
@@ -37,6 +39,9 @@ class AbuseRequestEndpoint(BaseEndpoint):
         """
         Convert comment to review
         Request will be sent to moderators.
+
+        :param topic_id: Must be a number.
+        :param comment_id: Must be a number.
         """
 
         response = await self._request.make_request(
@@ -64,6 +69,11 @@ class AbuseRequestEndpoint(BaseEndpoint):
     ) -> None | RequestError:
         """
         Create abuse about violation of site rules
+        Request will be sent to moderators.
+
+        :param comment_id: Must be a number.
+        :param topic_id: Must be a number.
+        :param reason: Must be a string.
         """
         response = await self._request.make_request(
             "POST",
@@ -90,7 +100,12 @@ class AbuseRequestEndpoint(BaseEndpoint):
         reason: str = None,
     ) -> None | RequestError:
         """
-        create abuse about spoiler in content
+        Create abuse about spoiler in content
+        Request will be sent to moderators.
+
+        :param comment_id: Must be a number.
+        :param topic_id: Must be a number.
+        :param reason: Must be a string.
         """
         response = await self._request.make_request(
             "POST",

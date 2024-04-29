@@ -1,8 +1,8 @@
 import logging
 
+from shikimori.types.episode_notification import EpisodeNotification
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from shikimori.types.episode_notification import EpisodeNotification
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
@@ -21,7 +21,8 @@ class EpisodeNotificationEndpoint(BaseEndpoint):
         is_anime365: bool = None,
     ) -> EpisodeNotification | RequestError:
         """
-
+        Notify shikimori about anime episode release
+        
         :param token: Private token required to access this api
         :param anime_id: Must be a number.
         :param episode: Must be a number.
