@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "shiki.py"
 version = "0.1.0"
-description = ""
+description = "Async wra"
 authors = ["Snayt1k3 <snayt1k3twitch@gmail.com>"]
 readme = "README.md"
 packages = [{include = "shikimori"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 aiohttp = "^3.9.1"
 tomli = "^2.0.1"
 setuptools = "^69.0.3"
