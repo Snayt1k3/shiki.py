@@ -5,3 +5,6 @@ from .exceptions import *
 from .requestLimiter import *
 from .endpoints import *
 from .auth import *
+
+
+__all__ = ["Shikimori", "types"]
