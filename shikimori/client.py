@@ -23,6 +23,7 @@ class Shikimori:
         client_id: str = None,
         client_secret: str = None,
         redirect_uri: str = "urn:ietf:wg:oauth:2.0:oob",
+        scopes: list[str] = None,
         base_url: str = None,
         logging: int | bool = None,
     ):
@@ -33,6 +34,7 @@ class Shikimori:
             user_agent (str): User-agent string to be used in API requests.
             client_id (str): Client ID for OAuth authentication.
             client_secret (str): Client secret for OAuth authentication.
+            scopes (list): Scopes for OAuth authentication.
             redirect_uri (str): Redirect URI for OAuth authentication. Defaults to "urn:ietf:wg:oauth:2.0:oob".
             base_url (str): Base URL for the Shikimori API. Defaults to None.
             logging (Union[int, bool]): Logging level for debug information. If True, debug logging is enabled. If False, logging is disabled. Defaults to None.
@@ -59,22 +61,32 @@ class Shikimori:
 
         # Auth dependencies
         self._options = AuthOptions(
-            client_id=client_id, redirect_uri=redirect_uri, client_secret=client_secret
+            client_id=client_id, redirect_uri=redirect_uri, client_secret=client_secret, scopes=scopes
         )
         self._user_agent = user_agent
-        self._token = None
 
-        # init auth
+        self._init_auth_endpoint()
+        self._init_endpoints()
+
+    def set_token(self, token: str) -> None:
+        """
+        Set OAuth token for authentication.
+
+        Args:
+            token (str): OAuth token to be set.
+        """
+        self._request.set_token(token)
+
+    def _init_auth_endpoint(self):
         self.auth = Auth(self._limiter, self._user_agent, self._options, self._base_url)
 
+    def _init_endpoints(self):
         # dependencies
         self._deps = {
             "base_url": self._base_url,
             "request": self._limiter,
             "user_agent": self._user_agent,
         }
-
-        # init endpoints adapters
         self.abuseRequest = endpoints.AbuseRequestEndpoint(**self._deps)
         self.achievement = endpoints.AchievementsEndpoint(**self._deps)
         self.anime = endpoints.AnimeEndpoint(**self._deps)
@@ -106,12 +118,3 @@ class Shikimori:
         self.userRate = endpoints.UserRatesEndpoint(**self._deps)
         self.user = endpoints.UserEndpoint(**self._deps)
         self.video = endpoints.VideosEndpoint(**self._deps)
-
-    def set_token(self, token: str) -> None:
-        """
-        Set OAuth token for authentication.
-
-        Args:
-            token (str): OAuth token to be set.
-        """
-        self._request.set_token(token)

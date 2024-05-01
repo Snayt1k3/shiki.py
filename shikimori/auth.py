@@ -1,8 +1,8 @@
 import logging
 from dataclasses import dataclass
 
-from shikimori.exceptions import RequestError
 from shikimori.base import BaseLimiter
+from shikimori.exceptions import RequestError
 
 __all__ = ["Auth", "AuthOptions", "AccessTokenData"]
 
@@ -14,6 +14,7 @@ class AuthOptions:
     client_id: str
     redirect_uri: str
     client_secret: str
+    scopes: list[str] | None = None
 
 
 @dataclass
@@ -122,3 +123,7 @@ class Auth:
         )
 
         return resp
+
+    @property
+    def auth_uri(self) -> str:
+        return f"https://shikimori.one/oauth/authorize?client_id={self._options.client_id}&redirect_uri={self._options.redirect_uri}&response_type=code&scope={"+".join(self._options.scopes)}"  # NOQA
