@@ -10,7 +10,10 @@ __all__ = ["Shikimori"]
 
 class Shikimori:
     """
-    main class fow work with shikimori api
+    Main class for interacting with the Shikimori API.
+
+    This class provides methods and endpoints for working with various features of the Shikimori API,
+    such as anime, manga, users, forums, etc.
     """
 
     def __init__(
@@ -24,8 +27,17 @@ class Shikimori:
         logging: int | bool = None,
     ):
         """
-        Initialize client for work with shikimori api
+        Initialize client for working with the Shikimori API.
 
+        Args:
+            user_agent (str): User-agent string to be used in API requests.
+            client_id (str): Client ID for OAuth authentication.
+            client_secret (str): Client secret for OAuth authentication.
+            redirect_uri (str): Redirect URI for OAuth authentication. Defaults to "urn:ietf:wg:oauth:2.0:oob".
+            base_url (str): Base URL for the Shikimori API. Defaults to None.
+            logging (Union[int, bool]): Logging level for debug information. If True, debug logging is enabled. If False, logging is disabled. Defaults to None.
+        Raises:
+            ValueError: If user_agent is not specified.
         """
         if not user_agent:
             raise ValueError("You need to specify user-agent")
@@ -37,7 +49,7 @@ class Shikimori:
                 basicConfig(level=logging)
 
         # dependencies
-        self._base_url = SHIKIMORI_URL if not base_url else base_url
+        self._base_url = base_url or SHIKIMORI_URL
         self._request = Request()
         self._limiter = RequestLimiter(
             MAX_REQUESTS_PER_SECOND,
@@ -96,4 +108,10 @@ class Shikimori:
         self.video = endpoints.VideosEndpoint(**self._deps)
 
     def set_token(self, token: str) -> None:
+        """
+        Set OAuth token for authentication.
+
+        Args:
+            token (str): OAuth token to be set.
+        """
         self._request.set_token(token)

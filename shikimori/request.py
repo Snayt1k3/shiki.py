@@ -2,6 +2,7 @@ import logging
 import aiohttp
 from .base import BaseRequest
 from .exceptions import RequestError
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -9,7 +10,12 @@ __all__ = ["Request"]
 
 
 class Request(BaseRequest):
-    """class for send requests"""
+    """
+    A class for sending HTTP requests.
+
+    This class extends the functionality of the BaseRequest class
+    to provide methods for sending various types of HTTP requests.
+    """
 
     def __init__(self, token: str = None):
         self._token = token
@@ -17,7 +23,21 @@ class Request(BaseRequest):
     def set_token(self, token: str) -> None:
         self._token = token
 
-    async def _request(self, method: str, headers: dict = None, **kwargs):
+    async def _request(
+        self, method: str, headers: dict = None, **kwargs
+    ) -> Any | RequestError:
+        """
+        Sends an HTTP request with the specified method.
+
+        Args:
+            method (str): The HTTP method (e.g., 'GET', 'POST', 'DELETE').
+            headers (dict, optional): A dictionary of HTTP headers to be included in the request. Defaults to None.
+            **kwargs: Additional keyword arguments to be passed to the underlying request function.
+
+        Returns:
+            Union[Any, RequestError]: The response object corresponding to the HTTP request, or a RequestError if an error occurs.
+
+        """
         try:
             if self._token:
                 headers["Authorization"] = f"Bearer {self._token}"

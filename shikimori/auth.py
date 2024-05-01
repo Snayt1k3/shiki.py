@@ -27,6 +27,13 @@ class AccessTokenData:
 
 
 class Auth:
+    """
+    Class for handling authentication with the Shikimori API.
+
+    This class provides methods for obtaining access tokens and refreshing tokens.
+
+    """
+
     def __init__(
         self,
         request: BaseLimiter,
@@ -34,12 +41,31 @@ class Auth:
         options: AuthOptions | None = None,
         base_url: str = None,
     ):
+        """
+        Initialize the Auth class.
+
+        Args:
+            request (BaseLimiter): An instance of the BaseLimiter class for making requests.
+            user_agent (str, optional): User-agent string to be used in API requests. Defaults to None.
+            options (AuthOptions, optional): An instance of the AuthOptions class containing authentication options. Defaults to None.
+            base_url (str, optional): Base URL for the Shikimori API. Defaults to None.
+        """
         self._base_url = base_url
         self._headers = {"User-Agent": user_agent}
         self._request = request
         self._options = options
 
     async def get_access_token(self, auth_code: str) -> AccessTokenData | RequestError:
+        """
+        Obtain an access token using an authorization code.
+
+        Args:
+            auth_code (str): Authorization code obtained during the OAuth authorization process.
+
+        Returns:
+            Union[AccessTokenData, RequestError]: An instance of AccessTokenData if successful, or a RequestError if an error occurs during the request.
+
+        """
         body = {
             "grant_type": "authorization_code",
             "client_id": self._options.client_id,
@@ -65,6 +91,16 @@ class Auth:
         return resp
 
     async def refresh(self, refresh_token: str) -> AccessTokenData | RequestError:
+        """
+        Refresh an access token using a refresh token.
+
+        Args:
+            refresh_token (str): Refresh token obtained during the OAuth authorization process.
+
+        Returns:
+            Union[AccessTokenData, RequestError]: An instance of AccessTokenData if successful, or a RequestError if an error occurs during the request.
+
+        """
         body = {
             "grant_type": "refresh_token",
             "client_id": self._options.client_id,
