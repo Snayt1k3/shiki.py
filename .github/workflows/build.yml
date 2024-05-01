@@ -50,4 +50,4 @@ jobs:
     - name: Upload coverage data to coveralls.io
       if: matrix.python-version == '3.12'
       run: |
-          coveralls --service=github
+          poetry run coveralls --service=github
