@@ -15,7 +15,7 @@ setup(
     install_requires=["aiohttp>=3.9.1", "tomli>=2.0.1", "setuptools>=69.0.3"],
     author="Snayt1k3",
     author_email="snayt1k3@gmail.com",
-    description="Description of your library",
+    description="Python Async Wrapper for Shikimori Api",
     url="https://github.com/Snayt1k3/shiki.py",
     classifiers=[
         "License :: OSI Approved :: MIT License",

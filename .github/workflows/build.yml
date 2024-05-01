@@ -15,6 +15,8 @@ env:
   CLIENT_ID: ${{secrets.CLIENT_ID}}
   CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
   AUTH_CODE: ${{secrets.AUTH_CODE }}
+  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
 
 jobs:
@@ -37,6 +39,18 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install poetry
         poetry install
+
     - name: Test with pytest
       run: |
         poetry run pytest
+
+    - name: Test with pytest and cov
+      if: matrix.python-version == '3.12'
+      run: |
+        poetry run pytest --cov=./ --cov-report=xml
+
+    - name: Upload coverage data to coveralls.io
+      if: matrix.python-version == '3.12'
+      run: |
+          poetry run coveralls --service=github
+

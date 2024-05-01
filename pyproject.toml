@@ -1,23 +1,24 @@
 [tool.poetry]
 name = "shiki.py"
 version = "0.1.0"
-description = "Async wra"
+description = "Python Async Wrapper for Shikimori Api"
 authors = ["Snayt1k3 <snayt1k3twitch@gmail.com>"]
 readme = "README.md"
 packages = [{include = "shikimori"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-aiohttp = "^3.9.1"
+python =  ">=3.10,<3.13"
+aiohttp = ">=3.9.1"
 tomli = "^2.0.1"
 setuptools = "^69.0.3"
-flake8 = "^7.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
 pytest-asyncio = "^0.23.5"
 black = "^24.2.0"
 python-dotenv = "^1.0.1"
+pytest-cov = "^5.0.0"
+coveralls = "^4.0.0"
 
 [build-system]
 requires = [
