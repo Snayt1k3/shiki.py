@@ -126,4 +126,4 @@ class Auth:
 
     @property
     def auth_uri(self) -> str:
-        return f"https://shikimori.one/oauth/authorize?client_id={self._options.client_id}&redirect_uri={self._options.redirect_uri}&response_type=code&scope={"+".join(self._options.scopes)}"  # NOQA
+        return f"https://shikimori.one/oauth/authorize?client_id={self._options.client_id}&redirect_uri={self._options.redirect_uri}&response_type=code&scope={'+'.join(self._options.scopes)}"  # NOQA
