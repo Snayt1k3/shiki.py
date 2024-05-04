@@ -1,5 +1,9 @@
-Schemas
+Types
 ====================
+
+.. automodule:: shikimori.types.auth
+   :members:
+   :undoc-members:
 
 .. automodule:: shikimori.types.abuse_requests
    :members:

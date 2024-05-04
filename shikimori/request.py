@@ -29,10 +29,9 @@ class Request(BaseRequest):
         """
         Sends an HTTP request with the specified method.
 
-        Args:
-            method (str): The HTTP method (e.g., 'GET', 'POST', 'DELETE').
-            headers (dict, optional): A dictionary of HTTP headers to be included in the request. Defaults to None.
-            **kwargs: Additional keyword arguments to be passed to the underlying request function.
+        :param method: The HTTP method (e.g., 'GET', 'POST', 'DELETE').
+        :param headers: A dictionary of HTTP headers to be included in the request. Defaults to None.
+        :param **kwargs: Additional keyword arguments to be passed to the underlying request function.
 
         Returns:
             Union[Any, RequestError]: The response object corresponding to the HTTP request, or a RequestError if an error occurs.

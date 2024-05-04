@@ -14,19 +14,16 @@ class RequestError(Exception):
     """
     Custom exception class for handling errors that occur during HTTP requests.
 
-    Attributes:
-        message (str): A string describing the error.
-        status_code (int, optional): The HTTP status code associated with the error. Defaults to None.
-
+    :param message: A string describing the error.
+    :param status_code: (int, optional): The HTTP status code associated with the error. Defaults to None.
     """
 
     def __init__(self, message, status_code=None):
         """
         Initializes a new instance of the RequestError class.
 
-        Args:
-            message (str): A string describing the error.
-            status_code (int, optional): The HTTP status code associated with the error. Defaults to None.
+        :param message: A string describing the error.
+        :param status_code: (int, optional): The HTTP status code associated with the error. Defaults to None.
         """
         super().__init__(message)
         self.status_code = status_code
