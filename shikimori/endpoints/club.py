@@ -5,7 +5,7 @@ from shikimori.types.animes import Anime
 from shikimori.types.club import Club, ClubImage, ClubInfo, Collection
 from shikimori.types.manga import Manga
 from shikimori.types.ranobe import Ranobe
-from shikimori.types.roles import Character
+from shikimori.types.character import CharacterBrief
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.user import User
@@ -196,7 +196,7 @@ class ClubEndpoint(BaseEndpoint):
 
     async def characters(
         self, id: int, limit: int = None, page: int = None
-    ) -> List[Character] | RequestError:
+    ) -> List[CharacterBrief] | RequestError:
         """
         List of club Characters.
 
@@ -212,7 +212,7 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Character.from_dict(ch) for ch in response]
+            return [CharacterBrief.from_dict(ch) for ch in response]
 
         logger.debug(
             f"Bad Request(GetCharacters): status - {response.status_code}: info - {str(response)}"

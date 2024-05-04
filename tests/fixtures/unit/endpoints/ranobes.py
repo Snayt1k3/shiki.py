@@ -1,16 +1,18 @@
 import pytest
 
 from shikimori.endpoints.ranobe import RanobeEndpoint
-from shikimori.types.animes import Relation, Anime, ExternalLink
+from shikimori.types.animes import Relation, Anime
+from shikimori.types.externalLink import ExternalLink
+from shikimori.types.character import CharacterBrief
 from shikimori.types.franchise import Franchise, Node, Link
 from shikimori.types.genres import Genre
 from shikimori.types.manga import Manga
 from shikimori.types.photo import Photo, PhotoExtended
 from shikimori.types.ranobe import Ranobe, RanobeInfo
-from shikimori.types.roles import Role, Character
+from shikimori.types.roles import Role
 from shikimori.types.topics import Topic, Linked, Forum
 from shikimori.types.user import User
-from shikimori.types.user_rates import MiniUserRate
+from shikimori.types.user_rates import UserRateBrief
 
 
 @pytest.fixture
@@ -142,7 +144,7 @@ def ranobe_byid_resp(ranobe_byid_json):
         licensors=response["licensors"],
         genres=[Genre(**genre) for genre in response["genres"]],
         user_rate=(
-            MiniUserRate(**response["user_rate"]) if response["user_rate"] else None
+            UserRateBrief(**response["user_rate"]) if response["user_rate"] else None
         ),
     )
 
@@ -194,7 +196,7 @@ def ranobes_roles_resp(ranobes_roles_json):
             roles=role["roles"],
             roles_russian=role["roles_russian"],
             character=(
-                Character(
+                CharacterBrief(
                     id=role["character"]["id"],
                     name=role["character"]["name"],
                     russian=role["character"]["russian"],
@@ -205,7 +207,7 @@ def ranobes_roles_resp(ranobes_roles_json):
                 else None
             ),
             person=(
-                Character(
+                CharacterBrief(
                     id=role["person"]["id"],
                     name=role["person"]["name"],
                     russian=role["person"]["russian"],

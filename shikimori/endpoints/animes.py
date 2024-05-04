@@ -5,8 +5,8 @@ from shikimori.types.animes import (
     Anime,
     AnimeInfo,
     Relation,
-    ExternalLink,
 )
+from shikimori.types.externalLink import ExternalLink
 from shikimori.types.franchise import Franchise
 from shikimori.types.roles import Role
 from shikimori.types.screenshots import ScreenShot

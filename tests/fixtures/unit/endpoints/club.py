@@ -6,7 +6,7 @@ from shikimori.types.club import Logo, Club, ClubImage, ClubInfo, Collection
 from shikimori.types.manga import Manga
 from shikimori.types.photo import Photo, PhotoExtended
 from shikimori.types.ranobe import Ranobe
-from shikimori.types.roles import Character
+from shikimori.types.character import CharacterBrief
 from shikimori.types.topics import Forum
 from shikimori.types.user import User
 
@@ -224,7 +224,7 @@ def club_byId_resp(club_byId_json):
             for manga in response["mangas"]
         ],
         characters=[
-            Character(
+            CharacterBrief(
                 id=ch["id"],
                 name=ch["name"],
                 russian=ch["russian"],
@@ -382,7 +382,7 @@ def club_characters_json():
 @pytest.fixture
 def club_characters_resp(club_characters_json):
     return [
-        Character(
+        CharacterBrief(
             id=s["id"],
             name=s["name"],
             russian=s["russian"],

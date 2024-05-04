@@ -3,8 +3,8 @@ from typing import List
 
 from shikimori.types.animes import (
     Relation,
-    ExternalLink,
 )
+from shikimori.types.externalLink import ExternalLink
 from shikimori.types.franchise import Franchise
 from shikimori.types.ranobe import Ranobe, RanobeInfo
 from shikimori.types.roles import Role

@@ -3,7 +3,7 @@ import logging
 from shikimori.types.people import People
 from .base import BaseEndpoint
 from ..exceptions import RequestError
-from ..types.base import BaseCharacter
+from shikimori.types.character import CharacterBrief
 from ..utils.filter import filter_none_parameters
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class PeopleEndpoint(BaseEndpoint):
 
     async def search(
         self, id: int, type: str = None
-    ) -> list[BaseCharacter] | RequestError:
+    ) -> list[CharacterBrief] | RequestError:
         """
         Search people.
 
@@ -48,7 +48,7 @@ class PeopleEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [BaseCharacter.from_dict(ch) for ch in response]
+            return [CharacterBrief.from_dict(ch) for ch in response]
 
         logger.debug(
             f"Bad Request(search): status - {response.status_code}: info - {str(response)}"
