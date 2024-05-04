@@ -12,7 +12,8 @@ logger = logging.getLogger(__name__)
 class PeopleEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> People | RequestError:
         """
-        Show a person
+        Show a person.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -34,8 +35,9 @@ class PeopleEndpoint(BaseEndpoint):
         self, id: int, type: str = None
     ) -> list[BaseCharacter] | RequestError:
         """
-        Search people
-        :param id: number
+        Search people.
+
+        :param id: must be a number.
         :param type: Must be one of: seyu, mangaka, producer.
         """
         response = await self._request.make_request(

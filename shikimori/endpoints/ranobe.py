@@ -46,6 +46,7 @@ class RanobeEndpoint(BaseEndpoint):
         Most of the parameters can be used in the combined mode:
 
         - season=2016,!summer_2016 – ranobe with season 2016 year and without season summer_2016
+
         :param page: Must be a number between 1 and 100000.
         :param limit: 50 maximum.
         :param order: Must be one of: id, id_desc, ranked, kind, popularity, name, aired_on, volumes, chapters, status, random, ranked_random, ranked_shiki, created_at, created_at_desc.
@@ -97,7 +98,8 @@ class RanobeEndpoint(BaseEndpoint):
 
     async def ById(self, id: int) -> RanobeInfo | RequestError:
         """
-        Show a ranobe
+        Show a ranobe.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -117,7 +119,8 @@ class RanobeEndpoint(BaseEndpoint):
 
     async def roles(self, id: int) -> List[Role] | RequestError:
         """
-        list roles
+        list roles.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -137,7 +140,8 @@ class RanobeEndpoint(BaseEndpoint):
 
     async def similar(self, id: int) -> List[Ranobe] | RequestError:
         """
-        list similar
+        list similar.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -157,7 +161,8 @@ class RanobeEndpoint(BaseEndpoint):
 
     async def related(self, id: int) -> List[Relation] | RequestError:
         """
-        list related
+        list related.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -176,7 +181,8 @@ class RanobeEndpoint(BaseEndpoint):
 
     async def franchise(self, id: int) -> Franchise | RequestError:
         """
-        list franchise
+        list franchise.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -196,7 +202,8 @@ class RanobeEndpoint(BaseEndpoint):
 
     async def ExternalLinks(self, id: int) -> List[ExternalLink] | RequestError:
         """
-        list ExternalLinks
+        list ExternalLinks.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -221,8 +228,9 @@ class RanobeEndpoint(BaseEndpoint):
         limit: int = None,
     ) -> List[Topic] | RequestError:
         """
-        list ExternalLinks
-        :param limit: 30 maximum
+        list ExternalLinks.
+
+        :param limit: 30 maximum.
         :param page: Must be a number between 1 and 100000.
         :param id: must be a number
         """

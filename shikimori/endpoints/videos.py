@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 class VideosEndpoint(BaseEndpoint):
     async def list(self, id: int) -> List[Video] | RequestError:
         """
-        List videos
+        List videos.
+
         :param id: must be a number
-        :return:
         """
         response = await self._request.make_request(
             "GET",
@@ -34,13 +34,14 @@ class VideosEndpoint(BaseEndpoint):
         self, id: int, kind: str, url: str, name: str
     ) -> Video | RequestError:
         """
-        Create a video
-        Requires content oauth scope
+        Create a video.
+
+        Requires content oauth scope.
+
         :param id: must be a number
         :param kind: Must be one of: pv, character_trailer, cm, op, ed, op_ed_clip, clip, other, episode_preview.
         :param url: Supported hostings: YouTube,vk,ok,coub,rutube,vimeo,sibnet,yandex,streamable,smotret_anime,myvi,youmite,viuly,stormo,mediafile
-        :param name: str.
-        :return:
+        :param name: must be a string.
         """
         response = await self._request.make_request(
             "POST",
@@ -60,11 +61,12 @@ class VideosEndpoint(BaseEndpoint):
 
     async def delete(self, anime_id: int, id: int) -> None | RequestError:
         """
-        Destroy a video
-        Requires content oauth scope
+        Destroy a video.
+
+        Requires content oauth scope.
+
         :param anime_id: must be a number
         :param id: must be a number
-        :return:
         """
         response = await self._request.make_request(
             "DELETE",

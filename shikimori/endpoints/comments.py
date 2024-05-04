@@ -19,11 +19,12 @@ class CommentEndpoint(BaseEndpoint):
         desc: int = None,
     ) -> List[Comment] | RequestError:
         """
-        List comments
-        :param commentable_id: number
+        List comments.
+
+        :param commentable_id: must be a number.
         :param commentable_type: Must be one of: Topic, User.
-        :param page: Must be a number between 1 and 100000
-        :param limit: 30 maximum
+        :param page: Must be a number between 1 and 100000.
+        :param limit: 30 maximum.
         :param desc: Must be one of: 1, 0.
         """
         response = await self._request.make_request(
@@ -52,8 +53,9 @@ class CommentEndpoint(BaseEndpoint):
 
     async def ById(self, id: int) -> Comment | RequestError:
         """
-        Show a comment
-        :param id: must be a number
+        Show a comment.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "GET",
@@ -80,14 +82,16 @@ class CommentEndpoint(BaseEndpoint):
         frontend: bool = None,
     ):
         """
-        Create a comment
-        Requires comments oauth scope
-        :param broadcast: Must be one of: true, false
-        :param body: Must be a String
+        Create a comment.
+
+        Requires comments oauth scope.
+
+        :param broadcast: Must be one of: true, false.
+        :param body: Must be a String.
         :param commentable_id: Must be a number.
-        :param commentable_type: Must be one of: Topic, User, Anime, Manga, Character, Person, Article, Club, ClubPage, Collection, Critique, Review
-        :param is_offtopic: Must be one of: true, false
-        :param frontend: Must be one of: true, false
+        :param commentable_type: Must be one of: Topic, User, Anime, Manga, Character, Person, Article, Club, ClubPage, Collection, Critique, Review.  # NOQA
+        :param is_offtopic: Must be one of: true, false.
+        :param frontend: Must be one of: true, false.
         """
 
         response = await self._request.make_request(
@@ -123,8 +127,10 @@ class CommentEndpoint(BaseEndpoint):
         self, id: int, body: str, frontend: bool = None
     ) -> Comment | RequestError:
         """
-        Update a comment. Requires comments oauth scope
+        Update a comment. Requires comments oauth scope.
+
         Use abuse_requests to change is_offtopic field.
+
         :param body: string.
         :param frontend: string.
         """
@@ -149,8 +155,9 @@ class CommentEndpoint(BaseEndpoint):
 
     async def delete(self, id: int) -> str | RequestError:
         """
-        Destroy a comment
-        Requires comments oauth scope
+        Destroy a comment.
+        Requires comments oauth scope.
+
         :param id: must be a number
         """
         response = await self._request.make_request(

@@ -37,14 +37,14 @@ async def test_UserRates_success(
     const_client, const_user_rate_json, const_user_rate_resp
 ):
     const_client._request = FakeRequest(const_user_rate_json)
-    response = await const_client.UserRates()
+    response = await const_client.user_rates()
     assert response == const_user_rate_resp
 
 
 @pytest.mark.asyncio
 async def test_UserRates_error(const_client):
     const_client._request = FakeRequest(RequestError("Test Message", 404))
-    response = await const_client.UserRates()
+    response = await const_client.user_rates()
     assert isinstance(response, RequestError)
 
 

@@ -17,15 +17,15 @@ class Shikimori:
     """
 
     def __init__(
-        self,
-        *,
-        user_agent: str = None,
-        client_id: str = None,
-        client_secret: str = None,
-        redirect_uri: str = "urn:ietf:wg:oauth:2.0:oob",
-        scopes: list[str] = None,
-        base_url: str = None,
-        logging: int | bool = None,
+            self,
+            *,
+            user_agent: str = None,
+            client_id: str = None,
+            client_secret: str = None,
+            redirect_uri: str = "urn:ietf:wg:oauth:2.0:oob",
+            scopes: list[str] = None,
+            base_url: str = None,
+            logging: int | bool = None,
     ):
         """
         Initialize client for working with the Shikimori API.
@@ -65,29 +65,15 @@ class Shikimori:
         )
         self._user_agent = user_agent
 
-        self._init_auth_endpoint()
-        self._init_endpoints()
-
-    def set_token(self, token: str) -> None:
-        """
-        Set OAuth token for authentication.
-
-        Args:
-            token (str): OAuth token to be set.
-        """
-        self._request.set_token(token)
-
-    def _init_auth_endpoint(self):
-        self.auth = Auth(self._limiter, self._user_agent, self._options, self._base_url)
-
-    def _init_endpoints(self):
         # dependencies
         self._deps = {
             "base_url": self._base_url,
             "request": self._limiter,
             "user_agent": self._user_agent,
         }
+
         self.abuseRequest = endpoints.AbuseRequestEndpoint(**self._deps)
+        """Endpoint"""
         self.achievement = endpoints.AchievementsEndpoint(**self._deps)
         self.anime = endpoints.AnimeEndpoint(**self._deps)
         self.appear = endpoints.AppearsEndpoint(**self._deps)
@@ -118,3 +104,12 @@ class Shikimori:
         self.userRate = endpoints.UserRatesEndpoint(**self._deps)
         self.user = endpoints.UserEndpoint(**self._deps)
         self.video = endpoints.VideosEndpoint(**self._deps)
+        self.auth = Auth(self._limiter, self._user_agent, self._options, self._base_url)
+
+    def set_token(self, token: str) -> None:
+        """
+        Set OAuth token for authentication.
+
+        :param token: OAuth token to be set.
+        """
+        self._request.set_token(token)

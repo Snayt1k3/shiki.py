@@ -12,11 +12,11 @@ class FavoritesEndpoint(BaseEndpoint):
         self, id: int, linked_type: str, kind: str = None
     ) -> str | RequestError:
         """
-        Create a favorite
-        :param id:
+        Create a favorite.
+
+        :param id: must be a number
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Person, Character
         :param kind: Must be one of: common, seyu, mangaka, producer, person
-        :return:
         """
         url = f"{self._base_url}/api/favorites/{linked_type}/{id}"
 
@@ -38,8 +38,9 @@ class FavoritesEndpoint(BaseEndpoint):
 
     async def delete(self, id: int, linked_type: str) -> str | RequestError:
         """
-        Destroy a favorite
-        :param id: number
+        Destroy a favorite.
+
+        :param id: must be a number
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Person, Character
         """
         url = f"{self._base_url}/api/favorites/{linked_type}/{id}"
@@ -59,9 +60,10 @@ class FavoritesEndpoint(BaseEndpoint):
 
     async def reorder(self, id: int, new_index: int = None) -> None | RequestError:
         """
-        Assign a new position to a favorite
-        :param id: number.
-        :param new_index: number.
+        Assign a new position to a favorite.
+
+        :param id: must be a number.
+        :param new_index: must be a number.
         """
         response = await self._request.make_request(
             "POST",

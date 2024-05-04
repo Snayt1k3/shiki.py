@@ -41,25 +41,26 @@ class AnimeEndpoint(BaseEndpoint):
         genre_v2: str = None,
     ) -> list[Anime] | RequestError:
         """
-        List animes
+        List animes.
+
         :param page: must be a number between 1 and 100000.
-        :param limit: Must be a number. 50 - maximum
+        :param limit: Must be a number, 50 - maximum.
         :param order: Must be one of: id, id_desc, ranked, kind, popularity, name, aired_on, episodes, status, random, ranked_random, ranked_shiki, created_at, created_at_desc.
-        :param kind: Must be one of: tv, movie, ova, ona, special, tv_special, music, pv, cm, tv_13, tv_24, tv_48
-        :param status: Must be one of: anons, ongoing, released
-        :param season: ex - summer_2017, 2016, 2014_2016, 199x
+        :param kind: Must be one of: tv, movie, ova, ona, special, tv_special, music, pv, cm, tv_13, tv_24, tv_48.
+        :param status: Must be one of: anons, ongoing, released.
+        :param season: ex - summer_2017, 2016, 2014_2016, 199x.
         :param score: Must be a number.
-        :param duration: Must be one of: S - less than 10, D - less than 30, F - more than 30
-        :param rating: Must be one of: none, g, pg, pg_13, r, r_plus, rx
-        :param genre: List of genre ids separated by comma
-        :param studio: List of studio ids separated by comma
-        :param franchise: List of franchises separated by comma
+        :param duration: Must be one of: S - less than 10, D - less than 30, F - more than 30.
+        :param rating: Must be one of: none, g, pg, pg_13, r, r_plus, rx.
+        :param genre: List of genre ids separated by comma.
+        :param studio: List of studio ids separated by comma.
+        :param franchise: List of franchises separated by comma.
         :param censored: Must be one of: true, false.
-        :param mylist: Must be one of: planned, watching, rewatching, completed, on_hold, dropped
-        :param ids: List of anime ids separated by comma
-        :param exclude_ids: List of anime ids separated by comma
-        :param search: Search phrase to filter animes by name
-        :param genre_v2: List of genre v2 ids separated by comma
+        :param mylist: Must be one of: planned, watching, rewatching, completed, on_hold, dropped.
+        :param ids: List of anime ids separated by comma.
+        :param exclude_ids: List of anime ids separated by comma.
+        :param search: Search phrase to filter animes by name.
+        :param genre_v2: List of genre v2 ids separated by comma.
         """
 
         response = await self._request.make_request(
@@ -101,8 +102,9 @@ class AnimeEndpoint(BaseEndpoint):
 
     async def ById(self, id: int) -> AnimeInfo | RequestError:
         """
-        Show an anime
-        :param id: Must be a Number
+        Show an anime.
+
+        :param id: Must be a Number.
         """
         response = await self._request.make_request(
             "GET",
@@ -121,8 +123,9 @@ class AnimeEndpoint(BaseEndpoint):
 
     async def roles(self, id: int) -> List[Role] | RequestError:
         """
-        List anime roles
-        :param id: must be a number
+        List anime roles.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "GET",
@@ -141,8 +144,9 @@ class AnimeEndpoint(BaseEndpoint):
 
     async def similar(self, id: int) -> List[Anime] | RequestError:
         """
-        List similar animes
-        :param id: must be a number
+        List similar animes.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "GET",
@@ -161,8 +165,9 @@ class AnimeEndpoint(BaseEndpoint):
 
     async def related(self, id: int) -> List[Relation] | RequestError:
         """
-        List related animes
-        :param id: must be a number
+        List related animes.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "GET",
@@ -181,8 +186,9 @@ class AnimeEndpoint(BaseEndpoint):
 
     async def screenshots(self, id: int) -> List[ScreenShot] | RequestError:
         """
-        List screenshots anime
-        :param id: must be a number
+        List screenshots anime.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "GET",
@@ -201,9 +207,9 @@ class AnimeEndpoint(BaseEndpoint):
 
     async def franchise(self, id: int) -> Franchise | RequestError:
         """
-        Show the whole franchise
-        :param id: must be a number
-        :return:
+        Show the whole franchise.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "GET",
@@ -222,8 +228,9 @@ class AnimeEndpoint(BaseEndpoint):
 
     async def externalLinks(self, id: int) -> List[ExternalLink] | RequestError:
         """
-        Show the externalLinks of an anime
-        :param id: must be a number
+        Show the externalLinks of an anime.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "GET",
@@ -249,10 +256,11 @@ class AnimeEndpoint(BaseEndpoint):
         episode: int = None,
     ) -> List[Topic] | RequestError:
         """
-        list of topics that relate to anime
+        list of topics that relate to anime.
+
         :param id: Must be a number.
         :param page: Must be a number between 1 and 100000.
-        :param limit: 30 maximum
+        :param limit: 30 maximum.
         :param kind: Must be one of: anons, ongoing, released, episode.
         :param episode: Must be a number.
         """

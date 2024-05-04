@@ -37,7 +37,8 @@ class AbuseRequestEndpoint(BaseEndpoint):
         self, topic_id: str | int = None, comment_id: str | int = None
     ) -> None | RequestError:
         """
-        Convert comment to review
+        Convert comment to review.
+
         Request will be sent to moderators.
 
         :param topic_id: Must be a number.
@@ -68,7 +69,8 @@ class AbuseRequestEndpoint(BaseEndpoint):
         reason: str = None,
     ) -> None | RequestError:
         """
-        Create abuse about violation of site rules
+        Create abuse about violation of site rules.
+
         Request will be sent to moderators.
 
         :param comment_id: Must be a number.

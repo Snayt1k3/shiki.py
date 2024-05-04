@@ -9,9 +9,11 @@ logger = logging.getLogger(__name__)
 class FriendEndpoint(BaseEndpoint):
     async def add(self, id: int) -> str | RequestError:
         """
-        Create a friend
-        Requires friends oauth scope
-        :param id: must be a number
+        Create a friend.
+
+        Requires friends oauth scope.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "POST",
@@ -30,10 +32,11 @@ class FriendEndpoint(BaseEndpoint):
 
     async def delete(self, id: int) -> str | RequestError:
         """
-        Destroy a friend
-        Requires friends oauth scope
+        Destroy a friend.
 
-        :param id: must be a number
+        Requires friends oauth scope.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "DELETE",

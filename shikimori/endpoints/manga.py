@@ -108,7 +108,8 @@ class MangaEndpoint(BaseEndpoint):
 
     async def ById(self, id: int) -> MangaInfo | RequestError:
         """
-        Show a manga
+        Show a manga.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -128,7 +129,8 @@ class MangaEndpoint(BaseEndpoint):
 
     async def roles(self, id: int) -> List[Role] | RequestError:
         """
-        list roles
+        list roles.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -148,7 +150,8 @@ class MangaEndpoint(BaseEndpoint):
 
     async def similar(self, id: int) -> List[Manga] | RequestError:
         """
-        list similar
+        list similar.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -168,7 +171,8 @@ class MangaEndpoint(BaseEndpoint):
 
     async def related(self, id: int) -> List[Relation] | RequestError:
         """
-        list related
+        list related.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -187,7 +191,8 @@ class MangaEndpoint(BaseEndpoint):
 
     async def franchise(self, id: int) -> Franchise | RequestError:
         """
-        list franchises
+        list franchises.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -207,7 +212,8 @@ class MangaEndpoint(BaseEndpoint):
 
     async def ExternalLinks(self, id: int) -> List[ExternalLink] | RequestError:
         """
-        list ExternalLinks
+        list ExternalLinks.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -232,7 +238,8 @@ class MangaEndpoint(BaseEndpoint):
         limit: int = None,
     ) -> List[Topic] | RequestError:
         """
-        list topics
+        list topics.
+
         :param id: must be a number
         :param page: Must be a number between 1 and 100000.
         :param limit: 30 maximum

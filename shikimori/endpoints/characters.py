@@ -11,8 +11,9 @@ logger = logging.getLogger(__name__)
 class CharacterEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> Character | RequestError:
         """
-        Show a character
-        :param id: must be a number
+        Show a character.
+
+        :param id: must be a number.
         """
 
         response = await self._request.make_request(
@@ -32,8 +33,9 @@ class CharacterEndpoint(BaseEndpoint):
 
     async def search(self, search: str) -> list[MiniCharacter] | RequestError:
         """
-        Search characters
-        :param search: Must be a String
+        Search characters.
+
+        :param search: Must be a String.
         """
         response = await self._request.make_request(
             "GET",
