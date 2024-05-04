@@ -45,7 +45,7 @@ class RanobeEndpoint(BaseEndpoint):
 
         Most of the parameters can be used in the combined mode:
 
-        - season=2016,!summer_2016 – ranobe with season 2016 year and without season summer_2016
+        - season=2016,!summer_2016 – ranobe with season 2016 year and without season summer_2016.
 
         :param page: Must be a number between 1 and 100000.
         :param limit: 50 maximum.
@@ -58,9 +58,9 @@ class RanobeEndpoint(BaseEndpoint):
         :param franchise: List of franchises separated by comma.
         :param censored: Set to false to allow hentai, yaoi and yuri.
         :param mylist: Must be one of: planned, watching, rewatching, completed, on_hold, dropped.
-        :param ids: List of ranobe ids separated by comma
-        :param exclude_ids: List of ranobe ids separated by comma
-        :param search: Must be a String
+        :param ids: List of ranobe ids separated by comma.
+        :param exclude_ids: List of ranobe ids separated by comma.
+        :param search: Must be a String.
         """
 
         response = await self._request.make_request(

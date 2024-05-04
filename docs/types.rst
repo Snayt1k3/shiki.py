@@ -25,11 +25,6 @@ Types
    :undoc-members:
    :exclude-members: from_dict
 
-.. automodule:: shikimori.types.base
-   :members:
-   :undoc-members:
-   :exclude-members: from_dict
-
 .. automodule:: shikimori.types.calendar
    :members:
    :undoc-members:

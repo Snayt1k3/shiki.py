@@ -41,7 +41,7 @@ class MessageEndpoint(BaseEndpoint):
 
         :param from_id: Must be a number.
         :param to_id: Must be a number.
-        :param body: Must be a String
+        :param body: Must be a String.
         :param kind: Must be one of: Private.
         """
         response = await self._request.make_request(
