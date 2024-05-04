@@ -1,30 +1,12 @@
 import logging
-from dataclasses import dataclass
+from shikimori.types.auth import AuthOptions, AccessTokenData
 
 from shikimori.base import BaseLimiter
 from shikimori.exceptions import RequestError
 
-__all__ = ["Auth", "AuthOptions", "AccessTokenData"]
+__all__ = ["Auth"]
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class AuthOptions:
-    client_id: str
-    redirect_uri: str
-    client_secret: str
-    scopes: list[str] | None = None
-
-
-@dataclass
-class AccessTokenData:
-    access_token: str
-    token_type: str
-    expires_in: int
-    refresh_token: str
-    scope: str
-    created_at: int
 
 
 class Auth:
@@ -32,7 +14,6 @@ class Auth:
     Class for handling authentication with the Shikimori API.
 
     This class provides methods for obtaining access tokens and refreshing tokens.
-
     """
 
     def __init__(
@@ -45,11 +26,10 @@ class Auth:
         """
         Initialize the Auth class.
 
-        Args:
-            request (BaseLimiter): An instance of the BaseLimiter class for making requests.
-            user_agent (str, optional): User-agent string to be used in API requests. Defaults to None.
-            options (AuthOptions, optional): An instance of the AuthOptions class containing authentication options. Defaults to None.
-            base_url (str, optional): Base URL for the Shikimori API. Defaults to None.
+        :param request: An instance of the BaseLimiter class for making requests.
+        :param user_agent:  User-agent string to be used in API requests. Defaults to None.
+        :param options:  An instance of the AuthOptions class containing authentication options. Defaults to None.
+        :param base_url:  Base URL for the Shikimori API. Defaults to None.
         """
         self._base_url = base_url
         self._headers = {"User-Agent": user_agent}
@@ -60,12 +40,7 @@ class Auth:
         """
         Obtain an access token using an authorization code.
 
-        Args:
-            auth_code (str): Authorization code obtained during the OAuth authorization process.
-
-        Returns:
-            Union[AccessTokenData, RequestError]: An instance of AccessTokenData if successful, or a RequestError if an error occurs during the request.
-
+        :param auth_code: Authorization code obtained during the OAuth authorization process.
         """
         body = {
             "grant_type": "authorization_code",
@@ -95,12 +70,7 @@ class Auth:
         """
         Refresh an access token using a refresh token.
 
-        Args:
-            refresh_token (str): Refresh token obtained during the OAuth authorization process.
-
-        Returns:
-            Union[AccessTokenData, RequestError]: An instance of AccessTokenData if successful, or a RequestError if an error occurs during the request.
-
+        :param refresh_token: Refresh token obtained during the OAuth authorization process.
         """
         body = {
             "grant_type": "refresh_token",
@@ -125,5 +95,8 @@ class Auth:
         return resp
 
     @property
-    def auth_uri(self) -> str:
+    def auth_url(self) -> str:
+        """
+        Generates a URL for obtaining an authorization code to authenticate requests.
+        """
         return f"https://shikimori.one/oauth/authorize?client_id={self._options.client_id}&redirect_uri={self._options.redirect_uri}&response_type=code&scope={'+'.join(self._options.scopes)}"  # NOQA

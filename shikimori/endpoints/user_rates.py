@@ -243,7 +243,7 @@ class UserRatesEndpoint(BaseEndpoint):
         """
         response = await self._request.make_request(
             "DELETE",
-            url=f"{self._base_url}/api/v2/user_rates/{type}/cleanup",
+            url=f"{self._base_url}/api/user_rates/{type}/cleanup",
             headers=self.headers,
         )
 
@@ -266,7 +266,7 @@ class UserRatesEndpoint(BaseEndpoint):
         """
         response = await self._request.make_request(
             "DELETE",
-            url=f"{self._base_url}/api/v2/user_rates/{type}/reset",
+            url=f"{self._base_url}/api/user_rates/{type}/reset",
             headers=self.headers,
         )
 
