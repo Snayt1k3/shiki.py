@@ -128,7 +128,7 @@ License
 
 This library is licensed under MIT. Please see `LICENSE <https://github.com/Snayt1k3/shiki.py/blob/master/LICENSE>`_ for licensing details.
 
-Documentation
+Doc
 -------------
 
 .. toctree::
