@@ -16,7 +16,7 @@ A Python library that provides a simple and easy-to-use wrapper for accessing th
 - **Easy-to-use API**: The API wrapper is designed to be simple and easy to use, with intuitive methods and parameters that make it easy to get started quickly.
 
 ## Documentation
-See the shiki.py [API documentation]() .
+See the shiki.py [API documentation](https://shikipy.readthedocs.io/en/latest/) .
 
 See the [official documentation](https://shikimori.one/api/doc) for the Shikimori API.
 

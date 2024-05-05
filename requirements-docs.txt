@@ -3,3 +3,4 @@ readthedocs-sphinx-search
 Sphinx
 sphinx-hoverxref
 tomli
+aiohttp
