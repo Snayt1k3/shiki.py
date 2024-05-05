@@ -6,7 +6,8 @@ A Python library that provides a simple and easy-to-use wrapper for accessing th
 [![Build Status](https://img.shields.io/github/actions/workflow/status/Snayt1k3/shiki.py/build.yml)](https://github.com/Snayt1k3/shiki.py/actions/)
 [![License](https://img.shields.io/github/license/snayt1k3/shiki.py)](https://github.com/Snayt1k3/shiki.py/LICENSE)
 [![Coverage Status](https://coveralls.io/repos/github/Snayt1k3/shiki.py/badge.svg?branch=master)](https://coveralls.io/github/Snayt1k3/shiki.py?branch=master)
-
+[![Documentation Status](https://readthedocs.org/projects/shikipy/badge/?version=latest)](https://shikipy.readthedocs.io/en/latest/?badge=latest)
+  
 ## Features
 
 - **Support for all Shikimori API endpoints**: This library supports all endpoints (both v1 and v2) of the Shikimori API, including anime, manga, characters, users, and more.
