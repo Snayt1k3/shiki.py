@@ -101,6 +101,7 @@ class GraphQlEndpoint(BaseEndpoint):
         search: str = None,
     ):
         """
+        :param publisher: List of comma separated publisher ids
         :param kind: List of values separated by comma. Add ! before value to apply negative filter. values: tv, movie, ova, ona, special, tv_special, music, pv, cm, tv_13, tv_24, tv_48
         :param status: List of values separated by comma. Add ! before value to apply negative filter.
         :param season: List of values separated by comma. Add ! before value to apply negative filter. Examples: summer_2017, 2016, 2014_2016, 199x
