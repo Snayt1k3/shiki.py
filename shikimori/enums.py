@@ -21,12 +21,14 @@ class OrderEnum(Enum):
     def __str__(self):
         return self.value
 
+
 class GenreEntryTypeEnum(Enum):
     ANIME = "Anime"
     MANGA = "Manga"
 
     def __str__(self):
         return self.value
+
 
 class UserRateTargetTypeEnum(Enum):
     ANIME = "Anime"
@@ -52,9 +54,11 @@ class UserRateOrderFieldEnum(Enum):
     ID = "id"
     UPDATED_AT = "updated_at"
 
+
 class SortOrderEnum(Enum):
     ASC = "asc"
     DESC = "desc"
+
 
 @dataclasses.dataclass
 class UserRateOrderInputType:
