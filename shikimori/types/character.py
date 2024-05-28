@@ -132,7 +132,10 @@ class Character:
             thread_id=data.get("thread_id"),
             topic_id=data.get("topic_id"),
             updated_at=data.get("updated_at"),
-            seyu=[CharacterBrief.from_dict(seyu_data) for seyu_data in data.get("seyu", [])],
+            seyu=[
+                CharacterBrief.from_dict(seyu_data)
+                for seyu_data in data.get("seyu", [])
+            ],
             animes=[
                 AnimeRole.from_dict(anime_data) for anime_data in data.get("animes", [])
             ],

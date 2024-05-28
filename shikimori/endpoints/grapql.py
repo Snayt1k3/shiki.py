@@ -57,7 +57,8 @@ class GraphQlEndpoint(BaseEndpoint):
         :param limit: Maximum 50
         """
 
-        query = """query($page: Int, $limit: Int, $order: OrderEnum, $kind: AnimeKindString, $status: AnimeStatusString, $season: SeasonString, $score: Int, $duration: DurationString, $rating: RatingString, $genre: String, $studio: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String){
+        query = (
+            """query($page: Int, $limit: Int, $order: OrderEnum, $kind: AnimeKindString, $status: AnimeStatusString, $season: SeasonString, $score: Int, $duration: DurationString, $rating: RatingString, $genre: String, $studio: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String){
         animes(
             page: $page,
             limit: $limit,
@@ -76,7 +77,10 @@ class GraphQlEndpoint(BaseEndpoint):
             ids: $ids,
             excludeIds: $excludeIds,
             search: $search
-        )""" + fields + "}"
+        )"""
+            + fields
+            + "}"
+        )
 
         response = await self._request.make_request(
             "POST",
@@ -132,7 +136,8 @@ class GraphQlEndpoint(BaseEndpoint):
         :param search: str
         """
 
-        query = """
+        query = (
+            """
         query($page: Int, $limit: Int, $ids: [ID!], $search: String) {
           characters(
             page: $page,
@@ -140,7 +145,10 @@ class GraphQlEndpoint(BaseEndpoint):
             ids: $ids,
             search: $search
           )
-        """ + fields  + "}"
+        """
+            + fields
+            + "}"
+        )
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -175,14 +183,18 @@ class GraphQlEndpoint(BaseEndpoint):
         :param ids: list of separated ids
         """
 
-        query = """
+        query = (
+            """
         query($page: Int, $limit: Int, $ids: [ID!]) {
           contests(
             page: $page,
             limit: $limit,
             ids: $ids
             )
-            """ + fields + "}"
+            """
+            + fields
+            + "}"
+        )
 
         response = await self._request.make_request(
             "POST",
@@ -214,9 +226,12 @@ class GraphQlEndpoint(BaseEndpoint):
         """
         :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         """
-        query = """
+        query = (
+            """
         query {}
-        """ + fields
+        """
+            + fields
+        )
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -243,10 +258,14 @@ class GraphQlEndpoint(BaseEndpoint):
         :param entry: GenreEntryTypeEnum
         """
 
-        query = """
+        query = (
+            """
         query ($entryType: GenreEntryTypeEnum!) {
           genres(entryType: $entryType)        
-        """ + fields + "}"
+        """
+            + fields
+            + "}"
+        )
 
         response = await self._request.make_request(
             "POST",
@@ -307,7 +326,8 @@ class GraphQlEndpoint(BaseEndpoint):
         :param limit: Maximum 50
         """
 
-        query = """
+        query = (
+            """
         query ($page: Int, $limit: Int, $order: OrderEnum, $kind: MangaKindString, $status: MangaStatusString, $season: SeasonString, $score: Int, $genre: String, $publisher: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String) {
           mangas(
             page: $page,
@@ -326,7 +346,10 @@ class GraphQlEndpoint(BaseEndpoint):
             excludeIds: $excludeIds,
             search: $search
           )
-        """ + fields + "}"
+        """
+            + fields
+            + "}"
+        )
 
         response = await self._request.make_request(
             "POST",
@@ -385,7 +408,8 @@ class GraphQlEndpoint(BaseEndpoint):
         :param isMangaka: bool
         """
 
-        query = """
+        query = (
+            """
         query ($page: Int, $limit: Int, $ids: [ID!], $search: String, $isSeyu: Boolean, $isProducer: Boolean, $isMangaka: Boolean) {
           people(
             page: $page,
@@ -396,7 +420,10 @@ class GraphQlEndpoint(BaseEndpoint):
             isProducer: $isProducer,
             isMangaka: $isMangaka
           )
-        """ + fields + "}"
+        """
+            + fields
+            + "}"
+        )
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -444,7 +471,8 @@ class GraphQlEndpoint(BaseEndpoint):
         :param order: UserRateOrderInputType
         """
 
-        query = """
+        query = (
+            """
         query ($page: Int, $limit: Int, $userId: ID, $targetType: UserRateTargetTypeEnum!, $status: UserRateStatusEnum, $order: UserRateOrderInputType) {
           userRates(
             page: $page,
@@ -454,7 +482,10 @@ class GraphQlEndpoint(BaseEndpoint):
             status: $status,
             order: $order
           ) 
-        """ + fields + "}"
+        """
+            + fields
+            + "}"
+        )
 
         response = await self._request.make_request(
             "POST",
@@ -500,7 +531,8 @@ class GraphQlEndpoint(BaseEndpoint):
         :param search: str
         """
 
-        query = """
+        query = (
+            """
         query ($page: Int, $limit: Int, $ids: [ID!], $search: String) {
           users(
             page: $page,
@@ -508,7 +540,10 @@ class GraphQlEndpoint(BaseEndpoint):
             ids: $ids,
             search: $search
           )
-        """ + fields + "}"
+        """
+            + fields
+            + "}"
+        )
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",

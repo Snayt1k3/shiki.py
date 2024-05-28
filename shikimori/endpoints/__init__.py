@@ -32,6 +32,7 @@ from .user_rates import UserRatesEndpoint
 from .users import UserEndpoint
 from .videos import VideosEndpoint
 from .grapql import GraphQlEndpoint
+
 __all__ = [
     "AbuseRequestEndpoint",
     "GraphQlEndpoint",

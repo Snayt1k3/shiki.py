@@ -5,16 +5,17 @@
 import tomli
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
+
+sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 with open("../pyproject.toml", "rb") as f:
     pyproject = tomli.load(f)
 
 _version: str = pyproject["tool"]["poetry"]["version"]
-project = 'shiki.py'
-copyright = '2024, Snayt1k3'
-author = 'Snayt1k3'
+project = "shiki.py"
+copyright = "2024, Snayt1k3"
+author = "Snayt1k3"
 
 release = _version
 version = ".".join(_version.split(".", 2)[:2])
@@ -37,13 +38,13 @@ extensions = [
     "sphinx_search.extension",
 ]
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 exclude_patterns = []
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 html_theme = "furo"
-html_static_path = ['_static']
+html_static_path = ["_static"]
 autodoc_default_options = {"member-order": "bysource"}
 intersphinx_mapping = {
     "py": ("https://docs.python.org/3", None),

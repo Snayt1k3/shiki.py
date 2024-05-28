@@ -36,6 +36,7 @@ class Comment:
             user=User.from_dict(data.get("user")),
         )
 
+
 @dataclass
 class CommentBrief:
     id: int
