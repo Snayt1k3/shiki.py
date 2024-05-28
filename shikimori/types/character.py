@@ -1,12 +1,22 @@
 from dataclasses import dataclass
-from shikimori.types.roles import Character as Seyu
-from .base import BaseRole, BaseCharacter, BaseTitle
 from .photo import Photo
 from ..utils.filter import handle_none_data
 
 
 @dataclass
-class MangaRole(BaseRole, BaseTitle):
+class MangaRole:
+    role: str
+    roles: list[str]
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+    kind: str
+    score: str
+    status: str
+    aired_on: str
+    released_on: str
     volumes: int
     chapters: int
 
@@ -32,7 +42,19 @@ class MangaRole(BaseRole, BaseTitle):
 
 
 @dataclass
-class AnimeRole(BaseRole, BaseTitle):
+class AnimeRole:
+    role: str
+    roles: list[str]
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+    kind: str
+    score: str
+    status: str
+    aired_on: str
+    released_on: str
     episodes: int
     episodes_aired: int
 
@@ -58,7 +80,32 @@ class AnimeRole(BaseRole, BaseTitle):
 
 
 @dataclass
-class Character(BaseCharacter):
+class CharacterBrief:
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+
+    @classmethod
+    @handle_none_data
+    def from_dict(cls, data: dict):
+        return cls(
+            id=data.get("id"),
+            name=data.get("name"),
+            russian=data.get("russian"),
+            image=Photo.from_dict(data.get("image")),
+            url=data.get("url"),
+        )
+
+
+@dataclass
+class Character:
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
     altname: str
     japanese: str
     description: str
@@ -68,7 +115,7 @@ class Character(BaseCharacter):
     thread_id: int
     topic_id: int
     updated_at: str
-    seyu: list[Seyu]
+    seyu: list[CharacterBrief]
     animes: list[AnimeRole]
     mangas: list[MangaRole]
 
@@ -85,7 +132,7 @@ class Character(BaseCharacter):
             thread_id=data.get("thread_id"),
             topic_id=data.get("topic_id"),
             updated_at=data.get("updated_at"),
-            seyu=[Seyu.from_dict(seyu_data) for seyu_data in data.get("seyu", [])],
+            seyu=[CharacterBrief.from_dict(seyu_data) for seyu_data in data.get("seyu", [])],
             animes=[
                 AnimeRole.from_dict(anime_data) for anime_data in data.get("animes", [])
             ],

@@ -2,7 +2,7 @@ import pytest
 
 from shikimori.endpoints.people import PeopleEndpoint
 from shikimori.types.animes import Anime
-from shikimori.types.base import BaseCharacter
+from shikimori.types.character import CharacterBrief
 from shikimori.types.manga import Manga
 from shikimori.types.people import People, Date, Works, Role
 from shikimori.types.photo import Photo
@@ -505,7 +505,7 @@ def people_byid_resp(people_byid_json):
                     for anime in role["animes"]
                 ],
                 characters=[
-                    BaseCharacter(
+                    CharacterBrief(
                         image=Photo(**s["image"]),
                         id=s["id"],
                         name=s["name"],
@@ -541,7 +541,7 @@ def people_search_json():
 @pytest.fixture
 def people_search_resp(people_search_json):
     return [
-        BaseCharacter(
+        CharacterBrief(
             id=ch["id"],
             russian=ch["russian"],
             url=ch["url"],

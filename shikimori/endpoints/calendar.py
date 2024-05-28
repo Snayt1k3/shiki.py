@@ -12,7 +12,8 @@ logger = logging.getLogger(__name__)
 class CalendarEndpoint(BaseEndpoint):
     async def list(self, censored: bool = None) -> List[Calendar] | RequestError:
         """
-        Show a calendar
+        Show a calendar.
+
         :param censored: Set to false to allow hentai, yaoi and yuri
         """
         response = await self._request.make_request(

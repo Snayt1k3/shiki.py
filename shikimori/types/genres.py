@@ -22,7 +22,11 @@ class Genre:
 
 
 @dataclass
-class GenreExtended(Genre):
+class GenreExtended:
+    id: int
+    name: str
+    russian: str
+    kind: str
     entry_type: str
 
     @classmethod

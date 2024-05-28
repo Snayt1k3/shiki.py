@@ -1,4 +1,3 @@
-from .base import BaseTitle
 from shikimori.types.genres import Genre
 from shikimori.types.photo import Photo
 from shikimori.types.user_rates import UserRate
@@ -8,7 +7,17 @@ from ..utils.filter import handle_none_data
 
 
 @dataclass
-class Ranobe(BaseTitle):
+class Ranobe:
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+    kind: str
+    score: str
+    status: str
+    aired_on: str
+    released_on: str
     volumes: int
     chapters: int
 
@@ -32,7 +41,19 @@ class Ranobe(BaseTitle):
 
 
 @dataclass
-class RanobeInfo(Ranobe):
+class RanobeInfo:
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+    kind: str
+    score: str
+    status: str
+    aired_on: str
+    released_on: str
+    volumes: int
+    chapters: int
     english: list[str]
     japanese: list[str]
     synonyms: list[str]

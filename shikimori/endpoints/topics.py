@@ -20,14 +20,13 @@ class TopicsEndpoint(BaseEndpoint):
         type: str = None,
     ) -> List[Topic] | RequestError:
         """
-        List topics
+        List topics.
+
         :param page: Must be a number between 1 and 100000.
         :param limit: 30 maximum
         :param forum: Must be one of: all, animanga, site, games, vn, contests, offtopic, clubs, my_clubs, critiques, news, collections, articles, cosplay.
         :param linked_id: Used together with linked_type
-        :param linked_type: Used together with linked_id.
-        Must be one of: Anime, Manga, Ranobe, Character, Person, Club, ClubPage, Critique, Review, Contest, CosplayGallery, Collection, Article.
-
+        :param linked_type: Used together with linked_id. Must be one of: Anime, Manga, Ranobe, Character, Person, Club, ClubPage, Critique, Review, Contest, CosplayGallery, Collection, Article.
         :param type: Must be one of: Topic, Topics::ClubUserTopic, Topics::EntryTopic, Topics::EntryTopics::AnimeTopic, Topics::EntryTopics::ArticleTopic, Topics::EntryTopics::CharacterTopic, Topics::EntryTopics::ClubPageTopic, Topics::EntryTopics::ClubTopic, Topics::EntryTopics::CollectionTopic, Topics::EntryTopics::ContestTopic, Topics::EntryTopics::CosplayGalleryTopic, Topics::EntryTopics::MangaTopic, Topics::EntryTopics::PersonTopic, Topics::EntryTopics::RanobeTopic, Topics::EntryTopics::CritiqueTopic, Topics::EntryTopics::ReviewTopic, Topics::NewsTopic, Topics::NewsTopics::ContestStatusTopic.
         """
         response = await self._request.make_request(
@@ -58,7 +57,8 @@ class TopicsEndpoint(BaseEndpoint):
         self, page: int = None, limit: int = None
     ) -> List[Status] | RequestError:
         """
-        NewsTopics about database updates
+        NewsTopics about database updates.
+
         :param page: Must be a number between 1 and 100000.
         :param limit: 30 maximum
         """
@@ -84,7 +84,8 @@ class TopicsEndpoint(BaseEndpoint):
 
     async def hot(self, limit: int = None) -> List[Topic] | RequestError:
         """
-        Hot topics
+        Hot topics.
+
         :param limit: 10 maximum
         """
         response = await self._request.make_request(
@@ -108,9 +109,9 @@ class TopicsEndpoint(BaseEndpoint):
 
     async def ById(self, id: int) -> Topic | RequestError:
         """
-        Show a topic
+        Show a topic.
+
         :param id: must be a number
-        :return:
         """
         response = await self._request.make_request(
             "GET",
@@ -137,14 +138,16 @@ class TopicsEndpoint(BaseEndpoint):
         linked_type: str = None,
     ) -> Topic | RequestError:
         """
-        Create a topic
-        Requires topics oauth scope
+        Create a topic.
+
+        Requires topics oauth scope.
+
         :param body: Must be a String.
-        :param forum_id: Must be a number..
+        :param forum_id: Must be a number.
         :param title: Must be a String.
         :param user_id: Must be a number. .
         :param type: Must be one of: Topic.
-        :param linked_id: Must be a number..
+        :param linked_id: Must be a number.
         :param linked_type: Must be one of: Anime, Manga, Ranobe, Character, Person, Club, ClubPage, Critique, Review, Contest, CosplayGallery, Collection, Article.
         """
         response = await self._request.make_request(
@@ -183,8 +186,10 @@ class TopicsEndpoint(BaseEndpoint):
         title: str = None,
     ) -> Topic | RequestError:
         """
-        Update a topic
-        Requires topics oauth scope
+        Update a topic.
+
+        Requires topics oauth scope.
+
         :param id: Must be a number.
         :param body: Must be a String.
         :param linked_id: Must be a number.
@@ -217,11 +222,11 @@ class TopicsEndpoint(BaseEndpoint):
 
     async def delete(self, id: int) -> None | RequestError:
         """
-        Destroy a topic
-        Requires topics oauth scope
+        Destroy a topic.
+
+        Requires topics oauth scope.
 
         :param id: Must be a number
-        :return:
         """
         response = await self._request.make_request(
             "DELETE",

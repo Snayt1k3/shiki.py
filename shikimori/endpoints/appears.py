@@ -10,8 +10,9 @@ logger = logging.getLogger(__name__)
 class AppearsEndpoint(BaseEndpoint):
     async def read(self, ids: str = None) -> None | RequestError:
         """
-        Mark comments or topics as read
-        :param ids: str like 'comment-7,comment-8,topic-270101'
+        Mark comments or topics as read.
+
+        :param ids: str like 'comment-7,comment-8,topic-270101'.
         """
 
         response = await self._request.make_request(

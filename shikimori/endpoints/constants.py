@@ -46,7 +46,7 @@ class ConstantsEndpoint(BaseEndpoint):
 
         return response
 
-    async def UserRates(self) -> UserRateConstant | RequestError:
+    async def user_rates(self) -> UserRateConstant | RequestError:
         response = await self._request.make_request(
             "GET",
             headers=self.headers,

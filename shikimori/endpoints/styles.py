@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 class StylesEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> Style | RequestError:
         """
-        Show a style
+        Show a style.
+
         :param id: must be a number
-        :return:
         """
         response = await self._request.make_request(
             "GET", url=f"{self._base_url}/api/styles/{id}", headers=self.headers
@@ -29,7 +29,8 @@ class StylesEndpoint(BaseEndpoint):
 
     async def preview(self, css: str) -> Style | RequestError:
         """
-        Preview a style
+        Preview a style.
+
         :param css: Must be a String
         """
         response = await self._request.make_request(
@@ -52,7 +53,8 @@ class StylesEndpoint(BaseEndpoint):
         self, css: str, name: str, owner_id: int, owner_type: str
     ) -> Style | RequestError:
         """
-        Create a style
+        Create a style.
+
         :param css: Must be a String
         :param name: Must be a String
         :param owner_id: Must be a number.
@@ -85,7 +87,8 @@ class StylesEndpoint(BaseEndpoint):
         self, id: int, css: str = None, name: str = None
     ) -> Style | RequestError:
         """
-        Update a style
+        Update a style.
+
         :param id: Must be a number
         :param css: Must be a String
         :param name: Must be a String

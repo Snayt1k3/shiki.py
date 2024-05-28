@@ -3,7 +3,7 @@ import pytest
 from shikimori.endpoints.characters import CharacterEndpoint
 from shikimori.types.character import Character, AnimeRole, MangaRole
 from shikimori.types.photo import Photo
-from shikimori.types.roles import Character as MiniCharacter
+from shikimori.types.character import CharacterBrief
 
 
 @pytest.fixture
@@ -148,7 +148,7 @@ def character_list_resp(character_list_json):
         url=response["url"],
         image=Photo(**response["image"]),
         seyu=[
-            MiniCharacter(
+            CharacterBrief(
                 image=Photo(**s["image"]),
                 id=s["id"],
                 name=s["name"],
@@ -219,7 +219,7 @@ def character_search_json():
 @pytest.fixture
 def character_search_resp(character_search_json):
     return [
-        MiniCharacter(
+        CharacterBrief(
             image=Photo(**s["image"]),
             id=s["id"],
             name=s["name"],

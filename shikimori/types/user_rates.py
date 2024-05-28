@@ -4,7 +4,7 @@ from shikimori.utils.filter import handle_none_data
 
 
 @dataclass
-class MiniUserRate:
+class UserRateBrief:
     id: int
     score: int
     status: str

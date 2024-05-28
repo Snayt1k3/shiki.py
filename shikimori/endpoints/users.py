@@ -25,7 +25,8 @@ class UserEndpoint(BaseEndpoint):
         self, page: int = None, limit: int = None, search: str = None
     ) -> List[User] | RequestError:
         """
-        list users
+        list users.
+
         :param page: Must be a number between 1 and 100000.
         :param limit: 100 maximum
         :param search: Must be a String
@@ -50,7 +51,8 @@ class UserEndpoint(BaseEndpoint):
 
     async def ById(self, id: int, is_nickname: str = None) -> UserInfo | RequestError:
         """
-        Show a user
+        Show a user.
+
         :param id: must be a number
         :param is_nickname: 1 if you want to get user by its nickname
         """
@@ -70,9 +72,10 @@ class UserEndpoint(BaseEndpoint):
 
         return response
 
-    async def info(self, id: int) -> User | RequestError:
+    async def info(self, id: int) -> UserInfoInc | RequestError:
         """
-        Show user's brief info
+        Show user's brief info.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -89,7 +92,7 @@ class UserEndpoint(BaseEndpoint):
 
         return response
 
-    async def whoami(self) -> User | RequestError:
+    async def whoami(self) -> UserInfoInc | RequestError:
         """
         Show current user's brief info
         """
@@ -129,8 +132,9 @@ class UserEndpoint(BaseEndpoint):
         self, page: int = None, limit: int = None
     ) -> List[User] | RequestError:
         """
-        Show user's friends
-        :param limit: 100 maximum
+        Show user's friends.
+
+        :param limit: 100 maximum.
         :param page: Must be a number between 1 and 100000.
         """
         response = await self._request.make_request(
@@ -150,7 +154,8 @@ class UserEndpoint(BaseEndpoint):
 
     async def clubs(self, id: int) -> List[Club] | RequestError:
         """
-        Show user's clubs
+        Show user's clubs.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -175,7 +180,8 @@ class UserEndpoint(BaseEndpoint):
         censored: bool = None,
     ) -> List[Rate] | RequestError:
         """
-        Show user's anime list
+        Show user's anime list.
+
         :param id: must be a number
         :param limit: Must be a number between 1 and 100000
         :param page: 5000 maximum
@@ -206,7 +212,8 @@ class UserEndpoint(BaseEndpoint):
         censored: bool = None,
     ) -> List[Rate] | RequestError:
         """
-        Show user's manga list
+        Show user's manga list.
+
         :param id: must be a number
         :param limit: Must be a number between 1 and 100000
         :param page: 5000 maximum
@@ -231,7 +238,8 @@ class UserEndpoint(BaseEndpoint):
 
     async def favourites(self, id: int) -> Favourites | RequestError:
         """
-        Show user's favourites
+        Show user's favourites.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -252,7 +260,8 @@ class UserEndpoint(BaseEndpoint):
         self, id: int, page: int = None, limit: int = None, type: str = None
     ) -> List[MessageInfo] | RequestError:
         """
-        Show current user's messages
+        Show current user's messages.
+
         :param id: must be a number.
         :param page: Must be a number between 1 and 100000.
         :param limit: 100 maximum
@@ -275,7 +284,8 @@ class UserEndpoint(BaseEndpoint):
 
     async def unread(self, id: int) -> UnreadMessages | RequestError:
         """
-        Show current user's unread messages counts
+        Show current user's unread messages counts.
+
         :param id: must be a number.
         """
         response = await self._request.make_request(
@@ -301,7 +311,8 @@ class UserEndpoint(BaseEndpoint):
         target_id: int = None,
     ) -> List[HistoryObj] | RequestError:
         """
-        Show user history
+        Show user history.
+
         :param id: Must be a number.
         :param page: Must be a number between 1 and 100000.
         :param limit: 100 maximum
@@ -332,9 +343,9 @@ class UserEndpoint(BaseEndpoint):
 
     async def bans(self, id: int) -> List[Ban] | RequestError:
         """
-        Show user's bans
+        Show user's bans.
+
         :param id: Must be a number.
-        :return:
         """
         response = await self._request.make_request(
             "GET",

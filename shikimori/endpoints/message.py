@@ -10,8 +10,10 @@ logger = logging.getLogger(__name__)
 class MessageEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> MessageInfo | RequestError:
         """
-        Show a message
-        Requires messages oauth scope
+        Show a message.
+
+        Requires messages oauth scope.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -33,11 +35,13 @@ class MessageEndpoint(BaseEndpoint):
         self, from_id: int, to_id: int, body: str, kind: str = "Private"
     ) -> MessageInfo | RequestError:
         """
-        Create a message
-            Requires messages oauth scope
+        Create a message.
+
+        Requires messages oauth scope.
+
         :param from_id: Must be a number.
         :param to_id: Must be a number.
-        :param body: Must be a String
+        :param body: Must be a String.
         :param kind: Must be one of: Private.
         """
         response = await self._request.make_request(
@@ -65,11 +69,12 @@ class MessageEndpoint(BaseEndpoint):
 
     async def update(self, id: int, body: str) -> MessageInfo | RequestError:
         """
-        Update a message
-        Requires messages oauth scope
+        Update a message.
+
+        Requires messages oauth scope.
+
         :param id: must be a number
         :param body: must be a string
-        :return:
         """
         response = await self._request.make_request(
             "PATCH",
@@ -93,8 +98,10 @@ class MessageEndpoint(BaseEndpoint):
 
     async def delete(self, id: int) -> None | RequestError:
         """
-        Destroy a message
-        Requires messages oauth scope
+        Destroy a message.
+
+        Requires messages oauth scope.
+
         :param id: must be a number
         """
         response = await self._request.make_request(
@@ -115,7 +122,9 @@ class MessageEndpoint(BaseEndpoint):
     async def markRead(self, ids: str, is_read: bool) -> None | RequestError:
         """
         mark as read or unread.
-        Requires messages oauth scope
+
+        Requires messages oauth scope.
+
         :param ids: string like '123, 34455, 283761846'
         :param is_read: True - read, False - Unread
         """
@@ -137,7 +146,8 @@ class MessageEndpoint(BaseEndpoint):
 
     async def readAll(self, type: str) -> None | RequestError:
         """
-        Requires messages oauth scope
+        Requires messages oauth scope.
+
         :param type: Must be one of: news, notifications.
         """
         response = await self._request.make_request(
@@ -158,7 +168,8 @@ class MessageEndpoint(BaseEndpoint):
 
     async def deleteAll(self, type: str) -> None | RequestError:
         """
-        Requires messages oauth scope
+        Requires messages oauth scope.
+
         :param type: Must be one of: news, notifications.
         """
         response = await self._request.make_request(

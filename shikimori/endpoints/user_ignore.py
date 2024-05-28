@@ -8,18 +8,18 @@ logger = logging.getLogger(__name__)
 
 
 class UserIgnoreEndpoint(BaseEndpoint):
-    async def ignore(self, user_id: str | int) -> UserIgnore | RequestError:
+    async def ignore(self, id: str | int) -> UserIgnore | RequestError:
         """
         ignore user.
 
-        Requires ignores oauth scope
+        Requires ignores oauth scope.
 
-        :param user_id: must be a number
+        :param id: must be a number
         """
 
         response = await self._request.make_request(
             "POST",
-            url=f"{self._base_url}/api/v2/users/{user_id}/ignore",
+            url=f"{self._base_url}/api/v2/users/{id}/ignore",
             headers=self.headers,
         )
 
@@ -32,18 +32,18 @@ class UserIgnoreEndpoint(BaseEndpoint):
 
         return response
 
-    async def unignore(self, user_id: str | int) -> UserIgnore | RequestError:
+    async def unignore(self, id: str | int) -> UserIgnore | RequestError:
         """
         unignore user.
 
-        Requires ignores oauth scope
+        Requires ignores oauth scope.
 
-        :param user_id: must be a number
+        :param id: must be a number
         """
 
         response = await self._request.make_request(
             "DELETE",
-            url=f"{self._base_url}/api/v2/users/{user_id}/ignore",
+            url=f"{self._base_url}/api/v2/users/{id}/ignore",
             headers=self.headers,
         )
 
