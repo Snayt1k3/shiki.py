@@ -128,7 +128,9 @@ class UserEndpoint(BaseEndpoint):
 
         return response
 
-    async def friends(self, page: int = None, limit: int = None) -> List[User] | RequestError:
+    async def friends(
+        self, page: int = None, limit: int = None
+    ) -> List[User] | RequestError:
         """
         Show user's friends.
 
@@ -139,7 +141,7 @@ class UserEndpoint(BaseEndpoint):
             "GET",
             url=f"{self._base_url}/api/users/friends",
             headers=self.headers,
-            json=filter_none_parameters({"page": page, "limit": limit})
+            json=filter_none_parameters({"page": page, "limit": limit}),
         )
         if not isinstance(response, RequestError):
             return [User.from_dict(u) for u in response]

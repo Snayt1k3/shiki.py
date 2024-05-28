@@ -11,6 +11,7 @@ with open("pyproject.toml", "rb") as f:
 def get_long_description() -> str:
     return (Path(__file__).parent / "README.md").read_text()
 
+
 extra_requirements = {
     "readthedocs": [
         "furo",

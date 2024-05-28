@@ -142,4 +142,3 @@ class Relation:
             anime=Anime.from_dict(anime) if (anime := data.get("anime")) else None,
             manga=Manga.from_dict(manga) if (manga := data.get("manga")) else None,
         )
-

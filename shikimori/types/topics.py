@@ -201,6 +201,7 @@ class ReviewLinked:
             created_at=data.get("created_at"),
         )
 
+
 @dataclass
 class TopicReview:
     id: int
