@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class GraphQlEndpoint(BaseEndpoint):
     async def animes(
         self,
-        query: str,
+        fields: str,
         page: int = 1,
         limit: int = 1,
         order: OrderEnum = None,
@@ -37,7 +37,7 @@ class GraphQlEndpoint(BaseEndpoint):
     ) -> dict | RequestError:
         """
 
-        :param query: graphql query
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         :param kind: List of values separated by comma. Add ! before value to apply negative filter. values: tv, movie, ova, ona, special, tv_special, music, pv, cm, tv_13, tv_24, tv_48
         :param status: List of values separated by comma. Add ! before value to apply negative filter.
         :param season: List of values separated by comma. Add ! before value to apply negative filter. Examples: summer_2017, 2016, 2014_2016, 199x
@@ -56,6 +56,27 @@ class GraphQlEndpoint(BaseEndpoint):
         :param page: must be a number
         :param limit: Maximum 50
         """
+
+        query = """query($page: Int, $limit: Int, $order: OrderEnum, $kind: AnimeKindString, $status: AnimeStatusString, $season: SeasonString, $score: Int, $duration: DurationString, $rating: RatingString, $genre: String, $studio: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String){
+        animes(
+            page: $page,
+            limit: $limit,
+            order: $order,
+            kind: $kind,
+            status: $status,
+            season: $season,
+            score: $score,
+            duration: $duration,
+            rating: $rating,
+            genre: $genre,
+            studio: $studio,
+            franchise: $franchise,
+            censored: $censored,
+            mylist: $mylist,
+            ids: $ids,
+            excludeIds: $excludeIds,
+            search: $search
+        )""" + fields + "}"
 
         response = await self._request.make_request(
             "POST",
@@ -96,7 +117,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
     async def characters(
         self,
-        query: str,
+        fields: str,
         page: int = 1,
         limit: int = 1,
         ids: str = None,
@@ -104,12 +125,22 @@ class GraphQlEndpoint(BaseEndpoint):
     ) -> dict | RequestError:
         """
 
-        :param query: graphql query
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         :param page: int
         :param limit: Maximum 50
         :param ids: list of separated ids
         :param search: str
         """
+
+        query = """
+        query($page: Int, $limit: Int, $ids: [ID!], $search: String) {
+          characters(
+            page: $page,
+            limit: $limit,
+            ids: $ids,
+            search: $search
+          )
+        """ + fields  + "}"
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -135,15 +166,24 @@ class GraphQlEndpoint(BaseEndpoint):
         return response
 
     async def contests(
-        self, query: str, page: int = 1, limit: int = 1, ids: str = None
+        self, fields: str, page: int = 1, limit: int = 1, ids: str = None
     ) -> dict | RequestError:
         """
-
-        :param query: graphql query
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         :param page: int
         :param limit: Maximum 10
         :param ids: list of separated ids
         """
+
+        query = """
+        query($page: Int, $limit: Int, $ids: [ID!]) {
+          contests(
+            page: $page,
+            limit: $limit,
+            ids: $ids
+            )
+            """ + fields + "}"
+
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -169,11 +209,14 @@ class GraphQlEndpoint(BaseEndpoint):
 
     async def currentUser(
         self,
-        query: str,
+        fields: str,
     ) -> dict | RequestError:
         """
-        :param query: graphql query
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         """
+        query = """
+        query {}
+        """ + fields
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -193,12 +236,18 @@ class GraphQlEndpoint(BaseEndpoint):
         return response
 
     async def genres(
-        self, query: str, entry: GenreEntryTypeEnum
+        self, fields: str, entry: GenreEntryTypeEnum
     ) -> dict | RequestError:
         """
-        :param query: graphql query
-        :param entry:
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
+        :param entry: GenreEntryTypeEnum
         """
+
+        query = """
+        query ($entryType: GenreEntryTypeEnum!) {
+          genres(entryType: $entryType)        
+        """ + fields + "}"
+
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -222,7 +271,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
     async def mangas(
         self,
-        query: str,
+        fields: str,
         page: int = 1,
         limit: int = 1,
         order: OrderEnum = None,
@@ -240,7 +289,7 @@ class GraphQlEndpoint(BaseEndpoint):
         search: str = None,
     ) -> dict | RequestError:
         """
-        :param query: graphql query
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         :param publisher: List of comma separated publisher ids
         :param kind: List of values separated by comma. Add ! before value to apply negative filter. values: tv, movie, ova, ona, special, tv_special, music, pv, cm, tv_13, tv_24, tv_48
         :param status: List of values separated by comma. Add ! before value to apply negative filter.
@@ -257,6 +306,28 @@ class GraphQlEndpoint(BaseEndpoint):
         :param page: must be a number
         :param limit: Maximum 50
         """
+
+        query = """
+        query ($page: Int, $limit: Int, $order: OrderEnum, $kind: MangaKindString, $status: MangaStatusString, $season: SeasonString, $score: Int, $genre: String, $publisher: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String) {
+          mangas(
+            page: $page,
+            limit: $limit,
+            order: $order,
+            kind: $kind,
+            status: $status,
+            season: $season,
+            score: $score,
+            genre: $genre,
+            publisher: $publisher,
+            franchise: $franchise,
+            censored: $censored,
+            mylist: $mylist,
+            ids: $ids,
+            excludeIds: $excludeIds,
+            search: $search
+          )
+        """ + fields + "}"
+
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -294,7 +365,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
     async def people(
         self,
-        query: str,
+        fields: str,
         page: int = 1,
         limit: int = 1,
         ids: str = None,
@@ -304,7 +375,7 @@ class GraphQlEndpoint(BaseEndpoint):
         isMangaka: bool = None,
     ) -> dict | RequestError:
         """
-        :param query: graphql query
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         :param page: int
         :param limit: Maximum 10
         :param ids: List of values separated by comma.
@@ -313,6 +384,19 @@ class GraphQlEndpoint(BaseEndpoint):
         :param isProducer: bool
         :param isMangaka: bool
         """
+
+        query = """
+        query ($page: Int, $limit: Int, $ids: [ID!], $search: String, $isSeyu: Boolean, $isProducer: Boolean, $isMangaka: Boolean) {
+          people(
+            page: $page,
+            limit: $limit,
+            ids: $ids,
+            search: $search,
+            isSeyu: $isSeyu,
+            isProducer: $isProducer,
+            isMangaka: $isMangaka
+          )
+        """ + fields + "}"
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -342,7 +426,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
     async def userRates(
         self,
-        query: str,
+        fields: str,
         userId: int = None,
         page: int = 1,
         limit: int = 1,
@@ -351,7 +435,7 @@ class GraphQlEndpoint(BaseEndpoint):
         order: UserRateOrderInputType = None,
     ) -> dict | RequestError:
         """
-        :param query: graphql query
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         :param userId: ID of current user is used by default
         :param page: int
         :param limit: maximum - 50
@@ -359,6 +443,19 @@ class GraphQlEndpoint(BaseEndpoint):
         :param status: UserRateStatusEnum
         :param order: UserRateOrderInputType
         """
+
+        query = """
+        query ($page: Int, $limit: Int, $userId: ID, $targetType: UserRateTargetTypeEnum!, $status: UserRateStatusEnum, $order: UserRateOrderInputType) {
+          userRates(
+            page: $page,
+            limit: $limit,
+            userId: $userId,
+            targetType: $targetType,
+            status: $status,
+            order: $order
+          ) 
+        """ + fields + "}"
+
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",
@@ -389,19 +486,29 @@ class GraphQlEndpoint(BaseEndpoint):
 
     async def users(
         self,
-        query: str,
+        fields: str,
         page: int = 1,
         limit: int = 1,
         ids: str = None,
         search: str = None,
     ) -> dict | RequestError:
         """
-        :param query: graphql query
+        :param fields: e.g. '{ anime { id name } }'  (check more in doc https://shikimori.one/api/doc/graphql )
         :param page: int
         :param limit: maximum - 50
         :param ids: List of values separated by comma.
         :param search: str
         """
+
+        query = """
+        query ($page: Int, $limit: Int, $ids: [ID!], $search: String) {
+          users(
+            page: $page,
+            limit: $limit,
+            ids: $ids,
+            search: $search
+          )
+        """ + fields + "}"
         response = await self._request.make_request(
             "POST",
             url=f"{self._base_url}/api/graphql",

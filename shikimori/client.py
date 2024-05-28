@@ -142,6 +142,9 @@ class Shikimori:
         self.video = endpoints.VideosEndpoint(**self._deps)
         """Endpoint for making requests to the URL 'https://shikimori.one/api/animes/:anime_id/videos'"""
         self.auth = Auth(self._limiter, self._user_agent, self._options, self._base_url)
+        """Endpoint for OAUTH"""
+        self.graphql = endpoints.GraphQlEndpoint(**self._deps)
+        """Endpoint for making requests to the URL 'https://shikimori.one/api/grapql with your fields'"""
 
     def set_token(self, token: str) -> None:
         """
