@@ -1,12 +1,21 @@
 from shikimori.types.user import User
 from shikimori.types.photo import Photo
 from dataclasses import dataclass
-from shikimori.types.base import BaseTitle
 from shikimori.utils.filter import handle_none_data
 
 
 @dataclass
-class Title(BaseTitle):
+class Title:
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+    kind: str
+    score: str
+    status: str
+    aired_on: str
+    released_on: str
     episodes: int = 0
     episodes_aired: int = 0
     volumes: int = 0
@@ -193,7 +202,25 @@ class ReviewLinked:
         )
 
 
-class TopicReview(Topic):
+@dataclass
+class TopicReview:
+    id: int
+    topic_title: str
+    body: str
+    html_body: str
+    html_footer: str
+    created_at: str
+    comments_count: int
+    forum: Forum
+    user: User
+    type: str
+    linked_id: int
+    linked_type: str
+    linked: Linked | None
+    viewed: bool
+    last_comment_viewed: bool
+    event: str
+    episode: int
     linked: ReviewLinked | None
 
     @classmethod

@@ -2,7 +2,8 @@ import pytest
 
 from shikimori.endpoints.users import UserEndpoint
 from shikimori.types.animes import Anime
-from shikimori.types.bans import Ban, Comment
+from shikimori.types.bans import Ban
+from shikimori.types.comment import CommentBrief
 from shikimori.types.club import Club, Logo
 from shikimori.types.manga import Manga
 from shikimori.types.message import MessageInfo
@@ -1095,7 +1096,7 @@ def users_bans_resp(users_bans_json):
             moderator_id=b["moderator_id"],
             reason=b["reason"],
             user_id=b["user_id"],
-            comment=Comment(**b["comment"]),
+            comment=CommentBrief(**b["comment"]),
             user=User(
                 id=b["user"]["id"],
                 avatar=b["user"]["avatar"],

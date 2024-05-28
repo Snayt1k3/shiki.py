@@ -1,9 +1,10 @@
 import pytest
 
 from shikimori.endpoints.bans import BanEndpoint
-from shikimori.types.bans import Comment, Ban
+from shikimori.types.bans import Ban
 from shikimori.types.photo import PhotoExtended
 from shikimori.types.user import User
+from shikimori.types.comment import CommentBrief
 
 
 @pytest.fixture
@@ -127,7 +128,7 @@ def bans_list_resp(bans_list_json):
             moderator_id=b["moderator_id"],
             reason=b["reason"],
             user_id=b["user_id"],
-            comment=Comment(**b["comment"]),
+            comment=CommentBrief(**b["comment"]),
             user=User(
                 id=b["user"]["id"],
                 avatar=b["user"]["avatar"],

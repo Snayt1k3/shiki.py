@@ -33,7 +33,16 @@ class Message:
 
 
 @dataclass
-class MessageInfo(Message):
+class MessageInfo:
+    id: int
+    kind: str
+    read: bool
+    body: str
+    html_body: str
+    created_at: str
+    linked_id: int | None
+    linked_type: str | None
+    linked: Linked | None
     sender: User
     to: User
 

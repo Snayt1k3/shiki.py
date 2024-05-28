@@ -3,21 +3,22 @@ import pytest
 from shikimori.endpoints.animes import AnimeEndpoint
 from shikimori.types.animes import Anime, AnimeInfo
 from shikimori.types.photo import Photo
-from shikimori.types.roles import Role, Character
+from shikimori.types.roles import Role
+from shikimori.types.character import CharacterBrief
 from shikimori.types.photo import Photo, PhotoExtended
 from shikimori.types.topics import Topic, Forum, Linked
-from shikimori.types.user_rates import MiniUserRate
+from shikimori.types.user_rates import UserRateBrief
 from shikimori.types.animes import (
     Anime,
     AnimeInfo,
     GenreExtended,
     Relation,
-    ExternalLink,
 )
+from shikimori.types.externalLink import ExternalLink
 from shikimori.types.franchise import Franchise, Node, Link
 from shikimori.types.manga import Manga
 from shikimori.types.photo import Photo, PhotoExtended
-from shikimori.types.roles import Role, Character
+from shikimori.types.roles import Role
 from shikimori.types.screenshots import ScreenShot
 from shikimori.types.studios import Studio
 from shikimori.types.videos import Video
@@ -295,7 +296,7 @@ def animes_byId_resp(animes_byId_json):
         studios=[Studio(**s) for s in response.get("studios")],
         videos=[Video(**v) for v in response.get("videos")],
         user_rate=(
-            MiniUserRate(**response["user_rate"]) if response["user_rate"] else None
+            UserRateBrief(**response["user_rate"]) if response["user_rate"] else None
         ),
     )
 
@@ -347,7 +348,7 @@ def animes_roles_resp(animes_roles_json):
             roles=role["roles"],
             roles_russian=role["roles_russian"],
             character=(
-                Character(
+                CharacterBrief(
                     id=role["character"]["id"],
                     name=role["character"]["name"],
                     russian=role["character"]["russian"],
@@ -358,7 +359,7 @@ def animes_roles_resp(animes_roles_json):
                 else None
             ),
             person=(
-                Character(
+                CharacterBrief(
                     id=role["person"]["id"],
                     name=role["person"]["name"],
                     russian=role["person"]["russian"],

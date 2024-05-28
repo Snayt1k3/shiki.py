@@ -11,7 +11,8 @@ logger = logging.getLogger(__name__)
 class UserRatesEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> UserRate | RequestError:
         """
-        Show a user rate
+        Show a user rate.
+
         :param id: must be a number
         """
 
@@ -40,7 +41,8 @@ class UserRatesEndpoint(BaseEndpoint):
         limit: int = None,
     ) -> list[UserRate] | RequestError:
         """
-        List user rates
+        List user rates.
+
         :param user_id: must be a number
         :param target_id: must be a number
         :param target_type: Must be one of: Anime, Manga
@@ -87,8 +89,10 @@ class UserRatesEndpoint(BaseEndpoint):
         text: str | None = None,
     ) -> UserRate | RequestError:
         """
-        Create a user rate
-        Requires user_rates oauth scope
+        Create a user rate.
+
+        Requires user_rates oauth scope.
+
         :param text: Must be a String
         :param rewatches: Must be a number.
         :param volumes: Must be a number.
@@ -143,8 +147,9 @@ class UserRatesEndpoint(BaseEndpoint):
         text: str | None = None,
     ) -> UserRate | RequestError:
         """
-        Update an user rate
-        Requires user_rates oauth scope
+        Update a user rate.
+
+        Requires user_rates oauth scope.
 
         :param user_rate_id: Must be a number.
         :param status: Must be a number.
@@ -183,15 +188,17 @@ class UserRatesEndpoint(BaseEndpoint):
 
         return response
 
-    async def increment(self, user_rate_id: int) -> UserRate | RequestError:
+    async def increment(self, id: int) -> UserRate | RequestError:
         """
         requires user_rates oauth scope.
-        Increment episodes/chapters by 1
-        :param user_rate_id:  Must be a number.
+
+        Increment episodes/chapters by 1.
+
+        :param id:  Must be a number.
         """
         response = await self._request.make_request(
             "POST",
-            url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}/increment",
+            url=f"{self._base_url}/api/v2/user_rates/{id}/increment",
             headers=self.headers,
         )
 
@@ -204,16 +211,18 @@ class UserRatesEndpoint(BaseEndpoint):
 
         return response
 
-    async def delete(self, user_rate_id: int) -> None | RequestError:
+    async def delete(self, id: int) -> None | RequestError:
         """
         Destroy a user rate.
-        requires user_rates oauth scope
-        :param user_rate_id: must be a number.
+
+        requires user_rates oauth scope.
+
+        :param id: must be a number.
         """
 
         response = await self._request.make_request(
             "DELETE",
-            url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}",
+            url=f"{self._base_url}/api/v2/user_rates/{id}",
             headers=self.headers,
         )
 
@@ -228,12 +237,13 @@ class UserRatesEndpoint(BaseEndpoint):
 
     async def cleanup(self, type: str) -> dict | RequestError:
         """
-        Be careful to use
+        Be careful to use.
+
         :param type: Must be one of: anime, manga.
         """
         response = await self._request.make_request(
             "DELETE",
-            url=f"{self._base_url}/api/v2/user_rates/{type}/cleanup",
+            url=f"{self._base_url}/api/user_rates/{type}/cleanup",
             headers=self.headers,
         )
 
@@ -249,12 +259,14 @@ class UserRatesEndpoint(BaseEndpoint):
     async def reset(self, type: str) -> dict | RequestError:
         """
         Be careful to use.
+
         Reset all user scores to 0.
+
         :param type: Must be one of: anime, manga.
         """
         response = await self._request.make_request(
             "DELETE",
-            url=f"{self._base_url}/api/v2/user_rates/{type}/reset",
+            url=f"{self._base_url}/api/user_rates/{type}/reset",
             headers=self.headers,
         )
 

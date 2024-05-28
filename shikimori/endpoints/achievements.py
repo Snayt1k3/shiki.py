@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 class AchievementsEndpoint(BaseEndpoint):
     async def list(self, user_id: int) -> list[Achievement] | RequestError:
         """
-        List user achievements
+        List user achievements.
+
         :param user_id: Must be a number.
         """
         response = await self._request.make_request(

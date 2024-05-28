@@ -42,7 +42,7 @@ class RequestLimiter(BaseLimiter):
 
     async def make_request(self, method: str, **kwargs):
         """
-        :param method: one of [GET, POST, PUT, PATCH, DELETE]
+        :param method: one of [GET, POST, PATCH, DELETE]
         :param kwargs: parameters for request
         :return: response or 'RequestError' or Raise 'TooManyRequests'
         """

@@ -13,8 +13,10 @@ class UserImageEndpoint(BaseEndpoint):
         self, image: str, linked_type: str = None
     ) -> UserImage | RequestError:
         """
-        Create a user image
-        Requires comments oauth scope
+        Create a user image.
+
+        Requires comments oauth scope.
+
         :param image: Must be a String
         :param linked_type: Must be a String
         """

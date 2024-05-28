@@ -1,32 +1,21 @@
 import logging
-from dataclasses import dataclass
+from shikimori.types.auth import AuthOptions, AccessTokenData
 
-from shikimori.exceptions import RequestError
 from shikimori.base import BaseLimiter
+from shikimori.exceptions import RequestError
 
-__all__ = ["Auth", "AuthOptions", "AccessTokenData"]
+__all__ = ["Auth"]
 
 logger = logging.getLogger(__name__)
 
 
-@dataclass
-class AuthOptions:
-    client_id: str
-    redirect_uri: str
-    client_secret: str
-
-
-@dataclass
-class AccessTokenData:
-    access_token: str
-    token_type: str
-    expires_in: int
-    refresh_token: str
-    scope: str
-    created_at: int
-
-
 class Auth:
+    """
+    Class for handling authentication with the Shikimori API.
+
+    This class provides methods for obtaining access tokens and refreshing tokens.
+    """
+
     def __init__(
         self,
         request: BaseLimiter,
@@ -34,12 +23,25 @@ class Auth:
         options: AuthOptions | None = None,
         base_url: str = None,
     ):
+        """
+        Initialize the Auth class.
+
+        :param request: An instance of the BaseLimiter class for making requests.
+        :param user_agent:  User-agent string to be used in API requests. Defaults to None.
+        :param options:  An instance of the AuthOptions class containing authentication options. Defaults to None.
+        :param base_url:  Base URL for the Shikimori API. Defaults to None.
+        """
         self._base_url = base_url
         self._headers = {"User-Agent": user_agent}
         self._request = request
         self._options = options
 
     async def get_access_token(self, auth_code: str) -> AccessTokenData | RequestError:
+        """
+        Obtain an access token using an authorization code.
+
+        :param auth_code: Authorization code obtained during the OAuth authorization process.
+        """
         body = {
             "grant_type": "authorization_code",
             "client_id": self._options.client_id,
@@ -65,6 +67,11 @@ class Auth:
         return resp
 
     async def refresh(self, refresh_token: str) -> AccessTokenData | RequestError:
+        """
+        Refresh an access token using a refresh token.
+
+        :param refresh_token: Refresh token obtained during the OAuth authorization process.
+        """
         body = {
             "grant_type": "refresh_token",
             "client_id": self._options.client_id,
@@ -86,3 +93,10 @@ class Auth:
         )
 
         return resp
+
+    @property
+    def auth_url(self) -> str:
+        """
+        Generates a URL for obtaining an authorization code to authenticate requests.
+        """
+        return f"https://shikimori.one/oauth/authorize?client_id={self._options.client_id}&redirect_uri={self._options.redirect_uri}&response_type=code&scope={'+'.join(self._options.scopes)}"  # NOQA

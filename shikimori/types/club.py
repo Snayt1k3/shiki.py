@@ -1,6 +1,6 @@
 from shikimori.types.manga import Manga
 from shikimori.types.animes import Anime
-from shikimori.types.roles import Character
+from shikimori.types.character import CharacterBrief
 from shikimori.types.user import User
 from .photo import ClubImage, Logo
 from .topics import Topic
@@ -36,7 +36,7 @@ class ClubInfo(Club):
     description: str
     description_html: str
     mangas: list[Manga]
-    characters: list[Character]
+    characters: list[CharacterBrief]
     thread_id: int
     topic_id: int
     user_role: str
@@ -55,7 +55,7 @@ class ClubInfo(Club):
                 Manga.from_dict(manga_data) for manga_data in data.get("mangas", [])
             ],
             characters=[
-                Character.from_dict(character_data)
+                CharacterBrief.from_dict(character_data)
                 for character_data in data.get("characters", [])
             ],
             thread_id=data.get("thread_id"),

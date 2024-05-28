@@ -5,7 +5,7 @@ from shikimori.types.animes import Anime
 from shikimori.types.club import Club, ClubImage, ClubInfo, Collection
 from shikimori.types.manga import Manga
 from shikimori.types.ranobe import Ranobe
-from shikimori.types.roles import Character
+from shikimori.types.character import CharacterBrief
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 from ..types.user import User
@@ -19,10 +19,11 @@ class ClubEndpoint(BaseEndpoint):
         self, page: int = None, limit: int = None, search: str = None
     ) -> List[Club] | RequestError:
         """
-        List clubs
+        List clubs.
+
         :param page: Must be a number between 1 and 100000.
-        :param limit: 30 max
-        :param search: string
+        :param limit: 30 max.
+        :param search: string.
         """
         response = await self._request.make_request(
             "GET",
@@ -44,8 +45,9 @@ class ClubEndpoint(BaseEndpoint):
 
     async def ById(self, id: int) -> ClubInfo | RequestError:
         """
-        Show a club
-        :param id: must be a number
+        Show a club.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "GET",
@@ -73,8 +75,10 @@ class ClubEndpoint(BaseEndpoint):
         image_upload_policy: str = None,
     ) -> ClubInfo | RequestError:
         """
-        Update a club
-        Requires clubs oauth scope
+        Update a club.
+
+        Requires clubs oauth scope.
+
         :param id: number.
         :param name: string.
         :param description: string.
@@ -114,9 +118,10 @@ class ClubEndpoint(BaseEndpoint):
         self, id: int, limit: int = None, page: int = None
     ) -> List[Anime] | RequestError:
         """
-        List of club animes
-        :param id: must a number
-        :param limit: 20 maximum
+        List of club animes.
+
+        :param id: must a number.
+        :param limit: 20 maximum.
         :param page: Must be a number between 1 and 100000.
         """
         response = await self._request.make_request(
@@ -139,9 +144,10 @@ class ClubEndpoint(BaseEndpoint):
         self, id: int, page: int = None, limit: int = None
     ) -> List[Manga] | RequestError:
         """
-        List of club mangas
-        :param id: must a number
-        :param limit: 20 maximum
+        List of club mangas.
+
+        :param id: must a number.
+        :param limit: 20 maximum.
         :param page: Must be a number between 1 and 100000.
         """
 
@@ -166,8 +172,9 @@ class ClubEndpoint(BaseEndpoint):
     ) -> List[Ranobe] | RequestError:
         """
         List of club Ranobes
-        :param id: must a number
-        :param limit: 20 maximum
+
+        :param id: must a number.
+        :param limit: 20 maximum.
         :param page: Must be a number between 1 and 100000.
         """
 
@@ -189,11 +196,12 @@ class ClubEndpoint(BaseEndpoint):
 
     async def characters(
         self, id: int, limit: int = None, page: int = None
-    ) -> List[Character] | RequestError:
+    ) -> List[CharacterBrief] | RequestError:
         """
-        List of club Characters
-        :param id: must a number
-        :param limit: 20 maximum
+        List of club Characters.
+
+        :param id: must a number.
+        :param limit: 20 maximum.
         :param page: Must be a number between 1 and 100000.
         """
         response = await self._request.make_request(
@@ -204,7 +212,7 @@ class ClubEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [Character.from_dict(ch) for ch in response]
+            return [CharacterBrief.from_dict(ch) for ch in response]
 
         logger.debug(
             f"Bad Request(GetCharacters): status - {response.status_code}: info - {str(response)}"
@@ -216,9 +224,10 @@ class ClubEndpoint(BaseEndpoint):
         self, id: int, limit: int = None, page: int = None
     ) -> List[Collection] | RequestError:
         """
-        List of club Collections
-        :param id: must a number
-        :param limit: 4 maximum
+        List of club Collections.
+
+        :param id: must a number.
+        :param limit: 4 maximum.
         :param page: Must be a number between 1 and 100000.
         """
         response = await self._request.make_request(
@@ -241,9 +250,10 @@ class ClubEndpoint(BaseEndpoint):
         self, id: int, limit: int = None, page: int = None
     ) -> List[Club] | RequestError:
         """
-        List of club clubs
-        :param id: must a number
-        :param limit: 30 maximum
+        List of club clubs.
+
+        :param id: must a number.
+        :param limit: 30 maximum.
         :param page: Must be a number between 1 and 100000.
         """
         response = await self._request.make_request(
@@ -266,9 +276,10 @@ class ClubEndpoint(BaseEndpoint):
         self, id: int, limit: int = None, page: int = None
     ) -> List[User] | RequestError:
         """
-        List of club members
-        :param id: must a number
-        :param limit: 100 maximum
+        List of club members.
+
+        :param id: must a number.
+        :param limit: 100 maximum.
         :param page: Must be a number between 1 and 100000.
         """
         response = await self._request.make_request(
@@ -291,9 +302,10 @@ class ClubEndpoint(BaseEndpoint):
         self, id: int, limit: int = None, page: int = None
     ) -> List[ClubImage] | RequestError:
         """
-        List of club Images
-        :param id: must a number
-        :param limit: 100 maximum
+        List of club Images.
+
+        :param id: must a number.
+        :param limit: 100 maximum.
         :param page: Must be a number between 1 and 100000.
         """
         response = await self._request.make_request(
@@ -314,9 +326,11 @@ class ClubEndpoint(BaseEndpoint):
 
     async def join(self, id: int) -> None | RequestError:
         """
-        Join a club
-        Requires clubs oauth scope
-        :param id: must be a number
+        Join a club.
+
+        Requires clubs oauth scope.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "POST",
@@ -335,9 +349,11 @@ class ClubEndpoint(BaseEndpoint):
 
     async def leave(self, id: int) -> None | RequestError:
         """
-        Leave a club
-        Requires clubs oauth scope
-        :param id: must be a number
+        Leave a club.
+
+        Requires clubs oauth scope.
+
+        :param id: must be a number.
         """
         response = await self._request.make_request(
             "POST",

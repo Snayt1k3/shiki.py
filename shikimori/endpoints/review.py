@@ -13,7 +13,8 @@ class ReviewEndpoint(BaseEndpoint):
         self, anime_id: int, body: str, opinion: str
     ) -> Review | RequestError:
         """
-        Create a review
+        Create a review.
+
         :param anime_id: Must be a number.
         :param body: Must be a String
         :param opinion: Must be one of: positive, neutral, negative
@@ -39,7 +40,8 @@ class ReviewEndpoint(BaseEndpoint):
 
     async def update(self, id: int, body: str, opinion: str) -> Review | RequestError:
         """
-        Update a review
+        Update a review.
+
         :param id: Must be a number.
         :param body: Must be a String
         :param opinion: Must be one of: positive, neutral, negative
@@ -62,7 +64,8 @@ class ReviewEndpoint(BaseEndpoint):
 
     async def delete(self, id: int) -> Review | RequestError:
         """
-        Destroy a review
+        Destroy a review.
+
         :param id: Must be a number.
         """
         response = await self._request.make_request(

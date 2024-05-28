@@ -21,8 +21,8 @@ class EpisodeNotificationEndpoint(BaseEndpoint):
         is_anime365: bool = None,
     ) -> EpisodeNotification | RequestError:
         """
-        Notify shikimori about anime episode release
-        
+        Notify shikimori about anime episode release.
+
         :param token: Private token required to access this api
         :param anime_id: Must be a number.
         :param episode: Must be a number.

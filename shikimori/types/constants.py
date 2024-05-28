@@ -4,7 +4,7 @@ from shikimori.utils.filter import handle_none_data
 
 
 @dataclass
-class BaseConstant:
+class MangaConstant:
     kind: list[str]
     status: list[str]
 
@@ -15,13 +15,14 @@ class BaseConstant:
 
 
 @dataclass
-class MangaConstant(BaseConstant):
-    pass
+class AnimeConstant:
+    kind: list[str]
+    status: list[str]
 
-
-@dataclass
-class AnimeConstant(BaseConstant):
-    pass
+    @classmethod
+    @handle_none_data
+    def from_dict(cls, data: dict):
+        return cls(kind=data.get("kind", []), status=data.get("status", []))
 
 
 @dataclass

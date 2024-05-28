@@ -12,8 +12,9 @@ logger = logging.getLogger(__name__)
 class DialogsEndpoint(BaseEndpoint):
     async def list(self) -> List[Dialog] | RequestError:
         """
-        List dialogs
-        Requires messages oauth scope
+        List dialogs.
+
+        Requires messages oauth scope.
         """
         response = await self._request.make_request(
             "GET",
@@ -32,9 +33,10 @@ class DialogsEndpoint(BaseEndpoint):
 
     async def ById(self, id: str) -> List[MessageInfo] | RequestError:
         """
-        Show a dialog
-        Requires messages oauth scope
-        :param id: like user_{id}
+        Show a dialog.
+        Requires messages oauth scope.
+
+        :param id: like user_{id}.
         """
         response = await self._request.make_request(
             "GET",
@@ -53,9 +55,10 @@ class DialogsEndpoint(BaseEndpoint):
 
     async def delete(self, id: str) -> str | RequestError:
         """
-        Destroy a dialog
-        Requires messages oauth scope
-        :param id: like user_{id}
+        Destroy a dialog.
+        Requires messages oauth scope.
+
+        :param id: like user_{id}.
         """
         response = await self._request.make_request(
             "GET",

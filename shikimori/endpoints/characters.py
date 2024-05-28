@@ -1,7 +1,6 @@
 import logging
 
-from shikimori.types.character import Character
-from shikimori.types.roles import Character as MiniCharacter
+from shikimori.types.character import Character, CharacterBrief
 from .base import BaseEndpoint
 from ..exceptions import RequestError
 
@@ -11,8 +10,9 @@ logger = logging.getLogger(__name__)
 class CharacterEndpoint(BaseEndpoint):
     async def ById(self, id: int) -> Character | RequestError:
         """
-        Show a character
-        :param id: must be a number
+        Show a character.
+
+        :param id: must be a number.
         """
 
         response = await self._request.make_request(
@@ -30,10 +30,11 @@ class CharacterEndpoint(BaseEndpoint):
 
         return response
 
-    async def search(self, search: str) -> list[MiniCharacter] | RequestError:
+    async def search(self, search: str) -> list[CharacterBrief] | RequestError:
         """
-        Search characters
-        :param search: Must be a String
+        Search characters.
+
+        :param search: Must be a String.
         """
         response = await self._request.make_request(
             "GET",
@@ -43,7 +44,7 @@ class CharacterEndpoint(BaseEndpoint):
         )
 
         if not isinstance(response, RequestError):
-            return [MiniCharacter.from_dict(ch) for ch in response]
+            return [CharacterBrief.from_dict(ch) for ch in response]
 
         logger.debug(
             f"Bad Request(search): status - {response.status_code}: info - {str(response)}"

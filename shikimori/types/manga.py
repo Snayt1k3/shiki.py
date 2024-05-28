@@ -1,4 +1,3 @@
-from .base import BaseTitle
 from shikimori.types.genres import Genre
 from shikimori.types.photo import Photo
 from dataclasses import dataclass
@@ -7,7 +6,17 @@ from ..utils.filter import handle_none_data
 
 
 @dataclass
-class Manga(BaseTitle):
+class Manga:
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+    kind: str
+    score: str
+    status: str
+    aired_on: str
+    released_on: str
     volumes: int
     chapters: int
 

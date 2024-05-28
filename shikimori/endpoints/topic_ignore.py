@@ -11,7 +11,8 @@ class TopicIgnoreEndpoint(BaseEndpoint):
     async def ignore(self, topic_id: str | int) -> Topic | RequestError:
         """
         ignore topic.
-        Requires topics oauth scope
+
+        Requires topics oauth scope.
 
         :param topic_id: Must be a number
         """
@@ -37,7 +38,8 @@ class TopicIgnoreEndpoint(BaseEndpoint):
     ) -> Topic | RequestError:
         """
         unignore topic.
-        Requires topics oauth scope
+
+        Requires topics oauth scope.
 
         :param topic_id: must be a number
         """

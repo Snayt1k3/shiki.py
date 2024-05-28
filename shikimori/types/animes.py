@@ -1,18 +1,27 @@
 from dataclasses import dataclass
 
-from .base import BaseTitle
 from .manga import Manga
 from .photo import Photo
 from .screenshots import ScreenShot
 from .studios import Studio
-from .user_rates import MiniUserRate
+from .user_rates import UserRateBrief
 from .videos import Video
 from ..utils.filter import handle_none_data
 from .genres import GenreExtended
 
 
 @dataclass
-class Anime(BaseTitle):
+class Anime:
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+    kind: str
+    score: str
+    status: str
+    aired_on: str
+    released_on: str
     episodes: int
     episodes_aired: int
 
@@ -64,7 +73,7 @@ class AnimeInfo(Anime):
     studios: list[Studio]
     videos: list[Video]
     screenshots: list[ScreenShot]
-    user_rate: MiniUserRate
+    user_rate: UserRateBrief
 
     @classmethod
     @handle_none_data
@@ -110,7 +119,7 @@ class AnimeInfo(Anime):
             studios=[Studio.from_dict(s) for s in data.get("studios", [])],
             videos=[Video.from_dict(v) for v in data.get("videos", [])],
             user_rate=(
-                MiniUserRate.from_dict(data.get("user_rate"))
+                UserRateBrief.from_dict(data.get("user_rate"))
                 if data.get("user_rate")
                 else None
             ),
@@ -132,32 +141,4 @@ class Relation:
             relation_russian=data.get("relation_russian"),
             anime=Anime.from_dict(anime) if (anime := data.get("anime")) else None,
             manga=Manga.from_dict(manga) if (manga := data.get("manga")) else None,
-        )
-
-
-@dataclass
-class ExternalLink:
-    id: int
-    kind: str
-    url: str
-    source: str
-    entry_id: int
-    entry_type: str
-    created_at: str
-    updated_at: str
-    imported_at: str
-
-    @classmethod
-    @handle_none_data
-    def from_dict(cls, data: dict):
-        return cls(
-            id=data.get("id"),
-            kind=data.get("kind"),
-            url=data.get("url"),
-            source=data.get("source"),
-            entry_id=data.get("entry_id"),
-            entry_type=data.get("entry_type"),
-            created_at=data.get("created_at"),
-            updated_at=data.get("updated_at"),
-            imported_at=data.get("imported_at"),
         )

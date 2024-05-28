@@ -4,7 +4,6 @@ from shikimori.types.animes import Anime
 from typing import Any
 
 from .manga import Manga
-from shikimori.types.base import BaseTitle
 from shikimori.constants import SHIKIMORI_URL
 from ..utils.filter import handle_none_data
 
@@ -317,7 +316,17 @@ class UnreadMessages:
 
 
 @dataclass
-class TitleHistory(BaseTitle):
+class TitleHistory:
+    id: int
+    name: str
+    russian: str
+    image: Photo
+    url: str
+    kind: str
+    score: str
+    status: str
+    aired_on: str
+    released_on: str
     volumes: int | None
     chapters: int | None
     episodes: int | None
