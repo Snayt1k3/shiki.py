@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "shiki.py"
-version = "1.1.0"
+version = "1.1.1"
 description = "Python Async Wrapper for Shikimori Api"
 authors = ["Snayt1k3 <snayt1k3twitch@gmail.com>"]
 readme = "README.md"
