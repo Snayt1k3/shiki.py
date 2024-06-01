@@ -99,4 +99,4 @@ class Auth:
         """
         Generates a URL for obtaining an authorization code to authenticate requests.
         """
-        return f"https://shikimori.one/oauth/authorize?client_id={self._options.client_id}&redirect_uri={self._options.redirect_uri}&response_type=code&scope={'+'.join(self._options.scopes)}"  # NOQA
+        return f"https://shikimori.one/oauth/authorize?client_id={self._options.client_id}&redirect_uri={self._options.redirect_uri}&response_type=code&scope={'+'.join(self._options.scopes) if self._options.scopes else ''}"  # NOQA
