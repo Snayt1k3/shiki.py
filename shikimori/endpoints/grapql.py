@@ -58,7 +58,7 @@ class GraphQlEndpoint(BaseEndpoint):
         """
 
         query = (
-            """query($page: Int, $limit: Int, $order: OrderEnum, $kind: AnimeKindString, $status: AnimeStatusString, $season: SeasonString, $score: Int, $duration: DurationString, $rating: RatingString, $genre: String, $studio: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String){
+            """query($page: PositiveInt, $limit: PositiveInt, $order: OrderEnum, $kind: AnimeKindString, $status: AnimeStatusString, $season: SeasonString, $score: Int, $duration: DurationString, $rating: RatingString, $genre: String, $studio: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String){
         animes(
             page: $page,
             limit: $limit,
@@ -138,7 +138,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
         query = (
             """
-        query($page: Int, $limit: Int, $ids: [ID!], $search: String) {
+        query($page: PositiveInt, $limit: PositiveInt, $ids: [ID!], $search: String) {
           characters(
             page: $page,
             limit: $limit,
@@ -185,7 +185,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
         query = (
             """
-        query($page: Int, $limit: Int, $ids: [ID!]) {
+        query($page: PositiveInt, $limit: PositiveInt, $ids: [ID!]) {
           contests(
             page: $page,
             limit: $limit,
@@ -328,7 +328,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
         query = (
             """
-        query ($page: Int, $limit: Int, $order: OrderEnum, $kind: MangaKindString, $status: MangaStatusString, $season: SeasonString, $score: Int, $genre: String, $publisher: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String) {
+        query ($page: PositiveInt, $limit: PositiveInt, $order: OrderEnum, $kind: MangaKindString, $status: MangaStatusString, $season: SeasonString, $score: Int, $genre: String, $publisher: String, $franchise: String, $censored: Boolean, $mylist: MylistString, $ids: String, $excludeIds: String, $search: String) {
           mangas(
             page: $page,
             limit: $limit,
@@ -410,7 +410,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
         query = (
             """
-        query ($page: Int, $limit: Int, $ids: [ID!], $search: String, $isSeyu: Boolean, $isProducer: Boolean, $isMangaka: Boolean) {
+        query ($page: PositiveInt, $limit: PositiveInt, $ids: [ID!], $search: String, $isSeyu: Boolean, $isProducer: Boolean, $isMangaka: Boolean) {
           people(
             page: $page,
             limit: $limit,
@@ -473,7 +473,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
         query = (
             """
-        query ($page: Int, $limit: Int, $userId: ID, $targetType: UserRateTargetTypeEnum!, $status: UserRateStatusEnum, $order: UserRateOrderInputType) {
+        query ($page: PositiveInt, $limit: PositiveInt, $userId: ID, $targetType: UserRateTargetTypeEnum!, $status: UserRateStatusEnum, $order: UserRateOrderInputType) {
           userRates(
             page: $page,
             limit: $limit,
@@ -533,7 +533,7 @@ class GraphQlEndpoint(BaseEndpoint):
 
         query = (
             """
-        query ($page: Int, $limit: Int, $ids: [ID!], $search: String) {
+        query ($page: PositiveInt, $limit: PositiveInt, $ids: [ID!], $search: String) {
           users(
             page: $page,
             limit: $limit,
