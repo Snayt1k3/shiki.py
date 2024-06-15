@@ -82,7 +82,7 @@ class AnimeInfo(Anime):
             id=data.get("id"),
             name=data.get("name"),
             russian=data.get("russian"),
-            image=data.get("image"),
+            image=Photo.from_dict(data.get("image")),
             url=data.get("url"),
             kind=data.get("kind"),
             score=data.get("score"),
