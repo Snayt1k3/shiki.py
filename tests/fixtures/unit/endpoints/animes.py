@@ -259,7 +259,7 @@ def animes_byId_resp(animes_byId_json):
         id=response["id"],
         name=response["name"],
         russian=response["russian"],
-        image=response["image"],
+        image=Photo(**response["image"]),
         url=response["url"],
         kind=response["kind"],
         score=response["score"],
