@@ -163,7 +163,7 @@ class UserRatesEndpoint(BaseEndpoint):
         response = await self._request.make_request(
             "PATCH",
             url=f"{self._base_url}/api/v2/user_rates/{user_rate_id}",
-            body={
+            json={
                 "user_rate": filter_none_parameters(
                     {
                         "status": status,
