@@ -91,14 +91,14 @@ async def test_info_error(user_client):
 @pytest.mark.asyncio
 async def test_friends_success(user_client, users_friends_json, users_friends_resp):
     user_client._request = FakeRequest(users_friends_json)
-    response = await user_client.friends()
+    response = await user_client.friends(123)
     assert response == users_friends_resp
 
 
 @pytest.mark.asyncio
 async def test_friends_error(user_client):
     user_client._request = FakeRequest(RequestError("Test Message", 404))
-    response = await user_client.friends()
+    response = await user_client.friends(123)
     assert isinstance(response, RequestError)
 
 
