@@ -49,16 +49,16 @@ class UserEndpoint(BaseEndpoint):
 
         return response
 
-    async def ById(self, id: int, is_nickname: str = None) -> UserInfo | RequestError:
+    async def ById(self, query: int | str, is_nickname: str = None) -> UserInfo | RequestError:
         """
         Show a user.
 
-        :param id: must be a number
+        :param query: must be a number or string (nickname)
         :param is_nickname: 1 if you want to get user by its nickname
         """
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/users/{id}",
+            url=f"{self._base_url}/api/users/{query}",
             params=filter_none_parameters({"is_nickname": is_nickname}),
             headers=self.headers,
         )
@@ -129,17 +129,18 @@ class UserEndpoint(BaseEndpoint):
         return response
 
     async def friends(
-        self, page: int = None, limit: int = None
+        self, id: int, page: int = None, limit: int = None
     ) -> List[User] | RequestError:
         """
         Show user's friends.
 
+        :param id: User id.
         :param limit: 100 maximum.
         :param page: Must be a number between 1 and 100000.
         """
         response = await self._request.make_request(
             "GET",
-            url=f"{self._base_url}/api/users/friends",
+            url=f"{self._base_url}/api/users/{id}/friends",
             headers=self.headers,
             json=filter_none_parameters({"page": page, "limit": limit}),
         )
