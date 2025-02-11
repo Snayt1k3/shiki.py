@@ -27,6 +27,7 @@ class Shikimori:
         scopes: list[str] = None,
         base_url: str = None,
         logging: int | bool = None,
+        raise_on_error: bool = False
     ):
         """
         Initialize client for working with the Shikimori API.
@@ -38,6 +39,7 @@ class Shikimori:
         :param redirect_uri: Redirect URI for OAuth authentication. Defaults to "urn:ietf:wg:oauth:2.0:oob".
         :param base_url: Base URL for the Shikimori API. Defaults to None.
         :param logging: Logging level for debug information. If True, debug logging is enabled. If False, logging is disabled. Defaults to None.
+        :param raise_on_error: If true RequestError will be raised else return
 
         Raises:
             ValueError: If user_agent is not specified.
@@ -54,7 +56,7 @@ class Shikimori:
 
         # dependencies
         self._base_url = base_url or SHIKIMORI_URL
-        self._request = Request()
+        self._request = Request(raise_on_error=raise_on_error)
         self._limiter = RequestLimiter(
             MAX_REQUESTS_PER_SECOND,
             MAX_REQUESTS_PER_MINUTE,

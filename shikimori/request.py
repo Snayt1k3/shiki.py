@@ -17,8 +17,9 @@ class Request(BaseRequest):
     to provide methods for sending various types of HTTP requests.
     """
 
-    def __init__(self, token: str = None):
+    def __init__(self, token: str = None, raise_on_error: bool = False):
         self._token = token
+        self._raise_on_error = raise_on_error
 
     def set_token(self, token: str) -> None:
         self._token = token
@@ -48,7 +49,10 @@ class Request(BaseRequest):
 
         except aiohttp.ClientResponseError as exc:
             logger.debug(f"Error occurred with {method} request - {exc}")
-            return RequestError(exc.message, exc.status)
+
+            if not self._raise_on_error:
+                return RequestError(exc.message, exc.status)
+            raise RequestError(exc.message, exc.status)
 
     async def make_request(self, method: str, **kwargs):
         methods = ["GET", "POST", "PATCH", "DELETE"]
